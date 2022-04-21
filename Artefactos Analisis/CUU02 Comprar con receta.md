@@ -1,8 +1,8 @@
-# CUU 02 Comprar medicamento receta
-**Objetivo**: Comprar medicamento con receta medica
-**Acotor Principal**: Cliente
-**Iniciador**: Responsable de venta
-**Actores extra**: Validador de Obra Social
+# CUU 02 Comprar medicamento receta  
+**Objetivo**: Comprar medicamento con receta medica  
+**Acotor Principal**: Cliente  
+**Iniciador**: Responsable de venta  
+**Actores extra**: Validador de Obra Social  
 
 **Precondiciones**: Cliente tiene consigo la receta correspondiente al remedio y su carnet de mutual
 
