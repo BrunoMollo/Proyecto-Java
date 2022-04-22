@@ -6,8 +6,8 @@
 
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
-|ABMC simple|1 x integ|1 x integ|Alta generico/droga, Alta obra social
-|ABMC dependiente|1|2| Carga medicamento, alta cliente
+|ABMC simple|1 x integ|1 x integ|Genericos/Drogas, Obra social
+|ABMC dependiente|1|2| Medicamento, Cliente
 |CU NO-ABMC|1|2| Venta de medicamento
 |Listado simple|1|3(*)| Informe de ventas del mes
 |Listado complejo|0|1(*)|
@@ -19,9 +19,9 @@
 
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
-|ABMC|todos|todos|Alta generico/droga, Alta obra social
-|CU "Complejo"(nivel resumen)|1|2|Venta de medicamento
-|Listado complejo|1|2| Informe de ventas del mes
+|ABMC|todos|todos|Genericos/Drogas, Obra social
+|CU "Complejo"(nivel resumen)|1|2|Venta de medicamento por obra social
+|Listado complejo|1|2| Listado de ventas de Obra Social
 |Nivel de acceso|2|2| Vendedor y Admin
 |Manejo de errores|obligatorio|obligatorio|no requiere detalle|
 |requerimiento extra obligatorio (**)|0|1|
@@ -37,3 +37,8 @@
 |Custom exceptions||
 |Log de errores||
 |Envio de emails||
+
+
+#### Modelo del Dominio
+
+![Image text](https://github.com/BrunoMollo/Proyecto-Java/blob/main/Artefactos%20Analisis/MD%20Farmacia.drawio.png)
