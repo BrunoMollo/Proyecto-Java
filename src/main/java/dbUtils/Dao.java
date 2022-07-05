@@ -1,4 +1,4 @@
-package Dao;
+package dbUtils;
 
 
 import java.sql.Connection;
@@ -7,9 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import org.w3c.dom.Entity;
-
-import entities.Persona;
 
 public abstract class Dao<ENTITY> {
 	
