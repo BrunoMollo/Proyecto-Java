@@ -28,11 +28,7 @@ CREATE TABLE `afiliados` (
   `numeroAfiliado` varchar(45) NOT NULL,
   `idObraSocial` int NOT NULL,
   `dniCliente` int NOT NULL,
-  PRIMARY KEY (`numeroAfiliado`),
-  KEY `idObraSocial_idx` (`idObraSocial`),
-  KEY `dni_idx` (`dniCliente`),
-  CONSTRAINT `dni` FOREIGN KEY (`dniCliente`) REFERENCES `clientes` (`dni`),
-  CONSTRAINT `idObraSocial` FOREIGN KEY (`idObraSocial`) REFERENCES `obras_sociales` (`codigo`)
+  PRIMARY KEY (`numeroAfiliado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,10 +77,7 @@ CREATE TABLE `dosis` (
   `codigoDroga` int NOT NULL,
   `codigoMedicamento` int NOT NULL,
   `cantidad` double NOT NULL,
-  PRIMARY KEY (`codigoDroga`,`codigoMedicamento`),
-  KEY `medicamento_idx` (`codigoMedicamento`),
-  CONSTRAINT `drogas` FOREIGN KEY (`codigoDroga`) REFERENCES `drogas` (`codigo`),
-  CONSTRAINT `medicamento` FOREIGN KEY (`codigoMedicamento`) REFERENCES `medicamentos` (`codigoBarra`)
+  PRIMARY KEY (`codigoDroga`,`codigoMedicamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -105,7 +98,7 @@ DROP TABLE IF EXISTS `drogas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `drogas` (
-  `codigo` int NOT NULL,
+  `codigo` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -121,30 +114,6 @@ LOCK TABLES `drogas` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `incompleto_ventas`
---
-
-DROP TABLE IF EXISTS `incompleto_ventas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `incompleto_ventas` (
-  `nroVenta` int NOT NULL AUTO_INCREMENT,
-  `fecha` date NOT NULL,
-  `total` double DEFAULT NULL,
-  PRIMARY KEY (`nroVenta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `incompleto_ventas`
---
-
-LOCK TABLES `incompleto_ventas` WRITE;
-/*!40000 ALTER TABLE `incompleto_ventas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `incompleto_ventas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `laboratorios`
 --
 
@@ -152,7 +121,7 @@ DROP TABLE IF EXISTS `laboratorios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `laboratorios` (
-  `codigo` int NOT NULL,
+  `codigo` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   `telefono` int NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -170,6 +139,30 @@ LOCK TABLES `laboratorios` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `lineaventas`
+--
+
+DROP TABLE IF EXISTS `lineaventas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lineaventas` (
+  `nroVenta` int NOT NULL,
+  `codBarra` int NOT NULL,
+  `cantidad` int DEFAULT NULL,
+  PRIMARY KEY (`nroVenta`,`codBarra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lineaventas`
+--
+
+LOCK TABLES `lineaventas` WRITE;
+/*!40000 ALTER TABLE `lineaventas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lineaventas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `medicamentos`
 --
 
@@ -182,9 +175,7 @@ CREATE TABLE `medicamentos` (
   `nombre` varchar(255) NOT NULL,
   `tamaño` varchar(45) NOT NULL,
   PRIMARY KEY (`codigoBarra`),
-  UNIQUE KEY `codigoBarra_UNIQUE` (`codigoBarra`),
-  KEY `codigoLaboratorio_idx` (`codigoLaboratorio`),
-  CONSTRAINT `codigoLaboratorio` FOREIGN KEY (`codigoLaboratorio`) REFERENCES `laboratorios` (`codigo`)
+  UNIQUE KEY `codigoBarra_UNIQUE` (`codigoBarra`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -233,8 +224,7 @@ CREATE TABLE `precio_medicamento` (
   `codigoMedicamento` int NOT NULL,
   `fecha` date NOT NULL,
   `monto` double NOT NULL,
-  PRIMARY KEY (`codigoMedicamento`,`fecha`),
-  CONSTRAINT `codigoMedicamento` FOREIGN KEY (`codigoMedicamento`) REFERENCES `medicamentos` (`codigoBarra`)
+  PRIMARY KEY (`codigoMedicamento`,`fecha`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -246,6 +236,32 @@ LOCK TABLES `precio_medicamento` WRITE;
 /*!40000 ALTER TABLE `precio_medicamento` DISABLE KEYS */;
 /*!40000 ALTER TABLE `precio_medicamento` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `ventas`
+--
+
+DROP TABLE IF EXISTS `ventas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ventas` (
+  `nroVenta` int NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `total` double DEFAULT NULL,
+  `nroAfiliado` int DEFAULT NULL,
+  `nroReceta` int DEFAULT NULL,
+  PRIMARY KEY (`nroVenta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ventas`
+--
+
+LOCK TABLES `ventas` WRITE;
+/*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -256,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-08 16:44:33
+-- Dump completed on 2022-07-08 20:43:52
