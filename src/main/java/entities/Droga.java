@@ -1,14 +1,14 @@
 package entities;
 
 public class Droga {
-	private String cod;
+	private Integer cod;
 	private String nombre;
 	
 	
-	public String getCod() {
+	public Integer getCod() {
 		return cod;
 	}
-	public void setCod(String cod) {
+	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
 	public String getNombre() {

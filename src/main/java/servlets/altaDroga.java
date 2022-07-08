@@ -39,13 +39,9 @@ public class altaDroga extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String cod= request.getParameter("cod");
 		String name= request.getParameter("name");
 		
-		
-		
 		Droga drug= new Droga();
-		drug.setCod(cod);
 		drug.setNombre(name);
 		
 		CtrlAltaDroga con= new CtrlAltaDroga();
@@ -54,9 +50,11 @@ public class altaDroga extends HttpServlet {
 			con.addDroga(drug);
 			
 			response.setStatus(201);
+			request.setAttribute("droga", drug);
 			request.getRequestDispatcher("WEB-INF/ConfirmarAltaDroga.jsp").forward(request, response);
 			
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();
 		}
