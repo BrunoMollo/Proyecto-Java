@@ -9,9 +9,9 @@ public class DbConnector {
 	private String driver="com.mysql.cj.jdbc.Driver";
 	private String host="localhost";
 	private String port="3306";
-	private String user="java";
-	private String password="himitsu";
-	private String db="java";
+	private String user="test";
+	private String password="testing";
+	private String db="farmacia";
 	private int conectados=0;
 	private Connection conn=null;
 	
@@ -23,9 +23,13 @@ public class DbConnector {
 		}
 	}
 	
-	public static DbConnector getInstancia() {
+	public static DbConnector getInstancia() throws SQLException {
 		if (instancia == null) {
 			instancia = new DbConnector();
+		}
+		
+		if(instancia==null) {
+			throw new SQLException("No se pudo establecer la conexion a la base de datos, verificar configeracionde DbConnector.java");
 		}
 		return instancia;
 	}

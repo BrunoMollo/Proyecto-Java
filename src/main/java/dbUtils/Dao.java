@@ -86,7 +86,7 @@ public abstract class Dao<ENTITY> {
 	}
 	
 	
-	
+	@Deprecated
 	protected void executeSimpleAdd(StatementWrapper stw, ENTITY ent) {
 		try {
 			Connection con=DbConnector.getInstancia().getConn();

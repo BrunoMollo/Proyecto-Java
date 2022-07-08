@@ -24,7 +24,7 @@ public class StatementWrapper {
 		}
 
 		public StatementWrapper(String _query) {
-			new StatementWrapper(_query, PreparedStatement.NO_GENERATED_KEYS);
+			this(_query, PreparedStatement.NO_GENERATED_KEYS);
 		}
 		
 		
