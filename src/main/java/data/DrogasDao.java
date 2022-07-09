@@ -3,14 +3,36 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import dbUtils.Dao;
 import dbUtils.DbConnector;
-import dbUtils.StatementWrapper;
 import entities.Droga;
 
 public class DrogasDao extends Dao<Droga> {
 
+	public LinkedList<Droga> getAll(){
+		LinkedList<Droga> arr=new LinkedList<>();
+		PreparedStatement pstm =null;
+		ResultSet rs=null;
+		
+			try {
+				pstm=DbConnector.getInstancia().getConn().prepareStatement("select * from drogas");
+				rs=pstm.executeQuery();
+				while(rs.next()) {
+					Droga d=new Droga();
+					d.setCod(rs.getInt("codigo"));
+					d.setNombre(rs.getString("nombre"));				
+					arr.add(d);
+				}		
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeResourses(pstm, rs);
+			}
+			return arr;	
+	}
+	
 	public void add(Droga drug) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -36,6 +58,38 @@ public class DrogasDao extends Dao<Droga> {
 		finally { closeResourses(pstmt, rs); }
 	}
 
+	public void update(Droga drug) {
+		PreparedStatement pstm =null;	
+		try {
+			pstm= DbConnector.getInstancia().getConn()
+					.prepareStatement("update drogas set nombre=? where codigo=?");
+			pstm.setString(1,drug.getNombre());
+			pstm.setInt(2,drug.getCod());
+			pstm.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResourses(pstm);
+		}
+	}
+	
+	public void delete(Droga drug) {
+		PreparedStatement pstm =null;
+		try {
+			pstm= DbConnector.getInstancia().getConn()
+					.prepareStatement("delete from drogas where codigo=?");
+			pstm.setInt(1,drug.getCod());
+			pstm.execute();
+			//ver como habria que tratar el tema de este tipo de borrado (en cascada o que)
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeResourses(pstm);
+		}
+	}
+		
 	@Override
 	protected Droga mapFromResulset(ResultSet rs) throws SQLException {
 		Droga drug = new Droga();

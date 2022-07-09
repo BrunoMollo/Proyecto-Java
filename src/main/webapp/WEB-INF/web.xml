@@ -19,4 +19,56 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>updateDroga</display-name>
+    <servlet-name>updateDroga</servlet-name>
+    <servlet-class>servlets.updateDroga</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateDroga</servlet-name>
+    <url-pattern>/updateDroga</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>updateJava</display-name>
+    <servlet-name>updateJava</servlet-name>
+    <servlet-class>servlets.UpdateJava</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateJava</servlet-name>
+    <url-pattern>/updatejava</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateDroga</display-name>
+    <servlet-name>UpdateDroga</servlet-name>
+    <servlet-class>servlets.UpdateDroga</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateDroga</servlet-name>
+    <url-pattern>/UpdateDroga</url-pattern>
+    <url-pattern>/updatedroga</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ASd</display-name>
+    <servlet-name>ASd</servlet-name>
+    <servlet-class>servlets.ASd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ASd</servlet-name>
+    <url-pattern>/ASd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAllDroga</display-name>
+    <servlet-name>GetAllDroga</servlet-name>
+    <servlet-class>servlets.GetAllDroga</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllDroga</servlet-name>
+    <url-pattern>/GetAllDroga</url-pattern>
+    <url-pattern>/getalldrogas</url-pattern>
+  </servlet-mapping>
 </web-app>
