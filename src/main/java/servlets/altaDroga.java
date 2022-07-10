@@ -1,7 +1,6 @@
 package servlets;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,10 +20,7 @@ public class altaDroga extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public altaDroga() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public altaDroga() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

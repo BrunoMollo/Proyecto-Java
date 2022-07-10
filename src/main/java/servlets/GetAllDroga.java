@@ -1,7 +1,6 @@
 package servlets;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,10 +21,7 @@ public class GetAllDroga extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAllDroga() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public GetAllDroga() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
