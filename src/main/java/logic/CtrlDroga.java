@@ -19,7 +19,9 @@ public class CtrlDroga {
 	}
 	
 	public LinkedList<Droga> getAll() throws SQLException{
+		drogaDao.getOne(null);
 		return drogaDao.getAll();
+		
 	}
 	
 	public void update(Droga d) throws SQLException {
