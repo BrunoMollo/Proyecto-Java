@@ -8,6 +8,7 @@ import logic.CtrlDroga;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import entities.Droga;
 
@@ -29,8 +30,18 @@ public class modifyDroga extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		CtrlDroga cad = new CtrlDroga();
+		LinkedList<Droga> arr;
+		try {
+			arr = cad.getAll();
+			request.setAttribute("listadroga", arr);
+			request.getRequestDispatcher("WEB-INF/getAllDroga.jsp").forward(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			response.sendError(500, e.getMessage());
+		}
+		
+		
 	}
 
 	/**
@@ -54,9 +65,7 @@ public class modifyDroga extends HttpServlet {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();
 		}
-		
-		
-		
+	
 	}
 
 }
