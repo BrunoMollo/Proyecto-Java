@@ -33,7 +33,7 @@ LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("listadroga");
 					<td><%=d.getCod()%> </td>
 					<td><input value=<%=d.getNombre()%> type="text" id=<%="name-"+d.getCod()%>></td>
 					<td><input type="button" value="Guardar" onclick=<%="MarcarParaModificar("+d.getCod()+")" %> /></td>
-					<td><input type="button" value="Eliminar" onclick=<%="" %> /></td>
+					<td><input type="button" value="Eliminar" onclick="alert('no funca')"/></td>
 				</tr>
 			
 		<%}%>

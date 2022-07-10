@@ -18,7 +18,7 @@ public class CtrlDroga {
 		drogaDao.add(drug);
 	}
 	
-	public LinkedList<Droga> getAll(){
+	public LinkedList<Droga> getAll() throws SQLException{
 		return drogaDao.getAll();
 	}
 	

@@ -5,57 +5,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+
 import dbUtils.Dao;
 import dbUtils.DbConnector;
+import dbUtils.StatementWrapper;
 import entities.Droga;
 
 public class DrogasDao extends Dao<Droga> {
 
-	public LinkedList<Droga> getAll(){
-		LinkedList<Droga> arr=new LinkedList<>();
-		PreparedStatement pstm =null;
-		ResultSet rs=null;
-		
-			try {
-				pstm=DbConnector.getInstancia().getConn().prepareStatement("select * from drogas");
-				rs=pstm.executeQuery();
-				while(rs.next()) {
-					Droga d=new Droga();
-					d.setCod(rs.getInt("codigo"));
-					d.setNombre(rs.getString("nombre"));				
-					arr.add(d);
-				}		
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				closeResourses(pstm, rs);
-			}
-			return arr;	
+	public LinkedList<Droga> getAll() throws SQLException{
+		return executeFindAll(new StatementWrapper("select * from drogas"));
 	}
 	
-	public void add(Droga drug) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		try {
-			pstmt = DbConnector.getInstancia().getConn().
-					prepareStatement(
-							"insert into drogas(nombre) values(?)",
-							PreparedStatement.RETURN_GENERATED_KEYS
-							);
-			pstmt.setString(1, drug.getNombre());
-			pstmt.executeUpdate();
-			
-			rs=pstmt.getGeneratedKeys();
-            if(rs!=null && rs.next()){
-                drug.setCod(rs.getInt(1));
-                
-                
-            }	
-               
-		}  
-		catch (SQLException e) { e.printStackTrace(); } 
-		finally { closeResourses(pstmt, rs); }
+	public void add(Droga drug) throws SQLException {
+		StatementWrapper stw= new StatementWrapper("insert into drogas(nombre) values(?)");
+		stw.push(drug.getNombre());
+		executeAddWithGeneratedKeys(stw, drug);
 	}
 
 	public void update(Droga drug) throws SQLException {
@@ -75,7 +40,7 @@ public class DrogasDao extends Dao<Droga> {
 		}
 	}
 	
-	public void delete(Droga drug) {
+	public void delete(Droga drug) throws SQLException{
 		PreparedStatement pstm =null;
 		try {
 			pstm= DbConnector.getInstancia().getConn()

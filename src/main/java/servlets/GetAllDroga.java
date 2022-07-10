@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import entities.Droga;
@@ -31,9 +32,16 @@ public class GetAllDroga extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CtrlDroga cad = new CtrlDroga();
-		LinkedList<Droga> arr= cad.getAll();
-		request.setAttribute("listadroga", arr);
-		request.getRequestDispatcher("WEB-INF/getAllDroga.jsp").forward(request, response);
+		LinkedList<Droga> arr;
+		try {
+			arr = cad.getAll();
+			request.setAttribute("listadroga", arr);
+			request.getRequestDispatcher("WEB-INF/getAllDroga.jsp").forward(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			response.sendError(500, e.getMessage());
+		}
+		
 		
 	}
 
