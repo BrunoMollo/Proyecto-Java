@@ -71,4 +71,14 @@
     <url-pattern>/GetAllDroga</url-pattern>
     <url-pattern>/getalldrogas</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>modifyDroga</display-name>
+    <servlet-name>modifyDroga</servlet-name>
+    <servlet-class>servlets.modifyDroga</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>modifyDroga</servlet-name>
+    <url-pattern>/modifydrug</url-pattern>
+  </servlet-mapping>
 </web-app>

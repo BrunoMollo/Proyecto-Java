@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logic.CtrlAltaDroga;
+import logic.CtrlDroga;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -30,7 +30,7 @@ public class GetAllDroga extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CtrlAltaDroga cad = new CtrlAltaDroga();
+		CtrlDroga cad = new CtrlDroga();
 		LinkedList<Droga> arr= cad.getAll();
 		request.setAttribute("listadroga", arr);
 		request.getRequestDispatcher("WEB-INF/getAllDroga.jsp").forward(request, response);

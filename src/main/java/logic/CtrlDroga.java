@@ -6,10 +6,10 @@ import java.util.LinkedList;
 import data.DrogasDao;
 import entities.Droga;
 
-public class CtrlAltaDroga {
+public class CtrlDroga {
 	DrogasDao drogaDao;
 	
-	public CtrlAltaDroga() {
+	public CtrlDroga() {
 		this.drogaDao=new DrogasDao();
 	}
 	
@@ -17,8 +17,14 @@ public class CtrlAltaDroga {
 	public void addDroga(Droga drug) throws SQLException{
 		drogaDao.add(drug);
 	}
+	
 	public LinkedList<Droga> getAll(){
 		return drogaDao.getAll();
 	}
+	
+	public void update(Droga d) throws SQLException {
+		drogaDao.update(d);
+	}
+	
 
 }

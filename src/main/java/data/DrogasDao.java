@@ -58,7 +58,7 @@ public class DrogasDao extends Dao<Droga> {
 		finally { closeResourses(pstmt, rs); }
 	}
 
-	public void update(Droga drug) {
+	public void update(Droga drug) throws SQLException {
 		PreparedStatement pstm =null;	
 		try {
 			pstm= DbConnector.getInstancia().getConn()
@@ -69,6 +69,7 @@ public class DrogasDao extends Dao<Droga> {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;   
 		} finally {
 			closeResourses(pstm);
 		}

@@ -13,15 +13,15 @@ import java.sql.SQLException;
 import entities.Droga;
 
 /**
- * Servlet implementation class altaDroga
+ * Servlet implementation class modifyDroga
  */
-public class altaDroga extends HttpServlet {
+public class modifyDroga extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public altaDroga() {
+    public modifyDroga() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,33 +31,31 @@ public class altaDroga extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at get: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String name= request.getParameter("name");
+		Integer cod=Integer.parseInt( request.getParameter("codModifiedDrug") );
+		String name=request.getParameter("newName");
 		
 		Droga drug= new Droga();
+		drug.setCod(cod);
 		drug.setNombre(name);
 		
 		CtrlDroga con= new CtrlDroga();
 		
 		try {
-			con.addDroga(drug);
-			
-			response.setStatus(201);
-			request.setAttribute("droga", drug);
-			request.getRequestDispatcher("WEB-INF/ConfirmarAltaDroga.jsp").forward(request, response);
-			
-		} 
-		catch (SQLException e) {
+			con.update(drug);
+			response.setStatus(200);
+			response.getWriter().append("cod: "+cod+ "name: "+name).append(request.getContextPath());//TODO
+		} catch (SQLException e) {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();
 		}
+		
 		
 		
 	}

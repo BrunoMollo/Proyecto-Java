@@ -30,28 +30,26 @@ LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("listadroga");
 	<tbody>
 		<% for(Droga d: arr){ %>
 				<tr>
-					<td><input value=<%=d.getCod()%> type="number" id=<%="cod-"+d.getCod()%>></td>
+					<td><%=d.getCod()%> </td>
 					<td><input value=<%=d.getNombre()%> type="text" id=<%="name-"+d.getCod()%>></td>
 					<td><input type="button" value="Guardar" onclick=<%="MarcarParaModificar("+d.getCod()+")" %> /></td>
+					<td><input type="button" value="Eliminar" onclick=<%="" %> /></td>
 				</tr>
 			
 		<%}%>
 	</tbody>
 </table>
 
-<form hidden="true" id="miForm" action="/fnweinfewinewnewji" method="post">
+<form hidden="true" id="miForm" action="modifydrug" method="post">
 	<input name="codModifiedDrug" id="codModifiedDrug">
-	<input name="newcod" id="newcod">
 	<input name="newName" id="newName">
 </form>
 
 <script type="text/javascript">
 	function MarcarParaModificar(oldCodDroga) {
-		newCod=document.getElementById("cod-"+oldCodDroga).value;
 		newName=document.getElementById("name-"+oldCodDroga).value;
 		
 		document.getElementById("codModifiedDrug").value=oldCodDroga;
-		document.getElementById("newcod").value = newCod;
 		document.getElementById("newName").value = newName;
 		
 		document.getElementById("miForm").submit();
