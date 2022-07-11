@@ -35,7 +35,7 @@ public class modifyDroga extends HttpServlet {
 		try {
 			arr = cad.getAll();
 			request.setAttribute("listadroga", arr);
-			request.getRequestDispatcher("WEB-INF/getAllDroga.jsp").forward(request, response);
+			request.getRequestDispatcher("getAllDroga.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			response.sendError(500, e.getMessage());

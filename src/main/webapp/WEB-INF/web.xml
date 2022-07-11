@@ -8,7 +8,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>altaDroga</servlet-name>
-    <url-pattern>/createdrug</url-pattern>
+    <url-pattern>/ui-droga/createdrug</url-pattern>
   </servlet-mapping>
   <display-name>Farmacia_TP</display-name>
   <welcome-file-list>
@@ -21,65 +21,13 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>updateDroga</display-name>
-    <servlet-name>updateDroga</servlet-name>
-    <servlet-class>servlets.updateDroga</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>updateDroga</servlet-name>
-    <url-pattern>/updateDroga</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>updateJava</display-name>
-    <servlet-name>updateJava</servlet-name>
-    <servlet-class>servlets.UpdateJava</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>updateJava</servlet-name>
-    <url-pattern>/updatejava</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>UpdateDroga</display-name>
-    <servlet-name>UpdateDroga</servlet-name>
-    <servlet-class>servlets.UpdateDroga</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateDroga</servlet-name>
-    <url-pattern>/UpdateDroga</url-pattern>
-    <url-pattern>/updatedroga</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ASd</display-name>
-    <servlet-name>ASd</servlet-name>
-    <servlet-class>servlets.ASd</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ASd</servlet-name>
-    <url-pattern>/ASd</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>GetAllDroga</display-name>
-    <servlet-name>GetAllDroga</servlet-name>
-    <servlet-class>servlets.GetAllDroga</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetAllDroga</servlet-name>
-    <url-pattern>/GetAllDroga</url-pattern>
-    <url-pattern>/getalldrogas</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>modifyDroga</display-name>
     <servlet-name>modifyDroga</servlet-name>
     <servlet-class>servlets.modifyDroga</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>modifyDroga</servlet-name>
-    <url-pattern>/modifydrug</url-pattern>
+    <url-pattern>/ui-droga/modifydrug</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -89,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AltaObraSocial</servlet-name>
-    <url-pattern>/createobrasocial</url-pattern>
+    <url-pattern>/ui-obraSocial/createobrasocial</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -100,6 +48,6 @@
   <servlet-mapping>
     <servlet-name>deleteDroga</servlet-name>
     <url-pattern>/deleteDroga</url-pattern>
-    <url-pattern>/deletedrug</url-pattern>
+    <url-pattern>/ui-droga/deletedrug</url-pattern>
   </servlet-mapping>
 </web-app>

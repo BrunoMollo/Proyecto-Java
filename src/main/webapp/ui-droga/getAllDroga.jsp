@@ -14,7 +14,8 @@
 <body>
 <h2>Drogas</h2>
 
-<p>[ <a href="index.html">Volver al menu</a> ] </p>
+<p>[ <a href="../index.html">Volver al menu</a> ] </p>
+
 <table class="table" border="1px solid black">
 	<thead>
 		<tr>

@@ -47,7 +47,7 @@ public class altaDroga extends HttpServlet {
 			
 			response.setStatus(201);
 			request.setAttribute("droga", drug);
-			request.getRequestDispatcher("WEB-INF/ConfirmarAltaDroga.jsp").forward(request, response);
+			request.getRequestDispatcher("ConfirmarAltaDroga.jsp").forward(request, response);
 			
 		} 
 		catch (SQLException e) {
