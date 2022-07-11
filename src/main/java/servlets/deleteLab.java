@@ -1,59 +1,58 @@
 package servlets;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logic.CtrlDroga;
+import logic.CtrlLaboratorio;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-import entities.Droga;
+import entities.Laboratorio;
 
 /**
- * Servlet implementation class altaDroga
+ * Servlet implementation class deleteLab
  */
-public class altaDroga extends HttpServlet {
+public class deleteLab extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public altaDroga() { super(); }
+    public deleteLab() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at get: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer cod=Integer.parseInt( request.getParameter("codLab") );
 		
-		String name= request.getParameter("name");
-		
-		Droga drug= new Droga();
-		drug.setNombre(name);
-		
-		CtrlDroga con= new CtrlDroga();
-		
-		try {
-			con.addDroga(drug);
+		Laboratorio lab= new Laboratorio();
+		lab.setCodigo(cod);
 			
-			response.setStatus(201);
-			request.setAttribute("droga", drug);
-			request.getRequestDispatcher("ConfirmarAltaDroga.jsp").forward(request, response);
-		} catch (SQLException e) {
-			response.sendError(500, e.getMessage());
-			e.printStackTrace();
-		}
-		
-		
+			CtrlLaboratorio con= new CtrlLaboratorio();
+			
+			try {
+				con.delete(lab);
+				response.setStatus(202);
+				response.sendRedirect("modifylab");
+			} catch (SQLException e) {
+				response.sendError(500, e.getMessage());
+				e.printStackTrace();//
+			}
 	}
 
 }
