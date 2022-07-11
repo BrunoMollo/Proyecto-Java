@@ -1,6 +1,7 @@
 package servlets;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,20 +9,19 @@ import logic.CtrlDroga;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 import entities.Droga;
 
 /**
- * Servlet implementation class modifyDroga
+ * Servlet implementation class deleteDroga
  */
-public class modifyDroga extends HttpServlet {
+public class deleteDroga extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public modifyDroga() {
+    public deleteDroga() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,42 +30,29 @@ public class modifyDroga extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CtrlDroga cad = new CtrlDroga();
-		LinkedList<Droga> arr;
-		try {
-			arr = cad.getAll();
-			request.setAttribute("listadroga", arr);
-			request.getRequestDispatcher("WEB-INF/getAllDroga.jsp").forward(request, response);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			response.sendError(500, e.getMessage());
-		}
-		
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer cod=Integer.parseInt( request.getParameter("codModifiedDrug") );
-		String name=request.getParameter("newName");
+		Integer cod=Integer.parseInt( request.getParameter("codDrug") );
 		
 		Droga drug= new Droga();
 		drug.setCod(cod);
-		drug.setNombre(name);
 		
 		CtrlDroga con= new CtrlDroga();
 		
 		try {
-			con.update(drug);
-			response.setStatus(200);
+			con.delete(drug);
+			response.setStatus(202);
 			response.sendRedirect("modifydrug");
 		} catch (SQLException e) {
 			response.sendError(500, e.getMessage());
-			e.printStackTrace();
+			e.printStackTrace();//
 		}
-	
 	}
 
 }

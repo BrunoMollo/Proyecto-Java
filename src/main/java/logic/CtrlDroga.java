@@ -25,6 +25,11 @@ public class CtrlDroga {
 	public void update(Droga d) throws SQLException {
 		drogaDao.update(d);
 	}
+
+	public void delete(Droga drug) throws SQLException {
+		// TODO Auto-generated method stub
+		drogaDao.delete(drug);
+	}
 	
 
 }

@@ -91,4 +91,15 @@
     <servlet-name>AltaObraSocial</servlet-name>
     <url-pattern>/createobrasocial</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>deleteDroga</display-name>
+    <servlet-name>deleteDroga</servlet-name>
+    <servlet-class>servlets.deleteDroga</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteDroga</servlet-name>
+    <url-pattern>/deleteDroga</url-pattern>
+    <url-pattern>/deletedrug</url-pattern>
+  </servlet-mapping>
 </web-app>
