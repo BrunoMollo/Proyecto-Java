@@ -51,19 +51,15 @@ public class AltaObraSocial extends HttpServlet {
 		try {
 			con.add(os);
 			response.setStatus(201);
-			response.getWriter().append("Se dio de alta").append(request.getContextPath());
+			
+			request.setAttribute("os", os);
+			
+			request.getRequestDispatcher("ConfirmarAltaObraSocial.jsp").forward(request, response);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			response.sendError(500, e.getMessage());
 		}
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
