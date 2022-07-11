@@ -7,13 +7,12 @@ import data.DrogasDao;
 import entities.Droga;
 
 public class CtrlDroga {
-	DrogasDao drogaDao;
+	private DrogasDao drogaDao;
 	
 	public CtrlDroga() {
 		this.drogaDao=new DrogasDao();
 	}
 	
-
 	public void addDroga(Droga drug) throws SQLException{
 		drogaDao.add(drug);
 	}

@@ -81,4 +81,14 @@
     <servlet-name>modifyDroga</servlet-name>
     <url-pattern>/modifydrug</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaObraSocial</display-name>
+    <servlet-name>AltaObraSocial</servlet-name>
+    <servlet-class>servlets.AltaObraSocial</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaObraSocial</servlet-name>
+    <url-pattern>/createobrasocial</url-pattern>
+  </servlet-mapping>
 </web-app>

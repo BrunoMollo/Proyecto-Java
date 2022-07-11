@@ -62,6 +62,15 @@ public class StatementWrapper {
 			});
 			return this;
 		}
+
+
+		public StatementWrapper push(Double d) {
+			paramterAdders.add((index, st)->{
+				try { st.setDouble(index, d); } 
+				catch (SQLException e) { throw e; }
+			});
+			return this;
+		}
 		
 		
 		
