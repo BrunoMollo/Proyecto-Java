@@ -68,7 +68,6 @@ public class ModifyObraSocial extends HttpServlet {
 		try {
 			LinkedHashMap<String, Object> data = parser.object();
 			
-			
 			os.setId( Integer.parseInt(data.get("id").toString()) );
 			os.setNombre(data.get("nombre").toString());
 			os.setTelefono(data.get("telefono").toString());
@@ -78,7 +77,6 @@ public class ModifyObraSocial extends HttpServlet {
 			con.update(os);
 			
 			resp.setStatus(200);
-			
 		} 
 		catch (ParseException e) {
 			resp.setStatus(490);

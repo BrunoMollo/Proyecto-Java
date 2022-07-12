@@ -19,7 +19,6 @@ public class CtrlDroga {
 	
 	public LinkedList<Droga> getAll() throws SQLException{
 		return drogaDao.getAll();
-		
 	}
 	
 	public void update(Droga d) throws SQLException {
@@ -27,7 +26,6 @@ public class CtrlDroga {
 	}
 
 	public void delete(Droga drug) throws SQLException {
-		// TODO Auto-generated method stub
 		drogaDao.delete(drug);
 	}
 	

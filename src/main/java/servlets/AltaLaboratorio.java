@@ -4,30 +4,29 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logic.CtrlDroga;
-
+import logic.CtrlLaboratorio;
 import java.io.IOException;
 import java.sql.SQLException;
-
-import entities.Droga;
+import entities.Laboratorio;
 
 /**
- * Servlet implementation class altaDroga
+ * Servlet implementation class AltaLaboratorio
  */
-public class altaDroga extends HttpServlet {
+public class AltaLaboratorio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public altaDroga() { super(); }
+    public AltaLaboratorio() {
+        super();
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at get: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -35,25 +34,26 @@ public class altaDroga extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String name= request.getParameter("name");
+		String nombre=request.getParameter("name");
+		String email=request.getParameter("email");
+		String telef=request.getParameter("telefono");
 		
-		Droga drug= new Droga();
-		drug.setNombre(name);
+		Laboratorio l =new Laboratorio();
+		l.setNombre(nombre);
+		l.setEmail(email);
+		l.setTelefono(telef);
 		
-		CtrlDroga con= new CtrlDroga();
+		CtrlLaboratorio ctrl = new CtrlLaboratorio();
 		
 		try {
-			con.addDroga(drug);
-			
+			ctrl.add(l);
 			response.setStatus(201);
-			request.setAttribute("droga", drug);
-			request.getRequestDispatcher("ConfirmarAltaDroga.jsp").forward(request, response);
+			request.setAttribute("lab", l);
+			request.getRequestDispatcher("ConfirmarAltaLaboratorio.jsp").forward(request, response);
 		} catch (SQLException e) {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 
 }

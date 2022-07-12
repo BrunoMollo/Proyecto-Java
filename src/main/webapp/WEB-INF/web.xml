@@ -59,5 +59,46 @@
   <servlet-mapping>
     <servlet-name>ModifyObraSocial</servlet-name>
     <url-pattern>/ui-obraSocial/modifyObraSocial</url-pattern>
+    <display-name>AltaLaboratorio</display-name>
+    <servlet-name>AltaLaboratorio</servlet-name>
+    <servlet-class>servlets.AltaLaboratorio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaLaboratorio</servlet-name>
+    <url-pattern>/AltaLaboratorio</url-pattern>
+    <url-pattern>/ui-laboratorio/createlaboratorio</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MenuLaboratorio</display-name>
+    <servlet-name>MenuLaboratorio</servlet-name>
+    <servlet-class>servlets.MenuLaboratorio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuLaboratorio</servlet-name>
+    <url-pattern>/MenuLaboratorio</url-pattern>
+    <url-pattern>/ui-laboratorio/menulab</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>modifyLab</display-name>
+    <servlet-name>modifyLab</servlet-name>
+    <servlet-class>servlets.modifyLab</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>modifyLab</servlet-name>
+    <url-pattern>/modifyLab</url-pattern>
+    <url-pattern>/ui-laboratorio/modifylab</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>deleteLab</display-name>
+    <servlet-name>deleteLab</servlet-name>
+    <servlet-class>servlets.deleteLab</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteLab</servlet-name>
+    <url-pattern>/deleteLab</url-pattern>
+    <url-pattern>/ui-laboratorio/deletelab</url-pattern>
   </servlet-mapping>
 </web-app>
