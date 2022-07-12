@@ -50,4 +50,14 @@
     <url-pattern>/deleteDroga</url-pattern>
     <url-pattern>/ui-droga/deletedrug</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ModifyObraSocial</display-name>
+    <servlet-name>ModifyObraSocial</servlet-name>
+    <servlet-class>servlets.ModifyObraSocial</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyObraSocial</servlet-name>
+    <url-pattern>/ui-obraSocial/modifyObraSocial</url-pattern>
+  </servlet-mapping>
 </web-app>

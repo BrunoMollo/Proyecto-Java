@@ -3,6 +3,7 @@ package data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.concurrent.locks.StampedLock;
 
 import dbUtils.Dao;
 import dbUtils.StatementWrapper;
@@ -12,8 +13,13 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 
 	@Override
 	protected ObraSocial mapFromResulset(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ObraSocial os=  new ObraSocial();
+		os.setId(rs.getInt("id"));
+		os.setNombre(rs.getString("nombre"));
+		os.setEmail(rs.getString("email"));
+		os.setTelefono(rs.getString("telefono"));
+		os.setDescuento(rs.getDouble("descuentoGeneral"));
+		return os;
 	}
 
 	@Override
@@ -29,8 +35,7 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 
 	@Override
 	public LinkedList<ObraSocial> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return executeFindAll(new StatementWrapper("select * from obras_sociales"));
 	}
 
 	@Override
@@ -44,9 +49,14 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 	}
 
 	@Override
-	public void update(ObraSocial p) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public void update(ObraSocial os) throws SQLException {
+		StatementWrapper stw=new StatementWrapper("update obras_sociales set nombre=?, telefono=?, email=?, descuentoGeneral=?  where id=?")
+				.push(os.getNombre())
+				.push(os.getTelefono())
+				.push(os.getEmail())
+				.push(os.getDescuento())
+				.push(os.getId());
+		executeModification(stw);
 	}
 
 	@Override

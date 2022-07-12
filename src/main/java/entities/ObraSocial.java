@@ -18,6 +18,9 @@ public class ObraSocial {
 	}
 	
 	
+	public ObraSocial() { }
+
+
 	public Integer getId() {
 		return id;
 	}
