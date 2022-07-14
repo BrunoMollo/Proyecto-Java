@@ -59,6 +59,8 @@
   <servlet-mapping>
     <servlet-name>ModifyObraSocial</servlet-name>
     <url-pattern>/ui-obraSocial/modifyObraSocial</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>AltaLaboratorio</display-name>
     <servlet-name>AltaLaboratorio</servlet-name>
     <servlet-class>servlets.AltaLaboratorio</servlet-class>
