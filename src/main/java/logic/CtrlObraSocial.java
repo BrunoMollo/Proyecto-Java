@@ -1,30 +1,14 @@
 package logic;
 
-import java.sql.SQLException;
-import java.util.LinkedList;
 
+import cosas_locas.BasicCtrl;
 import data.ObrasSocialesDao;
 import entities.ObraSocial;
 
-public class CtrlObraSocial {
+public class CtrlObraSocial extends BasicCtrl<ObraSocial>{
 
-	private ObrasSocialesDao osDao;
-	
 	public CtrlObraSocial() {
-		osDao= new ObrasSocialesDao();
+		this.miDao= new ObrasSocialesDao();
 	}
-	
-	public void add(ObraSocial os) throws SQLException {
-		osDao.add(os);
-	}
-
-	public LinkedList<ObraSocial> getAll() throws SQLException {
-		return osDao.getAll();
-	}
-
-	public void update(ObraSocial os) throws SQLException {
-		osDao.update(os);
-	}
-	
 	
 }

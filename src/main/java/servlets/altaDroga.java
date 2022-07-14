@@ -43,7 +43,7 @@ public class altaDroga extends HttpServlet {
 		CtrlDroga con= new CtrlDroga();
 		
 		try {
-			con.addDroga(drug);
+			con.add(drug);
 			
 			response.setStatus(201);
 			request.setAttribute("droga", drug);
