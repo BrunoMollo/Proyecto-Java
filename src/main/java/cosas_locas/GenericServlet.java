@@ -37,7 +37,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	protected String JSPGetAll;
 	protected String redirectDelete;
 	
-	protected abstract ENTITY getEntityFromRequest(HttpServletRequest request);
+	protected abstract ENTITY getEntityFromRequest(RequestParameterParser parser);
 
 	private HashMap<String, operationExecution<ENTITY>> postOperations;
 	
@@ -69,8 +69,8 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ENTITY obj= getEntityFromRequest(request);
+		RequestParameterParser dataParser= new RequestParameterParser(request);
+		ENTITY obj= getEntityFromRequest(dataParser);
 		
 		String opt=request.getParameter("opt");
 		

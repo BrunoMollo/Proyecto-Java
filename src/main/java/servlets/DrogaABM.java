@@ -1,12 +1,11 @@
 package servlets;
 
 
-import jakarta.servlet.http.HttpServletRequest;
 import logic.CtrlDroga;
 
 
-
 import cosas_locas.GenericServlet;
+import cosas_locas.RequestParameterParser;
 import entities.Droga;
 
 /**
@@ -26,16 +25,10 @@ public class DrogaABM extends GenericServlet<Droga> {
 
 
 	@Override
-	protected Droga getEntityFromRequest(HttpServletRequest request) {
-		String name= request.getParameter("name-droga");
-		
-		Integer cod=null;
-		if(request.getParameter("cod-droga")!=null) {
-			cod=Integer.parseInt(request.getParameter("cod-droga"));
-		}
+	protected Droga getEntityFromRequest(RequestParameterParser parser) {
 		Droga drug= new Droga();
-		drug.setCod(cod);
-		drug.setNombre(name);
+		drug.setCod(parser.getInt("cod-droga"));
+		drug.setNombre(parser.getString("name-droga"));
 		return drug;
 	}
 
