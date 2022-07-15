@@ -9,51 +9,37 @@ import logic.CtrlDroga;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import cosas_locas.GenericServlet;
 import entities.Droga;
 
 /**
  * Servlet implementation class altaDroga
  */
-public class altaDroga extends HttpServlet {
+public class altaDroga extends GenericServlet<Droga> {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public altaDroga() { super(); }
+    public altaDroga() { 
+    	super();
+    	this.con=new CtrlDroga();
+    	this.redirectAdd="ConfirmarAltaDroga.jsp";
+    	this.redirectUpdate="ABM-droga";
+    	this.JSPGetAll="getAllDroga.jsp";
+    	this.redirectDelete="ABM-droga";
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at get: ").append(request.getContextPath());
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected Droga getEntityFromRequest(HttpServletRequest request) {
+		String name= request.getParameter("name-droga");
 		
-		String name= request.getParameter("name");
-		
-		Droga drug= new Droga();
-		drug.setNombre(name);
-		
-		CtrlDroga con= new CtrlDroga();
-		
-		try {
-			con.add(drug);
-			
-			response.setStatus(201);
-			request.setAttribute("droga", drug);
-			request.getRequestDispatcher("ConfirmarAltaDroga.jsp").forward(request, response);
-		} catch (SQLException e) {
-			response.sendError(500, e.getMessage());
-			e.printStackTrace();
+		Integer cod=null;
+		if(request.getParameter("cod-droga")!=null) {
+			cod=Integer.parseInt(request.getParameter("cod-droga"));
 		}
-		
-		
+		Droga drug= new Droga();
+		drug.setCod(cod);
+		drug.setNombre(name);
+		return drug;
 	}
 
 }
