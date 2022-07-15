@@ -17,10 +17,10 @@ public class DrogaABMC extends GenericServlet<Droga> {
     public DrogaABMC() { 
     	super();
     	this.con=new CtrlDroga();
-    	this.JSPGetAll="getAllDroga.jsp";
+    	this.JSPGetAll="/ui-droga/getAllDroga.jsp";
     	this.redirectAdd="/ui-droga/ConfirmarAltaDroga.jsp";
-    	this.redirectUpdate="/lafarmacia/ui-droga/ABMC-droga";
-    	this.redirectDelete="/lafarmacia/ui-droga/ABMC-droga";
+    	this.redirectUpdate="/lafarmacia/ABMC-droga/all";
+    	this.redirectDelete="/lafarmacia/ABMC-droga/all";
     }
 
 

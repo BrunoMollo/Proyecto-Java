@@ -8,7 +8,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DrogaABMC</servlet-name>
-    <url-pattern>/ui-droga/ABMC-droga/*</url-pattern>
+    <url-pattern>/ABMC-droga/*</url-pattern>
   </servlet-mapping>
   <display-name>Farmacia_TP</display-name>
   <welcome-file-list>
