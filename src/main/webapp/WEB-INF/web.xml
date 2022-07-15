@@ -2,12 +2,12 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
   <servlet>
     <description></description>
-    <display-name>altaDroga</display-name>
-    <servlet-name>altaDroga</servlet-name>
-    <servlet-class>servlets.altaDroga</servlet-class>
+    <display-name>DrogaABM</display-name>
+    <servlet-name>DrogaABM</servlet-name>
+    <servlet-class>servlets.DrogaABM</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>altaDroga</servlet-name>
+    <servlet-name>DrogaABM</servlet-name>
     <url-pattern>/ui-droga/ABM-droga</url-pattern>
   </servlet-mapping>
   <display-name>Farmacia_TP</display-name>
@@ -21,16 +21,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>modifyDroga</display-name>
-    <servlet-name>modifyDroga</servlet-name>
-    <servlet-class>servlets.modifyDroga</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>modifyDroga</servlet-name>
-    <url-pattern>/ui-droga/modifydrug</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>AltaObraSocial</display-name>
     <servlet-name>AltaObraSocial</servlet-name>
     <servlet-class>servlets.AltaObraSocial</servlet-class>
@@ -38,17 +28,6 @@
   <servlet-mapping>
     <servlet-name>AltaObraSocial</servlet-name>
     <url-pattern>/ui-obraSocial/createobrasocial</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>deleteDroga</display-name>
-    <servlet-name>deleteDroga</servlet-name>
-    <servlet-class>servlets.deleteDroga</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>deleteDroga</servlet-name>
-    <url-pattern>/deleteDroga</url-pattern>
-    <url-pattern>/ui-droga/deletedrug</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

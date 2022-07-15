@@ -1,13 +1,10 @@
 package servlets;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
+
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
 
-import java.io.IOException;
-import java.sql.SQLException;
+
 
 import cosas_locas.GenericServlet;
 import entities.Droga;
@@ -15,15 +12,15 @@ import entities.Droga;
 /**
  * Servlet implementation class altaDroga
  */
-public class altaDroga extends GenericServlet<Droga> {
+public class DrogaABM extends GenericServlet<Droga> {
 	private static final long serialVersionUID = 1L;
        
-    public altaDroga() { 
+    public DrogaABM() { 
     	super();
     	this.con=new CtrlDroga();
+    	this.JSPGetAll="getAllDroga.jsp";
     	this.redirectAdd="ConfirmarAltaDroga.jsp";
     	this.redirectUpdate="ABM-droga";
-    	this.JSPGetAll="getAllDroga.jsp";
     	this.redirectDelete="ABM-droga";
     }
 

@@ -27,16 +27,9 @@ interface operationExecution<T>{
 	void execute(T obj,HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException;
 }
 
-/**
- * Servlet implementation class GenericServlet
- */
+
 public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    
     
 	protected BasicCtrl<ENTITY> con;
 	protected String redirectAdd;
@@ -46,17 +39,15 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	
 	protected abstract ENTITY getEntityFromRequest(HttpServletRequest request);
 
-	private HashMap<String, operationExecution<ENTITY>> opearionsMap;
-	
-	
+	private HashMap<String, operationExecution<ENTITY>> postOperations;
 	
 	
 	public GenericServlet() { 
 		super(); 
-		opearionsMap= new HashMap<String, operationExecution<ENTITY>>();
-		opearionsMap.put("add", addEntity );
-		opearionsMap.put("update", updateEntity);
-		opearionsMap.put("delete", deleteEntity);
+		postOperations= new HashMap<String, operationExecution<ENTITY>>();
+		postOperations.put("add", addEntity );
+		postOperations.put("update", updateEntity);
+		postOperations.put("delete", deleteEntity);
 	}
 	
 	/**
@@ -84,7 +75,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 		String opt=request.getParameter("opt");
 		
 		try {
-			opearionsMap.get(opt).execute(obj, request, response);
+			postOperations.get(opt).execute(obj, request, response);
 		} catch (NullPointerException e) {
 			response.getWriter().append("operacion no soportada, consultar a bruno");
 		}
@@ -95,7 +86,8 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	
 	//-----------------------------------------------------
 	
-	
+	//Estos no son metodos, sino atributos del tipo operationExecution(interfaz funcional)
+	//los declare asi para poder pasarlos facilmente adentro del HashMap en el constructor
 	protected operationExecution<ENTITY> addEntity=(obj, request,  response) ->{
 		try {
 			con.add(obj);
@@ -134,6 +126,5 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 			}
 	};
 	
-
 
 }
