@@ -16,19 +16,19 @@ public class RequestParameterParser {
 	}
 	
 	public Integer getInt(String name) {
-		String text=req.getParameter(name);
-		if(text!=null) {
-			return Integer.parseInt(text);
+		try {
+			return Integer.parseInt(req.getParameter(name));
+		} catch (NumberFormatException  | NullPointerException e) {
+			return null;
 		}
-		else {return null;}
 	}
 	
 	public Double getDouble(String name) {
-		String text=req.getParameter(name);
-		if(text!=null) {
-			return Double.parseDouble(text);
+		try {
+			return Double.parseDouble(req.getParameter(name));
+		} catch (NumberFormatException | NullPointerException e ) {
+			return null;
 		}
-		else {return null;}
 	}
 	
 	

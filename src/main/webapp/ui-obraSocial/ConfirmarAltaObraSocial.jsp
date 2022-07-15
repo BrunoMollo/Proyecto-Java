@@ -7,7 +7,7 @@
 	<meta charset="ISO-8859-1">
 	<title>La farmacia</title>
 	<%
-		ObraSocial os= (ObraSocial)request.getAttribute("os");
+		ObraSocial os= (ObraSocial)request.getAttribute("addedObject");
 	%>
 </head>
 <body>

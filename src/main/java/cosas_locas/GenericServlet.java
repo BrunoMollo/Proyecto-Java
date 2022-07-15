@@ -55,11 +55,16 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 		ENTITY obj= getEntityFromRequest(dataParser);
 		String opt=request.getPathInfo().substring(1);
 		System.out.println(opt);
-		try {
-			getOperations.get(opt).execute(obj, request, response);
-		} catch (NullPointerException e) {
-			response.getWriter().append("operacion no soportada, consultar a bruno");
+		
+		operationExecution<ENTITY> e=getOperations.get(opt);
+		if(e!=null) {
+			e.execute(obj, request, response);
 		}
+		else {
+			response.sendError(400,"no se que mandaste");
+		}
+				
+		
 	}
 
 	/**
@@ -69,11 +74,15 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 		RequestParameterParser dataParser= new RequestParameterParser(request);
 		ENTITY obj= getEntityFromRequest(dataParser);
 		String opt=request.getPathInfo().substring(1);
-		try {
-			postOperations.get(opt).execute(obj, request, response);
-		} catch (NullPointerException e) {
-			response.getWriter().append("operacion no soportada, consultar a bruno");
+		
+		operationExecution<ENTITY> e=postOperations.get(opt);
+		if(e!=null) {
+			e.execute(obj, request, response);
 		}
+		else {
+			response.sendError(400,"no se que mandaste");
+		}
+		
 	
 	}
 	
@@ -86,7 +95,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	
 	
 	//GET-----------------------
-	protected operationExecution<ENTITY> allEntities=(obj, request,  response) ->{
+	private operationExecution<ENTITY> allEntities=(obj, request,  response) ->{
 		try {
 			LinkedList<ENTITY> arr = con.getAll();
 			request.setAttribute("all", arr);
@@ -103,7 +112,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	
 	
 	//POST-------------------
-	protected operationExecution<ENTITY> addEntity=(obj, request,  response) ->{
+	private operationExecution<ENTITY> addEntity=(obj, request,  response) ->{
 		try {
 			con.add(obj);
 			response.setStatus(201);
@@ -117,11 +126,11 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	
 	
 	
-	protected  operationExecution<ENTITY> updateEntity=(obj, request, response)->{
+	private  operationExecution<ENTITY> updateEntity=(obj, request, response)->{
 				try {
 					con.update(obj);
 					response.setStatus(200);
-					response.sendRedirect(redirectUpdate);
+					this.allEntities.execute(obj, request, response);
 				} catch (SQLException e) {
 					response.sendError(500, e.getMessage());
 					e.printStackTrace();
@@ -130,11 +139,11 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	
 	
 			
-	protected operationExecution<ENTITY> deleteEntity=(obj, request,  response)-> {
+	private operationExecution<ENTITY> deleteEntity=(obj, request,  response)-> {
 			try {
 				con.delete(obj);
 				response.setStatus(202);
-				response.sendRedirect(redirectDelete);
+				this.allEntities.execute(obj, request, response);
 			} catch (SQLException e) {
 				response.sendError(500, e.getMessage());
 				e.printStackTrace();//

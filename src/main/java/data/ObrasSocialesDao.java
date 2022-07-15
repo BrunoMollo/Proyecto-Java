@@ -61,8 +61,7 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 
 	@Override
 	public void delete(ObraSocial p) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		executeModification(new StatementWrapper("delete from obras_sociales where id=?").push(p.getId()));
 	}
 
 }

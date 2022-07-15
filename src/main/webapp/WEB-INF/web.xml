@@ -20,26 +20,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <description></description>
-    <display-name>AltaObraSocial</display-name>
-    <servlet-name>AltaObraSocial</servlet-name>
-    <servlet-class>servlets.AltaObraSocial</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AltaObraSocial</servlet-name>
-    <url-pattern>/ui-obraSocial/createobrasocial</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ModifyObraSocial</display-name>
-    <servlet-name>ModifyObraSocial</servlet-name>
-    <servlet-class>servlets.ModifyObraSocial</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ModifyObraSocial</servlet-name>
-    <url-pattern>/ui-obraSocial/modifyObraSocial</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <display-name>AltaLaboratorio</display-name>
     <servlet-name>AltaLaboratorio</servlet-name>
     <servlet-class>servlets.AltaLaboratorio</servlet-class>
@@ -81,5 +61,15 @@
     <servlet-name>deleteLab</servlet-name>
     <url-pattern>/deleteLab</url-pattern>
     <url-pattern>/ui-laboratorio/deletelab</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ObraSocialABMC</display-name>
+    <servlet-name>ObraSocialABMC</servlet-name>
+    <servlet-class>servlets.ObraSocialABMC</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ObraSocialABMC</servlet-name>
+    <url-pattern>/ABMC-obrasocial/*</url-pattern>
   </servlet-mapping>
 </web-app>
