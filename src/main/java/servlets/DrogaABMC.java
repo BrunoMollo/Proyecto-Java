@@ -11,16 +11,16 @@ import entities.Droga;
 /**
  * Servlet implementation class altaDroga
  */
-public class DrogaABM extends GenericServlet<Droga> {
+public class DrogaABMC extends GenericServlet<Droga> {
 	private static final long serialVersionUID = 1L;
        
-    public DrogaABM() { 
+    public DrogaABMC() { 
     	super();
     	this.con=new CtrlDroga();
     	this.JSPGetAll="getAllDroga.jsp";
-    	this.redirectAdd="ConfirmarAltaDroga.jsp";
-    	this.redirectUpdate="ABM-droga";
-    	this.redirectDelete="ABM-droga";
+    	this.redirectAdd="/ui-droga/ConfirmarAltaDroga.jsp";
+    	this.redirectUpdate="/lafarmacia/ui-droga/ABMC-droga";
+    	this.redirectDelete="/lafarmacia/ui-droga/ABMC-droga";
     }
 
 

@@ -5,21 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import logic.CtrlDroga;
-import logic.CtrlLaboratorio;
+
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.function.Function;
 
-import org.w3c.dom.Entity;
-
-import entities.Droga;
-import entities.Laboratorio;
 
 
 @FunctionalInterface
@@ -72,7 +64,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 		RequestParameterParser dataParser= new RequestParameterParser(request);
 		ENTITY obj= getEntityFromRequest(dataParser);
 		
-		String opt=request.getParameter("opt");
+		String opt=request.getPathInfo().substring(1);
 		
 		try {
 			postOperations.get(opt).execute(obj, request, response);

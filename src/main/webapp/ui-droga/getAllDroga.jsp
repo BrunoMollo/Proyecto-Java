@@ -38,8 +38,7 @@
 	</tbody>
 </table>
 
-<form hidden="true" id="miForm" action="ABM-droga" method="post">
-	<input hidden name="opt" value="update">
+<form hidden="true" id="miForm" action="ABMC-droga/update" method="post">
 	<input name="cod-droga" id="codModifiedDrug">
 	<input name="name-droga" id="newName">
 	
@@ -56,8 +55,7 @@
 	}
 </script>
 
-<form hidden="true" id="ourForm" action="ABM-droga" method="post">
-	<input hidden name="opt" value="delete">
+<form hidden="true" id="ourForm" action="ABMC-droga/delete" method="post">
 	<input name="cod-droga" id="codDrug">
 	
 </form>
