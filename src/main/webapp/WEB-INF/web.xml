@@ -103,4 +103,15 @@
     <url-pattern>/deleteLab</url-pattern>
     <url-pattern>/ui-laboratorio/deletelab</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SignIn</display-name>
+    <servlet-name>SignIn</servlet-name>
+    <servlet-class>servlets.SignIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignIn</servlet-name>
+    <url-pattern>/SignIn</url-pattern>
+    <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
 </web-app>
