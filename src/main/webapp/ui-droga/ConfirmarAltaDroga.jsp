@@ -7,14 +7,14 @@
 	<meta charset="ISO-8859-1">
 	<title>La farmacia</title>
 	<%
-		Droga drug= (Droga)request.getAttribute("droga");
+		Droga drug= (Droga)request.getAttribute("addedObject");
 	%>
 </head>
 <body>
 	<h1>Se dio de alta la droga</h1>
 		<div>Codigo: <%=drug.getCod() %></div>
 		<div>Nombre: <%=drug.getNombre() %></div>
-		<a href="../index.html">Volver al menu</a>
+		<a href="/lafarmacia/index.html">Volver al menu</a>
 
 </body>
 </html>

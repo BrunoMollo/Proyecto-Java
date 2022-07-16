@@ -1,4 +1,4 @@
-package dbUtils;
+package ourLib.dbUtils;
 
 import java.sql.*;
 

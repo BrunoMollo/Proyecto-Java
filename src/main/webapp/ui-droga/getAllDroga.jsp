@@ -8,7 +8,8 @@
 	<meta charset="ISO-8859-1">
 	<title>Listado de drogas</title>
 	<%
-	LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("listadroga");
+	LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("all");
+	System.out.println(request);
 	%>
 </head>
 <body>
@@ -37,9 +38,9 @@
 	</tbody>
 </table>
 
-<form hidden="true" id="miForm" action="modifydrug" method="post">
-	<input name="codModifiedDrug" id="codModifiedDrug">
-	<input name="newName" id="newName">
+<form hidden="true" id="miForm" action="/lafarmacia/ABMC-droga/update" method="post">
+	<input name="cod-droga" id="codModifiedDrug">
+	<input name="name-droga" id="newName">
 	
 </form>
 
@@ -54,8 +55,8 @@
 	}
 </script>
 
-<form hidden="true" id="ourForm" action="deletedrug" method="post">
-	<input name="codDrug" id="codDrug">
+<form hidden="true" id="ourForm" action="/lafarmacia/ABMC-droga/delete" method="post">
+	<input name="cod-droga" id="codDrug">
 	
 </form>
 

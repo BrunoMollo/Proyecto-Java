@@ -9,25 +9,25 @@
 <body>
 	<h1 class="m-3" align="center">Alta de Obra Social</h1>
 	
-	<form action="createobrasocial" method="POST" class="needs-validation col-sm-6 container">
+	<form action="/lafarmacia/ABMC-obrasocial/add" method="POST" class="needs-validation col-sm-6 container">
 		<div class="row-sm-6">
 			<label class="form-label">Nombre:</label>
-			<input type="text" name="name" class="form-control" required>
+			<input type="text" name="name_os" class="form-control" required>
 		</div>
 		<br>
 		<div class="row-sm-6">
 			<label class="form-label">Telefono:</label>
-			<input type="number" name="phone" class="form-control" required>
+			<input type="number" name="phone_os" class="form-control" required>
 		</div>
 		<br>
 		<div class="row-sm-6">
 			<label class="form-label">Email: :</label>
-			<input type="email" name="email" class="form-control" required>
+			<input type="email" name="email_os" class="form-control" required>
 		</div>
 		<br>
 		<div class="row-sm-6">
 			<label class="form-label">Descuento: (DECIDIR COMO SE VA A INGRESAR)</label>
-			<input type="number" step="0.001" min="0" max="100" name="discount" class="form-control" required>
+			<input type="number" step="0.001" min="0" max="100" name="discount_os" class="form-control" required>
 		</div>
 		<br>
 		<div class="row-sm-6">
