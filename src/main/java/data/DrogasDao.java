@@ -5,11 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
-import dbUtils.Dao;
-import dbUtils.DbConnector;
-import dbUtils.StatementWrapper;
 import entities.Droga;
+import ourLib.dbUtils.Dao;
+import ourLib.dbUtils.DbConnector;
+import ourLib.dbUtils.StatementWrapper;
 
 public class DrogasDao extends Dao<Droga> {
 	

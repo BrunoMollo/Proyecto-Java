@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.concurrent.locks.StampedLock;
 
-import dbUtils.Dao;
-import dbUtils.StatementWrapper;
 import entities.ObraSocial;
+import ourLib.dbUtils.Dao;
+import ourLib.dbUtils.StatementWrapper;
 
 public class ObrasSocialesDao extends Dao<ObraSocial>{
 

@@ -1,9 +1,9 @@
 package logic;
 
 
-import cosas_locas.BasicCtrl;
 import data.ObrasSocialesDao;
 import entities.ObraSocial;
+import ourLib.LogicAbstraction.BasicCtrl;
 
 public class CtrlObraSocial extends BasicCtrl<ObraSocial>{
 

@@ -1,11 +1,11 @@
-package cosas_locas;
+package ourLib.servletAbstraction;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import ourLib.LogicAbstraction.BasicCtrl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,22 +19,70 @@ interface operationExecution<T>{
 	void execute(T obj,HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException;
 }
 
-
+/**
+*<p>Esta clase es una abstraccion de los servlets que realizan operaciones de alta, baja, modificacion, y consulta basicos.</p>
+*<p>Se el puede definir una url base, seguida de posibles bifuraciones, por ejemplo si creo un GenericServlet&ltCosa&gt:
+*	la url base seria: /ABMC-Cosa/*
+*	de la cual se pueden invocar urls como:
+*	<ul>
+*		<li>/ABMC-Cosa/all</li>
+*		<li>/ABMC-Cosa/delete</li>
+*		<li>/ABMC-Cosa/add</li>
+*		<li>/ABMC-Cosa/miurlcopado</li>
+*	</ul>
+*</p>
+*<p>
+*Esta clase abstracta ya tiene implemetada las siguinetes rutas por defecto:
+*	<ul>
+*		<li>
+*		Con GET:
+*			<ul>
+*			<li>all</li>
+*			</ul>
+*		</li>
+*		<li>
+*		Con Post:
+*			<ul>
+*			<li>add</li>
+*			<li>update</li>
+*			<li>delete</li>
+*			</ul>
+*		</li>
+*	</ul>
+*Es posible implemetar nuevas rutas o reescribir las existentes.
+*		
+*</p>
+*
+*
+*/
 public abstract class GenericServlet<ENTITY> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected BasicCtrl<ENTITY> con;
-	protected String redirectAdd;
-	protected String redirectUpdate;
-	protected String JSPGetAll;
-	protected String redirectDelete;
+	protected String jspAddSuccess;
+	protected String jspGetAll;
 	
+	
+	
+	/**
+	* <p>Es necesario reescribir este metodo para que el servlet pueda converir los datos
+	* que recibe de la request en la entidad del dominio corresponiente, para luego ser pasado
+	* al controlador. </p>
+	* <p>Los paramtros de la request estan encapsulados en el objeto RequestParameterParser que se pasa por parametro
+	* el mismo ofrece metodos para acceder a esta informacion ya parseada.</p>
+	*/
 	protected abstract ENTITY getEntityFromRequest(RequestParameterParser parser);
 
-	private HashMap<String, operationExecution<ENTITY>> postOperations;
-	private HashMap<String, operationExecution<ENTITY>> getOperations;
+	protected HashMap<String, operationExecution<ENTITY>> postOperations;
+	protected HashMap<String, operationExecution<ENTITY>> getOperations;
 	
 	
+	/**
+	* <p>Inicailiza los hashMaps usados para el manejo de las urls y carga las urls por defecto </p>
+	* <p>Al ser redefinido, es necesario eleguir un controlador que herede de la calse BasicCtrl<>, 
+	* ademas de definir los archivos jsp pedidos por defecto: (jspAddSuccess y jspGetAll)
+	* </p>
+	*/
 	public GenericServlet() { 
 		super(); 
 		getOperations=new HashMap<String, operationExecution<ENTITY>>();
@@ -47,14 +95,11 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 		
 	}
 	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestParameterParser dataParser= new RequestParameterParser(request);
 		ENTITY obj= getEntityFromRequest(dataParser);
 		String opt=request.getPathInfo().substring(1);
-		System.out.println(opt);
 		
 		operationExecution<ENTITY> e=getOperations.get(opt);
 		if(e!=null) {
@@ -67,9 +112,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestParameterParser dataParser= new RequestParameterParser(request);
 		ENTITY obj= getEntityFromRequest(dataParser);
@@ -100,7 +143,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 			LinkedList<ENTITY> arr = con.getAll();
 			request.setAttribute("all", arr);
 			System.out.println(request);
-			request.getRequestDispatcher(JSPGetAll).forward(request, response);
+			request.getRequestDispatcher(jspGetAll).forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			response.sendError(500, e.getMessage());
@@ -117,7 +160,7 @@ public abstract class GenericServlet<ENTITY> extends HttpServlet {
 			con.add(obj);
 			response.setStatus(201);
 			request.setAttribute("addedObject", obj);
-			request.getRequestDispatcher(redirectAdd).forward(request, response);
+			request.getRequestDispatcher(jspAddSuccess).forward(request, response);
 		} catch (SQLException e) {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();

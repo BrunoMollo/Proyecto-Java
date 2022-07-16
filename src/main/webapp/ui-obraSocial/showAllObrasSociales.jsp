@@ -12,7 +12,7 @@
 	%>
 </head>
 <body>
-<h2>Drogas</h2>
+<h2>Obras Sociales</h2>
 
 <p>[ <a href="../index.html">Volver al menu</a> ] </p>
 

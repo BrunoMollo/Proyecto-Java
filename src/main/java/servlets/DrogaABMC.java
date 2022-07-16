@@ -2,10 +2,8 @@ package servlets;
 
 
 import logic.CtrlDroga;
-
-
-import cosas_locas.GenericServlet;
-import cosas_locas.RequestParameterParser;
+import ourLib.servletAbstraction.GenericServlet;
+import ourLib.servletAbstraction.RequestParameterParser;
 import entities.Droga;
 
 /**
@@ -17,10 +15,8 @@ public class DrogaABMC extends GenericServlet<Droga> {
     public DrogaABMC() { 
     	super();
     	this.con=new CtrlDroga();
-    	this.JSPGetAll="/ui-droga/getAllDroga.jsp";
-    	this.redirectAdd="/ui-droga/ConfirmarAltaDroga.jsp";
-    	this.redirectUpdate="/lafarmacia/ABMC-droga/all";
-    	this.redirectDelete="/lafarmacia/ABMC-droga/all";
+    	this.jspGetAll="/ui-droga/getAllDroga.jsp";
+    	this.jspAddSuccess="/ui-droga/ConfirmarAltaDroga.jsp";
     }
 
 

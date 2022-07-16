@@ -1,8 +1,8 @@
 package logic;
 
-import cosas_locas.BasicCtrl;
 import data.DrogasDao;
 import entities.Droga;
+import ourLib.LogicAbstraction.BasicCtrl;
 
 public class CtrlDroga extends BasicCtrl<Droga>{
 

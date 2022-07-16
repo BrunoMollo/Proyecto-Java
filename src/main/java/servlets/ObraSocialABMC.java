@@ -1,11 +1,11 @@
 package servlets;
 
-import cosas_locas.GenericServlet;
-import cosas_locas.RequestParameterParser;
 import entities.ObraSocial;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import logic.CtrlObraSocial;
+import ourLib.servletAbstraction.GenericServlet;
+import ourLib.servletAbstraction.RequestParameterParser;
 
 /**
  * Servlet implementation class ObraSocialABMC
@@ -19,8 +19,8 @@ public class ObraSocialABMC extends GenericServlet<ObraSocial> {
     public ObraSocialABMC() {
         super();
         this.con=new CtrlObraSocial();
-        this.JSPGetAll="/ui-obraSocial/showAllObrasSociales.jsp";
-        this.redirectAdd="/ui-obraSocial/ConfirmarAltaObraSocial.jsp";
+        this.jspGetAll="/ui-obraSocial/showAllObrasSociales.jsp";
+        this.jspAddSuccess="/ui-obraSocial/ConfirmarAltaObraSocial.jsp";
     }
 
 	@Override

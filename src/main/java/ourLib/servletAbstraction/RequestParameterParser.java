@@ -1,7 +1,13 @@
-package cosas_locas;
+package ourLib.servletAbstraction;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+
+
+/**
+* <p>Esta clase es un Wrapper para los objetos HttpServletRequest, para acceder a sus parametros 
+* ya parseados sin tener que estar validando si los mismos son nulos.</p>
+*/
 public class RequestParameterParser {
 	
 	private HttpServletRequest req;
