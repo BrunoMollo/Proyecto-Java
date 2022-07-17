@@ -1,16 +1,15 @@
 package servlets;
 
 import entities.ObraSocial;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import logic.CtrlObraSocial;
-import ourLib.servletAbstraction.GenericServlet;
+import ourLib.servletAbstraction.DefaultServlet;
 import ourLib.servletAbstraction.RequestParameterParser;
 
 /**
  * Servlet implementation class ObraSocialABMC
  */
-public class ObraSocialABMC extends GenericServlet<ObraSocial> {
+public class ObraSocialABMC extends DefaultServlet<ObraSocial> {
 	private static final long serialVersionUID = 1L;
        
     /**

@@ -2,7 +2,7 @@ package logic;
 
 import java.sql.SQLException;
 
-import cosas_locas.BasicCtrl;
+import ourLib.LogicAbstraction.BasicCtrl;
 import data.LoginDao;
 import entities.Usuario;
 

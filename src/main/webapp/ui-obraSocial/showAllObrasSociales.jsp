@@ -30,7 +30,7 @@
 	</thead>
 	<tbody>
 		<% for(ObraSocial os: arr){ %>
-				<tr border="0">
+				<tr>
 					<td><%=os.getId() %> </td>
 					<td><input value=<%=os.getNombre() %> type="text" id=<%="name-"+os.getId()%>></td>
 					<td><input value=<%=os.getTelefono() %> type="number" id=<%="tel-"+os.getId()%>></td>
@@ -44,7 +44,7 @@
 </table>
 
 
-<form hidden id="form" action="/lafarmacia/ABMC-obrasocial/update" method="post" >
+<form hidden="true" id="form" action="/lafarmacia/ABMC-obrasocial/update" method="post" >
 	<input name="id_os">
 	<input name="name_os">
 	<input name="phone_os">

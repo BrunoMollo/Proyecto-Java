@@ -2,14 +2,14 @@ package servlets;
 
 
 import logic.CtrlDroga;
-import ourLib.servletAbstraction.GenericServlet;
+import ourLib.servletAbstraction.DefaultServlet;
 import ourLib.servletAbstraction.RequestParameterParser;
 import entities.Droga;
 
 /**
  * Servlet implementation class altaDroga
  */
-public class DrogaABMC extends GenericServlet<Droga> {
+public class DrogaABMC extends DefaultServlet<Droga> {
 	private static final long serialVersionUID = 1L;
        
     public DrogaABMC() { 

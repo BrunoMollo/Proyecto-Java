@@ -3,7 +3,6 @@ package data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.concurrent.locks.StampedLock;
 
 import entities.ObraSocial;
 import ourLib.dbUtils.Dao;
