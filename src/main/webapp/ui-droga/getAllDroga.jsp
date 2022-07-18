@@ -56,7 +56,7 @@
 </script>
 
 <form hidden="true" id="ourForm" action="/lafarmacia/ABMC-droga/delete" method="post">
-	<input name="cod-droga" id="codDrug">
+	<input name="cod_droga" id="codDrug">
 	
 </form>
 
