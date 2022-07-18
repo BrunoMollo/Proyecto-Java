@@ -4,9 +4,10 @@ import java.sql.SQLException;
 
 import ourLib.LogicAbstraction.BasicCtrl;
 import data.LoginDao;
+import data.UsuariosDao;
 import entities.Usuario;
 
-public class CtrlLogin extends BasicCtrl<Usuario>{
+public class CtrlLogin extends BasicCtrl<Usuario, UsuariosDao>{
 	static LoginDao miDao;
 	public CtrlLogin() {
 		 miDao=new LoginDao();

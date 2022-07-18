@@ -2,9 +2,11 @@ package ourLib.servletAbstraction;
 
 
 import ourLib.LogicAbstraction.BasicCtrl;
+import ourLib.dbUtils.Dao;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
+
 
 
 
@@ -33,10 +35,10 @@ import java.util.LinkedList;
 *Es posible implemetar nuevas rutas o reescribir las existentes.	
 *</p>
 */
-public abstract class DefaultServlet<ENTITY> extends RoutedServlet<ENTITY> {
+public abstract class DefaultServlet<ENTITY, CONTROLLER extends BasicCtrl<ENTITY, DAO>, DAO extends Dao<ENTITY>> extends RoutedServlet<ENTITY> {
 	private static final long serialVersionUID = 1L;
     
-	protected BasicCtrl<ENTITY> con;
+	protected CONTROLLER con;
 	protected String jspAddSuccess;
 	protected String jspGetAll;
 	

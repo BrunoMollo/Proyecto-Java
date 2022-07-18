@@ -10,22 +10,6 @@ import java.util.HashMap;
 
 
 /**
-*<p>
-* Esta Interfaz define la forma de las expresiones lambda que manejan
-* las ejecuciones de las distintas subUrls del servlet.
-* Recibe como parametro la request y la response ademas de un objeto
-* generico que es mapeado a travez de los datos recibidos de la request
-* (se debe definir este mapeo en el metodo getEntityFromRequest )
-*</p>
-*/
-@FunctionalInterface
-interface Operation<T>{
-	void execute(T obj,HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException;
-}
-
-
-
-/**
 *<p>Esta clase es una abstraccion de los servelts para agregar subrutas a los urls. Se el puede definir una url base, 
 *seguida de posibles bifuraciones, por ejemplo si creo un RoutedServlet&ltCosa&gt:
 *	la url base seria: /ABMC-Cosa/*

@@ -1,5 +1,6 @@
 package servlets;
 
+import data.ObrasSocialesDao;
 import entities.ObraSocial;
 import jakarta.servlet.http.HttpServlet;
 import logic.CtrlObraSocial;
@@ -9,7 +10,7 @@ import ourLib.servletAbstraction.RequestParameterParser;
 /**
  * Servlet implementation class ObraSocialABMC
  */
-public class ObraSocialABMC extends DefaultServlet<ObraSocial> {
+public class ObraSocialABMC extends DefaultServlet<ObraSocial, CtrlObraSocial, ObrasSocialesDao> {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -20,6 +21,7 @@ public class ObraSocialABMC extends DefaultServlet<ObraSocial> {
         this.con=new CtrlObraSocial();
         this.jspGetAll="/ui-obraSocial/showAllObrasSociales.jsp";
         this.jspAddSuccess="/ui-obraSocial/ConfirmarAltaObraSocial.jsp";
+        
     }
 
 	@Override

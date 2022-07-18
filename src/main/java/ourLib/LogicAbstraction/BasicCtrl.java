@@ -15,8 +15,9 @@ import ourLib.dbUtils.Dao;
 * la clase GenericServlet que implementa operaciones por defecto con los controladores.
 * </p>
 */
-public abstract class BasicCtrl<ENTITY> {
-protected Dao<ENTITY> miDao;
+public abstract class BasicCtrl<ENTITY, ENTIYT_DAO extends Dao<ENTITY>> {
+	protected ENTIYT_DAO miDao;
+	
 	
 	public ENTITY getOne(ENTITY e) throws SQLException {
 		return miDao.getOne(e);
@@ -37,5 +38,6 @@ protected Dao<ENTITY> miDao;
 	public void delete(ENTITY e) throws SQLException {
 		miDao.delete(e);
 	}
+
 	
 }

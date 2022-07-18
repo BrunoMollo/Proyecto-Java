@@ -30,7 +30,7 @@
 		<% for(Droga d: arr){ %>
 				<tr>
 					<td><%=d.getCod()%> </td>
-					<td><input value=<%=d.getNombre()%> type="text" id=<%="name-"+d.getCod()%>></td>
+					<td><input value=<%=d.getNombre()%> type="text" id=<%="name_"+d.getCod()%>></td>
 					<td><input type="button" value="Guardar" onclick=<%="MarcarParaModificar("+d.getCod()+")" %> /></td>
 					<td><input type="button" value="Eliminar" onclick=<%="MarcarParaBorrar("+d.getCod()+")" %> /></td>
 				</tr>
@@ -39,14 +39,14 @@
 </table>
 
 <form hidden="true" id="miForm" action="/lafarmacia/ABMC-droga/update" method="post">
-	<input name="cod-droga" id="codModifiedDrug">
-	<input name="name-droga" id="newName">
+	<input name="cod_droga" id="codModifiedDrug">
+	<input name="name_droga" id="newName">
 	
 </form>
 
 <script type="text/javascript">
 	function MarcarParaModificar(oldCodDroga) {
-		newName=document.getElementById("name-"+oldCodDroga).value;
+		newName=document.getElementById("name_"+oldCodDroga).value;
 		
 		document.getElementById("codModifiedDrug").value=oldCodDroga;
 		document.getElementById("newName").value = newName;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Get droga async</h1>
+	
+	<input type="text" name="name_droga" autocomplete="off">
+	<ul id="sugerencias">
+
+	</ul>
+	
+	
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	function sendRequest(evento){
+		if(evento.target.value.length<3){return}
+		
+		console.log(evento.target.value);
+		axios.get(`/lafarmacia/ABMC-droga/getbyname?name_droga=${evento.target.value}`)
+		.then((res)=>{
+			console.log(res.data)
+			
+			let sugerencias=document.querySelector("#sugerencias");
+			sugerencias.textContent = '';
+			for(let i=0; i<res.data.length; i++){
+				console.log(res.data[i]["cod_droga"]);	
+				
+				
+				let li=document.createElement("li");
+				li.innerText=res.data[i]["name_droga"];
+				li.addEventListener('click', ()=>evento.target.value=res.data[i]["name_droga"]);
+				sugerencias.appendChild(li);	
+			}
+			
+		})
+		.catch((err)=>console.log(err));
+	}
+
+	let input= document.querySelector("[name=name_droga]");
+	input.addEventListener('keyup', sendRequest);
+	
+	
+	
+
+</script>
+
+
+</body>
+</html>
