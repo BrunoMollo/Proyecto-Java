@@ -70,7 +70,6 @@ public abstract class DefaultServlet<ENTITY, CONTROLLER extends BasicCtrl<ENTITY
 		try {
 			LinkedList<ENTITY> arr = con.getAll();
 			request.setAttribute("all", arr);
-			System.out.println(request);
 			request.getRequestDispatcher(jspGetAll).forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();

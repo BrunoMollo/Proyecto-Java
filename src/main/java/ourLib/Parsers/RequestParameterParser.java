@@ -1,4 +1,4 @@
-package ourLib.servletAbstraction;
+package ourLib.Parsers;
 
 import jakarta.servlet.http.HttpServletRequest;
 

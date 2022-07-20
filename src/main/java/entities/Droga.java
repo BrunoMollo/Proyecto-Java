@@ -1,6 +1,9 @@
 package entities;
 
-public class Droga {
+import ourLib.Parsers.JsonMaker;
+import ourLib.Parsers.Jsonable;
+
+public class Droga implements Jsonable{
 	private Integer cod;
 	private String nombre;
 	
@@ -19,5 +22,11 @@ public class Droga {
 	}
 	
 	
+	public String toJson() {
+		JsonMaker maker=new JsonMaker();
+		maker.set("cod_droga", cod);
+		maker.set("name_droga", nombre);
+		return maker.getJSONObject();
+	}	
 	
 }

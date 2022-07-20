@@ -2,9 +2,10 @@ package servlets;
 
 
 import logic.CtrlDroga;
+import ourLib.Parsers.RequestParameterParser;
 import ourLib.servletAbstraction.DefaultServlet;
 import ourLib.servletAbstraction.Operation;
-import ourLib.servletAbstraction.RequestParameterParser;
+import ourLib.Parsers.JsonMaker;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -39,14 +40,8 @@ public class DrogaABMC extends DefaultServlet<Droga,CtrlDroga, DrogasDao> {
 			res.setStatus(200);
 			res.setContentType("application/json");
 			
-			res.getWriter().append("[");
-			for(int i=0; i<arr.size(); i++) {
-				res.getWriter().append("{\"cod_droga\": "+arr.get(i).getCod()+", \"name_droga\": \""+arr.get(i).getNombre()+"\"}");
-				if(i<arr.size()-1) {
-					res.getWriter().append(", ");
-				}
-			}
-			res.getWriter().append("]");
+			String JsonArr=JsonMaker.getJsonArray(arr);
+			res.getWriter().append(JsonArr);
 			
 		} catch (SQLException e) {
 			res.sendError(500, e.getMessage());
@@ -56,8 +51,7 @@ public class DrogaABMC extends DefaultServlet<Droga,CtrlDroga, DrogasDao> {
     		
     		
     		
-    		
-
+   
 
 	@Override
 	protected Droga getEntityFromRequest(RequestParameterParser parser) {
