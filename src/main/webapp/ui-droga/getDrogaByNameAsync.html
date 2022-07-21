@@ -3,23 +3,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-</head>
-<body>
-	<h1>Get droga async</h1>
 
-	<div id="async-sercher-droga">
-		<input type="text" name="name_droga" autocomplete="off">
-		<ul id="sugerencias"></ul>	
-	</div>
-	
-	
+
 <style>
 	*{
 	padding: 0;
 	margin: 0;
 	}
 
-	#async-sercher-droga{
+	.async-search{
 	margin: 30px;
 	width:200px;
 	}
@@ -40,40 +32,23 @@
 	 border: 1px solid #000;
 	cursor: pointer;
 	} 
-	
 </style>
+
+</head>
+<body>
+	<h1>Get droga async</h1>
+
+
+	<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga">
+		<input autocomplete="off">
+		<ul id="sugerencias"></ul>	
+	</div>
+	
+	
+
 	
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script type="text/javascript">
-	function sendRequest(evento){
-		if(evento.target.value.length<3){return}
-		
-		axios.get(`/lafarmacia/ABMC-droga/getbyname?name_droga=${evento.target.value}`)
-		.then((res)=>{
-			
-			let sugerencias=document.querySelector("#sugerencias");
-			sugerencias.textContent = ''; //borra lo que hay en sugerencias
-			
-			for(let i=0; i<res.data.length; i++){
-				let li=document.createElement("li");
-				li.innerText=res.data[i]["name_droga"];
-				li.addEventListener('click', ()=>{
-					evento.target.value=li.innerText
-					sugerencias.textContent = '';
-				});
-				sugerencias.appendChild(li);	
-			}
-			
-		})
-		.catch((err)=>console.log(err));
-	}
-
-	//Agrega el Listener al cargar la pagina en el inicio
-	let input= document.querySelector("[name=name_droga]");
-	input.addEventListener('keyup', sendRequest);
-	
-</script>
-
+<script src="/lafarmacia/js/asyncRequest.js"></script>
 
 </body>
 </html>
