@@ -13,7 +13,7 @@ USE `farmacia`;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=1 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
@@ -101,7 +101,7 @@ CREATE TABLE `drogas` (
   `codigo` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,6 +110,7 @@ CREATE TABLE `drogas` (
 
 LOCK TABLES `drogas` WRITE;
 /*!40000 ALTER TABLE `drogas` DISABLE KEYS */;
+INSERT INTO `drogas` VALUES (22,'Omeprazol'),(23,'Paracetamol'),(24,'Kellerhoff'),(26,'Kellerhoff'),(27,'ibuporfeno'),(28,'uwu');
 /*!40000 ALTER TABLE `drogas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,10 +124,10 @@ DROP TABLE IF EXISTS `laboratorios`;
 CREATE TABLE `laboratorios` (
   `codigo` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
-  `telefono` int NOT NULL,
+  `telefono` varchar(25) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +136,7 @@ CREATE TABLE `laboratorios` (
 
 LOCK TABLES `laboratorios` WRITE;
 /*!40000 ALTER TABLE `laboratorios` DISABLE KEYS */;
+INSERT INTO `laboratorios` VALUES (6,'Kellerhoff','132','asddsd@gmail.com'),(10,'type=\"text\"','','');
 /*!40000 ALTER TABLE `laboratorios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,12 +199,12 @@ DROP TABLE IF EXISTS `obras_sociales`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `obras_sociales` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) not NULL,
+  `nombre` varchar(50) NOT NULL,
   `telefono` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
   `descuentoGeneral` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,6 +213,7 @@ CREATE TABLE `obras_sociales` (
 
 LOCK TABLES `obras_sociales` WRITE;
 /*!40000 ALTER TABLE `obras_sociales` DISABLE KEYS */;
+INSERT INTO `obras_sociales` VALUES (1,'Cocaina','123','asd@gmail.com',43),(2,'Kellerhoff','123','dsa@gmaci.c',3);
 /*!40000 ALTER TABLE `obras_sociales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,6 +239,33 @@ CREATE TABLE `precio_medicamento` (
 LOCK TABLES `precio_medicamento` WRITE;
 /*!40000 ALTER TABLE `precio_medicamento` DISABLE KEYS */;
 /*!40000 ALTER TABLE `precio_medicamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `usuario` varchar(255) NOT NULL,
+  `contrasena` varchar(45) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `apellido` varchar(255) NOT NULL,
+  `rol` int NOT NULL,
+  PRIMARY KEY (`usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES ('admin','admin','Administrador','Farmacia',0),('bmollo','120901','Bruno','Mollo',1),('rdigiacinti','010402','Ramiro','Di Giacinti',1);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -273,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-08 20:43:52
+-- Dump completed on 2022-07-21 22:23:31
