@@ -1,6 +1,9 @@
 package entities;
 
-public class ObraSocial {
+import ourLib.Parsers.JsonMaker;
+import ourLib.Parsers.Jsonable;
+
+public class ObraSocial implements Jsonable{
 	
 	private Integer id;
 	private String nombre;
@@ -54,6 +57,18 @@ public class ObraSocial {
 	}
 	public void setDescuento(Double descuento) {
 		this.descuento = descuento;
+	}
+
+
+	@Override
+	public String toJson() {
+		JsonMaker maker=new JsonMaker();
+		maker.set("id_os", id);
+		maker.set("name_os", nombre);
+		maker.set("phone_os", telefono);
+		maker.set("email_os", email);
+		maker.set("discount_os", descuento);
+		return maker.getJSONObject();
 	}
 	
 	

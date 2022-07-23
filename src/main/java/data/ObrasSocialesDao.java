@@ -63,4 +63,8 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 		executeModification(new StatementWrapper("delete from obras_sociales where id=?").push(p.getId()));
 	}
 
+	public LinkedList<ObraSocial> getAllByName(ObraSocial os) throws SQLException {
+		return executeFindAll(new StatementWrapper("select * from obras_sociales where nombre like ?").push(os.getNombre()+"%"));
+	}
+
 }
