@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import entities.Laboratorio;
+import entities.Usuario;
 
 /**
  * Servlet implementation class deleteLab
@@ -37,13 +38,21 @@ public class deleteLab extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer cod=Integer.parseInt( request.getParameter("codLab") );
 		
-		Laboratorio lab= new Laboratorio();
-		lab.setCodigo(cod);
+		Usuario user= (Usuario) request.getSession().getAttribute("usuario");
+		
+		if(user.getRol()!=0) {
+			response.setStatus(401);
+			response.sendRedirect("modifylab");
+			return;
+		}
+			Integer cod=Integer.parseInt( request.getParameter("codLab") );
 			
+			Laboratorio lab= new Laboratorio();
+			lab.setCodigo(cod);
+				
 			CtrlLaboratorio con= new CtrlLaboratorio();
-			
+				
 			try {
 				con.delete(lab);
 				response.setStatus(202);

@@ -39,8 +39,7 @@ public class LoginDao extends Dao<Usuario>{
 		StatementWrapper stw=new StatementWrapper("select * from usuarios where usuario=? and contrasena=?");
 		stw.push(p.getUsuario());
 		stw.push(p.getContrasena());
-		return executeGetOne(stw);
-		
+		return executeGetOne(stw);	
 	}
 
 	@Override

@@ -52,7 +52,8 @@ public class SignIn extends HttpServlet {
 			
 			if(user!=null) {
 				response.setStatus(200);
-				response.sendRedirect("index.html");
+				request.getSession().setAttribute("usuario",user);
+				request.getRequestDispatcher("index.html").forward(request, response);
 			} else {
 				response.sendRedirect("login.html");
 			}

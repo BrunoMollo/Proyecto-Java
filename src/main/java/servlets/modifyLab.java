@@ -12,6 +12,7 @@ import java.util.LinkedList;
 
 
 import entities.Laboratorio;
+import entities.Usuario;
 
 /**
  * Servlet implementation class modifyDroga
@@ -48,28 +49,37 @@ public class modifyLab extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer cod=Integer.parseInt( request.getParameter("codModifiedLab") );
-		String name=request.getParameter("newName");
-		String email=request.getParameter("newEmail");
-		String telefono=request.getParameter("newTelefono");
 		
-		Laboratorio lab = new Laboratorio();
-		lab.setCodigo(cod);
-		lab.setEmail(email);
-		lab.setNombre(name);
-		lab.setTelefono(telefono);
 		
-		CtrlLaboratorio con= new CtrlLaboratorio();
+		Usuario user= (Usuario) request.getSession().getAttribute("usuario");
 		
-		try {
-			con.update(lab);
-			response.setStatus(200);
+		if(user.getRol()!=0) {
+			response.setStatus(401);
 			response.sendRedirect("modifylab");
-		} catch (SQLException e) {
-			response.sendError(500, e.getMessage());
-			e.printStackTrace();
+			return;
 		}
-	
+			Integer cod=Integer.parseInt( request.getParameter("codModifiedLab") );
+			String name=request.getParameter("newName");
+			String email=request.getParameter("newEmail");
+			String telefono=request.getParameter("newTelefono");
+			
+			Laboratorio lab = new Laboratorio();
+			lab.setCodigo(cod);
+			lab.setEmail(email);
+			lab.setNombre(name);
+			lab.setTelefono(telefono);
+			
+			CtrlLaboratorio con= new CtrlLaboratorio();
+			
+			try {
+				con.update(lab);
+				response.setStatus(200);
+				response.sendRedirect("modifylab");
+			} catch (SQLException e) {
+				response.sendError(500, e.getMessage());
+				e.printStackTrace();
+			}
+		
 	}
 
 }
