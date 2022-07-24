@@ -2,6 +2,10 @@ package entities;
 
 public class Usuario {
 
+	public static final int ADMIN=10;
+	public static final int VENDEDOR=5;
+	
+	
 	private String usuario;
 	private String contrasena;
 	private String nombre;
@@ -36,8 +40,15 @@ public class Usuario {
 	public Integer getRol() {
 		return rol;
 	}
-	public void setRol(Integer rol) {
-		this.rol = rol;
+	
+	//TODO DECIDIR UN ESTANDAR PARA ESTO
+	public void setRol(Integer rol_id) {
+		if(rol_id==0) {
+			this.rol=ADMIN;
+		}
+		else if(rol_id==1) {
+			this.rol=VENDEDOR;
+		}
 	}	
 	
 	@Deprecated

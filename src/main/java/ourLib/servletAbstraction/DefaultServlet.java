@@ -7,8 +7,7 @@ import ourLib.dbUtils.Dao;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
-
+import entities.Usuario;
 
 
 /**
@@ -51,11 +50,11 @@ public abstract class DefaultServlet<ENTITY, CONTROLLER extends BasicCtrl<ENTITY
 	public DefaultServlet() { 
 		super(); 
 		
-		getOperations.put("all", allEntities);
+		GET.setPath("all", allEntities, Usuario.VENDEDOR);
 
-		postOperations.put("add", addEntity );
-		postOperations.put("update", updateEntity);
-		postOperations.put("delete", deleteEntity);
+		POST.setPath("add", addEntity, Usuario.ADMIN );
+		POST.setPath("update", updateEntity, Usuario.ADMIN);
+		POST.setPath("delete", deleteEntity, Usuario.ADMIN);
 		
 	}
 	

@@ -7,7 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
-import java.util.HashMap;
+
+
+
+
+
 
 
 /**
@@ -38,22 +42,21 @@ public abstract class RoutedServlet<ENTITY> extends HttpServlet{
 	*/
 	protected abstract ENTITY getEntityFromRequest(RequestParameterParser parser);
 
-	protected HashMap<String, Operation<ENTITY>> postOperations;
-	protected HashMap<String, Operation<ENTITY>> getOperations;
+	protected final RouteManager<ENTITY> POST=new RouteManager<ENTITY>();
+	protected final RouteManager<ENTITY> GET=new RouteManager<ENTITY>();
 	
-	
-	public RoutedServlet(){
-		getOperations=new HashMap<String, Operation<ENTITY>>();
-		postOperations= new HashMap<String, Operation<ENTITY>>();
-	}
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Mapea los datos de la request a un objeto java
 		RequestParameterParser dataParser= new RequestParameterParser(request);
 		ENTITY obj= getEntityFromRequest(dataParser);
-		String opt=request.getPathInfo().substring(1);
 		
-		Operation<ENTITY> e=getOperations.get(opt);
+		//Selecciona la operacion a ejecutar dependiendo del path que llege en el url
+		String opt=request.getPathInfo().substring(1);
+		Operation<ENTITY> e = GET.getOperation(opt);
+		
 		if(e!=null) {
 			e.execute(obj, request, response);
 		}
@@ -61,12 +64,17 @@ public abstract class RoutedServlet<ENTITY> extends HttpServlet{
 	}
 
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Mapea los datos de la request a un objeto java
 		RequestParameterParser dataParser= new RequestParameterParser(request);
 		ENTITY obj= getEntityFromRequest(dataParser);
-		String opt=request.getPathInfo().substring(1);
 		
-		Operation<ENTITY> e=postOperations.get(opt);
+		//Selecciona la operacion a ejecutar dependiendo del path que llege en el url
+		String opt=request.getPathInfo().substring(1);
+		Operation<ENTITY> e=POST.getOperation(opt);
+		
 		if(e!=null) {
 			e.execute(obj, request, response);
 		}

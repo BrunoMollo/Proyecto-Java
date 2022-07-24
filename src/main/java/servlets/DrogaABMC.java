@@ -13,6 +13,7 @@ import java.util.LinkedList;
 
 import data.DrogasDao;
 import entities.Droga;
+import entities.Usuario;
 
 /**
  * Servlet implementation class altaDroga
@@ -20,6 +21,14 @@ import entities.Droga;
 public class DrogaABMC extends DefaultServlet<Droga,CtrlDroga, DrogasDao> {
 	private static final long serialVersionUID = 1L;
 	
+	
+	@Override
+	protected Droga getEntityFromRequest(RequestParameterParser parser) {
+		Droga drug= new Droga();
+		drug.setCod(parser.getInt("cod_droga"));
+		drug.setNombre(parser.getString("name_droga"));
+		return drug;
+	}
        
     public DrogaABMC() { 
     	super();
@@ -27,7 +36,7 @@ public class DrogaABMC extends DefaultServlet<Droga,CtrlDroga, DrogasDao> {
     	this.jspGetAll="/ui-droga/getAllDroga.jsp";
     	this.jspAddSuccess="/ui-droga/ConfirmarAltaDroga.jsp";
     	
-    	this.getOperations.put("getbyname", getByNameAsync);
+    	this.GET.setPath("getbyname", getByNameAsync, null);
     }
     
     private Operation<Droga> getByNameAsync= (obj, req, res)-> {
@@ -49,16 +58,6 @@ public class DrogaABMC extends DefaultServlet<Droga,CtrlDroga, DrogasDao> {
 		}
 };
     		
-    		
-    		
-   
 
-	@Override
-	protected Droga getEntityFromRequest(RequestParameterParser parser) {
-		Droga drug= new Droga();
-		drug.setCod(parser.getInt("cod_droga"));
-		drug.setNombre(parser.getString("name_droga"));
-		return drug;
-	}
 
 }

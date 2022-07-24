@@ -41,7 +41,7 @@ public class deleteLab extends HttpServlet {
 		
 		Usuario user= (Usuario) request.getSession().getAttribute("usuario");
 		
-		if(user.getRol()!=0) {
+		if(user.getRol() < Usuario.ADMIN) {
 			response.setStatus(401);
 			response.sendRedirect("modifylab");
 			return;
