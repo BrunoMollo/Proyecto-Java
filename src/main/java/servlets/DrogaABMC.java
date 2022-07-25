@@ -3,16 +3,15 @@ package servlets;
 
 import logic.CtrlDroga;
 import ourLib.Parsers.RequestParameterParser;
-import ourLib.servletAbstraction.DefaultServlet;
-import ourLib.servletAbstraction.Operation;
 import ourLib.Parsers.JsonMaker;
 
 import java.io.IOException;
+import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.concurrent.TimeUnit;
 
-import data.DrogasDao;
+
+
 import entities.Droga;
 import entities.Usuario;
 import jakarta.servlet.ServletException;
@@ -39,13 +38,14 @@ public class DrogaABMC extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    
-    			//Mapea los datos de la request a un objeto java
+    			
     			Droga drug= getDroga(new RequestParameterParser(request));
+    			Usuario user=Usuario.factory(request);
     			
     			try {
     				switch (request.getPathInfo().substring(1)) {
     				case "all": {
-    					LinkedList<Droga> arr = con.getAll();
+    					LinkedList<Droga> arr = con.getAll(user);
     					request.setAttribute("all", arr);
     					request.getRequestDispatcher("/ui-droga/getAllDroga.jsp").forward(request, response);
     					break;
@@ -70,30 +70,36 @@ public class DrogaABMC extends HttpServlet {
     			}
     			catch(SQLException e) {
     				response.sendError(500, e.getMessage());
-    				e.printStackTrace();
     			}
+    			catch (AccessException e) {
+    				response.sendError(403, e.getMessage());
+				}
+    			catch (Exception e) {
+    				e.printStackTrace();
+				}
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     
 		Droga drug= getDroga(new RequestParameterParser(request));
+		Usuario user=Usuario.factory(request);
 		
 		try {
 			switch (request.getPathInfo().substring(1)) {
 			case "add": {
-				con.add(drug);
+				con.add(drug, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", drug);
 				request.getRequestDispatcher("/ui-droga/ConfirmarAltaDroga.jsp").forward(request, response);
 				break;
 			}
 			case "update": {
-				con.update(drug);
+				con.update(drug, user);
 				response.setStatus(200);
 				break;
 			}
 			case "delete": {
-				con.delete(drug);
+				con.delete(drug, user);
 				response.setStatus(202);
 				break;
 			}
@@ -104,6 +110,11 @@ public class DrogaABMC extends HttpServlet {
 		}
 		catch(SQLException e) {
 			response.sendError(500, e.getMessage());
+		}
+		catch (AccessException e) {
+			response.sendError(403, e.getMessage());
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
     }

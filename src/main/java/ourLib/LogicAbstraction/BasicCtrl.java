@@ -1,8 +1,10 @@
 package ourLib.LogicAbstraction;
 
+import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import entities.Usuario;
 import ourLib.dbUtils.Dao;
 
 
@@ -19,23 +21,28 @@ public abstract class BasicCtrl<ENTITY, ENTIYT_DAO extends Dao<ENTITY>> {
 	protected ENTIYT_DAO miDao;
 	
 	
-	public ENTITY getOne(ENTITY e) throws SQLException {
+	public ENTITY getOne(ENTITY e, Usuario user) throws SQLException, AccessException {
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
 		return miDao.getOne(e);
 	}
 
-	public void add(ENTITY e) throws SQLException{
+	public void add(ENTITY e, Usuario user) throws SQLException, AccessException{
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
 		miDao.add(e);
 	}
 	
-	public LinkedList<ENTITY> getAll() throws SQLException{
+	public LinkedList<ENTITY> getAll(Usuario user) throws SQLException, AccessException{
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
 		return miDao.getAll();
 	}
 	
-	public void update(ENTITY e) throws SQLException {
+	public void update(ENTITY e, Usuario user) throws SQLException, AccessException {
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
 		miDao.update(e);
 	}
 
-	public void delete(ENTITY e) throws SQLException {
+	public void delete(ENTITY e, Usuario user) throws SQLException, AccessException {
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
 		miDao.delete(e);
 	}
 

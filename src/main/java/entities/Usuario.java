@@ -1,10 +1,24 @@
 package entities;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 public class Usuario {
 
-	public static final int ADMIN=10;
-	public static final int VENDEDOR=5;
+	public static final int ADMIN=0;
+	public static final int VENDEDOR=1;
 	
+	
+	//Este metodo lo hice para usarlo en los servlets, pq es mas seguro tener un Usuario vacio que un 'null', no le puedo enivar metodos al null
+	public static Usuario factory(HttpServletRequest request) {
+		Usuario u=(Usuario) request.getSession().getAttribute("user");
+		if(u==null) {
+			return new Usuario();
+		}
+		else {
+			return u;
+		}
+		
+	}
 	
 	private String usuario;
 	private String contrasena;
@@ -50,6 +64,21 @@ public class Usuario {
 			this.rol=VENDEDOR;
 		}
 	}	
+	
+	public Boolean hasAccess(Integer NeededAccess) {
+		if(this.rol==null) { return false; }
+		
+		switch (NeededAccess) {
+		case Usuario.ADMIN: 
+			if(this.rol==Usuario.ADMIN) { return true; }
+			else {return false; }
+		case Usuario.VENDEDOR:
+			if(this.rol==Usuario.ADMIN || this.rol==Usuario.VENDEDOR) { return true; }
+			else { return false; }
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + NeededAccess);
+		}
+	}
 	
 	@Deprecated
 	public Boolean equals(Usuario comparar) {
