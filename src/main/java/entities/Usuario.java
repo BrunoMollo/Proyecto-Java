@@ -1,8 +1,10 @@
 package entities;
 
 import jakarta.servlet.http.HttpServletRequest;
+import ourLib.Parsers.JsonMaker;
+import ourLib.Parsers.Jsonable;
 
-public class Usuario {
+public class Usuario implements Jsonable{
 
 	public static final int ADMIN=0;
 	public static final int VENDEDOR=1;
@@ -17,7 +19,6 @@ public class Usuario {
 		else {
 			return u;
 		}
-		
 	}
 	
 	private String usuario;
@@ -85,5 +86,15 @@ public class Usuario {
 //		if(comparar!=null) {
 		return (this.getUsuario()==(comparar.getUsuario()) && this.getContrasena()==(comparar.getContrasena()));
 //		return false;
+	}
+	@Override
+	public String toJson() {
+		JsonMaker jm= new JsonMaker();
+		jm.set("user", usuario);
+		//jm.set("contrasena", contrasena);  //Comente estos atributos pq no se si es necesaio enviarlos
+		//jm.set("nombre", nombre);
+		//jm.set("apellido", apellido);
+		jm.set("rol", rol);
+		return jm.getJSONObject();
 	}
 }

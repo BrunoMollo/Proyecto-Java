@@ -14,13 +14,13 @@ import entities.Usuario;
 /**
  * Servlet implementation class SignIn
  */
-public class SignIn extends HttpServlet {
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignIn() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,8 +29,8 @@ public class SignIn extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Usuario user=Usuario.factory(request);
+		response.getWriter().append(user.toJson());
 	}
 
 	/**
