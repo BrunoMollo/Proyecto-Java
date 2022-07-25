@@ -31,41 +31,48 @@
 				<tr>
 					<td><%=d.getCod()%> </td>
 					<td><input value=<%=d.getNombre()%> type="text" id=<%="name_"+d.getCod()%>></td>
-					<td><input type="button" value="Guardar" onclick=<%="MarcarParaModificar("+d.getCod()+")" %> /></td>
+					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %> /></td>
 					<td><input type="button" value="Eliminar" onclick=<%="MarcarParaBorrar("+d.getCod()+")" %> /></td>
 				</tr>
 		<%}%>
 	</tbody>
 </table>
 
-<form hidden="true" id="miForm" action="/lafarmacia/ABMC-droga/update" method="post">
-	<input name="cod_droga" id="codModifiedDrug">
-	<input name="name_droga" id="newName">
-	
-</form>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-	function MarcarParaModificar(oldCodDroga) {
-		newName=document.getElementById("name_"+oldCodDroga).value;
+	function sendUpdate(cod) {
+		newName=document.getElementById("name_"+cod).value;
+	
+		axios(
+			{
+				url: '/lafarmacia/ABMC-droga/update',
+				method:"post",
+				params:{
+					cod_droga: cod,
+					name_droga: newName
+				}
+			}		
+		)
+		.then((res)=>location.reload())
+		.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
 		
-		document.getElementById("codModifiedDrug").value=oldCodDroga;
-		document.getElementById("newName").value = newName;
-		
-		document.getElementById("miForm").submit();
 	}
 </script>
 
-<form hidden="true" id="ourForm" action="/lafarmacia/ABMC-droga/delete" method="post">
-	<input name="cod_droga" id="codDrug">
-	
-</form>
-
 <script type="text/javascript">
-	function MarcarParaBorrar(codDroga) {
-		
-		document.getElementById("codDrug").value=codDroga;
-	
-		document.getElementById("ourForm").submit();
+	function MarcarParaBorrar(cod) {
+		axios(
+				{
+					url: '/lafarmacia/ABMC-droga/delete',
+					method:"post",
+					params:{
+						cod_droga: cod,
+					}
+				}		
+			)
+			.then((res)=>location.reload())
+			.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+			
 	}
 </script>
 

@@ -30,6 +30,7 @@ import java.io.IOException;
 *La idea es tambien realizar funciones de validacion de usuarios en esta clase.
 *</p>
 */
+@Deprecated
 public abstract class RoutedServlet<ENTITY> extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     

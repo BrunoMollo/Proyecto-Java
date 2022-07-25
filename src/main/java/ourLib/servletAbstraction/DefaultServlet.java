@@ -34,6 +34,7 @@ import entities.Usuario;
 *Es posible implemetar nuevas rutas o reescribir las existentes.	
 *</p>
 */
+@Deprecated
 public abstract class DefaultServlet<ENTITY, CONTROLLER extends BasicCtrl<ENTITY, DAO>, DAO extends Dao<ENTITY>> extends RoutedServlet<ENTITY> {
 	private static final long serialVersionUID = 1L;
     

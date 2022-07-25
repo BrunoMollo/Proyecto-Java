@@ -7,57 +7,107 @@ import ourLib.servletAbstraction.DefaultServlet;
 import ourLib.servletAbstraction.Operation;
 import ourLib.Parsers.JsonMaker;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
-
+import java.util.concurrent.TimeUnit;
 
 import data.DrogasDao;
 import entities.Droga;
 import entities.Usuario;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class altaDroga
  */
-public class DrogaABMC extends DefaultServlet<Droga,CtrlDroga, DrogasDao> {
+public class DrogaABMC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private CtrlDroga con=new CtrlDroga();;
 	
-	@Override
-	protected Droga getEntityFromRequest(RequestParameterParser parser) {
+
+	protected Droga getDroga(RequestParameterParser parser) {
 		Droga drug= new Droga();
 		drug.setCod(parser.getInt("cod_droga"));
 		drug.setNombre(parser.getString("name_droga"));
 		return drug;
 	}
        
-    public DrogaABMC() { 
-    	super();
-    	this.con=new CtrlDroga();
-    	this.jspGetAll="/ui-droga/getAllDroga.jsp";
-    	this.jspAddSuccess="/ui-droga/ConfirmarAltaDroga.jsp";
-    	
-    	this.GET.setPath("getbyname", getByNameAsync, null);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   
+    			//Mapea los datos de la request a un objeto java
+    			Droga drug= getDroga(new RequestParameterParser(request));
+    			
+    			try {
+    				switch (request.getPathInfo().substring(1)) {
+    				case "all": {
+    					LinkedList<Droga> arr = con.getAll();
+    					request.setAttribute("all", arr);
+    					request.getRequestDispatcher("/ui-droga/getAllDroga.jsp").forward(request, response);
+    					break;
+    				}
+    				case "getbyname": {
+    					if(drug.getNombre().length()<2) {
+    			    		response.sendError(400, "largo insificuente");
+    			    		return;
+    					}
+    					LinkedList<Droga> arr=con.getByPartialName(drug);
+    					response.setStatus(200);
+    					response.setContentType("application/json");
+    					
+    					String JsonArr=JsonMaker.getJsonArray(arr);
+    					response.getWriter().append(JsonArr);
+    					break;
+    				}
+    				
+    				default:
+    					response.sendError(404, "no hay");
+    				}
+    			}
+    			catch(SQLException e) {
+    				response.sendError(500, e.getMessage());
+    				e.printStackTrace();
+    			}
     }
     
-    private Operation<Droga> getByNameAsync= (obj, req, res)-> {
-    	if(obj.getNombre().length()<2) {
-    		res.sendError(400, "largo insificuente");
-    		return;
-    	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    
+		Droga drug= getDroga(new RequestParameterParser(request));
+		
 		try {
-			LinkedList<Droga> arr=con.getByPartialName(obj);
-			res.setStatus(200);
-			res.setContentType("application/json");
+			switch (request.getPathInfo().substring(1)) {
+			case "add": {
+				con.add(drug);
+				response.setStatus(201);
+				request.setAttribute("addedObject", drug);
+				request.getRequestDispatcher("/ui-droga/ConfirmarAltaDroga.jsp").forward(request, response);
+				break;
+			}
+			case "update": {
+				con.update(drug);
+				response.setStatus(200);
+				break;
+			}
+			case "delete": {
+				con.delete(drug);
+				response.setStatus(202);
+				break;
+			}
 			
-			String JsonArr=JsonMaker.getJsonArray(arr);
-			res.getWriter().append(JsonArr);
-			
-		} catch (SQLException e) {
-			res.sendError(500, e.getMessage());
+			default:
+				response.sendError(404, "no hay");
+			}
+		}
+		catch(SQLException e) {
+			response.sendError(500, e.getMessage());
 			e.printStackTrace();
 		}
-};
-    		
-
-
+    }
+    
+    
+   
 }
