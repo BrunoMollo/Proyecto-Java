@@ -36,8 +36,8 @@
 					<td><input value=<%=os.getTelefono() %> type="number" id=<%="tel-"+os.getId()%>></td>
 					<td><input value=<%=os.getEmail() %> type="email" id=<%="email-"+os.getId()%>></td>
 					<td><input value=<%=os.getDescuento() %> type="number" step="0.001" min="0" max="100" id=<%="discount-"+os.getId()%>></td>
-					<td><input type="button" value="Guardar" onclick=<%="updateObraSocial("+os.getId()+")" %> id="btn-update"/></td>
-					<td><input type="button" value="Eliminar" onclick=<%="deleteObraSocial("+os.getId()+")" %> id="btn-delete"/></td>
+					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+os.getId()+")" %> id="btn-update"/></td>
+					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+os.getId()+")" %> id="btn-delete"/></td>
 				</tr>
 		<%}%>
 	</tbody>
@@ -54,31 +54,50 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-	function updateObraSocial(cod){
-		document.querySelector("[name=id_os]").value=cod;
-		document.querySelector("[name=name_os]").value=document.getElementById(`name-`+cod).value;
-		document.querySelector("[name=phone_os]").value=document.getElementById(`tel-`+cod).value ;
-		document.querySelector("[name=email_os]").value=document.getElementById(`email-`+cod).value ;
-		document.querySelector("[name=discount_os]").value=document.getElementById(`discount-`+cod).value ;
-		
-		let form=document.getElementById("form");
-		form.action="/lafarmacia/ABMC-obrasocial/update";
-		form.submit();
-	}
-</script>
+function sendUpdate(cod) {
+	let newName=document.getElementById(`name-`+cod).value;
+	let newTel=document.getElementById(`tel-`+cod).value ;
+	let newEmail=document.getElementById(`email-`+cod).value ;
+	let newDisc=document.getElementById(`discount-`+cod).value ;
 
+	axios(
+		{
+			url: '/lafarmacia/ABMC-obrasocial/update',
+			method:"post",
+			params:{
+				id_os: cod,
+				name_os: newName,
+				phone_os: newTel,
+				email_os: newEmail,
+				discount_os: newDisc
+			}
+		}		
+	)
+	.then((res)=>location.reload())
+	.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+	
+}
 
-<script type="text/javascript">
-	function deleteObraSocial(cod){
-		document.querySelector("[name=id_os]").value=cod;
-		let form=document.getElementById("form");
-		form.action="/lafarmacia/ABMC-obrasocial/delete";
-		
-		if(confirm("Seguro que desea borrar el registro?")){
-			form.submit();	
-		}
-		
+function sendDelete(cod) {
+	
+	if(confirm("Seguro que desea borrar el registro?")===false){
+		return;	
 	}
+	
+	axios(
+		{
+			url: '/lafarmacia/ABMC-obrasocial/delete',
+			method:"post",
+			params:{
+				id_os: cod
+			}
+		}		
+	)
+	.then((res)=>location.reload())
+	.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+	
+}
+
 
 </script>
 

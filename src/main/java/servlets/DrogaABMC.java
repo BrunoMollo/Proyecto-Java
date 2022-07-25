@@ -38,47 +38,47 @@ public class DrogaABMC extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    
-    			
-    			Droga drug= getDroga(new RequestParameterParser(request));
-    			Usuario user=Usuario.factory(request);
-    			
-    			try {
-    				switch (request.getPathInfo().substring(1)) {
-    				case "all": {
-    					LinkedList<Droga> arr = con.getAll(user);
-    					request.setAttribute("all", arr);
-    					request.getRequestDispatcher("/ui-droga/getAllDroga.jsp").forward(request, response);
-    					break;
-    				}
-    				case "getbyname": {
-    					if(drug.getNombre().length()<2) {
-    			    		response.sendError(400, "largo insificuente");
-    			    		return;
-    					}
-    					LinkedList<Droga> arr=con.getByPartialName(drug);
-    					response.setStatus(200);
-    					response.setContentType("application/json");
-    					
-    					String JsonArr=JsonMaker.getJsonArray(arr);
-    					response.getWriter().append(JsonArr);
-    					break;
-    				}
-    				
-    				default:
-    					response.sendError(404, "no hay");
-    				}
-    			}
-    			catch(SQLException e) {
-    				response.sendError(500, e.getMessage());
-    			}
-    			catch (AccessException e) {
-    				response.sendError(403, e.getMessage());
+		Droga drug= getDroga(new RequestParameterParser(request));
+		Usuario user=Usuario.factory(request);
+		
+		try {
+			switch (request.getPathInfo().substring(1)) {
+			case "all": {
+				LinkedList<Droga> arr = con.getAll(user);
+				request.setAttribute("all", arr);
+				request.getRequestDispatcher("/ui-droga/getAllDroga.jsp").forward(request, response);
+				break;
+			}
+			case "getbyname": {
+				if(drug.getNombre().length()<2) {
+		    		response.sendError(400, "largo insificuente");
+		    		return;
 				}
-    			catch (Exception e) {
-    				e.printStackTrace();
-				}
+				LinkedList<Droga> arr=con.getByPartialName(drug);
+				response.setStatus(200);
+				response.setContentType("application/json");
+				
+				String JsonArr=JsonMaker.getJsonArray(arr);
+				response.getWriter().append(JsonArr);
+				break;
+			}
+			
+			default:
+				response.sendError(404, "no hay");
+			}
+		}
+		catch(SQLException e) {
+			response.sendError(500, e.getMessage());
+		}
+		catch (AccessException e) {
+			response.sendError(403, e.getMessage());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
     }
     
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
     
 		Droga drug= getDroga(new RequestParameterParser(request));

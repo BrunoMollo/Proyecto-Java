@@ -32,7 +32,7 @@
 					<td><%=d.getCod()%> </td>
 					<td><input value=<%=d.getNombre()%> type="text" id=<%="name_"+d.getCod()%>></td>
 					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %> /></td>
-					<td><input type="button" value="Eliminar" onclick=<%="MarcarParaBorrar("+d.getCod()+")" %> /></td>
+					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+d.getCod()+")" %> /></td>
 				</tr>
 		<%}%>
 	</tbody>
@@ -57,10 +57,11 @@
 		.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
 		
 	}
-</script>
 
-<script type="text/javascript">
-	function MarcarParaBorrar(cod) {
+	function sendDelete(cod) {
+		if(confirm("Seguro que desea borrar el registro?")===false){
+			return;	
+		}
 		axios(
 				{
 					url: '/lafarmacia/ABMC-droga/delete',
