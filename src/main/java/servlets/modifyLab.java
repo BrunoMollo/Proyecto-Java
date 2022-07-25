@@ -51,9 +51,9 @@ public class modifyLab extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		Usuario user= (Usuario) request.getSession().getAttribute("usuario");
+		Usuario user= Usuario.factory(request);
 		
-		if(user.getRol() < Usuario.ADMIN) {
+		if(user.hasAccess(Usuario.ADMIN)) {
 			response.setStatus(401);
 			response.sendRedirect("modifylab");
 			return;

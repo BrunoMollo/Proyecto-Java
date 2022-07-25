@@ -45,6 +45,31 @@ public abstract class BasicCtrl<ENTITY, ENTIYT_DAO extends Dao<ENTITY>> {
 		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
 		miDao.delete(e);
 	}
+	
+	
+	
+	//estan para tener compatiblidad hacia atras con servlert de lab, hay que sacarlos despues
+	
+	@Deprecated
+	public ENTITY getOne(ENTITY e) throws SQLException {
+		return miDao.getOne(e);
+	}
+	@Deprecated
+	public void add(ENTITY e) throws SQLException{
+		miDao.add(e);
+	}
+	@Deprecated
+	public LinkedList<ENTITY> getAll() throws SQLException, AccessException{
+		return miDao.getAll();
+	}
+	@Deprecated
+	public void update(ENTITY e) throws SQLException, AccessException {
+		miDao.update(e);
+	}
+	@Deprecated
+	public void delete(ENTITY e) throws SQLException {
+		miDao.delete(e);
+	}
 
 	
 }
