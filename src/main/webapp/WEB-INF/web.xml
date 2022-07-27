@@ -62,7 +62,6 @@
     <url-pattern>/deleteLab</url-pattern>
     <url-pattern>/ui-laboratorio/deletelab</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>Login</display-name>
@@ -74,7 +73,7 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<description></description>
+    <description></description>
     <display-name>ObraSocialABMC</display-name>
     <servlet-name>ObraSocialABMC</servlet-name>
     <servlet-class>servlets.ObraSocialABMC</servlet-class>
@@ -82,5 +81,15 @@
   <servlet-mapping>
     <servlet-name>ObraSocialABMC</servlet-name>
     <url-pattern>/ABMC-obrasocial/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaMedicamento</display-name>
+    <servlet-name>AltaMedicamento</servlet-name>
+    <servlet-class>servlets.AltaMedicamento</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaMedicamento</servlet-name>
+    <url-pattern>/AltaMedicamento/*</url-pattern>
   </servlet-mapping>
 </web-app>

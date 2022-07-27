@@ -27,8 +27,8 @@ public class DrogasDao extends Dao<Droga> {
 	
 	@Override
 	public Droga getOne(Droga p) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return executeGetOne(
+				new StatementWrapper("select * from drogas where codigo=?").push(p.getCod()));
 	}
 
 	@Override
