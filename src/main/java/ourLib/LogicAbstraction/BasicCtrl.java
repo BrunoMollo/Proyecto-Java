@@ -20,29 +20,31 @@ import ourLib.dbUtils.Dao;
 public abstract class BasicCtrl<ENTITY, ENTIYT_DAO extends Dao<ENTITY>> {
 	protected ENTIYT_DAO miDao;
 	
+	//Variable para facilitar el desarollo, en realudad deveriaser USUARIO.ADMIN
+	private final int defualtPermision=Usuario.ANYONE;
 	
 	public ENTITY getOne(ENTITY e, Usuario user) throws SQLException, AccessException {
-		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
+		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
 		return miDao.getOne(e);
 	}
 
 	public void add(ENTITY e, Usuario user) throws SQLException, AccessException{
-		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
+		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
 		miDao.add(e);
 	}
 	
 	public LinkedList<ENTITY> getAll(Usuario user) throws SQLException, AccessException{
-		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
+		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
 		return miDao.getAll();
 	}
 	
 	public void update(ENTITY e, Usuario user) throws SQLException, AccessException {
-		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
+		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
 		miDao.update(e);
 	}
 
 	public void delete(ENTITY e, Usuario user) throws SQLException, AccessException {
-		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
+		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
 		miDao.delete(e);
 	}
 	

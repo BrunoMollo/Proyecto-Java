@@ -6,6 +6,7 @@ import ourLib.Parsers.Jsonable;
 
 public class Usuario implements Jsonable{
 
+	public static final int ANYONE=1789;
 	public static final int ADMIN=0;
 	public static final int VENDEDOR=1;
 	
@@ -67,6 +68,7 @@ public class Usuario implements Jsonable{
 	}	
 	
 	public Boolean hasAccess(Integer NeededAccess) {
+		if(NeededAccess==Usuario.ANYONE){ return true; }
 		if(this.rol==null) { return false; }
 		
 		switch (NeededAccess) {
