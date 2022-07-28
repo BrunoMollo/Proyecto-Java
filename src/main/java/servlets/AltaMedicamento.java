@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
 import logic.CtrlLaboratorio;
+import logic.CtrlMedicamento;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import entities.Dosis;
 import entities.Droga;
 import entities.Laboratorio;
 import entities.Medicamento;
+import entities.Usuario;
 
 /**
  * Servlet implementation class AltaMedicamento
@@ -43,6 +45,8 @@ public class AltaMedicamento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Medicamento med=null;
+		Usuario user=Usuario.factory(request);
 		
 		try {
 		switch (request.getPathInfo()){
@@ -52,7 +56,7 @@ public class AltaMedicamento extends HttpServlet {
 				Double size=Double.parseDouble(request.getParameter("size_med"));
 				Double precio=Double.parseDouble(request.getParameter("price_med"));
 				
-				Medicamento med = new Medicamento();
+				med = new Medicamento();
 				med.setNombre(nombre);
 				med.setPrecio(precio);
 				med.setSize(size);
@@ -61,26 +65,38 @@ public class AltaMedicamento extends HttpServlet {
 				Laboratorio l =new Laboratorio();
 				l.setCodigo(codLab);
 		
-				med.setLaboratorio(ctrl.getOne(l));
+				med.setLaboratorio(ctrl.getOne(l,user));
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 				
 			case "/cargadosis":
+				
 				Integer cod_dr=Integer.parseInt(request.getParameter("codDrug"));
 				Double cant_dr=Double.parseDouble(request.getParameter("cantDrug"));
-				Medicamento md=(Medicamento)request.getSession().getAttribute("medicamento");
+				med=(Medicamento)request.getSession().getAttribute("medicamento");
+				
 				
 				CtrlDroga ctrld=new CtrlDroga();
 				Droga drug=new Droga();
 				drug.setCod(cod_dr);
 						
-				Dosis dose=new Dosis(ctrld.getOne(drug),cant_dr);
-				md.addDosis(dose);
-				request.getSession().setAttribute("medicamento", md);
+				Dosis dose=new Dosis(ctrld.getOne(drug,user),cant_dr);
+				med.addDosis(dose);
+				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
+			case "/guardarmedicamento":
+				CtrlMedicamento ctrlmed = new CtrlMedicamento();
+				med=(Medicamento)request.getSession().getAttribute("medicamento");
+				
+				ctrlmed.add(med, user);
+				response.setStatus(201);
+				request.setAttribute("addedObject", med);
+				response.sendRedirect("/index.html");
+				break;
 		}
+		
 		} catch (SQLException e) {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();
