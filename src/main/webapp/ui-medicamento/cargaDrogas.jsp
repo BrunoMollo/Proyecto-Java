@@ -29,7 +29,12 @@
 		<thead>
 			<tr>
 				<th>Droga</th> 
-				<th>Cantidad</th>	
+				<th>Cantidad</th>
+				<th>
+				<form action="/lafarmacia/AltaMedicamento/guardarmedicamento" method="post">
+					<button type="submit">Guardar medicamento</button>
+				</form>
+				</th>	
 			</tr>
 		</thead>
 		<tbody>

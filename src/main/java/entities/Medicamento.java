@@ -50,6 +50,10 @@ public class Medicamento {
 		dosis.put(dosisToBeAdded.getCodigoDroga(), dosisToBeAdded);
 	}
 	
+	public void addAllDosis(HashMap<Integer, Dosis> dosisToBeAdded) {
+		this.dosis=dosisToBeAdded;
+	}
+	
 	public void removeDosis(Dosis dosisToBeRemoved) {
 		this.dosis.remove(dosisToBeRemoved.getCodigoDroga());
 	}
