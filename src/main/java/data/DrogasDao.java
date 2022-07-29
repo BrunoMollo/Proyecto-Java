@@ -67,9 +67,14 @@ public class DrogasDao extends Dao<Droga> {
 		finally { closeResourses(pstm); }
 	}
 
-	public LinkedList<Droga> getByPartialName(Droga obj) throws SQLException {
+	public LinkedList<Droga> getAllByPartialName(Droga obj) throws SQLException {
 		return executeFindAll(new StatementWrapper("select * from drogas where nombre like ?").push(obj.getNombre()+'%'));
 		
+	}
+
+
+	public Droga getOneByName(Droga drug) throws SQLException {
+		return executeGetOne(new StatementWrapper("select * from drogas where nombre=?").push(drug.getNombre()));
 	}
 
 }

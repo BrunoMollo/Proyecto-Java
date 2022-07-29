@@ -72,16 +72,16 @@ public class AltaMedicamento extends HttpServlet {
 				
 			case "/cargadosis":
 				
-				Integer cod_dr=Integer.parseInt(request.getParameter("codDrug"));
+				String name_droga=request.getParameter("name_droga");
 				Double cant_dr=Double.parseDouble(request.getParameter("cantDrug"));
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				
 				
 				CtrlDroga ctrld=new CtrlDroga();
 				Droga drug=new Droga();
-				drug.setCod(cod_dr);
+				drug.setNombre(name_droga);
 						
-				Dosis dose=new Dosis(ctrld.getOne(drug,user),cant_dr);
+				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr);
 				med.addDosis(dose);
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);

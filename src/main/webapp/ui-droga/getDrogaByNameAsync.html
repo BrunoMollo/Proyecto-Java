@@ -5,34 +5,9 @@
 <title>Insert title here</title>
 
 
-<style>
-	*{
-	padding: 0;
-	margin: 0;
-	}
-
-	.async-search{
-	margin: 30px;
-	width:200px;
-	}
-	
-	input{
-	padding: 2px;
-	width: 100%;
-	}
-
-	#sugerencias > li:hover{
-	color:blue;
-	} 
-
-	#sugerencias > li {
-	
-	padding: 5px;
-	list-style: none;
-	 border: 1px solid #000;
-	cursor: pointer;
-	} 
-</style>
+<link href="../style/asyncRequest.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+<script src="/lafarmacia/js/asyncRequest.js" defer></script>
 
 </head>
 <body>
@@ -51,11 +26,7 @@
 		<ul id="sugerencias"></ul>	
 	</div>
 	
-	
 
-	
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/lafarmacia/js/asyncRequest.js"></script>
 
 </body>
 </html>

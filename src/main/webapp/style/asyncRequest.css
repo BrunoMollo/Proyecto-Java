@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+	*{
+	padding: 0;
+	margin: 0;
+	}
+
+	.async-search{
+	margin: 30px;
+	width: 50%;
+	color:red;
+	}
+	
+	input{
+	padding: 2px;
+	width: 100%;
+	color:red;
+	}
+
+	#sugerencias > li:hover{
+	color:blue;
+	} 
+
+	#sugerencias > li {
+	
+	padding: 5px;
+	list-style: none;
+	border: 1px solid #000;
+	cursor: pointer;
+	position: absolute;
+	} 
