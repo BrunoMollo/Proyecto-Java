@@ -26,12 +26,12 @@ public class LaboratorioDao extends Dao<Laboratorio> {
 	public Laboratorio getOne(Laboratorio l) throws SQLException {
 		StatementWrapper stw=new StatementWrapper("select * from laboratorios where codigo=?");
 		stw.push(l.getCodigo());
-		return executeGetOne(stw);				
+		return doGetOne(stw);				
 	}
 
 	@Override
 	public LinkedList<Laboratorio> getAll() throws SQLException {
-		return executeFindAll(new StatementWrapper("select * from laboratorios"));
+		return doFindAll(new StatementWrapper("select * from laboratorios"));
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class LaboratorioDao extends Dao<Laboratorio> {
 		stw.push(p.getNombre());
 		stw.push(p.getTelefono());
 		stw.push(p.getEmail());
-		executeAddWithGeneratedKeys(stw, p);
+		doAddWithGeneratedKeys(stw, p);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class LaboratorioDao extends Dao<Laboratorio> {
 			stw.push(p.getEmail());
 			stw.push(p.getTelefono());
 			stw.push(p.getCodigo());
-		executeModification(stw);
+		doModification(stw);
 			
 	}
 
@@ -58,7 +58,7 @@ public class LaboratorioDao extends Dao<Laboratorio> {
 	public void delete(Laboratorio p) throws SQLException {
 		StatementWrapper stw = new StatementWrapper("delete from laboratorios where codigo=?");
 			stw.push(p.getCodigo());
-		executeModification(stw);
+		doModification(stw);
 		
 	}
 

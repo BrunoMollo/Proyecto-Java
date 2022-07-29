@@ -49,7 +49,7 @@ public class DosisDao extends Dao<Dosis>{
 		stw.push(dose.getCodigoDroga());
 		stw.push(med.getCodigoBarra());
 		stw.push(dose.getCant());
-		executeModification(stw);
+		doModification(stw);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class DosisDao extends Dao<Dosis>{
 	}
 	
 	public HashMap<Integer, Dosis> getDosisOfMedicamento(Medicamento med) throws SQLException{
-		LinkedList<Dosis> list = executeFindAll(
+		LinkedList<Dosis> list = doFindAll(
 				new StatementWrapper("select * from dosis where codigoMedicamento=?")
 					.push(med.getCodigoBarra()));
 		HashMap<Integer, Dosis> hash=new HashMap<Integer, Dosis>();

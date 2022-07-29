@@ -30,7 +30,7 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 
 	@Override
 	public LinkedList<ObraSocial> getAll() throws SQLException {
-		return executeFindAll(new StatementWrapper("select * from obras_sociales"));
+		return doFindAll(new StatementWrapper("select * from obras_sociales"));
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 			.push(os.getTelefono())
 			.push(os.getEmail())
 			.push(os.getDescuento());
-		executeAddWithGeneratedKeys(stw, os);
+		doAddWithGeneratedKeys(stw, os);
 	}
 
 	@Override
@@ -51,16 +51,16 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 				.push(os.getEmail())
 				.push(os.getDescuento())
 				.push(os.getId());
-		executeModification(stw);
+		doModification(stw);
 	}
 
 	@Override
 	public void delete(ObraSocial p) throws SQLException {
-		executeModification(new StatementWrapper("delete from obras_sociales where id=?").push(p.getId()));
+		doModification(new StatementWrapper("delete from obras_sociales where id=?").push(p.getId()));
 	}
 
 	public LinkedList<ObraSocial> getAllByName(ObraSocial os) throws SQLException {
-		return executeFindAll(new StatementWrapper("select * from obras_sociales where nombre like ?").push(os.getNombre()+"%"));
+		return doFindAll(new StatementWrapper("select * from obras_sociales where nombre like ?").push(os.getNombre()+"%"));
 	}
 
 }

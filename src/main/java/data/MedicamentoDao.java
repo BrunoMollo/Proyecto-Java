@@ -53,7 +53,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		stw.push(p.getSize());
 		stw.push(p.getPrecio());	
 		
-		executeAddWithGeneratedKeys(stw, p);
+		doAddWithGeneratedKeys(stw, p);
 	}
 	
 	

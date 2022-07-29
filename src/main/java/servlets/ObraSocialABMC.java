@@ -28,7 +28,7 @@ public class ObraSocialABMC extends HttpServlet {
 	private CtrlObraSocial con= new CtrlObraSocial();
 
 
-	protected ObraSocial getObraSocial(RequestParameterParser parser) {
+	private ObraSocial getObraSocial(RequestParameterParser parser) {
 		ObraSocial os= new ObraSocial();
 		os.setId(parser.getInt("id_os"));
 		os.setNombre(parser.getString("name_os"));

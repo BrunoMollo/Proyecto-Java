@@ -26,7 +26,7 @@ public class LoginDao extends Dao<Usuario>{
 	public Usuario getOne(Usuario p) throws SQLException {
 		StatementWrapper stw=new StatementWrapper("select * from usuarios where usuario=?");
 		stw.push(p.getUsuario());
-		return executeGetOne(stw);
+		return doGetOne(stw);
 		
 	}
 	
@@ -34,7 +34,7 @@ public class LoginDao extends Dao<Usuario>{
 		StatementWrapper stw=new StatementWrapper("select * from usuarios where usuario=? and contrasena=?");
 		stw.push(p.getUsuario());
 		stw.push(p.getContrasena());
-		return executeGetOne(stw);	
+		return doGetOne(stw);	
 	}
 
 	@Override

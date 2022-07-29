@@ -23,20 +23,20 @@ public class DrogasDao extends Dao<Droga> {
 	
 	@Override
 	public Droga getOne(Droga p) throws SQLException {
-		return executeGetOne(
+		return doGetOne(
 				new StatementWrapper("select * from drogas where codigo=?").push(p.getCod()));
 	}
 
 	@Override
 	public LinkedList<Droga> getAll() throws SQLException{
-		return executeFindAll(new StatementWrapper("select * from drogas"));
+		return doFindAll(new StatementWrapper("select * from drogas"));
 	}
 	
 	@Override
 	public void add(Droga drug) throws SQLException {
 		StatementWrapper stw= new StatementWrapper("insert into drogas(nombre) values(?)");
 		stw.push(drug.getNombre());
-		executeAddWithGeneratedKeys(stw, drug);
+		doAddWithGeneratedKeys(stw, drug);
 	}
 
 	@Override
@@ -68,13 +68,13 @@ public class DrogasDao extends Dao<Droga> {
 	}
 
 	public LinkedList<Droga> getAllByPartialName(Droga obj) throws SQLException {
-		return executeFindAll(new StatementWrapper("select * from drogas where nombre like ?").push(obj.getNombre()+'%'));
+		return doFindAll(new StatementWrapper("select * from drogas where nombre like ?").push(obj.getNombre()+'%'));
 		
 	}
 
 
 	public Droga getOneByName(Droga drug) throws SQLException {
-		return executeGetOne(new StatementWrapper("select * from drogas where nombre=?").push(drug.getNombre()));
+		return doGetOne(new StatementWrapper("select * from drogas where nombre=?").push(drug.getNombre()));
 	}
 
 }

@@ -28,7 +28,7 @@ public class DrogaABMC extends HttpServlet {
 	private CtrlDroga con=new CtrlDroga();;
 	
 
-	protected Droga getDroga(RequestParameterParser parser) {
+	private Droga getDroga(RequestParameterParser parser) {
 		Droga drug= new Droga();
 		drug.setCod(parser.getInt("cod_droga"));
 		drug.setNombre(parser.getString("name_droga"));
