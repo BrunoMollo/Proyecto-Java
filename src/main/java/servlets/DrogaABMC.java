@@ -51,15 +51,15 @@ public class DrogaABMC extends HttpServlet {
 			}
 			case "getbyname": {
 				if(drug.getNombre().length()<2) {
-		    		response.sendError(400, "largo insificuente");
+		    		response.sendError(400, "largo insuficiente");
 		    		return;
 				}
 				LinkedList<Droga> arr=con.getByPartialName(drug);
-				response.setStatus(200);
-				response.setContentType("application/json");
-				
 				String JsonArr=JsonMaker.getJsonArray(arr);
 				response.getWriter().append(JsonArr);
+
+				response.setStatus(200);
+				response.setContentType("application/json");
 				break;
 			}
 			
@@ -72,6 +72,9 @@ public class DrogaABMC extends HttpServlet {
 		}
 		catch (AccessException e) {
 			response.sendError(403, e.getMessage());
+		}
+		catch(UnsupportedOperationException e) {
+			response.sendError(501, e.getMessage());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -113,6 +116,9 @@ public class DrogaABMC extends HttpServlet {
 		}
 		catch (AccessException e) {
 			response.sendError(403, e.getMessage());
+		}
+		catch(UnsupportedOperationException e) {
+			response.sendError(501, e.getMessage());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

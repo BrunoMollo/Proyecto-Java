@@ -21,12 +21,7 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 		return os;
 	}
 
-
-	@Override
-	public ObraSocial getOne(ObraSocial p) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+ 
 
 	@Override
 	public LinkedList<ObraSocial> getAll() throws SQLException {
@@ -61,6 +56,15 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 
 	public LinkedList<ObraSocial> getAllByName(ObraSocial os) throws SQLException {
 		return doFindAll(new StatementWrapper("select * from obras_sociales where nombre like ?").push(os.getNombre()+"%"));
+	}
+
+
+
+	@Override
+	public ObraSocial getOne(ObraSocial p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
 
 }

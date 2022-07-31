@@ -37,27 +37,37 @@ public class LoginDao extends Dao<Usuario>{
 		return doGetOne(stw);	
 	}
 
+
 	@Override
 	public LinkedList<Usuario> getAll() throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
+
 
 	@Override
 	public void add(Usuario p) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
+
 
 	@Override
 	public void update(Usuario p) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
+
 
 	@Override
 	public void delete(Usuario p) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
+
+
 }

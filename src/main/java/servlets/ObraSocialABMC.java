@@ -76,6 +76,9 @@ public class ObraSocialABMC extends HttpServlet {
 		catch (AccessException e) {
 			response.sendError(403, e.getMessage());
 		}
+		catch(UnsupportedOperationException e) {
+			response.sendError(501, e.getMessage());
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,6 +119,9 @@ public class ObraSocialABMC extends HttpServlet {
 		}
 		catch (AccessException e) {
 			response.sendError(403, e.getMessage());
+		}
+		catch(UnsupportedOperationException e) {
+			response.sendError(501, e.getMessage());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

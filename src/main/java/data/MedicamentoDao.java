@@ -32,17 +32,6 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	}
 
 
-	@Override
-	public Medicamento getOne(Medicamento p) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public LinkedList<Medicamento> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void add(Medicamento p) throws SQLException {
@@ -55,19 +44,44 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		
 		doAddWithGeneratedKeys(stw, p);
 	}
-	
-	
+
+
+
+	@Override
+	public Medicamento getOne(Medicamento p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
+
+	@Override
+	public LinkedList<Medicamento> getAll() throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
 
 	@Override
 	public void update(Medicamento p) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
+
+
 
 	@Override
 	public void delete(Medicamento p) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
+	
+	
+
 
 }

@@ -49,7 +49,6 @@ public class Login extends HttpServlet {
 
 		try {
 			user=ctrl.validateLogin(user);
-			
 			if(user!=null) {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
@@ -58,10 +57,15 @@ public class Login extends HttpServlet {
 				response.sendRedirect("login.html");
 			}
 		} catch (SQLException e) {
-			response.sendError(500, e.getMessage());
-			e.printStackTrace();
-			response.sendRedirect("login.html");
+			response.sendError(500, e.getLocalizedMessage());
 		}
+		catch(UnsupportedOperationException e) {
+			response.sendError(501, e.getMessage());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		
 	}
 }

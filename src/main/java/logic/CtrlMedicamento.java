@@ -4,7 +4,6 @@ import java.rmi.AccessException;
 import java.sql.SQLException;
 
 import data.DosisDao;
-import data.LaboratorioDao;
 import data.MedicamentoDao;
 import entities.Dosis;
 import entities.Medicamento;

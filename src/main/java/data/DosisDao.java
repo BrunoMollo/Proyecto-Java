@@ -26,22 +26,8 @@ public class DosisDao extends Dao<Dosis>{
 	}
 
 
-	@Override
-	public Dosis getOne(Dosis p) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public LinkedList<Dosis> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public void add(Dosis p) throws SQLException {
-				
-	}
 	
 	public void add(Medicamento med, Dosis dose) throws SQLException {
 		StatementWrapper stw= new StatementWrapper("insert into dosis (codigoDroga, "
@@ -52,17 +38,7 @@ public class DosisDao extends Dao<Dosis>{
 		doModification(stw);
 	}
 
-	@Override
-	public void update(Dosis p) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void delete(Dosis p) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public HashMap<Integer, Dosis> getDosisOfMedicamento(Medicamento med) throws SQLException{
 		LinkedList<Dosis> list = doFindAll(
@@ -78,5 +54,64 @@ public class DosisDao extends Dao<Dosis>{
 		
 		
 	}
+
+
+
+
+
+	@Override
+	public Dosis getOne(Dosis p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
+
+
+
+	@Override
+	public LinkedList<Dosis> getAll() throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
+
+
+
+	@Override
+	public void add(Dosis p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
+
+
+
+	@Override
+	public void update(Dosis p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
+
+
+
+	@Override
+	public void delete(Dosis p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	}
+
+
+
+	
 
 }
