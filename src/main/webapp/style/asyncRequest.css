@@ -6,15 +6,13 @@
 	}
 
 	.async-search{
-	margin: 30px;
+	margin: 10px 30px;
 	width: 50%;
-	color:red;
 	}
 	
-	input{
+	.async-search>input{
 	padding: 2px;
 	width: 100%;
-	color:red;
 	}
 
 	#sugerencias > li:hover{
@@ -27,5 +25,5 @@
 	list-style: none;
 	border: 1px solid #000;
 	cursor: pointer;
-	position: absolute;
+	position: relative;
 	} 

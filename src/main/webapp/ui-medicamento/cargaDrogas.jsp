@@ -23,8 +23,9 @@
 <body>
 	<form action="/lafarmacia/AltaMedicamento/cargadosis" method="post">
 	
-		<label>Nombre Droga:</label>
+		
 			<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga" >
+			<label>Nombre Droga:</label>
 				<input name="name_droga" autocomplete="off">
 				<ul id="sugerencias"></ul>	
 			</div>
