@@ -19,6 +19,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	protected Medicamento mapFromResulset(ResultSet rs) throws SQLException {
 		Medicamento med=new Medicamento();
 		Laboratorio lab = new Laboratorio();
+		
 		lab.setCodigo(rs.getInt("codigoLaboratorio"));
 		
 		med.setCodigoBarra(rs.getInt("codigoBarra"));
@@ -26,6 +27,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		med.setNombre(rs.getString("nombre"));
 		med.setPrecio(rs.getDouble("precio"));
 		med.setSize(rs.getDouble("size"));
+		med.setUnidad(rs.getString("unidad"));
 		med.addAllDosis(ddao.getDosisOfMedicamento(med));
 		return med;
 		
@@ -35,14 +37,16 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	@Override
 	public void add(Medicamento p) throws SQLException {
-		StatementWrapper stw=new StatementWrapper("insert into medicamentos (codigoLaboratorio"
-				+ ",nombre,size,precio) values (?,?,?,?)");
+		StatementWrapper stw=new StatementWrapper("insert into medicamentos "
+				+ "(codigoBarra, codigoLaboratorio, nombre, size, unidad) values (?,?,?,?,?)");
+		
+		stw.push(p.getCodigoBarra());
 		stw.push(p.getLaboratorio().getCodigo());
 		stw.push(p.getNombre());
 		stw.push(p.getSize());
-		stw.push(p.getPrecio());	
+		stw.push(p.getUnidad());	
 		
-		doAddWithGeneratedKeys(stw, p);
+		doModification(stw);
 	}
 
 
@@ -63,8 +67,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
 
-
-
+	
 	@Override
 	public void update(Medicamento p) throws SQLException {
 		// TODO Auto-generated method stub

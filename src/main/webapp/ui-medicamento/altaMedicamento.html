@@ -6,12 +6,22 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<style>
+.dropdown select:{
+	display: inline-block;
+}
+</style>
 
 </head>
 <body>
 	<h1 class="m-3" align="center">Alta de Medicamento</h1>
 	
 	<form action="/lafarmacia/AltaMedicamento/inicializarmedicamento" method="POST" class="needs-validation col-sm-6 container">
+		<div class="row-sm-6">
+			<label class="form-label">Codigo de barras:</label>
+			<input type="number" min=0 max=999999999999 name="cod_med" class="form-control" required>
+		</div>
+		<br>
 		<div class="row-sm-6">
 			<label class="form-label">Nombre:</label>
 			<input type="text" name="name_med" class="form-control" required>
@@ -25,10 +35,18 @@
 		<div class="row-sm-6">
 			<label class="form-label">Tamaño:</label>
 			<input type="number" name="size_med" class="form-control"required>
+			
 		</div>
 		<br>
+		<select class="dropdown" name="unit_med">
+				<option value="unidades" selected>unidades</option>
+				<option value="mg">mg</option>
+				<option value="ml">ml</option>
+				<option value="dosis">dosis</option>
+			</select>
+		<br><br>
 		<div class="row-sm-6">
-			<label class="form-label">Precio:</label>
+			<label class="form-label">Precio Inicial:</label>
 			<input type="number" name="price_med" class="form-control"required>
 		</div>
 		<br>

@@ -4,10 +4,12 @@ public class Dosis {
 
 	private Droga droga;
 	private Double cant;
+	private String unidad;
 	
-	public Dosis(Droga drug, Double cant) {
+	public Dosis(Droga drug, Double cant, String unidad) {
 		this.droga=drug;
 		this.cant=cant;
+		this.unidad=unidad;
 	}
 	
 	public Integer getCodigoDroga() {
@@ -24,6 +26,12 @@ public class Dosis {
 	}
 	public void setCant(Double cant) {
 		this.cant = cant;
+	}
+	public String getUnidad() {
+		return unidad;
+	}
+	public void setUnidad(String unidad) {
+		this.unidad = unidad;
 	}
 	
 }

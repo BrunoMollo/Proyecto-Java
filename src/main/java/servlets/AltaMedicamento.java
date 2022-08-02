@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
 import logic.CtrlLaboratorio;
 import logic.CtrlMedicamento;
+import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -47,41 +48,26 @@ public class AltaMedicamento extends HttpServlet {
 		
 		Medicamento med=null;
 		Usuario user=Usuario.factory(request);
-		
+				
 		try {
 		switch (request.getPathInfo()){
 			case "/inicializarmedicamento":
-				String nombre=request.getParameter("name_med");
-				Integer codLab=Integer.parseInt(request.getParameter("lab_med"));
-				Double size=Double.parseDouble(request.getParameter("size_med"));
-				Double precio=Double.parseDouble(request.getParameter("price_med"));
-				
-				med = new Medicamento();
-				med.setNombre(nombre);
-				med.setPrecio(precio);
-				med.setSize(size);
-				
-				CtrlLaboratorio ctrl = new CtrlLaboratorio();
-				Laboratorio l =new Laboratorio();
-				l.setCodigo(codLab);
-		
-				med.setLaboratorio(ctrl.getOne(l,user));
+				med = mapMedicamento(request);				
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 				
 			case "/cargadosis":
-				
 				String name_droga=request.getParameter("name_droga");
 				Double cant_dr=Double.parseDouble(request.getParameter("cantDrug"));
+				String unidad=request.getParameter("unit_dose");
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
-				
 				
 				CtrlDroga ctrld=new CtrlDroga();
 				Droga drug=new Droga();
 				drug.setNombre(name_droga);
 						
-				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr);
+				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr,unidad);
 				med.addDosis(dose);
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);
@@ -93,7 +79,7 @@ public class AltaMedicamento extends HttpServlet {
 				ctrlmed.add(med, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", med);
-				response.sendRedirect("/index.html");
+				request.getRequestDispatcher("/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 		}
 		
@@ -101,6 +87,23 @@ public class AltaMedicamento extends HttpServlet {
 			response.sendError(500, e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	private Medicamento mapMedicamento(HttpServletRequest req) throws SQLException {
+		Medicamento mdic=new Medicamento();
+		RequestParameterParser parser=new RequestParameterParser(req);
+		mdic.setCodigoBarra(parser.getInt("cod_med")); 
+		mdic.setNombre(parser.getString("name_med"));
+		mdic.setPrecio(parser.getDouble("size_med"));
+		mdic.setSize(parser.getDouble("price_med"));
+		mdic.setUnidad(parser.getString("unit_med")); 
+		
+		CtrlLaboratorio ctrl = new CtrlLaboratorio();
+		Laboratorio l=new Laboratorio();
+		l.setCodigo(parser.getInt("lab_med"));
+		mdic.setLaboratorio(ctrl.getOne(l));
+		
+		return mdic;
 	}
 
 }

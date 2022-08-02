@@ -1,8 +1,10 @@
 package ourLib.dbUtils;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 
@@ -72,6 +74,13 @@ public class StatementWrapper {
 			return this;
 		}
 		
+		public StatementWrapper push(LocalDate d) {
+			paramterAdders.add((index, st)->{
+				try { st.setDate(index, Date.valueOf(d)); } 
+				catch (SQLException e) { throw e; }
+			});
+			return this;
+		}
 		
 		
 		

@@ -11,7 +11,7 @@
 	%>
 </head>
 <body>
-	<h1>Se dio de alta la droga</h1>
+	<h1>Se dio de alta la obra social</h1>
 		<div>Id: <%=os.getId() %></div>
 		<div>Nombre: <%=os.getNombre() %></div>
 		<div>Telefono: <%=os.getTelefono() %></div>

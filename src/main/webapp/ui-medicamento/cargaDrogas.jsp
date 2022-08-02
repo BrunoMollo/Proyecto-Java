@@ -25,15 +25,15 @@
 	
 		
 			<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga" >
-			<label>Nombre Droga:</label>
-				<input name="name_droga" autocomplete="off">
+				<label>Nombre Droga:</label>
+				<input name="name_droga" autocomplete="off" required>
 				<ul id="sugerencias"></ul>	
 			</div>
 			
 			
 		<label>Cantidad Droga:</label>
-		<input type="number" name="cantDrug">
-		<select name="select">
+		<input type="number" name="cantDrug" required>
+		<select name="unit_dose">
 		  <option value="mg"selected>mg</option>
 		  <option value="ml">ml</option>
 		</select>
@@ -61,7 +61,7 @@
 			<%for (Dosis dose : lista.values()) {%>
 			<tr>
 				<td><%=dose.getDroga().getNombre()%></td>
-				<td><%=dose.getCant()%></td>
+				<td><%=dose.getCant()+dose.getUnidad()%></td>
 			</tr>
 			<%} %>
 		</tbody>

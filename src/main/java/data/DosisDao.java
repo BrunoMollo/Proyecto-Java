@@ -20,7 +20,7 @@ public class DosisDao extends Dao<Dosis>{
 		
 		Droga drug=new Droga();
 		drug.setCod(rs.getInt("codigoDroga"));
-		Dosis dose=new Dosis(ddao.getOne(drug),rs.getDouble("cantidad"));
+		Dosis dose=new Dosis(ddao.getOne(drug),rs.getDouble("cantidad"),rs.getString("unidad"));
 		return dose;
 				
 	}
@@ -31,10 +31,11 @@ public class DosisDao extends Dao<Dosis>{
 	
 	public void add(Medicamento med, Dosis dose) throws SQLException {
 		StatementWrapper stw= new StatementWrapper("insert into dosis (codigoDroga, "
-				+ "codigoMedicamento, cantidad) values (?,?,?)");
+				+ "codigoMedicamento, cantidad, unidad) values (?,?,?,?)");
 		stw.push(dose.getCodigoDroga());
 		stw.push(med.getCodigoBarra());
 		stw.push(dose.getCant());
+		stw.push(dose.getUnidad());
 		doModification(stw);
 	}
 
