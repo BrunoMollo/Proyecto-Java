@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
 import logic.CtrlLaboratorio;
 import logic.CtrlMedicamento;
+import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
@@ -25,25 +26,15 @@ import entities.Usuario;
 public class AltaMedicamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AltaMedicamento() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Medicamento med=null;
@@ -83,11 +74,14 @@ public class AltaMedicamento extends HttpServlet {
 				break;
 		}
 		
-		} catch (SQLException e) {
-			response.sendError(500, e.getMessage());
-			e.printStackTrace();
+		} catch (Exception e) {
+			ExceptionDispacher.manage(e, response);
 		}
 	}
+	
+	
+	
+	
 	
 	private Medicamento mapMedicamento(HttpServletRequest req) throws SQLException {
 		Medicamento mdic=new Medicamento();

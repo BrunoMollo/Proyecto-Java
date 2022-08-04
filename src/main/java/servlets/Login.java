@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlLogin;
+import ourLib.Parsers.ExceptionDispacher;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,25 +18,15 @@ import entities.Usuario;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+   
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario user=Usuario.factory(request);
 		response.getWriter().append(user.toJson());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuario = request.getParameter("usuario");
 		String contra = request.getParameter("contrasena");		
@@ -56,14 +47,9 @@ public class Login extends HttpServlet {
 			} else {
 				response.sendRedirect("login.html");
 			}
-		} catch (SQLException e) {
-			response.sendError(500, e.getLocalizedMessage());
-		}
-		catch(UnsupportedOperationException e) {
-			response.sendError(501, e.getMessage());
-		}
+		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			ExceptionDispacher.manage(e, response);
 		}
 
 		

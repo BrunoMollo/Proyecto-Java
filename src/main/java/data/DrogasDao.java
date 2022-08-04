@@ -34,7 +34,7 @@ public class DrogasDao extends Dao<Droga> {
 	
 	@Override
 	public void add(Droga drug) throws SQLException {
-		StatementWrapper stw= new StatementWrapper("insert into drogas(nombre) values(?)");
+		StatementWrapper stw= new StatementWrapper("insert into drogas(nombre) values(?)EEEEEEEEEE");
 		stw.push(drug.getNombre());
 		doAddWithGeneratedKeys(stw, drug);
 	}

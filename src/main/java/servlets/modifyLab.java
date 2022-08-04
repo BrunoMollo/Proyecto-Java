@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlLaboratorio;
+import ourLib.Parsers.ExceptionDispacher;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,18 +20,9 @@ import entities.Usuario;
  */
 public class modifyLab extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public modifyLab() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+  
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CtrlLaboratorio cad = new CtrlLaboratorio();
 		LinkedList<Laboratorio> arr;
@@ -39,15 +31,15 @@ public class modifyLab extends HttpServlet {
 			response.setStatus(200);
 			request.setAttribute("listalab", arr);
 			request.getRequestDispatcher("menuLaboratorio.jsp").forward(request, response);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			response.sendError(500, e.getMessage());
+		} 
+		catch (Exception e) {
+			ExceptionDispacher.manage(e, response);
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
@@ -75,9 +67,8 @@ public class modifyLab extends HttpServlet {
 				con.update(lab);
 				response.setStatus(200);
 				response.sendRedirect("modifylab");
-			} catch (SQLException e) {
-				response.sendError(500, e.getMessage());
-				e.printStackTrace();
+			} catch (Exception e) {
+				ExceptionDispacher.manage(e, response);
 			}
 		
 	}

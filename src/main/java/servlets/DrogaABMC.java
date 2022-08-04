@@ -3,6 +3,7 @@ package servlets;
 
 import logic.CtrlDroga;
 import ourLib.Parsers.RequestParameterParser;
+import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
+import javax.management.ServiceNotFoundException;
 
 import entities.Droga;
 import entities.Usuario;
@@ -64,20 +65,11 @@ public class DrogaABMC extends HttpServlet {
 			}
 			
 			default:
-				response.sendError(404, "no hay");
+				throw new ServiceNotFoundException("no hay");
 			}
 		}
-		catch(SQLException e) {
-			response.sendError(500, e.getMessage());
-		}
-		catch (AccessException e) {
-			response.sendError(403, e.getMessage());
-		}
-		catch(UnsupportedOperationException e) {
-			response.sendError(501, e.getMessage());
-		}
 		catch (Exception e) {
-			e.printStackTrace();
+			ExceptionDispacher.manage(e, response);
 		}
     }
     
@@ -108,20 +100,11 @@ public class DrogaABMC extends HttpServlet {
 			}
 			
 			default:
-				response.sendError(404, "no hay");
+				throw new ServiceNotFoundException("no hay");
 			}
 		}
-		catch(SQLException e) {
-			response.sendError(500, e.getMessage());
-		}
-		catch (AccessException e) {
-			response.sendError(403, e.getMessage());
-		}
-		catch(UnsupportedOperationException e) {
-			response.sendError(501, e.getMessage());
-		}
 		catch (Exception e) {
-			e.printStackTrace();
+			ExceptionDispacher.manage(e, response);
 		}
     }
     
