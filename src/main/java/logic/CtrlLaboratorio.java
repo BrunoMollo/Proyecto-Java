@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import data.LaboratorioDao;
@@ -12,10 +13,8 @@ public class CtrlLaboratorio extends BasicCtrl<Laboratorio, LaboratorioDao>{
 		 this.miDao=new LaboratorioDao();
 	}
 
-	public LinkedList<Laboratorio> getByPartialName(Laboratorio lab) {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+	public LinkedList<Laboratorio> getByPartialName(Laboratorio lab) throws SQLException {
+		return miDao.getByPartialName(lab);
 	}
 	
 }

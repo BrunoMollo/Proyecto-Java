@@ -62,4 +62,17 @@ public class LaboratorioDao extends Dao<Laboratorio> {
 		
 	}
 
+
+	public LinkedList<Laboratorio> getByPartialName(Laboratorio lab) throws SQLException {
+		return doFindAll(
+				new StatementWrapper("select * from laboratorios where nombre like ?")
+				.push(lab.getNombre()+"%"));
+	}
+	
+	public Laboratorio getOneByName(Laboratorio lab) throws SQLException{
+		StatementWrapper stw=new StatementWrapper("select * from laboratorios where nombre=?");
+		stw.push(lab.getNombre());
+		return doGetOne(stw);	
+	}
+
 }

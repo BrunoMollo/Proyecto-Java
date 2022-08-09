@@ -92,10 +92,9 @@ public class AltaMedicamento extends HttpServlet {
 		mdic.setSize(parser.getDouble("price_med"));
 		mdic.setUnidad(parser.getString("unit_med")); 
 		
-		CtrlLaboratorio ctrl = new CtrlLaboratorio();
 		Laboratorio l=new Laboratorio();
-		l.setCodigo(parser.getInt("lab_med"));
-		mdic.setLaboratorio(ctrl.getOne(l));
+		l.setNombre(parser.getString("name_lab"));
+		mdic.setLaboratorio(l);
 		
 		return mdic;
 	}
