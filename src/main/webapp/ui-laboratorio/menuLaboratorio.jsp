@@ -37,51 +37,61 @@ table.center {
 		<% for(Laboratorio l: arr){ %>
 				<tr>
 					<td><%=l.getCodigo()%> </td>
-					<td><input value=<%=l.getNombre()%> type="text" id=<%="name-"+l.getCodigo()%> ></td>
-					<td><input value=<%=l.getEmail()%> type="email" id=<%="email-"+l.getCodigo()%> ></td>
-					<td><input value=<%=l.getTelefono()%> type="number" id=<%="telefono-"+l.getCodigo()%> ></td>
-					<td><input type="button" value="Guardar" onclick=<%="MarcarParaModificar("+l.getCodigo()+")" %> /></td>
-					<td><input type="button" value="Eliminar" onclick=<%="MarcarParaBorrar("+l.getCodigo()+")" %> /></td>
+					<td><input value=<%=l.getNombre()%> type="text" id=<%="name_"+l.getCodigo()%> ></td>
+					<td><input value=<%=l.getEmail()%> type="email" id=<%="email_"+l.getCodigo()%> ></td>
+					<td><input value=<%=l.getTelefono()%> type="number" id=<%="telefono_"+l.getCodigo()%> ></td>
+					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+l.getCodigo()+")" %> /></td>
+					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+l.getCodigo()+")" %> /></td>
 				</tr>
 		<%}%>
 	</tbody>
 </table>
 
-<form hidden="true" id="miForm" action="modifylab" method="post">
-	<input name="codModifiedLab" id="codModifiedLab">
-	<input name="newName" id="newName">
-	<input name="newEmail" id="newEmail">
-	<input name="newTelefono" id="newTelefono">
-</form>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-	function MarcarParaModificar(oldCodLab) {
-		newName=document.getElementById("name-"+oldCodLab).value;
-		newEmail=document.getElementById("email-"+oldCodLab).value;
-		newTelefono=document.getElementById("telefono-"+oldCodLab).value;
+	function sendUpdate(cod) {
+		newName=document.getElementById("name_"+cod).value;
+		newEmail=document.getElementById("email_"+cod).value;
+		newTel=document.getElementById("telefono_"+cod).value;
+	
+		axios(
+			{
+				url: '/lafarmacia/LaboratorioABMC/update',
+				method:"post",
+				params:{
+					cod_lab: cod,
+					name_lab: newName,
+					email_lab: newEmail,
+					telefono_lab: newTel
+					
+				}
+			}		
+		)
+		.then((res)=>location.reload())
+		.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
 		
-		document.getElementById("codModifiedLab").value=oldCodLab;
-		document.getElementById("newName").value = newName;
-		document.getElementById("newEmail").value = newEmail;
-		document.getElementById("newTelefono").value = newTelefono;
-		
-		document.getElementById("miForm").submit();
+	}
+
+	function sendDelete(cod) {
+		if(confirm("Seguro que desea borrar el registro?")===false){
+			return;	
+		}
+		axios(
+				{
+					url: '/lafarmacia/LaboratorioABMC/delete',
+					method:"post",
+					params:{
+						cod_lab: cod,
+					}
+				}		
+			)
+			.then((res)=>location.reload())
+			.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+			
 	}
 </script>
 
-<form hidden="true" id="ourForm" action="deletelab" method="post">
-	<input name="codLab" id="codLab">
-	
-</form>
-
-<script type="text/javascript">
-	function MarcarParaBorrar(codLab) {
-		
-		document.getElementById("codLab").value=codLab;
-	
-		document.getElementById("ourForm").submit();
-	}
-</script>
 
 </body>
 </html>
