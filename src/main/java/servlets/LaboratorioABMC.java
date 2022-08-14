@@ -39,7 +39,7 @@ public class LaboratorioABMC extends HttpServlet {
 				LinkedList<Laboratorio> arr = ctrl.getAll(user);
 				response.setStatus(200);
 				request.setAttribute("listalab", arr);
-				request.getRequestDispatcher("/ui-laboratorio/menuLaboratorio.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-laboratorio/menuLaboratorio.jsp").forward(request, response);
 				break;
 			}
 			case "getbyname": {
@@ -78,7 +78,7 @@ public class LaboratorioABMC extends HttpServlet {
 				ctrl.add(lab, user);
 				response.setStatus(201);
 				request.setAttribute("lab", lab);
-				request.getRequestDispatcher("/ui-laboratorio/ConfirmarAltaLaboratorio.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-laboratorio/ConfirmarAltaLaboratorio.jsp").forward(request, response);
 				break;
 			}
 			case "update": {

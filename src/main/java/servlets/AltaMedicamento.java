@@ -45,7 +45,7 @@ public class AltaMedicamento extends HttpServlet {
 			case "/inicializarmedicamento":
 				med = mapMedicamento(request);				
 				request.getSession().setAttribute("medicamento", med);
-				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 				
 			case "/cargadosis":
@@ -61,7 +61,7 @@ public class AltaMedicamento extends HttpServlet {
 				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr,unidad);
 				med.addDosis(dose);
 				request.getSession().setAttribute("medicamento", med);
-				request.getRequestDispatcher("/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 			case "/guardarmedicamento":
 				CtrlMedicamento ctrlmed = new CtrlMedicamento();
@@ -70,7 +70,7 @@ public class AltaMedicamento extends HttpServlet {
 				ctrlmed.add(med, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", med);
-				request.getRequestDispatcher("/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 		}
 		

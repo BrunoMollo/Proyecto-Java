@@ -47,7 +47,7 @@ public class DrogaABMC extends HttpServlet {
 			case "all": {
 				LinkedList<Droga> arr = con.getAll(user);
 				request.setAttribute("all", arr);
-				request.getRequestDispatcher("/ui-droga/getAllDroga.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-droga/getAllDroga.jsp").forward(request, response);
 				break;
 			}
 			case "getbyname": {
@@ -85,7 +85,7 @@ public class DrogaABMC extends HttpServlet {
 				con.add(drug, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", drug);
-				request.getRequestDispatcher("/ui-droga/ConfirmarAltaDroga.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-droga/ConfirmarAltaDroga.jsp").forward(request, response);
 				break;
 			}
 			case "update": {
