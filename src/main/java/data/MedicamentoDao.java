@@ -56,6 +56,8 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
 		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		//aca deberiamos hacer un join con la tabla precios para obtener el ultimo o algo asi
+		
 	}
 
 
