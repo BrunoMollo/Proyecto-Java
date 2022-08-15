@@ -12,7 +12,7 @@
 	<%Medicamento med = (Medicamento)request.getSession().getAttribute("medicamento"); %>
 	<%HashMap<Integer, Dosis> lista=med.getAllDosis(); %>
 	
-	<link href="../style/asyncRequest.css" rel="stylesheet">
+	<link href="/lafarmacia/style/asyncRequest.css" rel="stylesheet">
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="/lafarmacia/js/asyncRequest.js"></script>
 	

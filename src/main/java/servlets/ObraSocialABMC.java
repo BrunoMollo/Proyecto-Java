@@ -52,7 +52,7 @@ public class ObraSocialABMC extends HttpServlet {
 			case "all": {
 				LinkedList<ObraSocial> arr = con.getAll(user);
 				request.setAttribute("all", arr);
-				request.getRequestDispatcher("/ui-obraSocial/showAllObrasSociales.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/showAllObrasSociales.jsp").forward(request, response);
 				break;
 			}
 			case "getbyname": {
@@ -90,7 +90,7 @@ public class ObraSocialABMC extends HttpServlet {
 				con.add(os, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", os);
-				request.getRequestDispatcher("/ui-obraSocial/ConfirmarAltaObraSocial.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/ConfirmarAltaObraSocial.jsp").forward(request, response);
 				break;
 			}
 			case "update": {
