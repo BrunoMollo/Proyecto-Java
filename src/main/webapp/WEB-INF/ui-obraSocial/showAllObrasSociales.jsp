@@ -32,7 +32,7 @@
 		<% for(ObraSocial os: arr){ %>
 				<tr>
 					<td><%=os.getId() %> </td>
-					<td><input value=<%=os.getNombre() %> type="text" id=<%="name-"+os.getId()%>></td>
+					<td><input value=<%=os.getNombre().toString()%> type="text" id=<%="name-"+os.getId()%>></td>
 					<td><input value=<%=os.getTelefono() %> type="number" id=<%="tel-"+os.getId()%>></td>
 					<td><input value=<%=os.getEmail() %> type="email" id=<%="email-"+os.getId()%>></td>
 					<td><input value=<%=os.getDescuento() %> type="number" step="0.001" min="0" max="100" id=<%="discount-"+os.getId()%>></td>

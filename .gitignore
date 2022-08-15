@@ -23,5 +23,8 @@
 hs_err_pid*
 /build/
 
+#mis datos privados
+dbConfig.xml
+
 #whitelist
 !/src/**/*.jar
