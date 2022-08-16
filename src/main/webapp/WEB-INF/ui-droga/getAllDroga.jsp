@@ -30,7 +30,7 @@
 		<% for(Droga d: arr){ %>
 				<tr>
 					<td><%=d.getCod()%> </td>
-					<td><input value=<%=d.getNombre()%> type="text" id=<%="name_"+d.getCod()%>></td>
+					<td><input value="<%=d.getNombre()%>" type="text" id=<%="name_"+d.getCod()%>></td>
 					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %> /></td>
 					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+d.getCod()+")" %> /></td>
 				</tr>

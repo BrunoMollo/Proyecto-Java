@@ -37,9 +37,9 @@ table.center {
 		<% for(Laboratorio l: arr){ %>
 				<tr>
 					<td><%=l.getCodigo()%> </td>
-					<td><input value=<%=l.getNombre()%> type="text" id=<%="name_"+l.getCodigo()%> ></td>
-					<td><input value=<%=l.getEmail()%> type="email" id=<%="email_"+l.getCodigo()%> ></td>
-					<td><input value=<%=l.getTelefono()%> type="number" id=<%="telefono_"+l.getCodigo()%> ></td>
+					<td><input value="<%=l.getNombre()%>" type="text" id=<%="name_"+l.getCodigo()%> ></td>
+					<td><input value="<%=l.getEmail()%>" type="email" id=<%="email_"+l.getCodigo()%> ></td>
+					<td><input value="<%=l.getTelefono()%>" type="number" id=<%="telefono_"+l.getCodigo()%> ></td>
 					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+l.getCodigo()+")" %> /></td>
 					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+l.getCodigo()+")" %> /></td>
 				</tr>
