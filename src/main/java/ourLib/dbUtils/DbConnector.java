@@ -16,12 +16,12 @@ public class DbConnector {
 
 	private static DbConnector instancia;
 	
-	private String driver;//="com.mysql.cj.jdbc.Driver";
-	private String host;//="us-cdbr-east-06.cleardb.net";
-	private String port;//="3306";
-	private String user;//="b18e27e75b75d1";
-	private String password;//="b64eaac1";
-	private String db;//="heroku_f46f78fc841fab8";
+	private String driver;
+	private String host;
+	private String port;
+	private String user;
+	private String password;
+	private String db;
 	private static final String CONFIG = "dbConfig.xml";
 	private int conectados=0;
 	private Connection conn=null;
@@ -30,30 +30,9 @@ public class DbConnector {
 	
 	private DbConnector() {
 		
-		/*
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder builder=factory.newDocumentBuilder();
-			Document doc=builder.parse(new File("dbConfig.xml"));
-			doc.getDocumentElement().normalize();
-			NodeList list=doc.getElementsByTagName("entry");
-			String firstname = doc.getElementsByTagName("entry").
-			
-		} catch (ParserConfigurationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
 		try {
 			Properties prop = new Properties();
-			prop.loadFromXML(new FileInputStream("dbConfig.xml"));
+			prop.loadFromXML(new FileInputStream(CONFIG));
 			driver = prop.getProperty("driver");
             host=prop.getProperty("host"); 
             port=prop.getProperty("port");
@@ -61,16 +40,14 @@ public class DbConnector {
             password=prop.getProperty("password");
             db=prop.getProperty("db_name");
             
-		} catch (InvalidPropertiesFormatException e1) {
+            Class.forName(driver);
+            
+		} catch (IOException | ClassNotFoundException e1) {
 			e1.printStackTrace();
 			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		} 
 	}
+	
 	
 	public static DbConnector getInstancia() throws SQLException {
 		if (instancia == null) {
