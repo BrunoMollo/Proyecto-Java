@@ -16,13 +16,13 @@ public class DbConnector {
 
 	private static DbConnector instancia;
 	
-	private String driver;
-	private String host;
-	private String port;
-	private String user;
-	private String password;
-	private String db;
-	private static final String CONFIG = "dbConfig.xml";
+	private String driver="com.mysql.jdbc.Driver";
+	private String host="us-cdbr-east-06.cleardb.net";
+	private String port="3306";
+	private String user=System.getenv("JAVA_BD_USER");
+	private String password=System.getenv("JAVA_BD_PSW");
+	private String db="heroku_f46f78fc841fab8";
+
 	private int conectados=0;
 	private Connection conn=null;
 	
@@ -31,18 +31,8 @@ public class DbConnector {
 	private DbConnector() {
 		
 		try {
-			Properties prop = new Properties();
-			prop.loadFromXML(new FileInputStream(CONFIG));
-			driver = prop.getProperty("driver");
-            host=prop.getProperty("host"); 
-            port=prop.getProperty("port");
-            user=prop.getProperty("user");
-            password=prop.getProperty("password");
-            db=prop.getProperty("db_name");
-            
             Class.forName(driver);
-            
-		} catch (IOException | ClassNotFoundException e1) {
+		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 			
 		} 
