@@ -1,8 +1,7 @@
 package ourLib.dbUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
+import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import org.w3c.dom.*;
@@ -31,13 +30,14 @@ public class DbConnector {
 	
 	private DbConnector() {
 		
+		/*
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder=factory.newDocumentBuilder();
 			Document doc=builder.parse(new File("dbConfig.xml"));
 			doc.getDocumentElement().normalize();
-			System.out.println(doc.getElementById("host"));
-			
+			NodeList list=doc.getElementsByTagName("entry");
+			String firstname = doc.getElementsByTagName("entry").
 			
 		} catch (ParserConfigurationException e1) {
 			// TODO Auto-generated catch block
@@ -49,23 +49,26 @@ public class DbConnector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
-	    Properties prop = new Properties();
-        try(InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(CONFIG)){
-            prop.loadFromXML(in);
-            driver = prop.getProperty("driver");
+		try {
+			Properties prop = new Properties();
+			prop.loadFromXML(new FileInputStream("dbConfig.xml"));
+			driver = prop.getProperty("driver");
             host=prop.getProperty("host"); 
             port=prop.getProperty("port");
             user=prop.getProperty("user");
             password=prop.getProperty("password");
             db=prop.getProperty("db_name");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+            
+		} catch (InvalidPropertiesFormatException e1) {
+			e1.printStackTrace();
+			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 	
