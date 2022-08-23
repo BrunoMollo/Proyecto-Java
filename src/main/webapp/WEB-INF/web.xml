@@ -57,6 +57,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LaboratorioABMC</servlet-name>
-    <url-pattern>/LaboratorioABMC/*</url-pattern>
+    <url-pattern>/ABMC-laboratorio/*</url-pattern>
   </servlet-mapping>
 </web-app>
