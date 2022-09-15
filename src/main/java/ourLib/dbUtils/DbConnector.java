@@ -16,11 +16,11 @@ public class DbConnector {
 
 	private static DbConnector instancia;
 	
-	private String driver="com.mysql.jdbc.Driver";
+	private String driver="com.mysql.cj.jdbc.Driver";
 	private String host="us-cdbr-east-06.cleardb.net";
 	private String port="3306";
-	private String user=System.getenv("JAVA_BD_USER");
-	private String password=System.getenv("JAVA_BD_PSW");
+	private String user=System.getenv("JAVA_DB_USER");
+	private String password=System.getenv("JAVA_DB_PSW");
 	private String db="heroku_f46f78fc841fab8";
 
 	private int conectados=0;

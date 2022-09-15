@@ -76,7 +76,7 @@ public class StatementWrapper {
 		
 		public StatementWrapper push(LocalDate d) {
 			paramterAdders.add((index, st)->{
-				try { st.setDate(index, Date.valueOf(d)); } 
+				try { st.setObject(index, d); } 
 				catch (SQLException e) { throw e; }
 			});
 			return this;

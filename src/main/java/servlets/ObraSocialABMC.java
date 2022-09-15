@@ -19,8 +19,7 @@ import logic.CtrlObraSocial;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
-import ourLib.servletAbstraction.DefaultServlet;
-import ourLib.servletAbstraction.Operation;
+
 
 /**
  * Servlet implementation class ObraSocialABMC

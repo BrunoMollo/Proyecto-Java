@@ -1,10 +1,5 @@
 @charset "ISO-8859-1";
-.login-dark {
-  height:1000px;
-  background:#475d62 url(https://img.freepik.com/vector-gratis/fondo-estampado-medico-limpio_53876-116871.jpg?w=2000);
-  background-size:100% 100%;
-  position:center center;
-}
+
 
 .login-dark form {
   max-width:320px;
