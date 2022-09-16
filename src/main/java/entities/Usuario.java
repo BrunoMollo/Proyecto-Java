@@ -19,7 +19,12 @@ public class Usuario implements Jsonable{
 		}
 		else {
 			return u;
-		}
+		}}
+	public static Usuario factory(String rol) {
+			Usuario u= new Usuario();
+			u.setRol(Integer.parseInt(rol));
+			return u;
+			
 	}
 	
 	private String usuario;

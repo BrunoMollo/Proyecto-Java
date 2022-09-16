@@ -11,7 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
 <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script defer src="js/getCurrentUser.js"></script>
+<script defer src="./prueba.js"></script>
+<script defer src="./js/getCurrentUser.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
 </head>
@@ -46,13 +47,11 @@
 			            Clientes
 			          </a>
 			          <ul class="dropdown-menu">
-			          	<form action="" metod="">
-			            <li><a class="dropdown-item"><button class="dropdown-item"type="submit">Alta cliente</button></a></li>
-			           <!--  <li><a class="dropdown-item" href="">Actualizar cliente</a></li>
+			            <li><a class="dropdown-item"href="./altaCliente.jsp">Nuevo Cliente</a></li>
+			           	<li><a class="dropdown-item" href="">Actualizar cliente</a></li>
 			            <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
 			            <li><a class="dropdown-item" href="#">Consulta cliente</a></li>
-			            <li><a class="dropdown-item" href="./listCliente.jsp">Lista clientes</a></li> -->
-			            </form>
+			            <li><a class="dropdown-item" href="./listCliente.jsp">Lista clientes</a></li>
 			          </ul>
 			        </li>
 			        <li class="nav-item dropdown">
@@ -79,9 +78,6 @@
 					<span id="show-user-rol">sin rol</span>
 				</div>
    			</div>
-   			
-     		 <a  href="./login.html" class="btn btn-outline-success d-flex" type="submit">Login</a>
-    		
   		</div>
 	</nav>
 	<h1 id="title">Bienvenido</h1>
@@ -121,19 +117,13 @@
 		<div class="option-list">
 			<h2>Clientes</h2>
 			<ul>
-				<li><a class="btn btn-sm" href="./altaCliente.jsp">Alta Cliente</a></li>
-				<li><a  class="btn btn-sm" href="#">Modificar datos Cliente</a></li>
+					<li><a class="btn btn-sm" href="./altaCliente.jsp">Nuevo Cliente</a></li>
+					<li><a  class="btn btn-sm" href="#">Modificar datos Cliente</a></li>
+					<li><a  class="btn btn-sm" href="./listCliente.jsp">Lista Cientes</a></li>
+				
+				</form>
 			</ul>
 		</div>	
-		<div class="option-list">
-			<h2>Login</h2>
-			<ul>
-				<li><a class="btn btn-sm" href="./login.html">Login [EXP]</a></li>
-			</ul>
-		</div>
 	</section>
-	<footer>
-	<p>CopyRight</p>
-	</footer>
 </body>
 </html>

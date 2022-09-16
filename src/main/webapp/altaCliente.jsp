@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="entities.ObraSocial"%>
+<%@page import="entities.Usuario"%>
 <%@page import="logic.CtrlObraSocial"%>
-<%@page import="java.util.LinkedList"%> 
+<%@page import="java.util.LinkedList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 <link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
 <%	
 	LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll();
+	Usuario u= (Usuario)request.getSession().getAttribute("user");
 %>
 <title>Nuevo Cliente</title>
 </head>
@@ -24,7 +26,7 @@
 	
 	<main>
 		<form class="signup-form" action="./ABMC-cliente/add" method="post">
-		  	<h2 >Nuevo Cliente</h2>
+		  	<h2 >Nuevo Cliente <%=u.getNombre()%></h2>
 			<div class="form-group fieldset">
 					<div class="row">
  						<div class="col">

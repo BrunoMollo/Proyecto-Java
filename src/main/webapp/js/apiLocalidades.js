@@ -1,5 +1,4 @@
 
-
 const $provincias = document.getElementById('selProvincia');
 const $localidades = document.getElementById('selLocalidad');
 
@@ -48,9 +47,4 @@ document.addEventListener("DOMContentLoaded",provincia)
 
 	$provincias.addEventListener("change",e => localidad(e.target.value))
 
-//$provincias.addEventListener("change", e => {
-//	
-//   	localidad(e.target.value);
-//   	console.log(e.target.value)
-//    
-//})
+

@@ -14,7 +14,6 @@
 	flex-wrap:wrap;
 	justify-content:center;
 	align-content:center;
-	margin-right:-150px
 	
 }
 .option-list{
@@ -47,5 +46,7 @@
   border-color:#198754
 }
 .container-fluid {
-	margin-left:35px;
+	margin-left:35xp;
 }
+
+

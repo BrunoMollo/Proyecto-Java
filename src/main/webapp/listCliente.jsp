@@ -1,6 +1,8 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="entities.Cliente" %>
+<%@ page import="entities.Usuario" %>
 <%@ page import="logic.CtrlCliente" %>
+<%@ page import="logic.CtrlLogin" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@  page import="java.time.LocalDate"%>
@@ -19,12 +21,17 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 	<link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	
+	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	    
     <%	
  // Usuario u = (Usuario)  session.getAttribute("user");
     	CtrlCliente ctrl = new CtrlCliente();
+    	CtrlLogin login = new CtrlLogin();
+    	Usuario user = new Usuario();
     	LinkedList<Cliente> clientes= ctrl.getAll();
+    	
 		
     	
 	%>
@@ -35,7 +42,7 @@
 		<div class="row">
 			<div class="nav-bar " >
 				<div class="col" >
-        			<h4>Alumnos</h4>
+        			<h4 id="prueba">Alumnos</h4>
         		</div>
         		<div class="col" >
         			<a href="./index.html" class="btn btn-success "> <h4>Volver al Menu</h4></a>
@@ -96,5 +103,6 @@
 			  </div>
 				</div>
 	 <!-- /container -->
+	 <script defer src="js/getUserList.js"></script>
 </body>
 </html>
