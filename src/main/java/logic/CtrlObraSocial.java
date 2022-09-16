@@ -1,6 +1,7 @@
 package logic;
 
 
+import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -17,5 +18,7 @@ public class CtrlObraSocial extends BasicCtrl<ObraSocial, ObrasSocialesDao>{
 	public LinkedList<ObraSocial> getAllByName(ObraSocial os) throws SQLException {
 		return miDao.getAllByName(os);
 	}
+	
+	
 	
 }

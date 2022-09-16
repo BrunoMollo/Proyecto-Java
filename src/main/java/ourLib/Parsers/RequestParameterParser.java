@@ -1,6 +1,13 @@
 package ourLib.Parsers;
 
+import java.sql.SQLException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
+import entities.Cliente;
+import entities.ObraSocial;
 import jakarta.servlet.http.HttpServletRequest;
+import logic.CtrlObraSocial;
 
 
 
@@ -11,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class RequestParameterParser {
 	
 	private HttpServletRequest req;
+	
 
 	public RequestParameterParser(HttpServletRequest req) {
 		super();
@@ -36,7 +44,16 @@ public class RequestParameterParser {
 			return null;
 		}
 	}
+	public LocalDate getFecha(String name) {
+		try {
+			return LocalDate.parse(req.getParameter(name), Cliente.dFormat);
+		}
+		catch (DateTimeException | NullPointerException e ) {
+			return null;
+		}
+	}
+	}
 	
 	
 	
-}
+

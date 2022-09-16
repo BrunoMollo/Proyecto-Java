@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
+			
 public abstract class Dao<ENTITY>{
 	
 	private PreparedStatement st=null;

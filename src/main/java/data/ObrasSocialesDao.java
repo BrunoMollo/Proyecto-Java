@@ -62,9 +62,10 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 
 	@Override
 	public ObraSocial getOne(ObraSocial p) throws SQLException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		StatementWrapper stw=new StatementWrapper("select * from obras_sociales  where id=?")
+				.push(p.getId());
+			 return doGetOne(stw);
 	}
+
 
 }
