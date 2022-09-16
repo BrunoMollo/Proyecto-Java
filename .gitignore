@@ -26,5 +26,9 @@ hs_err_pid*
 #mis datos privados
 dbConfig.xml
 
+# cosas que se rompen del server
+.classpath
+org.eclipse.wst.common.project.facet.core.xml
+
 #whitelist
 !/src/**/*.jar
