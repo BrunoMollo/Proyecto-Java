@@ -20,7 +20,12 @@ public class Cliente implements Jsonable {
 	private LocalDate fechaNacimiento;
 	private String localidad;
 	private String provincia;
-
+	private String direccion;
+	
+	
+	public String getFullName() {
+		return this.apellido+" "+this.nombre;
+	}
 	public int getDni() {
 		return dni;
 	}
@@ -75,6 +80,19 @@ public class Cliente implements Jsonable {
 	}
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public Cliente() {
+		
+	}
+public Cliente(int dni) {
+	super();
+	this.setDni(dni);
 	}
 	@Override
 	public String toJson() {

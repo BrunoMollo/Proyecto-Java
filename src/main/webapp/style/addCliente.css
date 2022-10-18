@@ -92,7 +92,7 @@
         .signup-form form a:hover {
             text-decoration: underline;
         }
-        .signup-form h2 {
+        .signup-form h2,  .signup-form h3 {
             color: #9ADCD8;
             margin: 0 0 15px;
             display:relative;

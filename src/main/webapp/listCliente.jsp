@@ -26,11 +26,11 @@
 	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	    
     <%	
- // Usuario u = (Usuario)  session.getAttribute("user");
+ 		Usuario u = (Usuario)  session.getAttribute("user");
     	CtrlCliente ctrl = new CtrlCliente();
     	CtrlLogin login = new CtrlLogin();
     	Usuario user = new Usuario();
-    	LinkedList<Cliente> clientes= ctrl.getAll();
+    	LinkedList<Cliente> clientes= ctrl.getAll(u);
     	
 		
     	
@@ -45,7 +45,7 @@
         			<h4 id="prueba">Alumnos</h4>
         		</div>
         		<div class="col" >
-        			<a href="./index.html" class="btn btn-success "> <h4>Volver al Menu</h4></a>
+        			<a href="./indexLog.html" class="btn btn-success "> <h4>Volver al Menu</h4></a>
         		</div>
         		
         	</div>
@@ -61,12 +61,14 @@
                         			<th>Telefono</th>
                         			<th>Provincia</th>
                         			<th>Localidad</th>
+                                 	<th>Direccion</th>
                                  	<th>Obra Social</th>
                         			
                       			</tr>
                       		</thead>
                     		<tbody>
-                    		<% for (Cliente cli : clientes) { %>
+                    		<% if(!clientes.isEmpty()){
+                    		for (Cliente cli : clientes) { %>
                     			<tr>
                     				<td><%=cli.getDni()%></td>
                        				<td><%=cli.getNombre()%></td>
@@ -75,27 +77,28 @@
                     				<td><%=cli.getTelefono()%></td>
                     				<td><%=cli.getProvincia()%></td>
                     				<td><%=cli.getLocalidad()%></td>
+                    				<td><%=cli.getDireccion()%></td>
                     				<td><%=cli.getObraSocial().getNombre()%></td>
                     			
                     				
                     				<td>
                     					<div class= "btn-edit">
-                    						<form action="" method="post">
-                    							<input type="hidden" class="custom-control-input" id="edit-control" name="dni" value="<%=cli.getDni()%>">
+                    						<form action="./updateCliente.jsp" method="post">
+                    							<input type="hidden" class="custom-control-input" id="edit-control" name="dniCliente" value="<%=cli.getDni()%>">
 												<input class="btn btn-success btn-lg btn-block" type="submit" value="Modificar"> 
 											</form>
 										</div>	
                     				</td>
                     				<td>
                     					<div class= "btn-edit">
-                    				 		<form action="" method="post">
-                    							<input type="hidden" class="custom-control-input" id="delete-control" name="dni" value="<%=cli.getDni()%>">
-												<input class="btn btn-success btn-lg btn-block" type="submit" value="Eliminar"> 
+                    				 		<form action="./ABMC-cliente/delete" method="post">
+                    							<input type="hidden" class="custom-control-input"  name="dniCliente" value="<%=cli.getDni()%>">
+												<input class="btn btn-success btn-lg btn-block" id="delete-control" type="submit" value="Eliminar"> 
 											</form>
                     					</div>	
                     				</td><!-- borrar -->
                     			</tr>
-                    		<% } %>
+                    		<% }} %>
                     		</tbody>
                     		</table>
 		</div>
@@ -103,6 +106,16 @@
 			  </div>
 				</div>
 	 <!-- /container -->
-	 <script defer src="js/getUserList.js"></script>
+	 <script type="text/javascript"> 
+	 function confirmResp(){
+		 let resp= confirm("Esta seguro que desea eliminar el cliente");
+		 return resp;
+	 }
+	const $btnDelete= document.getElementById('delete-control');
+	if($btnDelete){
+	$btnDelete.addEventListener("click",confirmResp);
+	}
+	 </script>
+	 
 </body>
 </html>

@@ -40,6 +40,8 @@ public class StatementWrapper {
 			return makeStatement(con, PreparedStatement.NO_GENERATED_KEYS);
 		}
 		
+		//Se mapea el parametro del preparedStament ('?'), con el valor del String que se envio al metodo
+		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(String s) {
 			paramterAdders.add((index, st)->{
 				try { st.setString(index, s); } 
@@ -47,7 +49,8 @@ public class StatementWrapper {
 			});
 			return this;
 		}
-		
+		//Se mapea el parametro del preparedStament ('?'), con el valor del Integer que se envio al metodo
+		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(Integer i) {
 			paramterAdders.add((index, st)->{
 				try { st.setInt(index, i); } 
@@ -56,7 +59,8 @@ public class StatementWrapper {
 			return this;
 		}
 		
-
+		//Se mapea el parametro del preparedStament ('?'), con el valor del Boolean que se envio al metodo
+		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(Boolean b) {
 			paramterAdders.add((index, st)->{
 				try { st.setBoolean(index, b); } 
@@ -65,7 +69,8 @@ public class StatementWrapper {
 			return this;
 		}
 
-
+		//Se mapea el parametro del preparedStament ('?'), con el valor del Double que se envio al metodo
+		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(Double d) {
 			paramterAdders.add((index, st)->{
 				try { st.setDouble(index, d); } 
@@ -73,7 +78,8 @@ public class StatementWrapper {
 			});
 			return this;
 		}
-		
+		//Se mapea el parametro del preparedStament ('?'), con el valor de la Fecha que se envio al metodo
+		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(LocalDate d) {
 			paramterAdders.add((index, st)->{
 				try { st.setObject(index, d); } 

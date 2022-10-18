@@ -43,16 +43,24 @@ public class ClienteABMC extends HttpServlet {
 		cli.setLocalidad(parser.getString("localidad"));
 		cli.setProvincia(parser.getString("provincia"));
 		cli.setFechaNacimiento(parser.getFecha("fechaNac"));
-		
+		cli.setDireccion(parser.getString("direccion"));
 		//CONSULTAR POSIBLE CAMBIO..
-		ObraSocial os=new ObraSocial();
-		os.setId(parser.getInt("id_os"));
-		cli.setObraSocial(os);
-		
+				ObraSocial os=new ObraSocial();
+				os.setId(parser.getInt("id_os"));
+				cli.setObraSocial(os);
+				
+				return cli;
+				}
+	//Se agrega este metodo para levantar un cliente solo con el dni para su eliminacion.
+	private Cliente getClienteByDni(RequestParameterParser parser)  {
+		Cliente cli= new Cliente();
+		cli.setDni(parser.getInt("dniCliente"));
 		return cli;
-		}
+	}
+		
+		
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cliente cli= getCliente(new RequestParameterParser(request));
+		
 		Usuario user=Usuario.factory(request);
 		
 		try {
@@ -64,6 +72,7 @@ public class ClienteABMC extends HttpServlet {
 				break;
 			}
 			case "getbylastname": {
+				Cliente cli= getCliente(new RequestParameterParser(request));
 				if(cli.getApellido().length()<2) {
 		    		response.sendError(400, "largo insificuente");
 		    		return;
@@ -92,12 +101,13 @@ public class ClienteABMC extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cliente cli= getCliente(new RequestParameterParser(request));
+
 		Usuario user=Usuario.factory(request);
 		
 		try {
 			switch (request.getPathInfo().substring(1)) {
 			case "add": {
+				Cliente cli= getCliente(new RequestParameterParser(request));
 				con.add(cli, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", cli);
@@ -105,13 +115,19 @@ public class ClienteABMC extends HttpServlet {
 				break;
 			}
 			case "update": {
+				Cliente cli= getCliente(new RequestParameterParser(request));
 				con.update(cli, user);
 				response.setStatus(200);
+				request.setAttribute("addedObject", cli);
+				request.getRequestDispatcher("/WEB-INF/ui-cliente/confirmarCliente.jsp").forward(request, response);
 				break;
 			}
 			case "delete": {
+			
+				Cliente cli= getClienteByDni(new RequestParameterParser(request));
 				con.delete(cli, user);
 				response.setStatus(202);
+				response.sendRedirect("../listCliente.jsp");
 				break;
 			}
 			

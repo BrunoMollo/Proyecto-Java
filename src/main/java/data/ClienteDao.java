@@ -25,6 +25,7 @@ public class ClienteDao extends Dao<Cliente>{
 			cli.setProvincia(rs.getString("provincia"));
 			cli.setFechaNacimiento(rs.getObject("fechaNac", LocalDate.class));
 			cli.setObraSocial(ctrl.getOne(new ObraSocial(rs.getInt("id_obraSocial"))));
+			cli.setDireccion(rs.getString("direccion"));
 			return cli;
 		}
 
@@ -35,7 +36,7 @@ public class ClienteDao extends Dao<Cliente>{
 
 		@Override
 		public void add(Cliente cli) throws SQLException {
-			StatementWrapper stw=new StatementWrapper("insert into clientes (dni,nombre,apellido,email,telefono,localidad,provincia,fechaNac,id_obraSocial) values (?,?,?,?,?,?,?,?,?)")
+			StatementWrapper stw=new StatementWrapper("insert into clientes (dni,nombre,apellido,email,telefono,localidad,provincia,fechaNac,id_obraSocial,direccion) values (?,?,?,?,?,?,?,?,?,?)")
 				.push(cli.getDni())
 				.push(cli.getNombre())
 				.push(cli.getApellido())
@@ -44,13 +45,14 @@ public class ClienteDao extends Dao<Cliente>{
 				.push(cli.getLocalidad())
 				.push(cli.getProvincia())
 				.push(cli.getFechaNacimiento())
-				.push(cli.getObraSocial().getId());
+				.push(cli.getObraSocial().getId())
+				.push(cli.getDireccion());
 			doModification(stw);
 		}
 
 		@Override
 		public void update(Cliente cli) throws SQLException {
-			StatementWrapper stw=new StatementWrapper("update clientes set nombre=?, apellido=? ,telefono=?, email=?, localidad=? , provincia=?,fechaNac=?, id_obraSocial=? where dni=?")
+			StatementWrapper stw=new StatementWrapper("update clientes set nombre=?, apellido=? ,telefono=?, email=?, localidad=? , provincia=?,fechaNac=?, id_obraSocial=? ,direccion=? where dni=?")
 					.push(cli.getNombre())
 					.push(cli.getApellido())
 					.push(cli.getTelefono())
@@ -59,7 +61,9 @@ public class ClienteDao extends Dao<Cliente>{
 					.push(cli.getProvincia())
 					.push(cli.getFechaNacimiento())
 					.push(cli.getObraSocial().getId())
+					.push(cli.getDireccion())
 					.push(cli.getDni());
+	
 			doModification(stw);
 		}
 

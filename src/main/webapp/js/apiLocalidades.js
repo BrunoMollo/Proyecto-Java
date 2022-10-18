@@ -13,11 +13,22 @@ const $localidades = document.getElementById('selLocalidad');
   return 0;
 }
 
+if(!$provincias.value){
+	$provincias.addEventListener("DOMContentLoaded",provincia);
+	
+	}
+else{
+	$provincias.addEventListener("click",provincia,{'once':true});
+	
+	
+}
+
+$provincias.addEventListener("change",e => localidad(e.target.value))
  function provincia() {
     fetch("https://apis.datos.gob.ar/georef/api/provincias")
     .then(res => res.ok ? res.json(): Promise.reject(res))
     .then(json => {
-		let $options = "<option disabled selected >Elige una Provincia </option>";
+		let $options= "<option disabled selected >Elige una Provincia </option>"; ;
 		
 		let ordenado = json.provincias.sort(compare_nombre)
 		for(let prov of ordenado)
@@ -27,11 +38,7 @@ const $localidades = document.getElementById('selLocalidad');
    		 $provincias.innerHTML = $options;
  
 })}
-
-document.addEventListener("DOMContentLoaded",provincia)
-
  function localidad(prov) {
-	console.log(prov);
     fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${prov}&max=5000`)
     .then(res => res.ok ? res.json(): Promise.reject(res))
     .then(json => {
@@ -45,6 +52,8 @@ document.addEventListener("DOMContentLoaded",provincia)
  
 })}
 
-	$provincias.addEventListener("change",e => localidad(e.target.value))
+
+
+	
 
 
