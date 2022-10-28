@@ -15,7 +15,7 @@ public class ClienteDao extends Dao<Cliente>{
 		@Override
 		protected Cliente mapFromResulset(ResultSet rs) throws SQLException {
 			Cliente cli=  new Cliente();
-			CtrlObraSocial ctrl= new CtrlObraSocial();
+			ObrasSocialesDao osDao= new ObrasSocialesDao();
 			cli.setDni(rs.getInt("dni"));
 			cli.setNombre(rs.getString("nombre"));
 			cli.setApellido(rs.getString("apellido"));
@@ -24,7 +24,7 @@ public class ClienteDao extends Dao<Cliente>{
 			cli.setLocalidad(rs.getString("localidad"));
 			cli.setProvincia(rs.getString("provincia"));
 			cli.setFechaNacimiento(rs.getObject("fechaNac", LocalDate.class));
-			cli.setObraSocial(ctrl.getOne(new ObraSocial(rs.getInt("id_obraSocial"))));
+			cli.setObraSocial(osDao.getOne(new ObraSocial(rs.getInt("id_obraSocial"))));
 			cli.setDireccion(rs.getString("direccion"));
 			return cli;
 		}
