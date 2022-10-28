@@ -5,17 +5,23 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import entities.LineaVenta;
+import entities.Medicamento;
 import entities.Venta;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
 public class LineaVentaDao extends Dao<LineaVenta>{
 
+	MedicamentoDao medDao= new MedicamentoDao();
+	
 	@Override
 	protected LineaVenta mapFromResulset(ResultSet rs) throws SQLException {
 		LineaVenta lv=new LineaVenta();
-		lv.setNroVenta(rs.getInt("nroVenta"));
-		lv.setCodBarra(rs.getInt("codBarra"));
+		
+		Medicamento med= new Medicamento();
+		med.setCodigoBarra(rs.getInt("codigoBarra"));
+		med=medDao.getOne(med);
+		
 		lv.setCantidad(rs.getInt("cantidad"));
 		lv.setPrecioUnidad(rs.getDouble("precioUnidad"));
 		return lv;

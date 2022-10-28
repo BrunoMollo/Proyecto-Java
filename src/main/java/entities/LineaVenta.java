@@ -1,22 +1,36 @@
 package entities;
 
 public class LineaVenta {
-	private Integer nroVenta;
-	private Integer codBarra;
+	
+	private Medicamento medicamento;
 	private Integer cantidad;
 	private Double precioUnidad;
 	
-	public Integer getNroVenta() {
-		return nroVenta;
+	
+	public LineaVenta(){}
+	
+	
+	public LineaVenta(Medicamento med, Integer cant) {
+		this.medicamento=med;
+		precioUnidad=med.getPrecio(); //seria le ultimo
+		
+		this.cantidad=cant;
 	}
-	public void setNroVenta(Integer nroVenta) {
-		this.nroVenta = nroVenta;
+	
+	public void increaseQuantity(Integer delta) {
+		this.cantidad+=delta;
 	}
-	public Integer getCodBarra() {
-		return codBarra;
+	
+	public void decreaseQuantity(Integer delta) {
+		this.cantidad-=delta;
 	}
-	public void setCodBarra(Integer codBarra) {
-		this.codBarra = codBarra;
+	
+	
+	public Medicamento getMediacamento() {
+		return medicamento;
+	}
+	public void setMediacamento(Medicamento mediacamento) {
+		this.medicamento = mediacamento;
 	}
 	public Integer getCantidad() {
 		return cantidad;

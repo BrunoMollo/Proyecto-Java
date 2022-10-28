@@ -1,13 +1,41 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class Venta {
 	private Integer nroVenta;
 	private LocalDateTime fechaVenta;
 	private Double total;
-	private Integer dniCliente;
+	private Cliente cliente;
 	private Integer nroReceta;
+	private HashMap<Integer, LineaVenta> lineas; //la key es el codigo de barras
+	
+	
+	public void addMedicamento(Medicamento med, Integer cantidad) {
+		Integer cod=med.getCodigoBarra();
+		
+		if(lineas.containsKey(cod)) {
+			lineas.get(cod).increaseQuantity(cantidad);
+		}
+		else {
+			lineas.put(cod, new LineaVenta(med, cantidad) );
+		}	
+	}
+	
+	
+	public void removeMedicamento(Medicamento med, Integer cantidad) {
+		Integer cod=med.getCodigoBarra();
+		if(lineas.containsKey(cod)) {
+			lineas.get(cod).decreaseQuantity(cantidad);
+			
+			if(lineas.get(cod).getCantidad()<=0) {
+				lineas.remove(cod);
+			}
+		}
+		
+	}
+	
 	
 	public Integer getNroVenta() {
 		return nroVenta;
@@ -27,11 +55,11 @@ public class Venta {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-	public Integer getDniCliente() {
-		return dniCliente;
+	public Cliente getCliente() {
+		return this.cliente;
 	}
-	public void setDniCliente(Integer dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public Integer getNroReceta() {
 		return nroReceta;
