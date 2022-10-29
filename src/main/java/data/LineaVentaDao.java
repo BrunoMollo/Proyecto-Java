@@ -44,11 +44,14 @@ public class LineaVentaDao extends Dao<LineaVenta>{
 		throw new UnsupportedOperationException("Not Implemented "+funcName);
 	}
 
-	@Override
-	public void add(LineaVenta p) throws SQLException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+	
+	public void add(LineaVenta lv, Venta v) throws SQLException {
+		doModification(new StatementWrapper("INSERT INTO linea_ventas(nroVenta, codBarra, cantidad, precioUnidad) VALUES (?,?,?,?)")
+						.push(v.getNroVenta())
+						.push(lv.getMediacamento().getCodigoBarra())
+						.push(lv.getCantidad())
+						.push(lv.getPrecioUnidad())
+				);
 	}
 
 	@Override
@@ -63,6 +66,12 @@ public class LineaVentaDao extends Dao<LineaVenta>{
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
 		throw new UnsupportedOperationException("Not Implemented "+funcName);
+	}
+	@Override
+	public void add(LineaVenta p) throws SQLException {
+		// TODO Auto-generated method stub
+		String funcName=new Throwable().getStackTrace()[0].getMethodName();
+		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
 
 }

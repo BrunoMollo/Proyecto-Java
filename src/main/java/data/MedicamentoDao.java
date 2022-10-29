@@ -59,6 +59,13 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		//aca deberiamos hacer un join con la tabla precios para obtener el ultimo o algo asi
 		
 	}
+	
+	public Medicamento getByName(Medicamento m) throws SQLException{
+		return doGetOne(
+				new StatementWrapper( "select * from medicamentos where nombre like ?")
+					.push(m.getNombre()+"%" )
+				);
+	}
 
 
 

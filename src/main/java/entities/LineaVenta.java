@@ -17,6 +17,10 @@ public class LineaVenta {
 		this.cantidad=cant;
 	}
 	
+	public Double getSubTotal() {
+		return cantidad*precioUnidad;
+	}
+	
 	public void increaseQuantity(Integer delta) {
 		this.cantidad+=delta;
 	}

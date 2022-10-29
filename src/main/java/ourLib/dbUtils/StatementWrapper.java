@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 
@@ -81,6 +82,15 @@ public class StatementWrapper {
 		//Se mapea el parametro del preparedStament ('?'), con el valor de la Fecha que se envio al metodo
 		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(LocalDate d) {
+			paramterAdders.add((index, st)->{
+				try { st.setObject(index, d); } 
+				catch (SQLException e) { throw e; }
+			});
+			return this;
+		}
+		
+		
+		public StatementWrapper push(LocalDateTime d) {
 			paramterAdders.add((index, st)->{
 				try { st.setObject(index, d); } 
 				catch (SQLException e) { throw e; }

@@ -69,4 +69,14 @@
     <servlet-name>ClienteABMC</servlet-name>
     <url-pattern>/ABMC-cliente/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VentaServlet</display-name>
+    <servlet-name>VentaServlet</servlet-name>
+    <servlet-class>servlets.VentaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VentaServlet</servlet-name>
+    <url-pattern>/venta/*</url-pattern>
+  </servlet-mapping>
 </web-app>
