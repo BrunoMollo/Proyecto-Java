@@ -22,13 +22,10 @@
 
 <title>Venta</title>
 
-  <%	
+  	<%	
   		Usuario u = (Usuario) session.getAttribute("user");
-  		//Venta v = (Venta) session.getAttribute("venta");
-  		Venta v = new Venta();
-    	LinkedList<LineaVenta> lineasVenta;
-    	request.getSession().setAttribute("venta",v); 	
-    	
+  		Venta v = (Venta) session.getAttribute("venta");
+  		LinkedList<LineaVenta> lineasVenta;
 	%>
 </head>
 <body>
@@ -36,7 +33,7 @@
 		<h1>Nueva Venta</h1>
 	</header>
 	<main>
-		<form action="venta/addMedicamento" method="post">
+		<form action="addMedicamento" method="post">
 			<div class="form-group ">
 					<div class="row">
  						<div class="col async-search" url="/lafarmacia/ABMC-medicamento/getbyname" searchParameter="name_med">
@@ -48,7 +45,7 @@
     				<div class="row">
     					<div class="col">
 			  				<label class="col-md-0 control-label">Cantidad</label>      
-			 				<input  name="cantidad"class="form-control" placeholder="Cantidad" type="text">
+			 				<input  name="cantidad"class="form-control" placeholder="Cantidad" type="number">
     					</div>
     					<div class="col">
 			  				<button class="btn btn-warning" type="submit">Agregar</button>
@@ -62,18 +59,20 @@
                     			<tr>
                     				<th>Medicamento</th>
                     		    	<th>Cantidad</th>
-                        			<th>Precio Unitario</th>                      			
+                        			<th>Precio Unitario</th>      
+                        			<th>Subtotal</th>                   			
                       			</tr>
                       		</thead>
                     		<tbody>
                     		<% 
-                    		lineasVenta= v.getLineas();
-                    		if(!lineasVenta.isEmpty()){
-                    		for (LineaVenta lv : lineasVenta) { %>
+                
+ 
+                    		for (LineaVenta lv : v.getLineas()) { %>
                     			<tr>
                     				<td><%=lv.getMedicamento().getNombre()%></td>
                        				<td><%=lv.getCantidad()%></td>
-                    				<td><%=lv.getPrecioUnidad()%></td>
+                    				<td>$<%=lv.getPrecioUnidad()%></td>
+                    				<td>$<%=lv.getSubTotal() %></td>
                     				<td>
                     					<div class= "btn-edit">
                     				 		<form action="" method="post">
@@ -83,11 +82,10 @@
                     					</div>	
                     				</td>
                     			</tr>
-                    			<tr>
-                    			<td>SubTotal</td>
-                    			<td colspan="2">Total </td>
-                    			</tr>
-                    		<% }} %>
+                    		<% } %>
+	                    		<tr>
+	                    			<td colspan="2">Total: $<%=v.getTotal() %> </td>
+	                    		</tr>
                     		</tbody>
                     		</table>
 		</div>

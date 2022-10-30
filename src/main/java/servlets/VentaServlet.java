@@ -28,8 +28,26 @@ public class VentaServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Usuario user=Usuario.factory(request);
+		Venta ventaActual= (Venta) request.getSession().getAttribute("venta");
+		
+		try {
+			switch (request.getPathInfo()) {
+			case "/iniciarVentaLibre": {
+					Venta nuevaVenta= con.iniciarVentaLibre(user);
+					request.getSession().setAttribute("venta", nuevaVenta);
+					request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
+				break;
+			}
+			default:
+				throw new ServiceNotFoundException("no hay");
+			}
+		}
+		catch (Exception e) {
+			ExceptionDispacher.manage(e, response);
+		}
+		
 	}
 
 
@@ -39,27 +57,19 @@ public class VentaServlet extends HttpServlet {
 		Venta ventaActual= (Venta) request.getSession().getAttribute("venta");
 		
 		try {
-			switch (request.getPathInfo().substring(1)) {
-			case "iniciarVentaLibre": {
-					Venta nuevaVenta= con.iniciarVentaLibre(user);
-					request.getSession().setAttribute("venta", nuevaVenta);
-					request.getRequestDispatcher("/WEB-INF/ui-venta/agragarMedicamento.jsp").forward(request, response);//TODO chequar nombre de .jsp
-				break;
-			}
-			case "addMedicamento": {
+			switch (request.getPathInfo()) {
+			case "/addMedicamento": {
 				
-				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); //TODO chequear nombre de parametro
-				String nombreMed = request.getParameter("name_med"); //TODO chequear nombre de parametro
+				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); 
+				String nombreMed = request.getParameter("name_med"); 
 				
 				ventaActual=con.addMedicamento(ventaActual, nombreMed, cantidad, user); 
 				
-				request.getSession().setAttribute("venta", ventaActual);
-				
+				request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
 				break;
 			}
-			case "cerrarVenta": {
+			case "/cerrarVenta": {
 				ventaActual=con.cerrarVenta(ventaActual, user);
-				request.getSession().setAttribute("venta", ventaActual);//TODO chequear si es necesaria esta linea
 				request.getRequestDispatcher("/WEB-INF/ui-venta/NOSE.jsp").forward(request, response); //TODO que mieda pongo aca????
 				
 				break;
