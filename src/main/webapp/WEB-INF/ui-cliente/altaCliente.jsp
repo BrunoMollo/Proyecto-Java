@@ -1,48 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="entities.ObraSocial"%>
+<%@page import="entities.ObraSocial"%>
 <%@page import="entities.Usuario"%>
-<%@page import="entities.Cliente"%>
 <%@page import="logic.CtrlObraSocial"%>
-<%@page import="logic.CtrlCliente"%>
 <%@page import="java.util.LinkedList"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta lang="es">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link href="./style/addCliente.css" rel="stylesheet" type="text/css">
-<link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
-<title>Actualiza Cliente</title>
+<link href="../style/addCliente.css" rel="stylesheet" type="text/css">
+<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+<script defer src="../js/apiLocalidades.js"></script>
 <%	
 	Usuario u= (Usuario)request.getSession().getAttribute("user");
 	LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll(u);
-	Cliente c= new Cliente(Integer.parseInt(request.getParameter("dniCliente")));
-	c = new CtrlCliente().getOne(c, u);
 	
-			
 %>
-
+<title>Nuevo Cliente</title>
 </head>
 
 <body>
 	
 	<main>
-		<form class="signup-form" action="./ABMC-cliente/update" method="post">
-		  	<h2>Actualizar Cliente</h2><br>
-		  	<h3><%=c.getFullName()%></h3>
+		<form class="signup-form" action="./ABMC-cliente/add" method="post">
+		  	<h2 >Nuevo Cliente</h2>
 			<div class="form-group fieldset">
 					<div class="row">
  						<div class="col">
   							<label class="col-md-0 control-label">Nombre</label>      
- 							<input  name="nombre"class="form-control" value= "<%=c.getNombre()%> "type="text">
+ 							<input  name="nombre"class="form-control" placeholder="Nombre" type="text">
     					</div>
     					<div class="col">
 			  				<label class="col-md-0 control-label">Apellido</label>      
-			 				<input  name="apellido"class="form-control" value="<%=c.getApellido()%>" type="text">
+			 				<input  name="apellido"class="form-control" placeholder="Apellido" type="text">
     					</div>
   					</div>
 			</div>
@@ -50,11 +45,11 @@
 				<div class="row">
 		 			<div class="col">
 		  				<label class="col-md-0 control-label" >DNI</label>      
-		 				<input  name="dni"class="form-control" value="<%=c.getDni()%>" type="text" required>
+		 				<input  name="dni"class="form-control" placeholder="DNI"  type="text" required>
 		    		</div>
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Fecha Nacimiento</label>      
-		 				<input  name="fechaNac"class="form-control" value="<%=c.getFechaNacimiento().format(Cliente.dFormat)%>" type="text" required required pattern="\d{2}/\d{2}/\d{4}" >
+		 				<input  name="fechaNac"class="form-control" placeholder="dd/mm/aaaa" type="text" required required pattern="\d{2}/\d{2}/\d{4}" >
 		    		</div>
 		  		</div>
 			</div>
@@ -63,7 +58,7 @@
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Provincia</label>       		 			   
  						<select class="form-control" name="provincia"  id="selProvincia" required >
- 							<option value="<%=c.getProvincia()%>"><%=c.getProvincia()%> </option>
+ 							<option>Eliga una provincia</option>
  						</select>
 		    		</div>
 		  		</div>
@@ -71,14 +66,14 @@
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Localidad</label>      
 		 				<select class="form-control" name="localidad"  id="selLocalidad" required >
- 							<option value="<%=c.getLocalidad()%>"><%=c.getLocalidad()%></option>
+ 							<option>Eliga una localidad</option>
  						</select>
 		    		</div>
 		  		</div>
 		  		<div class="row">
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Direccion</label>      
-		 				<input  name="direccion" class="form-control" value="<%=c.getDireccion()%>" type="text" required>   
+		 				<input  name="direccion"class="form-control" placeholder="Direccion" class="form-control"  type="text" required>   
 		    		</div>
 		  		</div>
 		  		
@@ -87,14 +82,13 @@
 				<div class="row">
 					<div class="col">
 		 				<label class="col-md-0 control-label">Email</label>      
-		 				<input  name="email" value="<%=c.getEmail()%>" class="form-control"  type="email" required> 
-		 				
+		 				<input  name="email"class="form-control" placeholder="Correo Electronico" class="form-control"  type="email" required> 
 		 			</div>
 		 		</div>
 		 		<div class="row">
 		 			<div class="col">
 		 				<label class="col-md-0 control-label">Telefono</label>      
-		 				<input  name="telefono" value="<%=c.getTelefono()%>" class="form-control"  type="text" required> 
+		 				<input  name="telefono"class="form-control" placeholder="Telefono" class="form-control"  type="text" required> 
 		 			</div>
 		 		</div>
 			</div>
@@ -103,7 +97,7 @@
 					<div class="col">
 		 				<label class="col-md-0 control-label">Obra Social</label>      		 			   
  						<select class="form-control" name="id_os"  id="cli_os" required >
-      						<option value="<%=c.getObraSocial().getId()%>"><%=c.getObraSocial().getNombre()%></option>
+      						<option disabled selected>Eliga una Obra Social</option>
  				<% for(ObraSocial os : obraSociales){ %>
 		  			<option value="<%=os.getId()%>"><%=os.getNombre()%></option>
 		  
@@ -117,15 +111,15 @@
  	  		<div class="form-group">
  	  			<div class="row">
  	  				<div class="col">
-    					<button type="submit" class="btn btn-warning" >Actualizar </button>
+    					<button type="submit" class="btn btn-warning" >Agregar</button>
     				</div>
     				<div class="col">
-    					<a class="btn btn-warning nosubtitle" href="./indexLog.html">Volver al menu</a>
+    					<a class="btn btn-warning nosubtitle" href="../index.html">Volver al menu</a>
     				</div>
     			</div>
  			</div>
   	</form>
 </main>
-<script src="./js/apiLocalidades.js"></script>
+
 </body>
 </html>
