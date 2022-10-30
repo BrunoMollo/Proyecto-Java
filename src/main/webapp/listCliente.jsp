@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="nav-bar " >
 				<div class="col" >
-        			<h4 id="prueba">Alumnos</h4>
+        			<h4 id="prueba">Clientes</h4>
         		</div>
         		<div class="col" >
         			<a href="./indexLog.html" class="btn btn-success "> <h4>Volver al Menu</h4></a>

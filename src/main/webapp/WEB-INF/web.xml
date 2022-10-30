@@ -49,6 +49,10 @@
     <servlet-name>AltaMedicamento</servlet-name>
     <url-pattern>/AltaMedicamento/*</url-pattern>
   </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>AltaMedicamento</servlet-name>
+    <url-pattern>/ABMC-medicamento/*</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>LaboratorioABMC</display-name>

@@ -30,11 +30,11 @@ public class LineaVenta {
 	}
 	
 	
-	public Medicamento getMediacamento() {
+	public Medicamento getMedicamento() {
 		return medicamento;
 	}
-	public void setMediacamento(Medicamento mediacamento) {
-		this.medicamento = mediacamento;
+	public void setMedicamento(Medicamento medicamento) {
+		this.medicamento = medicamento;
 	}
 	public Integer getCantidad() {
 		return cantidad;

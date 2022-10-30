@@ -49,7 +49,7 @@ public class VentaServlet extends HttpServlet {
 			case "addMedicamento": {
 				
 				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); //TODO chequear nombre de parametro
-				String nombreMed = request.getParameter("medicamento"); //TODO chequear nombre de parametro
+				String nombreMed = request.getParameter("name_med"); //TODO chequear nombre de parametro
 				
 				ventaActual=con.addMedicamento(ventaActual, nombreMed, cantidad, user); 
 				

@@ -3,12 +3,14 @@ package logic;
 import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 import data.DosisDao;
 import data.LaboratorioDao;
 import data.MedicamentoDao;
 import data.PrecioDao;
 import entities.Dosis;
+import entities.Droga;
 import entities.Laboratorio;
 import entities.Medicamento;
 import entities.Precio;
@@ -19,6 +21,11 @@ public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
 	
 	public CtrlMedicamento() {
 		this.miDao=new MedicamentoDao();
+	}
+	
+	
+	public LinkedList<Medicamento> getByPartialName(Medicamento obj) throws SQLException {
+		return this.miDao.getAllByPartialName(obj);
 	}
 	
 	public void add(Medicamento med, Usuario user) throws SQLException, AccessException{

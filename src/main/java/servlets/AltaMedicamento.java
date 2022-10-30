@@ -9,10 +9,13 @@ import logic.CtrlDroga;
 import logic.CtrlLaboratorio;
 import logic.CtrlMedicamento;
 import ourLib.Parsers.ExceptionDispacher;
+import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import entities.Dosis;
 import entities.Droga;
@@ -28,18 +31,38 @@ public class AltaMedicamento extends HttpServlet {
        
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+			
+			Medicamento med= getMedbyName(new RequestParameterParser(request));
+			Usuario user=Usuario.factory(request);
+			CtrlMedicamento ctrlmed = new CtrlMedicamento();	
+			
+			try {
+				switch (request.getPathInfo().substring(1)){
+				
+					case "getbyname": 
+						if(med.getNombre().length()<2) {
+				    		response.sendError(400, "largo insuficiente");
+				    		return;
+				    		}
+						
+						LinkedList<Medicamento> arr= ctrlmed.getByPartialName(med);
+						String JsonArr=JsonMaker.getJsonArray(arr);
+						response.getWriter().append(JsonArr);
+						response.setStatus(200);
+						response.setContentType("application/json");
+						break;
+				}}
+				 catch (Exception e) {
+					ExceptionDispacher.manage(e, response);
+				}		
 	}
 
-	
-	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Medicamento med=null;
 		Usuario user=Usuario.factory(request);
-				
+		CtrlMedicamento ctrlmed = new CtrlMedicamento();		
 		try {
 		switch (request.getPathInfo()){
 			case "/inicializarmedicamento":
@@ -64,7 +87,7 @@ public class AltaMedicamento extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 			case "/guardarmedicamento":
-				CtrlMedicamento ctrlmed = new CtrlMedicamento();
+				
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				
 				ctrlmed.add(med, user);
@@ -72,7 +95,9 @@ public class AltaMedicamento extends HttpServlet {
 				request.setAttribute("addedObject", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
-		}
+		
+			}
+		
 		
 		} catch (Exception e) {
 			ExceptionDispacher.manage(e, response);
@@ -97,6 +122,14 @@ public class AltaMedicamento extends HttpServlet {
 		mdic.setLaboratorio(l);
 		
 		return mdic;
+	}
+	//CONSULTAR SI PASAMOS TODO AL METODO DE ABAJO O USAMOS EL DE ARRIBA. 
+	private Medicamento getMedbyName(RequestParameterParser parser) {	
+		Medicamento m =new Medicamento();
+		//m.setCodigo(parser.getInt("cod_lab"));
+		m.setNombre(parser.getString("name_med"));
+		;
+		return m;
 	}
 
 }

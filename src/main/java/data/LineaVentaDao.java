@@ -48,7 +48,7 @@ public class LineaVentaDao extends Dao<LineaVenta>{
 	public void add(LineaVenta lv, Venta v) throws SQLException {
 		doModification(new StatementWrapper("INSERT INTO linea_ventas(nroVenta, codBarra, cantidad, precioUnidad) VALUES (?,?,?,?)")
 						.push(v.getNroVenta())
-						.push(lv.getMediacamento().getCodigoBarra())
+						.push(lv.getMedicamento().getCodigoBarra())
 						.push(lv.getCantidad())
 						.push(lv.getPrecioUnidad())
 				);

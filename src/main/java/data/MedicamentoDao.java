@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import entities.Dosis;
+import entities.Droga;
 import entities.Laboratorio;
 import entities.Medicamento;
 import ourLib.dbUtils.Dao;
@@ -25,7 +26,8 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		med.setCodigoBarra(rs.getInt("codigoBarra"));
 		med.setLaboratorio(ldao.getOne(lab));
 		med.setNombre(rs.getString("nombre"));
-		med.setPrecio(rs.getDouble("precio"));
+		//En la DB no la tabla medicamento no tiene precio. Consultar
+		//med.setPrecio(rs.getDouble("precio"));
 		med.setSize(rs.getDouble("size"));
 		med.setUnidad(rs.getString("unidad"));
 		med.addAllDosis(ddao.getDosisOfMedicamento(med));
@@ -93,7 +95,13 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
 	
-	
+	public LinkedList<Medicamento> getAllByPartialName(Medicamento obj) throws SQLException {
+		return doFindAll(new StatementWrapper("select * from medicamentos  where nombre like ?")
+				.push(obj.getNombre()+"%"));
+				
+		
+	}
+
 
 
 }
