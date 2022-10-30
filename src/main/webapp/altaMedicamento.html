@@ -21,7 +21,7 @@
 <body>
 	<h1 class="m-3" align="center">Alta de Medicamento</h1>
 	
-	<form action="/lafarmacia/AltaMedicamento/inicializarmedicamento" method="POST" class="needs-validation col-sm-6 container">
+	<form action="/lafarmacia/ABMC-medicamento/inicializarmedicamento" method="POST" class="needs-validation col-sm-6 container">
 		<div class="row-sm-6">
 			<label class="form-label">Codigo de barras:</label>
 			<input type="number" min=0 max=999999999999 name="cod_med" class="form-control" required>
@@ -34,7 +34,7 @@
 		<br>
 		<div class="row-sm-6">
 			<label class="form-label">Laboratorio:</label>
-				<div class="async-search" url="/lafarmacia/ABMC-laboratorio/getbyname" searchParameter="name_lab">
+				<div class="async-search" url='/lafarmacia/ABMC-laboratorio/getbyname' searchParameter="name_lab">
 					<input autocomplete="off" name="name_lab">
 					<ul id="sugerencias"></ul>	
 				</div>

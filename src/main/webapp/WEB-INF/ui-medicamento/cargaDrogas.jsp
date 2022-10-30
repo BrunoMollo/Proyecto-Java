@@ -9,7 +9,7 @@
 	<meta charset="ISO-8859-1">
 	<title>La Farmacia</title>
 	
-	<%Medicamento med = (Medicamento)request.getSession().getAttribute("name-med"); %>
+	<%Medicamento med = (Medicamento)request.getSession().getAttribute("medicamento"); %>
 	<%HashMap<Integer, Dosis> lista=med.getAllDosis(); %>
 	
 	<link href="/lafarmacia/style/asyncRequest.css" rel="stylesheet">

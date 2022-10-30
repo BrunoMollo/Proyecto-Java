@@ -4,8 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import entities.Dosis;
-import entities.Droga;
+
 import entities.Laboratorio;
 import entities.Medicamento;
 import ourLib.dbUtils.Dao;
@@ -15,6 +14,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	LaboratorioDao ldao = new LaboratorioDao();
 	DosisDao ddao= new DosisDao();
+	PrecioDao pDao=new PrecioDao();
 	
 	@Override
 	protected Medicamento mapFromResulset(ResultSet rs) throws SQLException {
@@ -63,10 +63,13 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	}
 	
 	public Medicamento getByName(Medicamento m) throws SQLException{
-		return doGetOne(
+		Medicamento med=doGetOne(
 				new StatementWrapper( "select * from medicamentos where nombre like ?")
 					.push(m.getNombre()+"%" )
 				);
+		med.setPrecio(pDao.getLatestPrice(med));
+		
+		return med;
 	}
 
 

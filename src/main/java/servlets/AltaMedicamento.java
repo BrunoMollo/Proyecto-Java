@@ -92,7 +92,7 @@ public class AltaMedicamento extends HttpServlet {
 				
 				ctrlmed.add(med, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", med);
+				request.setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 		
@@ -113,8 +113,8 @@ public class AltaMedicamento extends HttpServlet {
 		RequestParameterParser parser=new RequestParameterParser(req);
 		mdic.setCodigoBarra(parser.getInt("cod_med")); 
 		mdic.setNombre(parser.getString("name_med"));
-		mdic.setPrecio(parser.getDouble("size_med"));
-		mdic.setSize(parser.getDouble("price_med"));
+		mdic.setPrecio(parser.getDouble("price_med"));
+		mdic.setSize(parser.getDouble("size_med"));
 		mdic.setUnidad(parser.getString("unit_med")); 
 		
 		Laboratorio l=new Laboratorio();
