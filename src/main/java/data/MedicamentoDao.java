@@ -14,6 +14,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	LaboratorioDao ldao = new LaboratorioDao();
 	DosisDao ddao= new DosisDao();
+	PrecioDao pdao=new PrecioDao();
 	
 	@Override
 	protected Medicamento mapFromResulset(ResultSet rs) throws SQLException {
@@ -50,16 +51,15 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	}
 
 
-
 	@Override
 	public Medicamento getOne(Medicamento p) throws SQLException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
-		//aca deberiamos hacer un join con la tabla precios para obtener el ultimo o algo asi
-		
+		Medicamento med=doGetOne(
+				new StatementWrapper( "select * from medicamentos where codigoBarra=?")
+					.push(p.getCodigoBarra())
+				);
+		med.setPrecio(pdao.getLatestPrice(p));
+		return med;
 	}
-
 
 
 	@Override

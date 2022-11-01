@@ -13,11 +13,14 @@ import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.LinkedList;
 
 import entities.Dosis;
 import entities.Droga;
 import entities.Laboratorio;
 import entities.Medicamento;
+import entities.Precio;
 import entities.Usuario;
 
 /**
@@ -39,6 +42,7 @@ public class AltaMedicamento extends HttpServlet {
 		
 		Medicamento med=null;
 		Usuario user=Usuario.factory(request);
+		CtrlMedicamento ctrlmed;
 				
 		try {
 		switch (request.getPathInfo()){
@@ -64,13 +68,35 @@ public class AltaMedicamento extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 			case "/guardarmedicamento":
-				CtrlMedicamento ctrlmed = new CtrlMedicamento();
+				ctrlmed = new CtrlMedicamento();
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				
 				ctrlmed.add(med, user);
 				response.setStatus(201);
 				request.setAttribute("addedObject", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				break;
+				
+			case "/getmedicprecios":
+				ctrlmed = new CtrlMedicamento();
+				med = mapMedicamento(request);		
+				med = ctrlmed.getOne(med,user);
+				LinkedList<Precio> listaPrecios=ctrlmed.getAllPrecios(med);
+				request.getSession().setAttribute("medicamento", med);
+				request.getSession().setAttribute("listaPrecios", listaPrecios);
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/agregarPrecio.jsp").forward(request, response);
+				break;
+				
+			case "/addnuevoprecio":
+				ctrlmed = new CtrlMedicamento();
+				med = mapMedicamento(request);	
+				Precio nuevo =new Precio();
+				
+				nuevo.setFecha((LocalDate.parse(request.getParameter("fechaNuevo"))));
+				nuevo.setMonto(Double.parseDouble(request.getParameter("precioNuevo")));
+				
+				ctrlmed.addPrecioNuevo(med,nuevo);
+				response.sendRedirect("indexLog.html");
 				break;
 		}
 		
