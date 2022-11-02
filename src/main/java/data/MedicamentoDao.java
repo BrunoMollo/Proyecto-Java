@@ -26,7 +26,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		med.setCodigoBarra(rs.getInt("codigoBarra"));
 		med.setLaboratorio(ldao.getOne(lab));
 		med.setNombre(rs.getString("nombre"));
-		med.setPrecio(rs.getDouble("precio"));
+		med.setPrecio(pdao.getLatestPrice(med));
 		med.setSize(rs.getDouble("size"));
 		med.setUnidad(rs.getString("unidad"));
 		med.addAllDosis(ddao.getDosisOfMedicamento(med));

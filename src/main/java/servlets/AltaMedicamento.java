@@ -32,17 +32,14 @@ public class AltaMedicamento extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: (Servlet Alta Medicamento)").append(request.getContextPath());
 	}
 
-	
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Medicamento med=null;
 		Usuario user=Usuario.factory(request);
-		CtrlMedicamento ctrlmed;
+		
 				
 		try {
 		switch (request.getPathInfo()){
@@ -67,8 +64,9 @@ public class AltaMedicamento extends HttpServlet {
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
+				
 			case "/guardarmedicamento":
-				ctrlmed = new CtrlMedicamento();
+				CtrlMedicamento ctrlmed = new CtrlMedicamento();
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				
 				ctrlmed.add(med, user);
@@ -78,25 +76,26 @@ public class AltaMedicamento extends HttpServlet {
 				break;
 				
 			case "/getmedicprecios":
-				ctrlmed = new CtrlMedicamento();
-				med = mapMedicamento(request);		
-				med = ctrlmed.getOne(med,user);
-				LinkedList<Precio> listaPrecios=ctrlmed.getAllPrecios(med);
-				request.getSession().setAttribute("medicamento", med);
-				request.getSession().setAttribute("listaPrecios", listaPrecios);
+				CtrlMedicamento ctrlme = new CtrlMedicamento();
+				Medicamento m = mapMedicamento(request);		
+				m = ctrlme.getOne(m,user);
+				LinkedList<Precio> listaPrecios = ctrlme.getAllPrecios(m);
+				request.getSession().setAttribute("medicamento", m);
+				request.setAttribute("listaPrecios", listaPrecios);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/agregarPrecio.jsp").forward(request, response);
 				break;
 				
 			case "/addnuevoprecio":
-				ctrlmed = new CtrlMedicamento();
-				med = mapMedicamento(request);	
-				Precio nuevo =new Precio();
+				CtrlMedicamento ctrlm = new CtrlMedicamento();
+				Medicamento medicam = (Medicamento) request.getSession().getAttribute("medicamento");	
+				Precio nuevo =new Precio();				
 				
 				nuevo.setFecha((LocalDate.parse(request.getParameter("fechaNuevo"))));
 				nuevo.setMonto(Double.parseDouble(request.getParameter("precioNuevo")));
 				
-				ctrlmed.addPrecioNuevo(med,nuevo);
-				response.sendRedirect("indexLog.html");
+				ctrlm.addPrecioNuevo(medicam,nuevo);
+				response.sendRedirect("../indexLog.html");
+				//request.getRequestDispatcher("../indexLog.html").forward(request, response);
 				break;
 		}
 		

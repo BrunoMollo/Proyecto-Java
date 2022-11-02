@@ -9,21 +9,21 @@
 <meta charset="ISO-8859-1">
 <title>Ingresar Nuevo Precio</title>
 
-<%LinkedList<Precio> listaPrecios = (LinkedList<Precio>) request.getAttribute("listaPrecios");
-Medicamento med = (Medicamento) request.getAttribute("med");%>
+<%LinkedList<Precio> listaPrecios = (LinkedList<Precio>) request.getAttribute("listaPrecios");%>
+<%Medicamento med = (Medicamento) request.getAttribute("med");%>
 
 </head>
 <body>
 
 <form action="/lafarmacia/AltaMedicamento/addnuevoprecio" method="post">
 	<label>Ingrese el nuevo precio del medicamento:</label>
-	<input type="number" name="precioNuevo" required>
+	<input type="number" name="precioNuevo" step=0.01 min=0 required>
 	<input type="date" name="fechaNuevo" required>
 	<button type="submit">Guardar</button>
 </form>
 <br>
-<a href="indexLog.html">Cancelar?</a>
-<br>
+<a href="../indexLog.html">Cancelar</a>
+<br><br>
 <label>Precios anteriores:</label>
 <table>
 	<thead>
