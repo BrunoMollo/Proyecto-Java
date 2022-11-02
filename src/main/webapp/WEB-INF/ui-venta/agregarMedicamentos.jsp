@@ -24,7 +24,7 @@
 
   	<%	
   		Usuario u = (Usuario) session.getAttribute("user");
-  		Venta v = (Venta) session.getAttribute("venta");
+  		Venta v = ((CtrlVenta) session.getAttribute("CtrlVenta")).getVenta();
   		LinkedList<LineaVenta> lineasVenta;
 	%>
 </head>
@@ -45,7 +45,7 @@
     				<div class="row">
     					<div class="col">
 			  				<label class="col-md-0 control-label">Cantidad</label>      
-			 				<input  name="cantidad"class="form-control" placeholder="Cantidad" type="number">
+			 				<input  name="cantidad"class="form-control" placeholder="Cantidad" type="number" value="1">
     					</div>
     					<div class="col">
 			  				<button class="btn btn-warning" type="submit">Agregar</button>
@@ -89,6 +89,12 @@
                     		</tbody>
                     		</table>
 		</div>
+		
+		<div>
+                 <form action="cerrarVenta" method="post">
+						<input type="submit" value="Realizar Venta"> 
+				</form>
+        </div>	
  	</main>
 </body>
 </html>

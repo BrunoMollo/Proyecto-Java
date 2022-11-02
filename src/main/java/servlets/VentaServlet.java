@@ -20,9 +20,7 @@ import entities.Venta;
 
 public class VentaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-	private CtrlVenta con= new CtrlVenta();
-	
+
 	
     public VentaServlet() { super(); }
 
@@ -30,13 +28,14 @@ public class VentaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Usuario user=Usuario.factory(request);
-		Venta ventaActual= (Venta) request.getSession().getAttribute("venta");
+		CtrlVenta con= (CtrlVenta) request.getSession().getAttribute("CtrlVenta");
 		
 		try {
 			switch (request.getPathInfo()) {
 			case "/iniciarVentaLibre": {
-					Venta nuevaVenta= con.iniciarVentaLibre(user);
-					request.getSession().setAttribute("venta", nuevaVenta);
+					con = new CtrlVenta();
+					con.iniciarVentaLibre(user);
+					request.getSession().setAttribute("CtrlVenta", con);
 					request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
 				break;
 			}
@@ -54,7 +53,7 @@ public class VentaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Usuario user=Usuario.factory(request);
-		Venta ventaActual= (Venta) request.getSession().getAttribute("venta");
+		CtrlVenta con= (CtrlVenta) request.getSession().getAttribute("CtrlVenta");
 		
 		try {
 			switch (request.getPathInfo()) {
@@ -63,14 +62,14 @@ public class VentaServlet extends HttpServlet {
 				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); 
 				String nombreMed = request.getParameter("name_med"); 
 				
-				ventaActual=con.addMedicamento(ventaActual, nombreMed, cantidad, user); 
+				con.addMedicamento(nombreMed, cantidad); 
 				
 				request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
 				break;
 			}
 			case "/cerrarVenta": {
-				ventaActual=con.cerrarVenta(ventaActual, user);
-				request.getRequestDispatcher("/WEB-INF/ui-venta/NOSE.jsp").forward(request, response); //TODO que mieda pongo aca????
+				con.cerrarVenta();
+				response.sendRedirect("/lafarmacia");//volver al menu de vendedro ¿?
 				
 				break;
 			}

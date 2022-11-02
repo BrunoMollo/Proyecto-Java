@@ -15,36 +15,40 @@ public class CtrlVenta {
 	private VentaDao vDao= new VentaDao();
 	private MedicamentoDao mDao=new MedicamentoDao();
 	
+	private Venta ventaActual;
+	private Usuario user;
 	
+	public Venta getVenta() {
+		return ventaActual;
+	}
 	
-	public Venta iniciarVentaLibre(Usuario user) throws AccessException {
+	public void iniciarVentaLibre(Usuario _user) throws AccessException {
+		user=_user;
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
-		Venta venta=new Venta();
-		venta.setVendidoPor(user);
-		return venta;
+		ventaActual=new Venta();
+		ventaActual.setVendidoPor(user);
 	}
 	
 	
-	public Venta addMedicamento(Venta venta, String nombreMed, Integer cant, Usuario user) throws SQLException, AccessException {
+	public void addMedicamento(String nombreMed, Integer cant) throws SQLException, AccessException {
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
 		Medicamento med= new Medicamento();
 		med.setNombre(nombreMed);
 		med=mDao.getByName(med);
 		
-		venta.addMedicamento(med, cant);
+		if(med==null)  {throw new SQLException("no exite el medicamento");}
 		
-		return venta;
+		ventaActual.addMedicamento(med, cant);
+		
 	}	
 	
 	
-	public Venta cerrarVenta(Venta venta, Usuario user) throws SQLException, AccessException {
+	public void cerrarVenta() throws SQLException, AccessException {
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
-		venta.setFechaVenta(LocalDateTime.now());
-		venta.cacularTotal();
+		ventaActual.setFechaVenta(LocalDateTime.now());
+		ventaActual.cacularTotal();
 		
-		vDao.add(venta);
-		
-		return venta;
+		vDao.add(ventaActual);
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -45,7 +46,10 @@ public class StatementWrapper {
 		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(String s) {
 			paramterAdders.add((index, st)->{
-				try { st.setString(index, s); } 
+				try { 
+					if(s==null) {st.setNull(index, Types.VARCHAR); }
+					else { st.setString(index, s); } 
+					} 
 				catch (SQLException e) { throw e; }
 			});
 			return this;
@@ -54,7 +58,10 @@ public class StatementWrapper {
 		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(Integer i) {
 			paramterAdders.add((index, st)->{
-				try { st.setInt(index, i); } 
+				try { 
+					if(i==null) {st.setNull(index, Types.INTEGER); }
+					else {st.setInt(index, i); }
+				 } 
 				catch (SQLException e) { throw e; }
 			});
 			return this;
@@ -64,7 +71,10 @@ public class StatementWrapper {
 		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(Boolean b) {
 			paramterAdders.add((index, st)->{
-				try { st.setBoolean(index, b); } 
+				try { 
+					if(b==null) {st.setNull(index, Types.BOOLEAN); }
+					else {st.setBoolean(index, b);}
+				} 
 				catch (SQLException e) { throw e; }
 			});
 			return this;
@@ -74,7 +84,10 @@ public class StatementWrapper {
 		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(Double d) {
 			paramterAdders.add((index, st)->{
-				try { st.setDouble(index, d); } 
+				try { 
+					if(d==null) {st.setNull(index, Types.DOUBLE); }
+					else{ st.setDouble(index, d); } 
+					} 
 				catch (SQLException e) { throw e; }
 			});
 			return this;
@@ -83,7 +96,10 @@ public class StatementWrapper {
 		//Si se invocan los push en orden de los parametros ('?'), el index se autoincrementa .
 		public StatementWrapper push(LocalDate d) {
 			paramterAdders.add((index, st)->{
-				try { st.setObject(index, d); } 
+				try { 
+					if(d==null) {st.setNull(index, Types.TIMESTAMP); }
+					else {st.setObject(index, d); }
+					} 
 				catch (SQLException e) { throw e; }
 			});
 			return this;
@@ -92,7 +108,10 @@ public class StatementWrapper {
 		
 		public StatementWrapper push(LocalDateTime d) {
 			paramterAdders.add((index, st)->{
-				try { st.setObject(index, d); } 
+				try { 
+					if(d==null) {st.setNull(index, Types.TIMESTAMP); }
+					else {st.setObject(index, d); }
+				} 
 				catch (SQLException e) { throw e; }
 			});
 			return this;
