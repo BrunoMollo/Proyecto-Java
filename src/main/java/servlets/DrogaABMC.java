@@ -87,8 +87,10 @@ public class DrogaABMC extends HttpServlet {
 			switch (request.getPathInfo().substring(1)) {
 			case "add": {
 				con.add(drug, user);
+				LinkedList<Droga> arr=con.getByPartialName(drug);
+				request.setAttribute("all", arr);
 				response.setStatus(201);
-				request.getRequestDispatcher("/WEB-INF/ui-droga/getAllDroga.jsp").forward(request, response);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-droga/all");
 				break;
 			}
 			case "update": {

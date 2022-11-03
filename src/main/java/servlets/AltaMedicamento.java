@@ -68,14 +68,14 @@ public class AltaMedicamento extends HttpServlet {
 		Usuario user=Usuario.factory(request);
 		CtrlMedicamento ctrlmed = new CtrlMedicamento();		
 		try {
-		switch (request.getPathInfo()){
-			case "/inicializarmedicamento":
+		switch (request.getPathInfo().substring(1)){
+			case "inicializarmedicamento":
 				med = mapMedicamento(request);				
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 				
-			case "/cargadosis":
+			case "cargadosis":
 				String name_droga=request.getParameter("name_droga");
 				Double cant_dr=Double.parseDouble(request.getParameter("cantDrug"));
 				String unidad=request.getParameter("unit_dose");
@@ -90,7 +90,7 @@ public class AltaMedicamento extends HttpServlet {
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
-			case "/guardarmedicamento":
+			case "guardarmedicamento":
 				
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				

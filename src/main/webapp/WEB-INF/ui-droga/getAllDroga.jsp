@@ -16,12 +16,7 @@
 	<title>Listado de drogas</title>
 		<% 
 		LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("all");
-			if(arr==null)
-			{
-				Usuario u = (Usuario)  session.getAttribute("user");
-				CtrlDroga ctrl = new CtrlDroga();
-    			arr= ctrl.getAll(u);  	
-			}	
+	
 		%>
 </head>
 <body>
@@ -84,7 +79,7 @@
 				}		
 			)
 			.then((res)=>location.reload())
-			.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+			.catch((err)=>{ console.log(err); alert("ups... algo salio mal") })
 			
 	}
 </script>

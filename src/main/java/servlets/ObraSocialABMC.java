@@ -92,8 +92,9 @@ public class ObraSocialABMC extends HttpServlet {
 			case "add": {
 				con.add(os, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", os);
-				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/ConfirmarAltaObraSocial.jsp").forward(request, response);
+				LinkedList<ObraSocial> arr = con.getAll(user);
+				request.setAttribute("all", arr);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-obrasocial/all");
 				break;
 			}
 			case "update": {

@@ -67,7 +67,7 @@ public class ClienteABMC extends HttpServlet {
 			switch (request.getPathInfo().substring(1)) {
 			case "all": {
 				LinkedList<Cliente> arr = con.getAll(user);
-				request.setAttribute("allCli", arr);
+				request.setAttribute("all", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
 				break;
 			}
@@ -115,8 +115,8 @@ public class ClienteABMC extends HttpServlet {
 				Cliente cli= getCliente(new RequestParameterParser(request));
 				con.add(cli, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", cli);
-				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
+				LinkedList<Cliente> arr = con.getAll(user);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-cliente/all");
 				break;
 			}
 			//.Consultar

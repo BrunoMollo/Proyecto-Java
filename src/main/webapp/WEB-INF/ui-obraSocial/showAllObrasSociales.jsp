@@ -9,15 +9,11 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<title>Listado de drogas</title>
 		
 	<% 
 	LinkedList<ObraSocial> arr = (LinkedList<ObraSocial>)request.getAttribute("all");
-	if(arr==null){
-		Usuario u = (Usuario)  session.getAttribute("user");
-		CtrlObraSocial ctrl = new CtrlObraSocial();
-    	arr= ctrl.getAll(u);  	
-	}	
 	%>
 </head>
 <body>
@@ -25,7 +21,7 @@
 
 <p>[ <a href="../index.html">Volver al menu</a> ] </p>
 
-<table class="table" border="1">
+<table class="table" >
 	<thead>
 		<tr>
 			<th>Id</th>
@@ -102,8 +98,8 @@ function sendDelete(cod) {
 			}
 		}		
 	)
-	.then((res)=>location.reload())
-	.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+	.then((res)=> location.reload())
+	.catch((err)=>{ console.log(err); alert("ups... algo salio mal") })
 	
 }
 

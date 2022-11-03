@@ -36,7 +36,7 @@
 			</tbody>
 		</table>
 		<br>		
-		<a href="../indexLog.html">Volver al menu</a>
+		<a href="../index.html">Volver al menu</a>
 		
 </body>
 </html>

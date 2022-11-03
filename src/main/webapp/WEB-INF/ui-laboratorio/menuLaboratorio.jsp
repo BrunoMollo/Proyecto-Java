@@ -21,12 +21,7 @@ table.center {
 	<meta charset="ISO-8859-1">
 	<title>Listado de laboratorios</title>
 	<% 
-	LinkedList<Laboratorio> arr = (LinkedList<Laboratorio>)request.getAttribute("listalab");
-	if(arr==null){
-		Usuario u = (Usuario)  session.getAttribute("user");
-		CtrlLaboratorio ctrl = new CtrlLaboratorio();
-    	arr= ctrl.getAll(u);  	
-	}	
+	LinkedList<Laboratorio> arr = (LinkedList<Laboratorio>)request.getAttribute("all");
 	%>
 </head>
 <body>
