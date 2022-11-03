@@ -1,5 +1,7 @@
 <%@page import="entities.Laboratorio"%>
 <%@page import="java.util.LinkedList"%>
+<%@ page import="entities.Usuario" %>
+<%@ page import="logic.CtrlLaboratorio" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -15,11 +17,16 @@ table.center {
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	<link href="style/sharedStyle.css" rel="stylesheet" type="text/css">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<meta charset="ISO-8859-1">
 	<title>Listado de laboratorios</title>
-	<%
+	<% 
 	LinkedList<Laboratorio> arr = (LinkedList<Laboratorio>)request.getAttribute("listalab");
+	if(arr==null){
+		Usuario u = (Usuario)  session.getAttribute("user");
+		CtrlLaboratorio ctrl = new CtrlLaboratorio();
+    	arr= ctrl.getAll(u);  	
+	}	
 	%>
 </head>
 <body>
@@ -27,7 +34,7 @@ table.center {
 
 <p align="center">[ <a href="../index.html">Volver al menu</a> ] </p>
 
-<table class="center" border="1px solid black">
+<table class="center" >
 	<thead>
 		<tr>
 			<th>Codigo</th>
@@ -62,7 +69,7 @@ table.center {
 	
 		axios(
 			{
-				url: '/lafarmacia/LaboratorioABMC/update',
+				url: '/lafarmacia/ABMC-laboratorio/update',
 				method:"post",
 				params:{
 					cod_lab: cod,
@@ -84,7 +91,7 @@ table.center {
 		}
 		axios(
 				{
-					url: '/lafarmacia/LaboratorioABMC/delete',
+					url: '/lafarmacia/ABMC-laboratorio/delete',
 					method:"post",
 					params:{
 						cod_lab: cod,

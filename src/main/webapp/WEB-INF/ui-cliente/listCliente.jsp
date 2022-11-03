@@ -2,7 +2,6 @@
 <%@ page import="entities.Cliente" %>
 <%@ page import="entities.Usuario" %>
 <%@ page import="logic.CtrlCliente" %>
-<%@ page import="logic.CtrlLogin" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@  page import="java.time.LocalDate"%>
@@ -26,14 +25,12 @@
 	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	    
     <%	
- 		Usuario u = (Usuario)  session.getAttribute("user");
-    	CtrlCliente ctrl = new CtrlCliente();
-    	CtrlLogin login = new CtrlLogin();
-    	Usuario user = new Usuario();
-    	LinkedList<Cliente> clientes= ctrl.getAll(u);
-    	
-		
-    	
+    	LinkedList<Cliente> clientes=(LinkedList<Cliente>) request.getAttribute("allCli");
+    	if(clientes==null){
+    		Usuario u = (Usuario)  session.getAttribute("user");
+    		CtrlCliente ctrl = new CtrlCliente();
+        	clientes= ctrl.getAll(u);  	
+    	}	
 	%>
 	
 </head>
@@ -43,11 +40,7 @@
 			<div class="nav-bar " >
 				<div class="col" >
         			<h4 id="prueba">Clientes</h4>
-        		</div>
-        		<div class="col" >
-        			<a href="../index.html" class="btn btn-success "> <h4>Volver al Menu</h4></a>
-        		</div>
-        		
+        		</div>    		
         	</div>
             	<div class="col-12 col-sm-12 col-lg-12">
                 	<div class="table-responsive">
@@ -97,14 +90,15 @@
                     			</tr>
                     		<% }} %>
                     		</tbody>
-                    		</table>
-		</div>
-			</div>
-			  </div>
+                    	</table>
+					</div>
 				</div>
+				<a href="../index.html " class="btn btn-success btn-lg btn-block w-25"> Volver al menu</a>
+			 </div>
+		</div>
 	 <!-- /container -->
-	 <script type="text/javascript">
 	 
+<script  type="text/javascript"	 >
 	 function sendUpdate(dni) {
 			newName=document.getElementById("name_"+dni).value;
 		

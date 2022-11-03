@@ -1,4 +1,6 @@
 <%@page import="entities.Droga"%>
+<%@page import="entities.Usuario"%>
+<%@page import="logic.CtrlDroga"%>
 <%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -9,13 +11,18 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-	<link href="style/sharedStyle.css" rel="stylesheet" type="text/css">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<meta charset="ISO-8859-1">
 	<title>Listado de drogas</title>
-	<%
-	LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("all");
-	System.out.println(request);
-	%>
+		<% 
+		LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("all");
+			if(arr==null)
+			{
+				Usuario u = (Usuario)  session.getAttribute("user");
+				CtrlDroga ctrl = new CtrlDroga();
+    			arr= ctrl.getAll(u);  	
+			}	
+		%>
 </head>
 <body>
 <h2>Drogas</h2>

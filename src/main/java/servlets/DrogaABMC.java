@@ -63,6 +63,10 @@ public class DrogaABMC extends HttpServlet {
 				response.setContentType("application/json");
 				break;
 			}
+			case "redirectAddDroga": {
+				request.getRequestDispatcher("/WEB-INF/ui-droga/altaDroga.html").forward(request, response);
+				break;
+			}
 			
 			default:
 				throw new ServiceNotFoundException("no hay");
@@ -84,8 +88,7 @@ public class DrogaABMC extends HttpServlet {
 			case "add": {
 				con.add(drug, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", drug);
-				request.getRequestDispatcher("/WEB-INF/ui-droga/ConfirmarAltaDroga.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-droga/getAllDroga.jsp").forward(request, response);
 				break;
 			}
 			case "update": {

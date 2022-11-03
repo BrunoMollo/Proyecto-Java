@@ -27,7 +27,7 @@
 <body>
 	
 	<main>
-		<form class="signup-form" action="./ABMC-cliente/add" method="post">
+		<form class="signup-form" action="add" method="post">
 		  	<h2 >Nuevo Cliente</h2>
 			<div class="form-group fieldset">
 					<div class="row">
@@ -110,11 +110,11 @@
 
  	  		<div class="form-group">
  	  			<div class="row">
- 	  				<div class="col">
-    					<button type="submit" class="btn btn-warning" >Agregar</button>
+    				<div class="col">
+    					<a class="btn btn-success btn-lg " href="../index.html">Volver al menu</a>
     				</div>
     				<div class="col">
-    					<a class="btn btn-warning nosubtitle" href="../index.html">Volver al menu</a>
+    					<button type="submit" class="btn btn-success btn-lg" >Agregar</button>
     				</div>
     			</div>
  			</div>

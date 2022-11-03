@@ -1,5 +1,8 @@
 <%@page import="entities.ObraSocial"%>
 <%@page import="java.util.LinkedList"%>
+<%@page import="entities.Usuario"%>
+<%@page import="logic.CtrlObraSocial"%>
+<%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,8 +10,14 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Listado de drogas</title>
-	<%
+		
+	<% 
 	LinkedList<ObraSocial> arr = (LinkedList<ObraSocial>)request.getAttribute("all");
+	if(arr==null){
+		Usuario u = (Usuario)  session.getAttribute("user");
+		CtrlObraSocial ctrl = new CtrlObraSocial();
+    	arr= ctrl.getAll(u);  	
+	}	
 	%>
 </head>
 <body>

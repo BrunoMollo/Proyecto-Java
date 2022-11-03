@@ -67,6 +67,10 @@ public class ObraSocialABMC extends HttpServlet {
 				response.getWriter().append(JsonArr);
 				break;
 			}
+			case "redirectAddOS": {
+				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/altaObraSocial.html").forward(request, response);
+				break;
+			}
 			
 			default:
 				throw new ServiceNotFoundException("no hay");

@@ -67,7 +67,7 @@ public class ClienteABMC extends HttpServlet {
 			switch (request.getPathInfo().substring(1)) {
 			case "all": {
 				LinkedList<Cliente> arr = con.getAll(user);
-				request.setAttribute("all", arr);
+				request.setAttribute("allCli", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
 				break;
 			}
@@ -88,6 +88,7 @@ public class ClienteABMC extends HttpServlet {
 			//Consultar esto. Larga un Error en consola. No me parece buena idea.
 			case "new": {				
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/altaCliente.jsp").forward(request, response);
+				break;
 			}
 			
 			default:
@@ -120,8 +121,11 @@ public class ClienteABMC extends HttpServlet {
 			}
 			//.Consultar
 			case "redirectUpdate": {
-				response.setStatus(303);
+				
+				//response.sendRedirect("/lafarmacia/WEB-INF/ui-cliente/updateCliente.jsp");
+				//return ;
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/updateCliente.jsp").forward(request, response);
+				break;
 			}
 			case "update": {
 				Cliente cli= getCliente(new RequestParameterParser(request));

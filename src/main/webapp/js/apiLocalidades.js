@@ -1,6 +1,6 @@
 
-const $provincias = document.getElementById('selProvincia');
-const $localidades = document.getElementById('selLocalidad');
+const $provincia = document.getElementById('selProvincia');
+const $localidad = document.getElementById('selLocalidad');
 
 	function compare_nombre( a, b )
   {
@@ -13,17 +13,18 @@ const $localidades = document.getElementById('selLocalidad');
   return 0;
 }
 
-if(!$provincias.value){
-	$provincias.addEventListener("DOMContentLoaded",provincia);
+if(!$provincia.value){
+	$provincia.addEventListener("DOMContentLoaded",provincia);
 	
 	}
-else{
-	$provincias.addEventListener("click",provincia,{'once':true});
-	
-	
+else{	
+	$provincia.addEventListener("click",provincia,{once:true});
+		
 }
 
-$provincias.addEventListener("change",e => localidad(e.target.value))
+$provincia.addEventListener("change",e => localidad(e.target.value),{once:true})
+
+
  function provincia() {
     fetch("https://apis.datos.gob.ar/georef/api/provincias")
     .then(res => res.ok ? res.json(): Promise.reject(res))
@@ -35,7 +36,7 @@ $provincias.addEventListener("change",e => localidad(e.target.value))
 		{		
         $options += `<option value="${prov.nombre}">${prov.nombre}</option>`; 
     	} 
-   		 $provincias.innerHTML = $options;
+   		 $provincia.innerHTML = $options;
  
 })}
  function localidad(prov) {
@@ -48,7 +49,7 @@ $provincias.addEventListener("change",e => localidad(e.target.value))
 		{		
         $options += `<option value="${loc.nombre}">${loc.nombre}</option>`; 
     	} 
-   		 $localidades.innerHTML = $options;
+   		 $localidad.innerHTML = $options;
  
 })}
 

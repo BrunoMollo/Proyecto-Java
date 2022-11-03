@@ -51,6 +51,10 @@ public class AltaMedicamento extends HttpServlet {
 						response.setStatus(200);
 						response.setContentType("application/json");
 						break;
+					case "redirectAddMed": {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/altaMedicamento.html").forward(request, response);
+						break;
+					}
 				}}
 				 catch (Exception e) {
 					ExceptionDispacher.manage(e, response);
