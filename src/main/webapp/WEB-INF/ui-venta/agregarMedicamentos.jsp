@@ -26,6 +26,7 @@
   		Usuario u = (Usuario) session.getAttribute("user");
   		Venta v = ((CtrlVenta) session.getAttribute("CtrlVenta")).getVenta();
   		LinkedList<LineaVenta> lineasVenta;
+  		Boolean medEncontrado= (Boolean)request.getAttribute("medEncontrado");
 	%>
 </head>
 <body>
@@ -96,5 +97,10 @@
 				</form>
         </div>	
  	</main>
+ 	<%if(medEncontrado!=null && medEncontrado==false){ %>
+ 	<script type="text/javascript">
+ 		setTimeout(()=>alert("No existe el medicamento"), 1)
+ 	</script>
+ 	<% } %>
 </body>
 </html>

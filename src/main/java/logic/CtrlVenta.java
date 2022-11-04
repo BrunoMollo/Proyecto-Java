@@ -30,16 +30,16 @@ public class CtrlVenta {
 	}
 	
 	
-	public void addMedicamento(String nombreMed, Integer cant) throws SQLException, AccessException {
+	public Boolean addMedicamento(String nombreMed, Integer cant) throws SQLException, AccessException {
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
 		Medicamento med= new Medicamento();
 		med.setNombre(nombreMed);
 		med=mDao.getByName(med);
 		
-		if(med==null)  {throw new SQLException("no exite el medicamento");}
+		if(med==null)  {return false; }
 		
 		ventaActual.addMedicamento(med, cant);
-		
+		return true;
 	}	
 	
 	

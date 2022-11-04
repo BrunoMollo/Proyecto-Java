@@ -67,7 +67,9 @@ public class MedicamentoDao extends Dao<Medicamento>{
 				new StatementWrapper( "select * from medicamentos where nombre like ?")
 					.push(m.getNombre()+"%" )
 				);
-		med.setPrecio(pDao.getLatestPrice(med));
+		if(med!=null) {
+			med.setPrecio(pDao.getLatestPrice(med));			
+		}
 		
 		return med;
 	}

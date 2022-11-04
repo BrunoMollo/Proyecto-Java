@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlVenta;
+import ourLib.CustomException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.RequestParameterParser;
 
@@ -62,7 +63,10 @@ public class VentaServlet extends HttpServlet {
 				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); 
 				String nombreMed = request.getParameter("name_med"); 
 				
-				con.addMedicamento(nombreMed, cantidad); 
+				Boolean medEncontrado=con.addMedicamento(nombreMed, cantidad); 
+			
+				request.setAttribute("medEncontrado", medEncontrado);
+				
 				
 				request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
 				break;
