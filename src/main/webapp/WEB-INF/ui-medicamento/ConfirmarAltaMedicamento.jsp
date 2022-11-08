@@ -8,7 +8,7 @@
 	<meta charset="ISO-8859-1">
 	<title>La farmacia</title>
 	<%
-		Medicamento med= (Medicamento)request.getAttribute("addedObject");
+		Medicamento med= (Medicamento)request.getAttribute("medicamento");
 	%>
 </head>
 <body>
@@ -36,7 +36,7 @@
 			</tbody>
 		</table>
 		<br>		
-		<a href="../indexLog.html">Volver al menu</a>
+		<a href="../index.html">Volver al menu</a>
 		
 </body>
 </html>

@@ -1,14 +1,13 @@
 package servlets;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
-import logic.CtrlLaboratorio;
 import logic.CtrlMedicamento;
 import ourLib.Parsers.ExceptionDispacher;
+import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
@@ -30,26 +29,52 @@ public class AltaMedicamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: (Servlet Alta Medicamento)").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {			
+			Medicamento med= getMedbyName(new RequestParameterParser(request));
+			Usuario user=Usuario.factory(request);
+			CtrlMedicamento ctrlmed = new CtrlMedicamento();	
+			
+			try {
+				switch (request.getPathInfo().substring(1)){
+				
+					case "getbyname": 
+						if(med.getNombre().length()<2) {
+				    		response.sendError(400, "largo insuficiente");
+				    		return;
+				    		}
+						
+						LinkedList<Medicamento> arr= ctrlmed.getByPartialName(med);
+						String JsonArr=JsonMaker.getJsonArray(arr);
+						response.getWriter().append(JsonArr);
+						response.setStatus(200);
+						response.setContentType("application/json");
+						break;
+					case "redirectAddMed": {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/altaMedicamento.html").forward(request, response);
+						break;
+					}
+				}}
+				 catch (Exception e) {
+					ExceptionDispacher.manage(e, response);
+				}		
 	}
+
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Medicamento med=null;
 		Usuario user=Usuario.factory(request);
-		
-				
+
 		try {
-		switch (request.getPathInfo()){
-			case "/inicializarmedicamento":
+		switch (request.getPathInfo().substring(1)){
+			case "inicializarmedicamento":
 				med = mapMedicamento(request);				
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 				
-			case "/cargadosis":
+			case "cargadosis":
 				String name_droga=request.getParameter("name_droga");
 				Double cant_dr=Double.parseDouble(request.getParameter("cantDrug"));
 				String unidad=request.getParameter("unit_dose");
@@ -64,14 +89,15 @@ public class AltaMedicamento extends HttpServlet {
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
-				
+	
 			case "/guardarmedicamento":
 				CtrlMedicamento ctrlmed = new CtrlMedicamento();
+
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				
 				ctrlmed.add(med, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", med);
+				request.setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 				
@@ -98,6 +124,7 @@ public class AltaMedicamento extends HttpServlet {
 				//request.getRequestDispatcher("../indexLog.html").forward(request, response);
 				break;
 		}
+
 		
 		} catch (Exception e) {
 			ExceptionDispacher.manage(e, response);
@@ -113,8 +140,8 @@ public class AltaMedicamento extends HttpServlet {
 		RequestParameterParser parser=new RequestParameterParser(req);
 		mdic.setCodigoBarra(parser.getInt("cod_med")); 
 		mdic.setNombre(parser.getString("name_med"));
-		mdic.setPrecio(parser.getDouble("size_med"));
-		mdic.setSize(parser.getDouble("price_med"));
+		mdic.setPrecio(parser.getDouble("price_med"));
+		mdic.setSize(parser.getDouble("size_med"));
 		mdic.setUnidad(parser.getString("unit_med")); 
 		
 		Laboratorio l=new Laboratorio();
@@ -122,6 +149,14 @@ public class AltaMedicamento extends HttpServlet {
 		mdic.setLaboratorio(l);
 		
 		return mdic;
+	}
+	//CONSULTAR SI PASAMOS TODO AL METODO DE ABAJO O USAMOS EL DE ARRIBA. 
+	private Medicamento getMedbyName(RequestParameterParser parser) {	
+		Medicamento m =new Medicamento();
+		//m.setCodigo(parser.getInt("cod_lab"));
+		m.setNombre(parser.getString("name_med"));
+		;
+		return m;
 	}
 
 }

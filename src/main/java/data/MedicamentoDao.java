@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import entities.Dosis;
+
 import entities.Laboratorio;
 import entities.Medicamento;
 import ourLib.dbUtils.Dao;
@@ -14,7 +14,8 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	LaboratorioDao ldao = new LaboratorioDao();
 	DosisDao ddao= new DosisDao();
-	PrecioDao pdao=new PrecioDao();
+	PrecioDao pDao=new PrecioDao();
+
 	
 	@Override
 	protected Medicamento mapFromResulset(ResultSet rs) throws SQLException {
@@ -26,7 +27,9 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		med.setCodigoBarra(rs.getInt("codigoBarra"));
 		med.setLaboratorio(ldao.getOne(lab));
 		med.setNombre(rs.getString("nombre"));
-		med.setPrecio(pdao.getLatestPrice(med));
+
+		med.setPrecio(pDao.getLatestPrice(med));
+
 		med.setSize(rs.getDouble("size"));
 		med.setUnidad(rs.getString("unidad"));
 		med.addAllDosis(ddao.getDosisOfMedicamento(med));
@@ -57,7 +60,19 @@ public class MedicamentoDao extends Dao<Medicamento>{
 				new StatementWrapper( "select * from medicamentos where codigoBarra=?")
 					.push(p.getCodigoBarra())
 				);
-		med.setPrecio(pdao.getLatestPrice(p));
+		med.setPrecio(pDao.getLatestPrice(p));
+		return med;
+	}
+	
+	public Medicamento getByName(Medicamento m) throws SQLException{
+		Medicamento med=doGetOne(
+				new StatementWrapper( "select * from medicamentos where nombre like ?")
+					.push(m.getNombre()+"%" )
+				);
+		if(med!=null) {
+			med.setPrecio(pDao.getLatestPrice(med));			
+		}
+		
 		return med;
 	}
 
@@ -86,7 +101,13 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
 	}
 	
-	
+	public LinkedList<Medicamento> getAllByPartialName(Medicamento obj) throws SQLException {
+		return doFindAll(new StatementWrapper("select * from medicamentos  where nombre like ?")
+				.push(obj.getNombre()+"%"));
+				
+		
+	}
+
 
 
 }

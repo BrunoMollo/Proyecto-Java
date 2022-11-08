@@ -1,5 +1,7 @@
 <%@page import="entities.Laboratorio"%>
 <%@page import="java.util.LinkedList"%>
+<%@ page import="entities.Usuario" %>
+<%@ page import="logic.CtrlLaboratorio" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -11,10 +13,15 @@ table.center {
   margin-right: auto;
 }
 </style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<meta charset="ISO-8859-1">
 	<title>Listado de laboratorios</title>
-	<%
-	LinkedList<Laboratorio> arr = (LinkedList<Laboratorio>)request.getAttribute("listalab");
+	<% 
+	LinkedList<Laboratorio> arr = (LinkedList<Laboratorio>)request.getAttribute("all");
 	%>
 </head>
 <body>
@@ -22,7 +29,7 @@ table.center {
 
 <p align="center">[ <a href="../index.html">Volver al menu</a> ] </p>
 
-<table class="center" border="1px solid black">
+<table class="center" >
 	<thead>
 		<tr>
 			<th>Codigo</th>
@@ -57,7 +64,7 @@ table.center {
 	
 		axios(
 			{
-				url: '/lafarmacia/LaboratorioABMC/update',
+				url: '/lafarmacia/ABMC-laboratorio/update',
 				method:"post",
 				params:{
 					cod_lab: cod,
@@ -79,7 +86,7 @@ table.center {
 		}
 		axios(
 				{
-					url: '/lafarmacia/LaboratorioABMC/delete',
+					url: '/lafarmacia/ABMC-laboratorio/delete',
 					method:"post",
 					params:{
 						cod_lab: cod,

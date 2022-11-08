@@ -67,6 +67,10 @@ public class ObraSocialABMC extends HttpServlet {
 				response.getWriter().append(JsonArr);
 				break;
 			}
+			case "redirectAddOS": {
+				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/altaObraSocial.html").forward(request, response);
+				break;
+			}
 			
 			default:
 				throw new ServiceNotFoundException("no hay");
@@ -88,8 +92,9 @@ public class ObraSocialABMC extends HttpServlet {
 			case "add": {
 				con.add(os, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", os);
-				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/ConfirmarAltaObraSocial.jsp").forward(request, response);
+				LinkedList<ObraSocial> arr = con.getAll(user);
+				request.setAttribute("all", arr);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-obrasocial/all");
 				break;
 			}
 			case "update": {

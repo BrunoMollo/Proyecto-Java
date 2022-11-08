@@ -38,7 +38,7 @@ public class LaboratorioABMC extends HttpServlet {
 			case "all": {
 				LinkedList<Laboratorio> arr = ctrl.getAll(user);
 				response.setStatus(200);
-				request.setAttribute("listalab", arr);
+				request.setAttribute("all", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-laboratorio/menuLaboratorio.jsp").forward(request, response);
 				break;
 			}
@@ -55,6 +55,11 @@ public class LaboratorioABMC extends HttpServlet {
 				response.setContentType("application/json");
 				break;
 			}
+			case "redirectAddLab": {
+				request.getRequestDispatcher("/WEB-INF/ui-laboratorio/altaLaboratorio.html").forward(request, response);
+				break;
+			}
+			
 			
 			default:
 				throw new ServiceNotFoundException("no hay");
@@ -77,9 +82,11 @@ public class LaboratorioABMC extends HttpServlet {
 			case "add": {
 				ctrl.add(lab, user);
 				response.setStatus(201);
-				request.setAttribute("lab", lab);
-				request.getRequestDispatcher("/WEB-INF/ui-laboratorio/ConfirmarAltaLaboratorio.jsp").forward(request, response);
+				LinkedList<Laboratorio> arr = ctrl.getAll(user);
+				request.setAttribute("all", arr);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-laboratorio/all");		
 				break;
+				
 			}
 			case "update": {
 				ctrl.update(lab, user);

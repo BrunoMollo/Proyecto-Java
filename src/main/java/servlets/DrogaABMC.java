@@ -63,6 +63,10 @@ public class DrogaABMC extends HttpServlet {
 				response.setContentType("application/json");
 				break;
 			}
+			case "redirectAddDroga": {
+				request.getRequestDispatcher("/WEB-INF/ui-droga/altaDroga.html").forward(request, response);
+				break;
+			}
 			
 			default:
 				throw new ServiceNotFoundException("no hay");
@@ -83,9 +87,10 @@ public class DrogaABMC extends HttpServlet {
 			switch (request.getPathInfo().substring(1)) {
 			case "add": {
 				con.add(drug, user);
+				LinkedList<Droga> arr=con.getByPartialName(drug);
+				request.setAttribute("all", arr);
 				response.setStatus(201);
-				request.setAttribute("addedObject", drug);
-				request.getRequestDispatcher("/WEB-INF/ui-droga/ConfirmarAltaDroga.jsp").forward(request, response);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-droga/all");
 				break;
 			}
 			case "update": {

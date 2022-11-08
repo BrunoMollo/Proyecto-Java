@@ -1,16 +1,23 @@
 <%@page import="entities.Droga"%>
+<%@page import="entities.Usuario"%>
+<%@page import="logic.CtrlDroga"%>
 <%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<meta charset="ISO-8859-1">
 	<title>Listado de drogas</title>
-	<%
-	LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("all");
-	System.out.println(request);
-	%>
+		<% 
+		LinkedList<Droga> arr = (LinkedList<Droga>)request.getAttribute("all");
+	
+		%>
 </head>
 <body>
 <h2>Drogas</h2>
@@ -72,7 +79,7 @@
 				}		
 			)
 			.then((res)=>location.reload())
-			.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
+			.catch((err)=>{ console.log(err); alert("ups... algo salio mal") })
 			
 	}
 </script>

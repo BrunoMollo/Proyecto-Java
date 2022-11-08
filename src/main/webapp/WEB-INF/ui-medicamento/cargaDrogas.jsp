@@ -8,6 +8,8 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>La Farmacia</title>
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+	<link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
 	
 	<%Medicamento med = (Medicamento)request.getSession().getAttribute("medicamento"); %>
 	<%HashMap<Integer, Dosis> lista=med.getAllDosis(); %>
@@ -21,7 +23,8 @@
 
 </head>
 <body>
-	<form action="/lafarmacia/AltaMedicamento/cargadosis" method="post">
+<div class="form-group">
+	<form action="cargadosis" method="post">
 	
 		
 			<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga" >
@@ -42,7 +45,7 @@
 		<button type="submit">Agregar droga</button>
 		
 	</form>
-	
+</div>	
 	<br> <br> <hr>
 	
 	<table>
@@ -51,7 +54,7 @@
 				<th>Droga</th> 
 				<th>Cantidad</th>
 				<th>
-				<form action="/lafarmacia/AltaMedicamento/guardarmedicamento" method="post">
+				<form action="guardarmedicamento" method="post">
 					<button type="submit">Guardar medicamento</button>
 				</form>
 				</th>	

@@ -13,8 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link href="./style/addCliente.css" rel="stylesheet" type="text/css">
-<link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
+<link href="../style/addCliente.css" rel="stylesheet" type="text/css">
+<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+<script defer src="../js/apiLocalidades.js"></script>
 <%	
 	Usuario u= (Usuario)request.getSession().getAttribute("user");
 	LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll(u);
@@ -26,7 +27,7 @@
 <body>
 	
 	<main>
-		<form class="signup-form" action="./ABMC-cliente/add" method="post">
+		<form class="signup-form" action="add" method="post">
 		  	<h2 >Nuevo Cliente</h2>
 			<div class="form-group fieldset">
 					<div class="row">
@@ -109,16 +110,16 @@
 
  	  		<div class="form-group">
  	  			<div class="row">
- 	  				<div class="col">
-    					<button type="submit" class="btn btn-warning" >Agregar</button>
+    				<div class="col">
+    					<a class="btn btn-success btn-lg " href="../index.html">Volver al menu</a>
     				</div>
     				<div class="col">
-    					<a class="btn btn-warning nosubtitle" href="./indexLog.html">Volver al menu</a>
+    					<button type="submit" class="btn btn-success btn-lg" >Agregar</button>
     				</div>
     			</div>
  			</div>
   	</form>
 </main>
-<script src="./js/apiLocalidades.js"></script>
+
 </body>
 </html>

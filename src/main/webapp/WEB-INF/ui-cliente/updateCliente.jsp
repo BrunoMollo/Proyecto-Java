@@ -14,8 +14,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link href="./style/addCliente.css" rel="stylesheet" type="text/css">
-<link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
+<link href="../style/addCliente.css" rel="stylesheet" type="text/css">
+<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+<script defer src="../js/apiLocalidades.js"></script>
 <title>Actualiza Cliente</title>
 <%	
 	Usuario u= (Usuario)request.getSession().getAttribute("user");
@@ -31,9 +32,8 @@
 <body>
 	
 	<main>
-		<form class="signup-form" action="./ABMC-cliente/update" method="post">
+		<form class="signup-form" action="update" method="post">
 		  	<h2>Actualizar Cliente</h2><br>
-		  	<h3><%=c.getFullName()%></h3>
 			<div class="form-group fieldset">
 					<div class="row">
  						<div class="col">
@@ -63,7 +63,7 @@
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Provincia</label>       		 			   
  						<select class="form-control" name="provincia"  id="selProvincia" required >
- 							<option value="<%=c.getProvincia()%>"><%=c.getProvincia()%> </option>
+ 							<option selected value="<%=c.getProvincia()%>"><%=c.getProvincia()%> </option>
  						</select>
 		    		</div>
 		  		</div>
@@ -71,7 +71,7 @@
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Localidad</label>      
 		 				<select class="form-control" name="localidad"  id="selLocalidad" required >
- 							<option value="<%=c.getLocalidad()%>"><%=c.getLocalidad()%></option>
+ 							<option selected value="<%=c.getLocalidad()%>"><%=c.getLocalidad()%></option>
  						</select>
 		    		</div>
 		  		</div>
@@ -117,15 +117,16 @@
  	  		<div class="form-group">
  	  			<div class="row">
  	  				<div class="col">
+    					<a class="btn btn-success btn-lg " href="../index.html">Volver al menu</a>
+    				</div>
+ 	  				<div class="col">
     					<button type="submit" class="btn btn-warning" >Actualizar </button>
     				</div>
-    				<div class="col">
-    					<a class="btn btn-warning nosubtitle" href="./indexLog.html">Volver al menu</a>
-    				</div>
+    				
     			</div>
  			</div>
   	</form>
 </main>
-<script src="./js/apiLocalidades.js"></script>
+
 </body>
 </html>

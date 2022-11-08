@@ -77,7 +77,7 @@
 
         .signup-form a {
             color: #fff;
-            text-decoration: underline;
+            text-decoration: none;
         }
 
         .signup-form a:hover {
@@ -89,9 +89,6 @@
             text-decoration: none;
         }
 
-        .signup-form form a:hover {
-            text-decoration: underline;
-        }
         .signup-form h2,  .signup-form h3 {
             color: #9ADCD8;
             margin: 0 0 15px;

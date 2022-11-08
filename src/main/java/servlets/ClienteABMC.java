@@ -68,7 +68,7 @@ public class ClienteABMC extends HttpServlet {
 			case "all": {
 				LinkedList<Cliente> arr = con.getAll(user);
 				request.setAttribute("all", arr);
-				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/showClientes.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
 				break;
 			}
 			case "getbylastname": {
@@ -83,6 +83,11 @@ public class ClienteABMC extends HttpServlet {
 				
 				String JsonArr=JsonMaker.getJsonArray(arr);
 				response.getWriter().append(JsonArr);
+				break;
+			}
+			//Consultar esto. Larga un Error en consola. No me parece buena idea.
+			case "new": {				
+				request.getRequestDispatcher("/WEB-INF/ui-cliente/altaCliente.jsp").forward(request, response);
 				break;
 			}
 			
@@ -110,8 +115,16 @@ public class ClienteABMC extends HttpServlet {
 				Cliente cli= getCliente(new RequestParameterParser(request));
 				con.add(cli, user);
 				response.setStatus(201);
-				request.setAttribute("addedObject", cli);
-				request.getRequestDispatcher("/WEB-INF/ui-cliente/confirmarCliente.jsp").forward(request, response);
+				LinkedList<Cliente> arr = con.getAll(user);
+				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-cliente/all");
+				break;
+			}
+			//.Consultar
+			case "redirectUpdate": {
+				
+				//response.sendRedirect("/lafarmacia/WEB-INF/ui-cliente/updateCliente.jsp");
+				//return ;
+				request.getRequestDispatcher("/WEB-INF/ui-cliente/updateCliente.jsp").forward(request, response);
 				break;
 			}
 			case "update": {
@@ -119,7 +132,7 @@ public class ClienteABMC extends HttpServlet {
 				con.update(cli, user);
 				response.setStatus(200);
 				request.setAttribute("addedObject", cli);
-				request.getRequestDispatcher("/WEB-INF/ui-cliente/confirmarCliente.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
 				break;
 			}
 			case "delete": {
@@ -127,9 +140,9 @@ public class ClienteABMC extends HttpServlet {
 				Cliente cli= getClienteByDni(new RequestParameterParser(request));
 				con.delete(cli, user);
 				response.setStatus(202);
-				response.sendRedirect("../listCliente.jsp");
 				break;
 			}
+			
 			
 			default:
 				throw new ServiceNotFoundException("no hay");

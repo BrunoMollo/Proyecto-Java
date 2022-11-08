@@ -6,20 +6,21 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-<link href="./style/sharedStyle.css" rel="stylesheet" type="text/css">
+<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 	<h1 class="m-3" align="center">Alta de Droga</h1>
 	
-	<form action="/lafarmacia/ABMC-droga/add" method="POST" class="needs-validation col-sm-6 container">
+	<form action="add" method="POST" class="needs-validation col-sm-6 container">
 		<div class="row-sm-6">
 			<label class="form-label">Nombre:</label>
 			<input type="text" name="name_droga" class="form-control">
 		</div>
 		<br>
 		<div class="row-sm-6">
-			<button type="submit" class="w-100 btn btn-primary btn-lg">Cargar datos</button>		
+			<button type="submit" class="w-50 btn btn-primary btn-lg d-block mx-auto">Cargar datos</button>
+			<a href="../index.html" class="w-50 mt-1 mb-3 btn btn-primary btn-lg d-block mx-auto">Volver al menu</a>	
 		</div>
 	</form>
 
