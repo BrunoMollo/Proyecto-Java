@@ -70,4 +70,9 @@ public class PrecioDao extends Dao<Precio>{
 		throw new UnsupportedOperationException("Not Implemented "+funcName);
 	}
 
+	public LinkedList<Precio> getPrices(Medicamento med) throws SQLException {
+		return doFindAll(new StatementWrapper("select * from precio_medicamento where codigoMedicamento=? "
+				+ "order by fecha desc").push(med.getCodigoBarra()));
+	}
+
 }

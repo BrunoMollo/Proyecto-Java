@@ -13,11 +13,14 @@ import ourLib.Parsers.RequestParameterParser;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.LinkedList;
 
 import entities.Dosis;
 import entities.Droga;
 import entities.Laboratorio;
 import entities.Medicamento;
+import entities.Precio;
 import entities.Usuario;
 
 /**
@@ -29,16 +32,14 @@ public class AltaMedicamento extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: (Servlet Alta Medicamento)").append(request.getContextPath());
 	}
 
-	
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Medicamento med=null;
 		Usuario user=Usuario.factory(request);
+		
 				
 		try {
 		switch (request.getPathInfo()){
@@ -63,6 +64,7 @@ public class AltaMedicamento extends HttpServlet {
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
+				
 			case "/guardarmedicamento":
 				CtrlMedicamento ctrlmed = new CtrlMedicamento();
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
@@ -71,6 +73,29 @@ public class AltaMedicamento extends HttpServlet {
 				response.setStatus(201);
 				request.setAttribute("addedObject", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				break;
+				
+			case "/getmedicprecios":
+				CtrlMedicamento ctrlme = new CtrlMedicamento();
+				Medicamento m = mapMedicamento(request);		
+				m = ctrlme.getOne(m,user);
+				LinkedList<Precio> listaPrecios = ctrlme.getAllPrecios(m);
+				request.getSession().setAttribute("medicamento", m);
+				request.setAttribute("listaPrecios", listaPrecios);
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/agregarPrecio.jsp").forward(request, response);
+				break;
+				
+			case "/addnuevoprecio":
+				CtrlMedicamento ctrlm = new CtrlMedicamento();
+				Medicamento medicam = (Medicamento) request.getSession().getAttribute("medicamento");	
+				Precio nuevo =new Precio();				
+				
+				nuevo.setFecha((LocalDate.parse(request.getParameter("fechaNuevo"))));
+				nuevo.setMonto(Double.parseDouble(request.getParameter("precioNuevo")));
+				
+				ctrlm.addPrecioNuevo(medicam,nuevo);
+				response.sendRedirect("../indexLog.html");
+				//request.getRequestDispatcher("../indexLog.html").forward(request, response);
 				break;
 		}
 		

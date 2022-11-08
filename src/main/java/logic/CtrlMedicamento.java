@@ -3,6 +3,7 @@ package logic;
 import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 import data.DosisDao;
 import data.LaboratorioDao;
@@ -40,4 +41,16 @@ public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
 		Precio precio=new Precio(LocalDate.now(),med.getPrecio());
 		pdao.add(med,precio);
 	}
+
+	public LinkedList<Precio> getAllPrecios(Medicamento med) throws SQLException {
+		PrecioDao pdao=new PrecioDao();
+		return pdao.getPrices(med);
+	}
+	
+	public void addPrecioNuevo(Medicamento med, Precio precioNuevo) throws SQLException{
+		PrecioDao pdao=new PrecioDao();
+		pdao.add(med, precioNuevo);
+		
+	}
+	
 }
