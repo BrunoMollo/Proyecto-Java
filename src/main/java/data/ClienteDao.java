@@ -7,13 +7,14 @@ import java.util.LinkedList;
 import entities.Cliente;
 import entities.ObraSocial;
 import logic.CtrlObraSocial;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
 public class ClienteDao extends Dao<Cliente>{
 
 		@Override
-		protected Cliente mapFromResulset(ResultSet rs) throws SQLException {
+		protected Cliente mapFromResulset(ResultSet rs) throws SQLException, AppException {
 			Cliente cli=  new Cliente();
 			ObrasSocialesDao osDao= new ObrasSocialesDao();
 			cli.setDni(rs.getInt("dni"));
@@ -30,12 +31,12 @@ public class ClienteDao extends Dao<Cliente>{
 		}
 
 		@Override
-		public LinkedList<Cliente> getAll() throws SQLException {
+		public LinkedList<Cliente> getAll() throws AppException {
 			return doFindAll(new StatementWrapper("select * from clientes"));
 		}
 
 		@Override
-		public void add(Cliente cli) throws SQLException {
+		public void add(Cliente cli) throws AppException {
 			StatementWrapper stw=new StatementWrapper("insert into clientes (dni,nombre,apellido,email,telefono,localidad,provincia,fechaNac,id_obraSocial,direccion) values (?,?,?,?,?,?,?,?,?,?)")
 				.push(cli.getDni())
 				.push(cli.getNombre())
@@ -51,7 +52,7 @@ public class ClienteDao extends Dao<Cliente>{
 		}
 
 		@Override
-		public void update(Cliente cli) throws SQLException {
+		public void update(Cliente cli) throws AppException {
 			StatementWrapper stw=new StatementWrapper("update clientes set nombre=?, apellido=? ,telefono=?, email=?, localidad=? , provincia=?,fechaNac=?, id_obraSocial=? ,direccion=? where dni=?")
 					.push(cli.getNombre())
 					.push(cli.getApellido())
@@ -68,18 +69,18 @@ public class ClienteDao extends Dao<Cliente>{
 		}
 
 		@Override
-		public void delete(Cliente cli) throws SQLException {
+		public void delete(Cliente cli) throws AppException {
 			doModification(new StatementWrapper("delete from clientes where dni=?").push(cli.getDni()));
 		}
 
-		public LinkedList<Cliente> getAllByLastName(Cliente cli) throws SQLException {
+		public LinkedList<Cliente> getAllByLastName(Cliente cli) throws AppException {
 			return doFindAll(new StatementWrapper("select * from clientes where apellido like ?").push(cli.getApellido()+"%"));
 		}
 
 
 
 		@Override
-		public Cliente getOne(Cliente cli) throws SQLException {
+		public Cliente getOne(Cliente cli) throws AppException {
 			StatementWrapper stw=new StatementWrapper("select * from clientes  where dni=?")
 					.push(cli.getDni());
 				 return doGetOne(stw);

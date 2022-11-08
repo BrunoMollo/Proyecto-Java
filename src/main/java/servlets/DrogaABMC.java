@@ -3,11 +3,11 @@ package servlets;
 
 import logic.CtrlDroga;
 import ourLib.Parsers.RequestParameterParser;
+import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 
 import java.io.IOException;
-import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -69,7 +69,7 @@ public class DrogaABMC extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {
@@ -105,7 +105,7 @@ public class DrogaABMC extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {

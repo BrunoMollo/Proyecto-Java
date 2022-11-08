@@ -1,17 +1,15 @@
 package logic;
 
-import java.sql.SQLException;
-
-import ourLib.LogicAbstraction.BasicCtrl;
+import ourLib.AppException;
 import data.LoginDao;
 import entities.Usuario;
 
-public class CtrlLogin extends BasicCtrl<Usuario, LoginDao>{
-	public CtrlLogin() {
-		 miDao=new LoginDao();
-	}
+public class CtrlLogin{
 	
-	public Usuario validateLogin(Usuario ingresado) throws SQLException {
+	LoginDao miDao=new LoginDao();
+	
+	
+	public Usuario validateLogin(Usuario ingresado) throws AppException {
 		return miDao.getUP(ingresado);	
 	}
 	

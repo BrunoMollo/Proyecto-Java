@@ -1,6 +1,5 @@
 package logic;
 
-import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -10,11 +9,11 @@ import data.LaboratorioDao;
 import data.MedicamentoDao;
 import data.PrecioDao;
 import entities.Dosis;
-import entities.Droga;
 import entities.Laboratorio;
 import entities.Medicamento;
 import entities.Precio;
 import entities.Usuario;
+import ourLib.AppException;
 import ourLib.LogicAbstraction.BasicCtrl;
 
 public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
@@ -24,16 +23,16 @@ public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
 	}
 	
 	
-	public LinkedList<Medicamento> getByPartialName(Medicamento obj) throws SQLException {
+	public LinkedList<Medicamento> getByPartialName(Medicamento obj) throws SQLException, AppException {
 		return this.miDao.getAllByPartialName(obj);
 	}
 	
-	public void add(Medicamento med, Usuario user) throws SQLException, AccessException{
-		if(!user.hasAccess(Usuario.ADMIN)) {throw new AccessException("Debe ser admin");}
+	public void add(Medicamento med, Usuario user) throws AppException{
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AppException("Debe ser admin", 401);}
 		
 		//Requiero guardar la clave primaria en el registro de la base datos, no me sirve tener solo en nombre
 		Laboratorio mi_lab= new LaboratorioDao().getOneByName(med.getLaboratorio());
-		if(mi_lab==null) {throw new SQLException("No se encontro el laboratorio"); }
+		if(mi_lab==null) {throw new AppException("No se encontro el laboratorio",401); }
 		med.setLaboratorio(mi_lab);
 		
 		miDao.add(med);
@@ -48,12 +47,12 @@ public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
 		pdao.add(med,precio);
 	}
 
-	public LinkedList<Precio> getAllPrecios(Medicamento med) throws SQLException {
+	public LinkedList<Precio> getAllPrecios(Medicamento med) throws AppException {
 		PrecioDao pdao=new PrecioDao();
 		return pdao.getPrices(med);
 	}
 	
-	public void addPrecioNuevo(Medicamento med, Precio precioNuevo) throws SQLException{
+	public void addPrecioNuevo(Medicamento med, Precio precioNuevo) throws AppException{
 		PrecioDao pdao=new PrecioDao();
 		pdao.add(med, precioNuevo);
 		

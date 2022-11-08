@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -19,6 +18,7 @@ import logic.CtrlObraSocial;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
+import ourLib.AppException;
 
 
 /**
@@ -73,7 +73,7 @@ public class ObraSocialABMC extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {
@@ -109,7 +109,7 @@ public class ObraSocialABMC extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {

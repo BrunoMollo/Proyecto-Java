@@ -1,6 +1,7 @@
 package entities;
 
 import jakarta.servlet.http.HttpServletRequest;
+import ourLib.AppException;
 import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.Jsonable;
 
@@ -72,7 +73,7 @@ public class Usuario implements Jsonable{
 		}
 	}	
 	
-	public Boolean hasAccess(Integer NeededAccess) {
+	public Boolean hasAccess(Integer NeededAccess) throws AppException {
 		if(NeededAccess==Usuario.ANYONE){ return true; }
 		if(this.rol==null) { return false; }
 		
@@ -84,7 +85,7 @@ public class Usuario implements Jsonable{
 			if(this.rol==Usuario.ADMIN || this.rol==Usuario.VENDEDOR) { return true; }
 			else { return false; }
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + NeededAccess);
+			throw new AppException("Unexpected value: " + NeededAccess, 500);
 		}
 	}
 	

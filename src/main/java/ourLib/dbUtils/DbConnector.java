@@ -7,6 +7,8 @@ import java.util.Properties;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+import ourLib.AppException;
+
 import javax.xml.parsers.*;
 import java.io.*;
 
@@ -39,13 +41,13 @@ public class DbConnector {
 	}
 	
 	
-	public static DbConnector getInstancia() throws SQLException {
+	public static DbConnector getInstancia() throws AppException {
 		if (instancia == null) {
 			instancia = new DbConnector();
 		}
 		
 		if(instancia==null) {
-			throw new SQLException("No se pudo establecer la conexion a la base de datos, verificar configeracionde DbConnector.java");
+			throw new AppException("No se pudo establecer la conexion a la base de datos, verificar configeracionde DbConnector.java", 500);
 		}
 		return instancia;
 	}

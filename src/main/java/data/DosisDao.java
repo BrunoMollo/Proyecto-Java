@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import entities.Dosis;
 import entities.Droga;
 import entities.Medicamento;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
@@ -16,7 +17,7 @@ public class DosisDao extends Dao<Dosis>{
 	DrogasDao ddao= new DrogasDao();
 
 	@Override
-	protected Dosis mapFromResulset(ResultSet rs) throws SQLException {
+	protected Dosis mapFromResulset(ResultSet rs) throws SQLException, AppException {
 		
 		Droga drug=new Droga();
 		drug.setCod(rs.getInt("codigoDroga"));
@@ -29,7 +30,7 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	
-	public void add(Medicamento med, Dosis dose) throws SQLException {
+	public void add(Medicamento med, Dosis dose) throws AppException {
 		StatementWrapper stw= new StatementWrapper("insert into dosis (codigoDroga, "
 				+ "codigoMedicamento, cantidad, unidad) values (?,?,?,?)");
 		stw.push(dose.getCodigoDroga());
@@ -41,7 +42,7 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	
-	public HashMap<Integer, Dosis> getDosisOfMedicamento(Medicamento med) throws SQLException{
+	public HashMap<Integer, Dosis> getDosisOfMedicamento(Medicamento med) throws AppException{
 		LinkedList<Dosis> list = doFindAll(
 				new StatementWrapper("select * from dosis where codigoMedicamento=?")
 					.push(med.getCodigoBarra()));
@@ -61,10 +62,10 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	@Override
-	public Dosis getOne(Dosis p) throws SQLException {
+	public Dosis getOne(Dosis p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
@@ -72,10 +73,10 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	@Override
-	public LinkedList<Dosis> getAll() throws SQLException {
+	public LinkedList<Dosis> getAll() throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
@@ -83,10 +84,10 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	@Override
-	public void add(Dosis p) throws SQLException {
+	public void add(Dosis p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
@@ -94,10 +95,10 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	@Override
-	public void update(Dosis p) throws SQLException {
+	public void update(Dosis p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
@@ -105,10 +106,10 @@ public class DosisDao extends Dao<Dosis>{
 
 
 	@Override
-	public void delete(Dosis p) throws SQLException {
+	public void delete(Dosis p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 

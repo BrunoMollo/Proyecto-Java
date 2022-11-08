@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlVenta;
-import ourLib.CustomException;
+import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.RequestParameterParser;
 
@@ -16,6 +16,7 @@ import javax.management.ServiceNotFoundException;
 
 import entities.Usuario;
 import entities.Venta;
+import ourLib.AppException;
 
 
 
@@ -41,7 +42,7 @@ public class VentaServlet extends HttpServlet {
 				break;
 			}
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {
@@ -79,7 +80,7 @@ public class VentaServlet extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {

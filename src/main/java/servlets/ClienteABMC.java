@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlCliente;
+import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
@@ -92,7 +93,7 @@ public class ClienteABMC extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {
@@ -145,7 +146,7 @@ public class ClienteABMC extends HttpServlet {
 			
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {

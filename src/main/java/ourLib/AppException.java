@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-public class CustomException extends Exception{
+public class AppException extends Exception{
 
 	private static final long serialVersionUID = 1L;
 	
 	private int statusCode;
 	
-	CustomException(String msj, int statusCode){
+	public AppException(String msj, int statusCode){
 		super(msj);
 		this.statusCode=statusCode;
 	}

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import entities.Laboratorio;
 import entities.Medicamento;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
@@ -18,7 +19,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	
 	@Override
-	protected Medicamento mapFromResulset(ResultSet rs) throws SQLException {
+	protected Medicamento mapFromResulset(ResultSet rs) throws SQLException, AppException {
 		Medicamento med=new Medicamento();
 		Laboratorio lab = new Laboratorio();
 		
@@ -40,7 +41,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 
 	@Override
-	public void add(Medicamento p) throws SQLException {
+	public void add(Medicamento p) throws AppException {
 		StatementWrapper stw=new StatementWrapper("insert into medicamentos "
 				+ "(codigoBarra, codigoLaboratorio, nombre, size, unidad) values (?,?,?,?,?)");
 		
@@ -55,7 +56,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 
 	@Override
-	public Medicamento getOne(Medicamento p) throws SQLException {
+	public Medicamento getOne(Medicamento p) throws AppException {
 		Medicamento med=doGetOne(
 				new StatementWrapper( "select * from medicamentos where codigoBarra=?")
 					.push(p.getCodigoBarra())
@@ -64,7 +65,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		return med;
 	}
 	
-	public Medicamento getByName(Medicamento m) throws SQLException{
+	public Medicamento getByName(Medicamento m) throws AppException{
 		Medicamento med=doGetOne(
 				new StatementWrapper( "select * from medicamentos where nombre like ?")
 					.push(m.getNombre()+"%" )
@@ -78,30 +79,30 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 
 	@Override
-	public LinkedList<Medicamento> getAll() throws SQLException {
+	public LinkedList<Medicamento> getAll() throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 	
 	@Override
-	public void update(Medicamento p) throws SQLException {
+	public void update(Medicamento p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
 
 	@Override
-	public void delete(Medicamento p) throws SQLException {
+	public void delete(Medicamento p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 	
-	public LinkedList<Medicamento> getAllByPartialName(Medicamento obj) throws SQLException {
+	public LinkedList<Medicamento> getAllByPartialName(Medicamento obj) throws AppException {
 		return doFindAll(new StatementWrapper("select * from medicamentos  where nombre like ?")
 				.push(obj.getNombre()+"%"));
 				

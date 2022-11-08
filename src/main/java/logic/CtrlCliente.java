@@ -1,13 +1,12 @@
 package logic;
 
-import java.sql.SQLException;
 import java.util.LinkedList;
 
-import org.apache.catalina.User;
 
 import data.ClienteDao;
 import entities.Cliente;
 import entities.Usuario;
+import ourLib.AppException;
 import ourLib.LogicAbstraction.BasicCtrl;
 
 public class CtrlCliente extends BasicCtrl<Cliente, ClienteDao>{
@@ -17,7 +16,7 @@ public class CtrlCliente extends BasicCtrl<Cliente, ClienteDao>{
 			this.miDao= new ClienteDao();
 		}
 
-		public LinkedList<Cliente> getAllByLastName(Cliente cli, Usuario user) throws SQLException {
+		public LinkedList<Cliente> getAllByLastName(Cliente cli, Usuario user) throws AppException {
 			return miDao.getAllByLastName(cli);
 		}
 

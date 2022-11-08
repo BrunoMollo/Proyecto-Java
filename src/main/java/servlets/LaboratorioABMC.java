@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlLaboratorio;
+import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
@@ -18,6 +19,7 @@ import javax.management.ServiceNotFoundException;
 import entities.Droga;
 import entities.Laboratorio;
 import entities.Usuario;
+import ourLib.AppException;
 
 /**
  * Servlet implementation class LaboratorioABMC
@@ -62,7 +64,7 @@ public class LaboratorioABMC extends HttpServlet {
 			
 			
 			default:
-				throw new ServiceNotFoundException("no hay");
+				throw new AppException("no hay",404);
 			}
 		}
 		catch (Exception e) {
@@ -100,7 +102,7 @@ public class LaboratorioABMC extends HttpServlet {
 			}
 			
 			default:
-				throw new ServiceNotFoundException("no hay :(");
+				throw new AppException("no hay", 404);
 			}
 		}
 		catch (Exception e) {

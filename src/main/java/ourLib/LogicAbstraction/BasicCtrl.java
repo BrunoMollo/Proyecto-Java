@@ -1,10 +1,10 @@
 package ourLib.LogicAbstraction;
 
-import java.rmi.AccessException;
-import java.sql.SQLException;
+
 import java.util.LinkedList;
 
 import entities.Usuario;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 
 
@@ -21,30 +21,30 @@ public abstract class BasicCtrl<ENTITY, ENTIYT_DAO extends Dao<ENTITY>> {
 	protected ENTIYT_DAO miDao;
 	
 	//Variable para facilitar el desarollo, en realudad deveriaser USUARIO.ADMIN
-	private final int defualtPermision=Usuario.ANYONE;
+	private final int defualtPermision=Usuario.ADMIN;
 	
-	public ENTITY getOne(ENTITY e, Usuario user) throws SQLException, AccessException {
-		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
+	public ENTITY getOne(ENTITY e, Usuario user) throws AppException {
+		if(!user.hasAccess(defualtPermision)) {throw new AppException("Debe ser admin", 401);}
 		return miDao.getOne(e);
 	}
 
-	public void add(ENTITY e, Usuario user) throws SQLException, AccessException{
-		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
+	public void add(ENTITY e, Usuario user) throws AppException{
+		if(!user.hasAccess(defualtPermision)) {throw new AppException("Debe ser admin", 401);}
 		miDao.add(e);
 	}
 	
-	public LinkedList<ENTITY> getAll(Usuario user) throws SQLException, AccessException{
-		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
+	public LinkedList<ENTITY> getAll(Usuario user) throws AppException{
+		if(!user.hasAccess(defualtPermision)) {throw new AppException("Debe ser admin", 401);}
 		return miDao.getAll();
 	}
 	
-	public void update(ENTITY e, Usuario user) throws SQLException, AccessException {
-		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
+	public void update(ENTITY e, Usuario user) throws AppException {
+		if(!user.hasAccess(defualtPermision)) {throw new AppException("Debe ser admin", 401);}
 		miDao.update(e);
 	}
 
-	public void delete(ENTITY e, Usuario user) throws SQLException, AccessException {
-		if(!user.hasAccess(defualtPermision)) {throw new AccessException("Debe ser admin");}
+	public void delete(ENTITY e, Usuario user) throws AppException {
+		if(!user.hasAccess(defualtPermision)) {throw new AppException("Debe ser admin",401);}
 		miDao.delete(e);
 	}
 	
@@ -53,23 +53,23 @@ public abstract class BasicCtrl<ENTITY, ENTIYT_DAO extends Dao<ENTITY>> {
 	//estan para tener compatiblidad hacia atras con servlert de lab, hay que sacarlos despues
 	
 	@Deprecated
-	public ENTITY getOne(ENTITY e) throws SQLException {
+	public ENTITY getOne(ENTITY e) throws AppException {
 		return miDao.getOne(e);
 	}
 	@Deprecated
-	public void add(ENTITY e) throws SQLException{
+	public void add(ENTITY e) throws AppException{
 		miDao.add(e);
 	}
 	@Deprecated
-	public LinkedList<ENTITY> getAll() throws SQLException, AccessException{
+	public LinkedList<ENTITY> getAll() throws AppException{
 		return miDao.getAll();
 	}
 	@Deprecated
-	public void update(ENTITY e) throws SQLException, AccessException {
+	public void update(ENTITY e) throws AppException {
 		miDao.update(e);
 	}
 	@Deprecated
-	public void delete(ENTITY e) throws SQLException {
+	public void delete(ENTITY e) throws AppException {
 		miDao.delete(e);
 	}
 

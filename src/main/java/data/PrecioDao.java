@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import entities.Medicamento;
 import entities.Precio;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
@@ -20,13 +21,13 @@ public class PrecioDao extends Dao<Precio>{
 	}
 
 	@Override
-	public Precio getOne(Precio p) throws SQLException {
+	public Precio getOne(Precio p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 	
-	public Double getLatestPrice(Medicamento med) throws SQLException {
+	public Double getLatestPrice(Medicamento med) throws AppException {
 		StatementWrapper stw=new StatementWrapper("select * from precio_medicamento "
 				+ "where codigoMedicamento=? order by fecha desc limit 1 ");
 		stw.push(med.getCodigoBarra());
@@ -34,13 +35,13 @@ public class PrecioDao extends Dao<Precio>{
 	}
 
 	@Override
-	public LinkedList<Precio> getAll() throws SQLException {
+	public LinkedList<Precio> getAll() throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 	
-	public void add(Medicamento med, Precio p) throws SQLException {
+	public void add(Medicamento med, Precio p) throws AppException {
 		StatementWrapper stw=new StatementWrapper("insert into precio_medicamento "
 				+ "(codigoMedicamento, fecha, monto) values (?,?,?)");
 		stw.push(med.getCodigoBarra());
@@ -50,27 +51,27 @@ public class PrecioDao extends Dao<Precio>{
 	}
 	
 	@Override
-	public void add(Precio p) throws SQLException {
+	public void add(Precio p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
 	@Override
-	public void update(Precio p) throws SQLException {
+	public void update(Precio p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
 	@Override
-	public void delete(Precio p) throws SQLException {
+	public void delete(Precio p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
-	public LinkedList<Precio> getPrices(Medicamento med) throws SQLException {
+	public LinkedList<Precio> getPrices(Medicamento med) throws AppException {
 		return doFindAll(new StatementWrapper("select * from precio_medicamento where codigoMedicamento=? "
 				+ "order by fecha desc").push(med.getCodigoBarra()));
 	}

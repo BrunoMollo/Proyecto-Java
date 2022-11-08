@@ -1,6 +1,5 @@
 package logic;
 
-import java.rmi.AccessException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -9,6 +8,7 @@ import data.VentaDao;
 import entities.Medicamento;
 import entities.Usuario;
 import entities.Venta;
+import ourLib.AppException;
 
 public class CtrlVenta {
 
@@ -22,16 +22,16 @@ public class CtrlVenta {
 		return ventaActual;
 	}
 	
-	public void iniciarVentaLibre(Usuario _user) throws AccessException {
+	public void iniciarVentaLibre(Usuario _user) throws AppException {
 		user=_user;
-		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		ventaActual=new Venta();
 		ventaActual.setVendidoPor(user);
 	}
 	
 	
-	public Boolean addMedicamento(String nombreMed, Integer cant) throws SQLException, AccessException {
-		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
+	public Boolean addMedicamento(String nombreMed, Integer cant) throws AppException {
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		Medicamento med= new Medicamento();
 		med.setNombre(nombreMed);
 		med=mDao.getByName(med);
@@ -43,8 +43,8 @@ public class CtrlVenta {
 	}	
 	
 	
-	public void cerrarVenta() throws SQLException, AccessException {
-		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AccessException("Debe ser vendedor");}
+	public void cerrarVenta() throws AppException {
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		ventaActual.setFechaVenta(LocalDateTime.now());
 		ventaActual.cacularTotal();
 		

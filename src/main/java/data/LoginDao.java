@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 import entities.Usuario;
@@ -23,14 +24,14 @@ public class LoginDao extends Dao<Usuario>{
 
 
 	@Override
-	public Usuario getOne(Usuario p) throws SQLException {
+	public Usuario getOne(Usuario p) throws AppException {
 		StatementWrapper stw=new StatementWrapper("select * from usuarios where usuario=?");
 		stw.push(p.getUsuario());
 		return doGetOne(stw);
 		
 	}
 	
-	public Usuario getUP(Usuario p) throws SQLException {
+	public Usuario getUP(Usuario p) throws AppException {
 		StatementWrapper stw=new StatementWrapper("select * from usuarios where usuario=? and contrasena=?");
 		stw.push(p.getUsuario());
 		stw.push(p.getContrasena());
@@ -39,34 +40,34 @@ public class LoginDao extends Dao<Usuario>{
 
 
 	@Override
-	public LinkedList<Usuario> getAll() throws SQLException {
+	public LinkedList<Usuario> getAll() throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
 	@Override
-	public void add(Usuario p) throws SQLException {
+	public void add(Usuario p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
 	@Override
-	public void update(Usuario p) throws SQLException {
+	public void update(Usuario p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 
 	@Override
-	public void delete(Usuario p) throws SQLException {
+	public void delete(Usuario p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Manga de vagos, implementen "+funcName);
+		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 
 

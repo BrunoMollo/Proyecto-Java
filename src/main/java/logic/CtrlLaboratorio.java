@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import data.LaboratorioDao;
 import entities.Laboratorio;
+import ourLib.AppException;
 import ourLib.LogicAbstraction.BasicCtrl;
 
 public class CtrlLaboratorio extends BasicCtrl<Laboratorio, LaboratorioDao>{
@@ -13,7 +14,7 @@ public class CtrlLaboratorio extends BasicCtrl<Laboratorio, LaboratorioDao>{
 		 this.miDao=new LaboratorioDao();
 	}
 
-	public LinkedList<Laboratorio> getByPartialName(Laboratorio lab) throws SQLException {
+	public LinkedList<Laboratorio> getByPartialName(Laboratorio lab) throws AppException {
 		return miDao.getByPartialName(lab);
 	}
 	

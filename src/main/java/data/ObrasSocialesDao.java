@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import entities.ObraSocial;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
@@ -24,12 +25,12 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
  
 
 	@Override
-	public LinkedList<ObraSocial> getAll() throws SQLException {
+	public LinkedList<ObraSocial> getAll() throws AppException {
 		return doFindAll(new StatementWrapper("select * from obras_sociales"));
 	}
 
 	@Override
-	public void add(ObraSocial os) throws SQLException {
+	public void add(ObraSocial os) throws AppException {
 		StatementWrapper stw=new StatementWrapper("insert into obras_sociales (nombre,telefono,email,descuentoGeneral) values (?,?,?,?)");
 		stw.push(os.getNombre())
 			.push(os.getTelefono())
@@ -39,7 +40,7 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 	}
 
 	@Override
-	public void update(ObraSocial os) throws SQLException {
+	public void update(ObraSocial os) throws AppException {
 		StatementWrapper stw=new StatementWrapper("update obras_sociales set nombre=?, telefono=?, email=?, descuentoGeneral=?  where id=?")
 				.push(os.getNombre())
 				.push(os.getTelefono())
@@ -50,18 +51,18 @@ public class ObrasSocialesDao extends Dao<ObraSocial>{
 	}
 
 	@Override
-	public void delete(ObraSocial p) throws SQLException {
+	public void delete(ObraSocial p) throws AppException {
 		doModification(new StatementWrapper("delete from obras_sociales where id=?").push(p.getId()));
 	}
 
-	public LinkedList<ObraSocial> getAllByName(ObraSocial os) throws SQLException {
+	public LinkedList<ObraSocial> getAllByName(ObraSocial os) throws AppException {
 		return doFindAll(new StatementWrapper("select * from obras_sociales where nombre like ?").push(os.getNombre()+"%"));
 	}
 
 
 
 	@Override
-	public ObraSocial getOne(ObraSocial p) throws SQLException {
+	public ObraSocial getOne(ObraSocial p) throws AppException {
 		StatementWrapper stw=new StatementWrapper("select * from obras_sociales  where id=?")
 				.push(p.getId());
 			 return doGetOne(stw);

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import entities.Cliente;
 import entities.LineaVenta;
 import entities.Venta;
+import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
 
@@ -16,7 +17,7 @@ public class VentaDao extends Dao<Venta>{
 	private LineaVentaDao lvDao= new LineaVentaDao();
 	
 	@Override
-	protected Venta mapFromResulset(ResultSet rs) throws SQLException {
+	protected Venta mapFromResulset(ResultSet rs) throws SQLException, AppException {
 		Venta venta=new Venta();
 		
 		venta.setNroReceta(rs.getInt("nroVenta"));
@@ -30,21 +31,21 @@ public class VentaDao extends Dao<Venta>{
 	}
 
 	@Override
-	public Venta getOne(Venta p) throws SQLException {
+	public Venta getOne(Venta p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
 	@Override
-	public LinkedList<Venta> getAll() throws SQLException {
+	public LinkedList<Venta> getAll() throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
 	@Override
-	public void add(Venta v) throws SQLException {
+	public void add(Venta v) throws AppException {
 		StatementWrapper tablaVenta= new StatementWrapper("INSERT INTO ventas"
 				+ "( fecha, total, dniCliente, nroReceta, vendidoPor) VALUES"
 				+ "(?,?,?,?,?)")
@@ -62,17 +63,17 @@ public class VentaDao extends Dao<Venta>{
 	}
 
 	@Override
-	public void update(Venta p) throws SQLException {
+	public void update(Venta p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
 	@Override
-	public void delete(Venta p) throws SQLException {
+	public void delete(Venta p) throws AppException {
 		// TODO Auto-generated method stub
 		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new UnsupportedOperationException("Not Implemented "+funcName);
+		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
 }
