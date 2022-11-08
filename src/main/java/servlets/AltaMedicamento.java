@@ -53,6 +53,10 @@ public class AltaMedicamento extends HttpServlet {
 						request.getRequestDispatcher("/WEB-INF/ui-medicamento/altaMedicamento.html").forward(request, response);
 						break;
 					}
+					case "redirectNewPrecio": {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/ModificarPrecioMedicamento.html").forward(request, response);
+						break;
+					}
 				}}
 				 catch (Exception e) {
 					ExceptionDispacher.manage(e, response);
@@ -90,7 +94,7 @@ public class AltaMedicamento extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
 	
-			case "/guardarmedicamento":
+			case "guardarmedicamento":
 				CtrlMedicamento ctrlmed = new CtrlMedicamento();
 
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
@@ -101,9 +105,9 @@ public class AltaMedicamento extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 				
-			case "/getmedicprecios":
+			case "getmedicprecios":
 				CtrlMedicamento ctrlme = new CtrlMedicamento();
-				Medicamento m = mapMedicamento(request);		
+				Medicamento m = mapMedicamento(request);
 				m = ctrlme.getOne(m,user);
 				LinkedList<Precio> listaPrecios = ctrlme.getAllPrecios(m);
 				request.getSession().setAttribute("medicamento", m);
@@ -111,7 +115,7 @@ public class AltaMedicamento extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/agregarPrecio.jsp").forward(request, response);
 				break;
 				
-			case "/addnuevoprecio":
+			case "addnuevoprecio":
 				CtrlMedicamento ctrlm = new CtrlMedicamento();
 				Medicamento medicam = (Medicamento) request.getSession().getAttribute("medicamento");	
 				Precio nuevo =new Precio();				
@@ -120,7 +124,7 @@ public class AltaMedicamento extends HttpServlet {
 				nuevo.setMonto(Double.parseDouble(request.getParameter("precioNuevo")));
 				
 				ctrlm.addPrecioNuevo(medicam,nuevo);
-				response.sendRedirect("../indexLog.html");
+				response.sendRedirect("../index.html");
 				//request.getRequestDispatcher("../indexLog.html").forward(request, response);
 				break;
 		}
