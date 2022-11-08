@@ -22,7 +22,7 @@
 	<button type="submit">Guardar</button>
 </form>
 <br>
-<a href="../indexLog.html">Cancelar</a>
+<a href="../index.html">Cancelar</a>
 <br><br>
 <label>Precios anteriores:</label>
 <table>
