@@ -19,11 +19,11 @@ public class DbConnector {
 	private static DbConnector instancia;
 	
 	private String driver="com.mysql.cj.jdbc.Driver";
-	private String host="us-cdbr-east-06.cleardb.net";
-	private String port="3306";
+	private String host="containers-us-west-34.railway.app";
+	private String port="7921";
 	private String user=System.getenv("JAVA_BD_USER");
 	private String password=System.getenv("JAVA_BD_PSW");
-	private String db="heroku_f46f78fc841fab8";
+	private String db="railway";
 
 	private int conectados=0;
 	private Connection conn=null;
