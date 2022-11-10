@@ -31,7 +31,8 @@
 </head>
 <body>
 	<header>
-		<h1>Nueva Venta</h1>
+		<h1 class="d-inline ml-3">Nueva Venta</h1>
+		<a href="../index.html" class="w-20 h-10 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
 	</header>
 	<main>
 		<form action="addMedicamento" method="post">
@@ -43,18 +44,18 @@
  							<ul id="sugerencias"></ul>	
     					</div>
     				</div>
-    				<div class="row">
-    					<div class="col">
+    				<div class="row">	
+    					<div class="col ml-5">
 			  				<label class="col-md-0 control-label">Cantidad</label>      
 			 				<input  name="cantidad"class="form-control" placeholder="Cantidad" type="number" value="1">
     					</div>
-    					<div class="col">
-			  				<button class="btn btn-warning" type="submit">Agregar</button>
+    					<div class="col p-4">
+			  				<button class="w-20 h-15   btn btn-success btn-lg" type="submit">Agregar</button>
     					</div>
     				</div>
 			</div>
 		</form>
-		<div class="table-responsive">
+		<div class="table-responsive ml-5">
                     	<table class="table">
                     		<thead>
                     			<tr>
@@ -77,8 +78,8 @@
                     				<td>
                     					<div class= "btn-edit">
                     				 		<form action="" method="post">
-                    							<input type="" class="custom-control-input"  name="" value="">
-												<input class="btn btn-success btn-lg btn-block" id="" type="submit" value=""> 
+                    						<!--	<input type="" class="custom-control-input"  name="" value="">
+													<input class="btn btn-success btn-lg btn-block" id="" type="submit" value=""> -->
 											</form>
                     					</div>	
                     				</td>
@@ -93,7 +94,7 @@
 		
 		<div>
                  <form action="cerrarVenta" method="post">
-						<input type="submit" value="Realizar Venta"> 
+						<input type="submit" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Realizar Venta"> 
 				</form>
         </div>	
  	</main>

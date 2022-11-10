@@ -14,22 +14,21 @@ const $localidad = document.getElementById('selLocalidad');
 }
 
 if(!$provincia.value){
-	$provincia.addEventListener("DOMContentLoaded",provincia);
+	document.addEventListener("DOMContentLoaded",provincia);
+	$provincia.addEventListener("change",e => localidad(e.target.value))
 	
 	}
 else{	
+		console.log($provincia.value)
 	$provincia.addEventListener("click",provincia,{once:true});
-		
+	$provincia.addEventListener("change",e => localidad(e.target.value))
 }
-
-$provincia.addEventListener("change",e => localidad(e.target.value),{once:true})
-
 
  function provincia() {
     fetch("https://apis.datos.gob.ar/georef/api/provincias")
     .then(res => res.ok ? res.json(): Promise.reject(res))
     .then(json => {
-		let $options= "<option disabled selected >Elige una Provincia </option>"; ;
+		let $options= "<option value=\"\" disabled selected >Elige una Provincia </option>"; 
 		
 		let ordenado = json.provincias.sort(compare_nombre)
 		for(let prov of ordenado)

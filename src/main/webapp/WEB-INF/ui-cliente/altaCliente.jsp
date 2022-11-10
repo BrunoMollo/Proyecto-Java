@@ -58,7 +58,7 @@
 		    		<div class="col">
 		  				<label class="col-md-0 control-label">Provincia</label>       		 			   
  						<select class="form-control" name="provincia"  id="selProvincia" required >
- 							<option>Eliga una provincia</option>
+ 							<option value="">Eliga una provincia</option>
  						</select>
 		    		</div>
 		  		</div>

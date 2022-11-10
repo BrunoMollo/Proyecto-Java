@@ -94,23 +94,7 @@
 	 <!-- /container -->
 	 
 <script  type="text/javascript"	 >
-	 function sendUpdate(dni) {
-			newName=document.getElementById("name_"+dni).value;
-		
-			axios(
-				{
-					url: '/lafarmacia/ABMC-droga/update',
-					method:"post",
-					params:{
-						cod_droga: cod,
-						name_droga: newName
-					}
-				}		
-			)
-			.then((res)=>location.reload())
-			.catch((err)=>{ console.log(err.response.data); alert("ups... algo salio mal") })
-			
-		}
+
 	 function sendDelete(dni) {
 			if(confirm("Seguro que desea borrar el registro?")===false){
 				return;	
