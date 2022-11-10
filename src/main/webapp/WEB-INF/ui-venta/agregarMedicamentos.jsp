@@ -14,11 +14,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link href="style/addCliente.css" rel="stylesheet" type="text/css">
 <link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 <link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
 <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script defer src="/lafarmacia/js/asyncRequest.js"></script>
+<script defer src="/lafarmacia/js/async.js"></script>
 
 <title>Venta</title>
 
@@ -38,9 +37,9 @@
 		<form action="addMedicamento" method="post">
 			<div class="form-group ">
 					<div class="row">
- 						<div class="col async-search" url="/lafarmacia/ABMC-medicamento/getbyname" searchParameter="name_med">
+ 						<div class="col async-search" url="/lafarmacia/ABMC-medicamento/" searchParameter="name_med">
   							<label class="col-md-0 control-label">Nombre Medicamento</label>      
- 							<input  name="name_med"class="form-control" placeholder="Nombre Medicamento" type="text" autocomplete="off" required>
+ 							<input id="asyncInput" name="name_med"class="form-control" placeholder="Nombre Medicamento" type="text" autocomplete="off" required>
  							<ul id="sugerencias"></ul>	
     					</div>
     				</div>

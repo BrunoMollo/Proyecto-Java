@@ -37,6 +37,14 @@ public class AltaMedicamento extends HttpServlet {
 			try {
 				switch (request.getPathInfo().substring(1)){
 				
+				case "all": {
+					LinkedList<Medicamento> arr = ctrlmed.getAll(user);
+					response.setContentType("application/json");
+					String JsonArr=JsonMaker.getJsonArray(arr);
+					response.setStatus(200);	
+					response.getWriter().append(JsonArr);							
+					break;}
+				
 					case "getbyname": 
 						if(med.getNombre().length()<2) {
 				    		response.sendError(400, "largo insuficiente");

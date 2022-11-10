@@ -26,6 +26,9 @@ public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
 	public LinkedList<Medicamento> getByPartialName(Medicamento obj) throws SQLException, AppException {
 		return this.miDao.getAllByPartialName(obj);
 	}
+	public LinkedList<Medicamento> getAll() throws  AppException {
+		return this.miDao.getAll();
+	}
 	
 	public void add(Medicamento med, Usuario user) throws AppException{
 		if(!user.hasAccess(Usuario.ADMIN)) {throw new AppException("Debe ser admin", 401);}

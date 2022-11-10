@@ -10,20 +10,22 @@
 	width: 50%;
 	}
 	
-	.async-search>input{
+	.async-search input{
 	padding: 2px;
 	width: 100%;
 	}
 
-	#sugerencias > li:hover{
-	color:blue;
+	#sugerencias  li:hover{
+	color:white;
+	background:green
 	} 
 
-	#sugerencias > li {
-	
-	padding: 5px;
-	list-style: none;
-	border: 1px solid #000;
-	cursor: pointer;
-	position: relative;
-	} 
+	#sugerencias li {
+	color: black;
+    padding: 5px;
+    list-style: none;
+    border: 1px solid #000;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+    background: gainsboro;}

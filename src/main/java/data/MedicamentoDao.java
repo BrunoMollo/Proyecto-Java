@@ -80,9 +80,15 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	@Override
 	public LinkedList<Medicamento> getAll() throws AppException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new AppException("Manga de vagos, implementen "+funcName,500);
+		LinkedList<Medicamento> med=doFindAll(
+				new StatementWrapper( "select * from medicamentos "));
+		if(med!=null) {
+			for(Medicamento m:med) {
+				m.setPrecio(pDao.getLatestPrice(m));
+			}
+		}
+		
+		return med;
 	}
 
 	
