@@ -43,7 +43,12 @@ public class Login extends HttpServlet {
 			if(user!=null) {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
-				request.getRequestDispatcher("index.html").forward(request, response);
+				if(user.getRol()==Usuario.ADMIN) {
+					request.getRequestDispatcher("index.html").forward(request, response);
+				}
+				if(user.getRol()==Usuario.VENDEDOR) {
+					request.getRequestDispatcher("home.html").forward(request, response);
+				}
 			} else {
 				response.sendRedirect("login.html");
 			}

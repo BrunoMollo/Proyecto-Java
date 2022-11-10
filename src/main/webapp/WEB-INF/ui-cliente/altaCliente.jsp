@@ -17,9 +17,7 @@
 <link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 <script defer src="../js/apiLocalidades.js"></script>
 <%	
-	Usuario u= (Usuario)request.getSession().getAttribute("user");
-	LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll(u);
-	
+	LinkedList<ObraSocial> obraSociales = (LinkedList<ObraSocial>) request.getAttribute("listOS");
 %>
 <title>Nuevo Cliente</title>
 </head>
@@ -111,7 +109,7 @@
  	  		<div class="form-group">
  	  			<div class="row">
     				<div class="col">
-    					<a class="btn btn-success btn-lg " href="../index.html">Volver al menu</a>
+    					<a class="btn btn-success btn-lg " href="../Redirect">Volver al menu</a>
     				</div>
     				<div class="col">
     					<button type="submit" class="btn btn-success btn-lg" >Agregar</button>

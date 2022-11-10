@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlCliente;
+import logic.CtrlObraSocial;
 import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
@@ -67,7 +68,7 @@ public class ClienteABMC extends HttpServlet {
 		try {
 			switch (request.getPathInfo().substring(1)) {
 			case "all": {
-				LinkedList<Cliente> arr = con.getAll(user);
+				LinkedList<Cliente> arr = con.getAll();
 				request.setAttribute("all", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
 				break;
@@ -87,7 +88,9 @@ public class ClienteABMC extends HttpServlet {
 				break;
 			}
 			//Consultar esto. Larga un Error en consola. No me parece buena idea.
-			case "new": {				
+			case "new": {
+				LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll();
+				request.setAttribute("listOS", obraSociales);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/altaCliente.jsp").forward(request, response);
 				break;
 			}
@@ -114,9 +117,9 @@ public class ClienteABMC extends HttpServlet {
 			switch (request.getPathInfo().substring(1)) {
 			case "add": {
 				Cliente cli= getCliente(new RequestParameterParser(request));
-				con.add(cli, user);
+				con.add(cli);
 				response.setStatus(201);
-				LinkedList<Cliente> arr = con.getAll(user);
+				LinkedList<Cliente> arr = con.getAll();
 				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-cliente/all");
 				break;
 			}
@@ -125,12 +128,16 @@ public class ClienteABMC extends HttpServlet {
 				
 				//response.sendRedirect("/lafarmacia/WEB-INF/ui-cliente/updateCliente.jsp");
 				//return ;
+				
+				request.setAttribute("listOS", new CtrlObraSocial().getAll());
+				Cliente c= new Cliente(Integer.parseInt(request.getParameter("dniCliente")));
+				request.setAttribute("cliente", new CtrlCliente().getOne(c));
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/updateCliente.jsp").forward(request, response);
 				break;
 			}
 			case "update": {
 				Cliente cli= getCliente(new RequestParameterParser(request));
-				con.update(cli, user);
+				con.update(cli);
 				response.setStatus(200);
 				request.setAttribute("addedObject", cli);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
@@ -139,7 +146,7 @@ public class ClienteABMC extends HttpServlet {
 			case "delete": {
 			
 				Cliente cli= getClienteByDni(new RequestParameterParser(request));
-				con.delete(cli, user);
+				con.delete(cli);
 				response.setStatus(202);
 				break;
 			}

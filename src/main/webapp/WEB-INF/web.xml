@@ -49,7 +49,7 @@
     <servlet-name>AltaMedicamento</servlet-name>
     <url-pattern>/AltaMedicamento/*</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>AltaMedicamento</servlet-name>
     <url-pattern>/ABMC-medicamento/*</url-pattern>
   </servlet-mapping>
@@ -82,5 +82,15 @@
   <servlet-mapping>
     <servlet-name>VentaServlet</servlet-name>
     <url-pattern>/venta/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Redirect</display-name>
+    <servlet-name>Redirect</servlet-name>
+    <servlet-class>servlets.Redirect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Redirect</servlet-name>
+    <url-pattern>/Redirect</url-pattern>
   </servlet-mapping>
 </web-app>

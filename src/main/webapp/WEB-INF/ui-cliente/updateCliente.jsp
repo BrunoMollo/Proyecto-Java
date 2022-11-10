@@ -9,23 +9,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link href="../style/addCliente.css" rel="stylesheet" type="text/css">
-<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
-<script defer src="../js/apiLocalidades.js"></script>
-<title>Actualiza Cliente</title>
-<%	
-	Usuario u= (Usuario)request.getSession().getAttribute("user");
-	LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll(u);
-	Cliente c= new Cliente(Integer.parseInt(request.getParameter("dniCliente")));
-	c = new CtrlCliente().getOne(c, u);
-	
-			
-%>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+	<link href="../style/addCliente.css" rel="stylesheet" type="text/css">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+	<script defer src="../js/apiLocalidades.js"></script>
+	<title>Actualiza Cliente</title>
+	<%	
+		LinkedList<ObraSocial> obraSociales = (LinkedList<ObraSocial>) request.getAttribute("listOS");
+		Cliente c = (Cliente) request.getAttribute("cliente");
+	%>
 
 </head>
 
@@ -117,7 +113,7 @@
  	  		<div class="form-group">
  	  			<div class="row">
  	  				<div class="col">
-    					<a class="btn btn-success btn-lg " href="../index.html">Volver al menu</a>
+    					<a class="btn btn-success btn-lg " href="../Redirect">Volver al menu</a>
     				</div>
  	  				<div class="col">
     					<button type="submit" class="btn btn-warning" >Actualizar </button>
