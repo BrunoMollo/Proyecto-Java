@@ -20,11 +20,11 @@
 		%>
 </head>
 <body>
-<h2>Drogas</h2>
-
-<p>[ <a href="../index.html">Volver al menu</a> ] </p>
-
-<table class="table" border="1px solid black">
+<header>
+	<h2 class="d-inline ml-3">Drogas</h2>
+	<a href="../index.html" class="w-20 float-right mt-1 mb-3 mr-2 btn btn-success btn-lg">Volver al menu</a>
+</header>
+<table class="table-responsive ml-5" >
 	<thead>
 		<tr>
 			<th>Codigo</th>
@@ -38,8 +38,8 @@
 				<tr>
 					<td><%=d.getCod()%> </td>
 					<td><input value="<%=d.getNombre()%>" type="text" id=<%="name_"+d.getCod()%>></td>
-					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %> /></td>
-					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+d.getCod()+")" %> /></td>
+					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %>></td> 
+					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Eliminar" onclick=<%="sendDelete("+d.getCod()+")" %>></td> 
 				</tr>
 		<%}%>
 	</tbody>

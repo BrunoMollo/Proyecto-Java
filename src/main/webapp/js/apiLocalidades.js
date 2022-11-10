@@ -19,7 +19,6 @@ if(!$provincia.value){
 	
 	}
 else{	
-		console.log($provincia.value)
 	$provincia.addEventListener("click",provincia,{once:true});
 	$provincia.addEventListener("change",e => localidad(e.target.value))
 }

@@ -25,13 +25,13 @@ table.center {
 	%>
 </head>
 <body>
-<h2 align="center">Laboratorios</h2>
-
-<p align="center">[ <a href="../index.html">Volver al menu</a> ] </p>
-
+<header>
+	<h2 class="d-inline ml-3">Laboratorios</h2>
+	<a href="../index.html" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+</header>
 <table class="center" >
 	<thead>
-		<tr>
+		<tr style="text-align:center">
 			<th>Codigo</th>
 			<th>Nombre</th>
 			<th>Email</th>
@@ -47,8 +47,8 @@ table.center {
 					<td><input value="<%=l.getNombre()%>" type="text" id=<%="name_"+l.getCodigo()%> ></td>
 					<td><input value="<%=l.getEmail()%>" type="email" id=<%="email_"+l.getCodigo()%> ></td>
 					<td><input value="<%=l.getTelefono()%>" type="number" id=<%="telefono_"+l.getCodigo()%> ></td>
-					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+l.getCodigo()+")" %> /></td>
-					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+l.getCodigo()+")" %> /></td>
+					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" onclick=<%="sendUpdate("+l.getCodigo()+")" %> id="btn-update" value="Guardar"></td> 
+					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" onclick=<%="sendDelete("+l.getCodigo()+")" %> id="btn-delete" value="Eliminar"></td>
 				</tr>
 		<%}%>
 	</tbody>

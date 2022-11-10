@@ -2,15 +2,20 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 <title>Modificar precio Medicamento</title>
 </head>
-<body>
-
-<form action="AltaMedicamento/getmedicprecios" method="post">
-	<label>Ingrese codigo de producto:</label>
+<body style="height: 100vh">
+<div class="h-50 d-flex justify-content-center align-items-center">
+<form  class="border border-success p-4 rounded shadow " action="AltaMedicamento/getmedicprecios" method="post">
+	<label >Ingrese codigo de producto:</label>
 	<input type="number" min="000000000000" max="999999999999" name="cod_med" placeholder="ej: 000000000001" required>
-	<button type="submit">Buscar</button>
+	<button class="w-20 h-15   btn btn-success btn-lg" type="submit">Buscar</button>
 </form>
-
+</div>
 </body>
 </html>

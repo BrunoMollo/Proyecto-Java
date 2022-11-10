@@ -9,6 +9,10 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 	<title>Listado de drogas</title>
 		
@@ -17,10 +21,10 @@
 	%>
 </head>
 <body>
-<h2>Obras Sociales</h2>
-
-<p>[ <a href="../index.html">Volver al menu</a> ] </p>
-
+<header>
+	<h2 class="d-inline ml-3">Obras Sociales</h2>
+	<a href="../index.html" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+</header>
 <table class="table" >
 	<thead>
 		<tr>
@@ -41,8 +45,8 @@
 					<td><input value="<%=os.getTelefono() %>" type="number" id=<%="tel-"+os.getId()%>></td>
 					<td><input value="<%=os.getEmail() %>" type="email" id=<%="email-"+os.getId()%>></td>
 					<td><input value=<%=os.getDescuento() %> type="number" step="0.001" min="0" max="100" id=<%="discount-"+os.getId()%>></td>
-					<td><input type="button" value="Guardar" onclick=<%="sendUpdate("+os.getId()+")" %> id="btn-update"/></td>
-					<td><input type="button" value="Eliminar" onclick=<%="sendDelete("+os.getId()+")" %> id="btn-delete"/></td>
+					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" onclick=<%="sendUpdate("+os.getId()+")" %> id="btn-update" value="Guardar"></td> 
+					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" onclick=<%="sendDelete("+os.getId()+")" %> id="btn-delete" value="Eliminar"></td>
 				</tr>
 		<%}%>
 	</tbody>
