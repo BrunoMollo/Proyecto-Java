@@ -74,7 +74,7 @@ public class VentaServlet extends HttpServlet {
 			}
 			case "/cerrarVenta": {
 				con.cerrarVenta();
-				response.sendRedirect("/lafarmacia");//volver al menu de vendedro ¿?
+				response.sendRedirect("../Redirect");//volver al menu de vendedro ¿?
 				
 				break;
 			}
