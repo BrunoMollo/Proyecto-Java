@@ -3,10 +3,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
-
 import entities.Cliente;
 import entities.ObraSocial;
-import logic.CtrlObraSocial;
 import ourLib.AppException;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.StatementWrapper;
