@@ -17,6 +17,7 @@ public class Cliente implements Jsonable {
 	private String email;
 	private String telefono;
 	private ObraSocial obraSocial;
+	private int nroAfiliado;
 	private LocalDate fechaNacimiento;
 	private String localidad;
 	private String provincia;
@@ -63,6 +64,12 @@ public class Cliente implements Jsonable {
 	public void setObraSocial(ObraSocial obraSocial) {
 		this.obraSocial = obraSocial;
 	}
+	public int getNroAfiliado() {
+		return nroAfiliado;
+	}
+	public void setNroAfiliado(int nroAfiliado) {
+		this.nroAfiliado = nroAfiliado;
+	}
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
@@ -90,9 +97,9 @@ public class Cliente implements Jsonable {
 	public Cliente() {
 		
 	}
-public Cliente(int dni) {
-	super();
-	this.setDni(dni);
+	public Cliente(int dni) {
+		super();
+		this.setDni(dni);
 	}
 	@Override
 	public String toJson() {

@@ -20,6 +20,10 @@ public class CtrlCliente extends BasicCtrl<Cliente, ClienteDao>{
 			return miDao.getAllByLastName(cli);
 		}
 
+		public Cliente getByNroAfiliado(Cliente c) throws AppException {
+			return miDao.getByNroAfiliado(c);
+		}
+
 		
 	}
 

@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import logic.CtrlCliente;
 import logic.CtrlVenta;
 import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
@@ -65,6 +66,7 @@ public class VentaServlet extends HttpServlet {
 		
 		Usuario user=Usuario.factory(request);
 		CtrlVenta con= (CtrlVenta) request.getSession().getAttribute("CtrlVenta");
+		CtrlCliente ccli = new CtrlCliente();
 		
 		try {
 			switch (request.getPathInfo()) {
@@ -87,8 +89,22 @@ public class VentaServlet extends HttpServlet {
 			case "/buscarCliente": {
 				ClienteDao cdao = new ClienteDao();
 				Integer dni= Integer.parseInt(request.getParameter("dniCliente"));
-				Cliente c = cdao.getOne(new Cliente(dni));
-				
+				Cliente c = ccli.getOne(new Cliente(dni));
+				if(c!=null) {
+					request.getSession().setAttribute("cliente", c);
+					con.setCliente(c);
+					request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentosOS.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("/WEB-INF/ui-venta/buscarCliente.html").forward(request, response);
+				}
+				break;
+			}
+			case "/buscarAfiliado": {
+				ClienteDao cdao = new ClienteDao();
+				Integer nroAfiliado= Integer.parseInt(request.getParameter("nroAfiliado"));
+				Cliente c = new Cliente();
+				c.setNroAfiliado(nroAfiliado);
+				c = ccli.getByNroAfiliado(c);
 				if(c!=null) {
 					request.getSession().setAttribute("cliente", c);
 					con.setCliente(c);
@@ -116,7 +132,11 @@ public class VentaServlet extends HttpServlet {
 		catch (Exception e) {
 			ExceptionDispacher.manage(e, response);
 		}
+		
+		
     }
+	
+	
 		
 }
 
