@@ -22,20 +22,21 @@ public class Login extends HttpServlet {
        
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		Usuario user=Usuario.factory(request);
 		
-			if(user.getNombre()==null) {
-				response.sendRedirect("login.html");		
+		Usuario user=Usuario.factory(request);
+
+		
+		if(user.getNombre()==null) {
+			response.sendRedirect("login.html");		
+		}
+		else {
+			if(user.getRol()==Usuario.ADMIN) {
+				request.getRequestDispatcher("WEB-INF/adminMenu.jsp").forward(request, response);
 			}
-			else {
-				if(user.getRol()==Usuario.ADMIN) {
-					request.getRequestDispatcher("WEB-INF/adminMenu.html").forward(request, response);
-				}
-				else if(user.getRol()==Usuario.VENDEDOR) {
-					request.getRequestDispatcher("WEB-INF/vendedorMenu.html").forward(request, response);
-				}
+			else if(user.getRol()==Usuario.VENDEDOR) {
+				request.getRequestDispatcher("WEB-INF/vendedorMenu.jsp").forward(request, response);
 			}
+		}
 			
 	}
 
@@ -60,10 +61,10 @@ public class Login extends HttpServlet {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
 				if(user.getRol()==Usuario.ADMIN) {
-					request.getRequestDispatcher("WEB-INF/adminMenu.html").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/adminMenu.jsp").forward(request, response);
 				}
 				if(user.getRol()==Usuario.VENDEDOR) {
-					request.getRequestDispatcher("WEB-INF/vendedorMenu.html").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/vendedorMenu.jsp").forward(request, response);
 				}
 				} else {
 					response.sendRedirect("login.html");

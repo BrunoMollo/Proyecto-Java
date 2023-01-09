@@ -15,35 +15,24 @@ import entities.Usuario;
 public class Redirect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Redirect() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	//Estamos duplicando codigo a lo pabote teniendo esto separado del servlet de login, pero funciona. fue 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario user= Usuario.factory(request);
 		
-		if(user.getRol()==Usuario.ADMIN) {
-			response.sendRedirect("index.html");
+		if(user.getNombre()==null) {
+			response.sendRedirect("login.html");		
 		}
-		if(user.getRol()==Usuario.VENDEDOR) {
-			response.sendRedirect("home.html");
+		else {
+			if(user.getRol()==Usuario.ADMIN) {
+				request.getRequestDispatcher("WEB-INF/adminMenu.jsp").forward(request, response);
+			}
+			else if(user.getRol()==Usuario.VENDEDOR) {
+				request.getRequestDispatcher("WEB-INF/vendedorMenu.jsp").forward(request, response);
+			}
 		}
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
 
 }
