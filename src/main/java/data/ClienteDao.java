@@ -27,6 +27,7 @@ public class ClienteDao extends Dao<Cliente>{
 			cli.setFechaNacimiento(rs.getObject("fechaNac", LocalDate.class));
 			cli.setObraSocial(osDao.getOne(new ObraSocial(rs.getInt("id_obraSocial"))));
 			cli.setDireccion(rs.getString("direccion"));
+			cli.setNroAfiliado(rs.getString("nroAfiliado"));
 			return cli;
 		}
 
@@ -37,7 +38,7 @@ public class ClienteDao extends Dao<Cliente>{
 
 		@Override
 		public void add(Cliente cli) throws AppException {
-			StatementWrapper stw=new StatementWrapper("insert into clientes (dni,nombre,apellido,email,telefono,localidad,provincia,fechaNac,id_obraSocial,direccion) values (?,?,?,?,?,?,?,?,?,?)")
+			StatementWrapper stw=new StatementWrapper("insert into clientes (dni,nombre,apellido,email,telefono,localidad,provincia,fechaNac,id_obraSocial,direccion, nroAfiliado) values (?,?,?,?,?,?,?,?,?,?,?)")
 				.push(cli.getDni())
 				.push(cli.getNombre())
 				.push(cli.getApellido())
@@ -47,13 +48,15 @@ public class ClienteDao extends Dao<Cliente>{
 				.push(cli.getProvincia())
 				.push(cli.getFechaNacimiento())
 				.push(cli.getObraSocial().getId())
-				.push(cli.getDireccion());
+				.push(cli.getDireccion())
+				.push(cli.getNroAfiliado());
 			doModification(stw);
 		}
 
 		@Override
 		public void update(Cliente cli) throws AppException {
-			StatementWrapper stw=new StatementWrapper("update clientes set nombre=?, apellido=? ,telefono=?, email=?, localidad=? , provincia=?,fechaNac=?, id_obraSocial=? ,direccion=? where dni=?")
+			StatementWrapper stw=new StatementWrapper("update clientes set nombre=?, apellido=? ,telefono=?, email=?, localidad=? ,"
+					+ "provincia=?,fechaNac=?, id_obraSocial=? ,direccion=?,nroAfiliado=? where dni=?")
 					.push(cli.getNombre())
 					.push(cli.getApellido())
 					.push(cli.getTelefono())
@@ -63,8 +66,8 @@ public class ClienteDao extends Dao<Cliente>{
 					.push(cli.getFechaNacimiento())
 					.push(cli.getObraSocial().getId())
 					.push(cli.getDireccion())
+					.push(cli.getNroAfiliado())
 					.push(cli.getDni());
-	
 			doModification(stw);
 		}
 
@@ -77,15 +80,11 @@ public class ClienteDao extends Dao<Cliente>{
 			return doFindAll(new StatementWrapper("select * from clientes where apellido like ?").push(cli.getApellido()+"%"));
 		}
 
-
-
 		@Override
 		public Cliente getOne(Cliente cli) throws AppException {
 			StatementWrapper stw=new StatementWrapper("select * from clientes  where dni=?")
 					.push(cli.getDni());
 				 return doGetOne(stw);
-		
 		}
-
 	}
 

@@ -25,7 +25,7 @@
 	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	    
     <%	
-    	LinkedList<Cliente> clientes=(LinkedList<Cliente>) request.getAttribute("all");
+    	LinkedList<Cliente> clientes=(LinkedList<Cliente>)request.getAttribute("all");
 	%>
 	
 </head>
@@ -51,11 +51,11 @@
                         			<th>Localidad</th>
                                  	<th>Direccion</th>
                                  	<th>Obra Social</th>
-                        			
+                        			<th>Numero Afiliado</th>
                       			</tr>
                       		</thead>
                     		<tbody>
-                    		<% if(!clientes.isEmpty()){
+                    		<% 
                     		for (Cliente cli : clientes) { %>
                     			<tr>
                     				<td><%=cli.getDni()%></td>
@@ -67,8 +67,7 @@
                     				<td><%=cli.getLocalidad()%></td>
                     				<td><%=cli.getDireccion()%></td>
                     				<td><%=cli.getObraSocial().getNombre()%></td>
-                    			
-                    				
+                    			    <td><%=cli.getNroAfiliado()%></td>              				
                     				<td>
                     					<div class= "btn-edit">
                     						<form action="redirectUpdate" method="post">
@@ -81,9 +80,9 @@
                     					<div class= "btn-edit">
 												<input class="btn btn-success btn-lg btn-block" onclick=<%="sendDelete("+cli.getDni()+")"%> id="delete-control" type="submit" value="Eliminar"> 											
                     					</div>	
-                    				</td><!-- borrar -->
+                    				</td>
                     			</tr>
-                    		<% }} %>
+                    		<% } %>
                     		</tbody>
                     	</table>
 					</div>
