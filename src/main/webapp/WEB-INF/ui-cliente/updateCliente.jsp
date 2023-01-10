@@ -107,9 +107,13 @@
 						</select>
 					</div>
 		 		</div>
+		 		<div class="row">
+		 			<div class="col">
+		 				<label class="col-md-0 control-label">Numero Afiliado</label>      
+		 				<input  name="nroAfiliado"class="form-control" value="<%=c.getNroAfiliado()%>" class="form-control"  type="text" required> 
+		 			</div>
+		 		</div>
 			</div>
-			
-
  	  		<div class="form-group">
  	  			<div class="row">
  	  				<div class="col">

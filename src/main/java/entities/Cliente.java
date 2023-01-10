@@ -22,7 +22,7 @@ public class Cliente implements Jsonable {
 	private String localidad;
 	private String provincia;
 	private String direccion;
-	
+	private String nroAfiliado;
 	
 	public String getFullName() {
 		return this.apellido+" "+this.nombre;
@@ -94,6 +94,12 @@ public class Cliente implements Jsonable {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	public String getNroAfiliado() {
+		return nroAfiliado;
+	}
+	public void setNroAfiliado(String nroAfiliado) {
+		this.nroAfiliado = nroAfiliado;
+	}
 	public Cliente() {
 		
 	}
@@ -113,6 +119,7 @@ public class Cliente implements Jsonable {
 		maker.set("fecha_nac", fechaNacimiento.format(dFormat));
 		maker.set("localidad_cli", localidad);
 		maker.set("provincia_cli", provincia);
+		maker.set("nroAfiliado_cli", nroAfiliado);
 		return maker.getJSONObject();
 	}
 	
