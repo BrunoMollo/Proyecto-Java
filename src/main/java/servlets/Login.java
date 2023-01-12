@@ -21,26 +21,6 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Usuario user=Usuario.factory(request);
-
-		
-		if(user.getNombre()==null) {
-			response.sendRedirect("login.html");		
-		}
-		else {
-			if(user.getRol()==Usuario.ADMIN) {
-				request.getRequestDispatcher("WEB-INF/adminMenu.jsp").forward(request, response);
-			}
-			else if(user.getRol()==Usuario.VENDEDOR) {
-				request.getRequestDispatcher("WEB-INF/vendedorMenu.jsp").forward(request, response);
-			}
-		}
-			
-	}
-
-	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -60,15 +40,8 @@ public class Login extends HttpServlet {
 			if(user!=null) {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
-				if(user.getRol()==Usuario.ADMIN) {
-					request.getRequestDispatcher("WEB-INF/adminMenu.jsp").forward(request, response);
-				}
-				if(user.getRol()==Usuario.VENDEDOR) {
-					request.getRequestDispatcher("WEB-INF/vendedorMenu.jsp").forward(request, response);
-				}
-				} else {
-					response.sendRedirect("login.html");
-				}
+				response.sendRedirect("index");
+			}
 		} 
 		catch (Exception e) {
 			ExceptionDispacher.manage(e, response);

@@ -2,6 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
   <display-name>lafarmacia</display-name>
   <welcome-file-list>
+  	<welcome-file>index</welcome-file>
     <welcome-file>login</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -86,16 +87,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>Redirect</display-name>
-    <servlet-name>Redirect</servlet-name>
-    <servlet-class>servlets.Redirect</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Redirect</servlet-name>
-    <url-pattern>/Redirect</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>Logout</display-name>
     <servlet-name>Logout</servlet-name>
     <servlet-class>servlets.Logout</servlet-class>
@@ -103,5 +94,16 @@
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Index</display-name>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>servlets.Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/index</url-pattern>
+    <url-pattern>/index.html</url-pattern>
   </servlet-mapping>
 </web-app>

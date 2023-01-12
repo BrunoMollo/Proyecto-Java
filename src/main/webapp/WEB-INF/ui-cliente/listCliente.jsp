@@ -88,7 +88,7 @@
                     	</table>
 					</div>
 				</div>
-				<a href="../Redirect" class="btn btn-success btn-lg btn-block w-25"> Volver al menu</a>
+				<a href="../index" class="btn btn-success btn-lg btn-block w-25"> Volver al menu</a>
 			 </div>
 		</div>
 	 <!-- /container -->

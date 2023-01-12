@@ -9,16 +9,16 @@ import java.io.IOException;
 
 import entities.Usuario;
 
-/**
- * Servlet implementation class Redirect
- */
-public class Redirect extends HttpServlet {
+
+public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	//Estamos duplicando codigo a lo pabote teniendo esto separado del servlet de login, pero funciona. fue 
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario user= Usuario.factory(request);
-		
+
+		Usuario user=Usuario.factory(request);
+
 		if(user.getNombre()==null) {
 			response.sendRedirect("login.html");		
 		}
@@ -29,10 +29,12 @@ public class Redirect extends HttpServlet {
 			else if(user.getRol()==Usuario.VENDEDOR) {
 				request.getRequestDispatcher("WEB-INF/vendedorMenu.jsp").forward(request, response);
 			}
-		}
+		}	
 		
 	}
+	
 
-
-
+	
+	
+	
 }
