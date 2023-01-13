@@ -10,10 +10,13 @@ import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.RequestParameterParser;
 
+import java.io.Console;
 import java.io.IOException;
 
 import javax.management.ServiceNotFoundException;
 
+import data.ClienteDao;
+import entities.Cliente;
 import entities.Usuario;
 import entities.Venta;
 import ourLib.AppException;
@@ -34,18 +37,24 @@ public class VentaServlet extends HttpServlet {
 		
 		try {
 			switch (request.getPathInfo()) {
-			case "/iniciarVentaLibre": {
+				case "/iniciarVentaLibre": {
 					con = new CtrlVenta();
-					con.iniciarVentaLibre(user);
+					con.iniciarVenta(user);
 					request.getSession().setAttribute("CtrlVenta", con);
 					request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
-				break;
+					break;
+				}
+				case "/iniciarVentaOS": {
+					con = new CtrlVenta();
+					con.iniciarVenta(user);
+					request.getSession().setAttribute("CtrlVenta", con);
+					request.getRequestDispatcher("/WEB-INF/ui-venta/buscarCliente.html").forward(request, response);
+					break;
+				}
+				default:
+					throw new AppException("no hay",404);
 			}
-			default:
-				throw new AppException("no hay",404);
-			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			ExceptionDispacher.manage(e, response);
 		}
 		
@@ -59,24 +68,45 @@ public class VentaServlet extends HttpServlet {
 		
 		try {
 			switch (request.getPathInfo()) {
-			case "/addMedicamento": {
-				
+			case "/addMedicamento": {			
 				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); 
-				String nombreMed = request.getParameter("name_med"); 
-				
-				Boolean medEncontrado=con.addMedicamento(nombreMed, cantidad); 
-			
-				request.setAttribute("medEncontrado", medEncontrado);
-				
-				
+				String nombreMed = request.getParameter("name_med"); 			
+				Boolean medEncontrado=con.addMedicamento(nombreMed, cantidad); 		
+				request.setAttribute("medEncontrado", medEncontrado);			
 				request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
 				break;
 			}
-			case "/cerrarVenta": {
-				con.cerrarVenta();
-				response.sendRedirect("../Redirect");//volver al menu de vendedro ¿?
-				
+			case "/addMedicamentoOS": {			
+				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); 
+				String nombreMed = request.getParameter("name_med"); 			
+				Boolean medEncontrado=con.addMedicamento(nombreMed, cantidad); 		
+				request.setAttribute("medEncontrado", medEncontrado);			
+				request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentosOS.jsp").forward(request, response);
 				break;
+			}
+			case "/buscarCliente": {
+				ClienteDao cdao = new ClienteDao();
+				Integer dni= Integer.parseInt(request.getParameter("dniCliente"));
+				Cliente c = cdao.getOne(new Cliente(dni));
+				
+				if(c!=null) {
+					request.getSession().setAttribute("cliente", c);
+					con.setCliente(c);
+					request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentosOS.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("/WEB-INF/ui-venta/buscarCliente.html").forward(request, response);
+				}
+				break;
+			}
+			case "/cerrarVenta": {
+				String strNroRec = request.getParameter("nroReceta");
+				Integer nroRec = strNroRec==null?null:Integer.parseInt(request.getParameter("nroReceta"));
+				con.getVenta().setNroReceta(nroRec);
+				con.cerrarVenta();
+				//Ver si no haria falta mostrar como una especie de factura antes de volver al menu principal
+				response.sendRedirect("../Redirect");//volver al menu de vendedro ¿?				
+				break;
+				
 			}
 			
 			default:

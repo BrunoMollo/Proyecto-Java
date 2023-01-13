@@ -1,3 +1,4 @@
+<%@page import="entities.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entities.Usuario" %>
@@ -23,6 +24,7 @@
 
   	<%	
   		Usuario u = (Usuario) session.getAttribute("user");
+  		Cliente c = (Cliente) session.getAttribute("cliente");
   		Venta v = ((CtrlVenta) session.getAttribute("CtrlVenta")).getVenta();
   		LinkedList<LineaVenta> lineasVenta;
   		Boolean medEncontrado= (Boolean)request.getAttribute("medEncontrado");
@@ -34,7 +36,8 @@
 		<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
 	</header>
 	<main>
-		<form action="addMedicamento" method="post">
+		<label>Cliente: <%=c.getFullName()%></label>
+		<form action="addMedicamentoOS" method="post">
 			<div class="form-group ">
 					<div class="row">
  						<div class="col async-search" url="/lafarmacia/ABMC-medicamento/" searchParameter="name_med">
@@ -93,6 +96,7 @@
 		
 		<div>
                  <form action="cerrarVenta" method="post">
+                 		<input required type="number" name="nroReceta" min="0" step=1 placeholder="Numero Receta">
 						<input type="submit" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Realizar Venta"> 
 				</form>
         </div>	

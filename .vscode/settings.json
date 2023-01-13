@@ -1,0 +1,6 @@
+{
+    "explorer.excludeGitIgnore": true,
+    "local-tomcat.catalinaHome": "C://Tomcat9/Mtomcat",
+    "local-tomcat.warDir": "target",
+    "local-tomcat.deploymentPort": 8080
+}

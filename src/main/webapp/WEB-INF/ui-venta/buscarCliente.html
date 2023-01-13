@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+		<title>Venta por OS</title>
+	</head>
+	<body>
+		<header>
+			<h1 class="d-inline ml-3">Ingresar cliente para venta</h1>
+			<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+		</header>
+		<form action="buscarAfiliado" method="POST">
+			<label for="nroAfiliado">Numero Afiliado: </label>
+			<input type="number" name="nroAfiliado" min="0" max="99999999" step="1">
+			<button type="submit">Buscar</button>
+		</form>
+			<br><br>
+		<form action="buscarCliente" method="POST">
+			<label for="dniCliente">Dni del cliente: </label>
+			<input type="number" name="dniCliente" min="0" max="99999999" step="1">
+			<button type="submit">Buscar Cliente</button>
+		</form>
+	</body>
+</html>

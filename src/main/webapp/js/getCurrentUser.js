@@ -1,10 +1,9 @@
-const $=(query)=>document.querySelector(query);
 
 function putDataInDOM(data){
-	$("#show-user-name").innerText="USER: "+data.user;
-	$("#show-user-rol").innerText="ROL: "+data.rol;
+	document.querySelector("#show-user-name").innerText="USER: "+data.user;
+	document.querySelector("#show-user-rol").innerText="ROL: "+data.rol;
 }
 
-axios.get('/lafarmacia/login')
+fetch('/lafarmacia/login/who')
 .then((res)=>putDataInDOM(res.data))
 .catch((err)=>console.log(err))

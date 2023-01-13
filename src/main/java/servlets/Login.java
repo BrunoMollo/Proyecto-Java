@@ -9,7 +9,9 @@ import ourLib.Parsers.ExceptionDispacher;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
+import entities.Laboratorio;
 import entities.Usuario;
 
 /**
@@ -18,16 +20,11 @@ import entities.Usuario;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario user=Usuario.factory(request);
-		response.getWriter().append(user.toJson());
-	}
-
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		String usuario = request.getParameter("usuario");
 		String contra = request.getParameter("contrasena");		
 		
@@ -43,14 +40,7 @@ public class Login extends HttpServlet {
 			if(user!=null) {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
-				if(user.getRol()==Usuario.ADMIN) {
-					request.getRequestDispatcher("index.html").forward(request, response);
-				}
-				if(user.getRol()==Usuario.VENDEDOR) {
-					request.getRequestDispatcher("home.html").forward(request, response);
-				}
-			} else {
-				response.sendRedirect("login.html");
+				response.sendRedirect("index");
 			}
 		} 
 		catch (Exception e) {

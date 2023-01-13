@@ -52,12 +52,12 @@ public class VentaDao extends Dao<Venta>{
 						.push(v.getFechaVenta())
 						.push(v.getTotal())
 						.push((v.getCliente()!=null)? v.getCliente().getDni() : null)
-						.push(v.getNroReceta())
+						.push((v.getNroReceta()!=null)? v.getNroReceta() : null)
 						.push(v.getVendidoPor().getUsuario());
 		
 		doAddWithGeneratedKeys(tablaVenta, v);
 		
-		for( LineaVenta lv : v.getLineas()) {
+		for(LineaVenta lv : v.getLineas()) {
 			lvDao.add(lv, v);
 		}			
 	}

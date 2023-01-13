@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import data.MedicamentoDao;
 import data.VentaDao;
+import entities.Cliente;
 import entities.Medicamento;
 import entities.Usuario;
 import entities.Venta;
@@ -22,11 +23,15 @@ public class CtrlVenta {
 		return ventaActual;
 	}
 	
-	public void iniciarVentaLibre(Usuario _user) throws AppException {
+	public void iniciarVenta(Usuario _user) throws AppException {
 		user=_user;
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		ventaActual=new Venta();
 		ventaActual.setVendidoPor(user);
+	}
+	
+	public void setCliente(Cliente cli) {
+		ventaActual.setCliente(cli);
 	}
 	
 	
