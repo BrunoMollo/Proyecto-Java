@@ -85,7 +85,7 @@ public class ClienteDao extends Dao<Cliente>{
 				 return doGetOne(stw);
 		}
 		public Cliente getByNroAfiliado(Cliente c) throws AppException {
-			StatementWrapper stw=new StatementWrapper("select * from clientes where nro_afiliado=?")
+			StatementWrapper stw=new StatementWrapper("select * from clientes where nroAfiliado=?")
 					.push(c.getNroAfiliado());
 				 return doGetOne(stw);
 		}
