@@ -2,10 +2,13 @@ package data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import entities.Cliente;
 import entities.LineaVenta;
+import entities.ObraSocial;
 import entities.Venta;
 import ourLib.AppException;
 import ourLib.dbUtils.Dao;
@@ -20,13 +23,18 @@ public class VentaDao extends Dao<Venta>{
 	protected Venta mapFromResulset(ResultSet rs) throws SQLException, AppException {
 		Venta venta=new Venta();
 		
-		venta.setNroReceta(rs.getInt("nroVenta"));
+		venta.setNroVenta(rs.getInt("nroVenta"));
 		
 		Cliente miCliente= new Cliente();
-		miCliente.setDni(rs.getInt("dni"));
-		miCliente=cliDao.getOne(miCliente);
-		venta.setCliente(miCliente);
-		
+		Integer dniCliente=rs.getInt("dniCLiente");
+		if(dniCliente!=0) 
+		{
+			miCliente.setDni(dniCliente);
+			miCliente=cliDao.getOne(miCliente);
+			venta.setCliente(miCliente);
+		}		
+		venta.setFechaVenta(rs.getObject("fecha", LocalDateTime.class));
+		venta.setTotal(rs.getDouble("total"));
 		return venta;
 	}
 
@@ -76,4 +84,27 @@ public class VentaDao extends Dao<Venta>{
 		throw new AppException("Not Implemented "+funcName, 500);
 	}
 
+	public LinkedList<Venta> listarVentasOS(LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException {
+		StatementWrapper st= new StatementWrapper("SELECT nroVenta, dniCliente, fecha, total FROM "
+				+ "ventas v inner join clientes c "
+				+ "on (v.dniCLiente = c.dni) "
+				+ " where (v.fecha>=?) and (v.fecha<=?)"
+				+ "and c.id_obraSocial=?")
+				.push(fechaDesde)
+				.push(fechaHasta)
+				.push(os.getId());
+		LinkedList<Venta> ventas = doFindAll(st);
+		return ventas;
+	}
+	public LinkedList<Venta> listarVentasParticular(LocalDate fechaDesde, LocalDate fechaHasta) throws AppException {
+		StatementWrapper st= new StatementWrapper("SELECT nroVenta, dniCliente, fecha, total FROM "
+				+ "ventas v"
+				+ " where (v.fecha>=?) and (v.fecha<=?)"
+				+ "and (v.dniCLiente is NULL)")
+				.push(fechaDesde)
+				.push(fechaHasta)
+				;
+		LinkedList<Venta> ventas = doFindAll(st);
+		return ventas;
+	}
 }

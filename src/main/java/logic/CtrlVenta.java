@@ -1,11 +1,14 @@
 package logic;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 
 import data.MedicamentoDao;
 import data.VentaDao;
 import entities.Medicamento;
+import entities.ObraSocial;
 import entities.Usuario;
 import entities.Venta;
 import ourLib.AppException;
@@ -49,6 +52,16 @@ public class CtrlVenta {
 		ventaActual.cacularTotal();
 		
 		vDao.add(ventaActual);
+	}
+	
+	public LinkedList<Venta> listarVentas(Usuario _user, LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException {
+		user=_user;
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
+		if(os.getId()==34) {
+			return vDao.listarVentasParticular(fechaDesde, fechaHasta);
+		}
+		return vDao.listarVentasOS(fechaDesde,fechaHasta,os);
+		
 	}
 	
 }

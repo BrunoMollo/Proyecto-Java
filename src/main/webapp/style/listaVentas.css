@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+
+.t-head{
+	background-color: #198754;
+}
+.table tr:nth-child(even) {
+    background-color: #E7E9EB;
+}
+.prueba{
+	text-align:center;
+}
