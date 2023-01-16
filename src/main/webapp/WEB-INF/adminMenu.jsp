@@ -134,6 +134,7 @@
 			<ul>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaLibre">Venta Particular</a></li>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaOS">Venta por Obra Social</a></li>
+					<li><a class="btn btn-sm" href="DescargarListadoVentas">Descargar listado de ventas</a></li>
 			</ul>
 		</div>
 	</section>
