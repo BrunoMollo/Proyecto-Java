@@ -1,3 +1,4 @@
+<%@page import="entities.ObraSocial"%>
 <%@page import="entities.Cliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -25,6 +26,7 @@
   	<%	
   		Usuario u = (Usuario) session.getAttribute("user");
   		Cliente c = (Cliente) session.getAttribute("cliente");
+  		ObraSocial os = c.getObraSocial();
   		Venta v = ((CtrlVenta) session.getAttribute("CtrlVenta")).getVenta();
   		LinkedList<LineaVenta> lineasVenta;
   		Boolean medEncontrado= (Boolean)request.getAttribute("medEncontrado");
@@ -36,7 +38,9 @@
 		<a href="../Redirect" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
 	</header>
 	<main>
-		<label>Cliente: <%=c.getFullName()%></label>
+		<label>Cliente: <%=c.getFullName()%></label><br>
+		<label>Obra Social: <%=os.getNombre()%></label><br>
+		<label>Descuento: <%=os.getDescuento()%>%</label>
 		<form action="addMedicamentoOS" method="post">
 			<div class="form-group ">
 					<div class="row">
@@ -63,7 +67,8 @@
                     			<tr>
                     				<th>Medicamento</th>
                     		    	<th>Cantidad</th>
-                        			<th>Precio Unitario</th>      
+                        			<th>Precio Unitario</th>
+                        			<th>Precio Con Descuento</th>      
                         			<th>Subtotal</th>                   			
                       			</tr>
                       		</thead>
@@ -76,7 +81,8 @@
                     				<td><%=lv.getMedicamento().getNombre()%></td>
                        				<td><%=lv.getCantidad()%></td>
                     				<td>$<%=lv.getPrecioUnidad()%></td>
-                    				<td>$<%=lv.getSubTotal() %></td>
+                    				<td>$<%=lv.getPrecioUnidad()*(1-os.getDescuento()/100)%></td>
+                    				<td>$<%=lv.getSubTotal()*(1-os.getDescuento()/100)%></td>
                     				<td>
                     					<div class= "btn-edit">
                     				 		<form action="" method="post">
@@ -88,7 +94,7 @@
                     			</tr>
                     		<% } %>
 	                    		<tr>
-	                    			<td colspan="2">Total: $<%=v.getTotal() %> </td>
+	                    			<td colspan="2">Total: $<%=v.getTotal()*(1-os.getDescuento()/100)%> </td>
 	                    		</tr>
                     		</tbody>
                     		</table>

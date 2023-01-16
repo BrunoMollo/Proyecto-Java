@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlCliente;
+import logic.CtrlObraSocial;
 import logic.CtrlVenta;
 import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
@@ -18,6 +19,7 @@ import javax.management.ServiceNotFoundException;
 
 import data.ClienteDao;
 import entities.Cliente;
+import entities.ObraSocial;
 import entities.Usuario;
 import entities.Venta;
 import ourLib.AppException;
@@ -34,19 +36,19 @@ public class VentaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Usuario user=Usuario.factory(request);
-		CtrlVenta con= (CtrlVenta) request.getSession().getAttribute("CtrlVenta");
+		
 		
 		try {
 			switch (request.getPathInfo()) {
 				case "/iniciarVentaLibre": {
-					con = new CtrlVenta();
+					CtrlVenta con = new CtrlVenta();
 					con.iniciarVenta(user);
 					request.getSession().setAttribute("CtrlVenta", con);
 					request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentos.jsp").forward(request, response);
 					break;
 				}
 				case "/iniciarVentaOS": {
-					con = new CtrlVenta();
+					CtrlVenta con = new CtrlVenta();
 					con.iniciarVenta(user);
 					request.getSession().setAttribute("CtrlVenta", con);
 					request.getRequestDispatcher("/WEB-INF/ui-venta/buscarCliente.html").forward(request, response);
@@ -64,9 +66,9 @@ public class VentaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Usuario user=Usuario.factory(request);
 		CtrlVenta con= (CtrlVenta) request.getSession().getAttribute("CtrlVenta");
 		CtrlCliente ccli = new CtrlCliente();
+		CtrlObraSocial ctrlOS= new CtrlObraSocial();
 		
 		try {
 			switch (request.getPathInfo()) {
@@ -87,7 +89,6 @@ public class VentaServlet extends HttpServlet {
 				break;
 			}
 			case "/buscarCliente": {
-				ClienteDao cdao = new ClienteDao();
 				Integer dni= Integer.parseInt(request.getParameter("dniCliente"));
 				Cliente c = ccli.getOne(new Cliente(dni));
 				if(c!=null) {
@@ -100,7 +101,6 @@ public class VentaServlet extends HttpServlet {
 				break;
 			}
 			case "/buscarAfiliado": {
-				ClienteDao cdao = new ClienteDao();
 				String nroAfiliado= request.getParameter("nroAfiliado");
 				Cliente c = new Cliente();
 				c.setNroAfiliado(nroAfiliado);
@@ -118,9 +118,12 @@ public class VentaServlet extends HttpServlet {
 				String strNroRec = request.getParameter("nroReceta");
 				Integer nroRec = strNroRec==null?null:Integer.parseInt(request.getParameter("nroReceta"));
 				con.getVenta().setNroReceta(nroRec);
-				con.cerrarVenta();
+				ObraSocial osCli = (ObraSocial) request.getSession().getAttribute("osCliente");
+				if(osCli!=null) {con.cerrarVenta(osCli);} 
+				else {con.cerrarVenta();}
+				
 				//Ver si no haria falta mostrar como una especie de factura antes de volver al menu principal
-				response.sendRedirect("../Redirect");//volver al menu de vendedro ¿?				
+				response.sendRedirect("../Redirect");			
 				break;
 				
 			}
