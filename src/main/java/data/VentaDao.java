@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import entities.Cliente;
 import entities.LineaVenta;
@@ -94,22 +95,40 @@ public class VentaDao extends Dao<Venta>{
 	public File getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException, IOException {
 		Connection con =DbConnector.getInstancia().getConn();
 		
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
+	    String periodo = "("+ fechaDesde.format(myFormatObj)+" a "+ fechaHasta.format(myFormatObj) + ")";  
+	 
 		String basePath="D://";
-		String name="output.csv";
+		String name="Ventas "+os.getNombre()+" "+periodo+".csv";
 		
 		File file = new File(basePath+name);
 		file.createNewFile();
 		BufferedWriter writer= new BufferedWriter(new FileWriter(basePath+name));
 		
 		try {
-			PreparedStatement st= con.prepareStatement("select v.fecha, c.nombre, c.apellido, c.id_obraSocial from ventas v\r\n"
-					+ "inner join clientes c\r\n"
-					+ "	on  v.dniCLiente=c.dni\r\n"
-					+ "where c.id_obraSocial=24\r\n"
-					+ "and v.fecha between '20230101' and '20230201'");
-			//st.setInt(1, os.getId());
-			//st.setObject(2, fechaDesde);
-			//st.setObject(3, fechaHasta);
+			PreparedStatement st= con.prepareStatement(
+				"select v.fecha\r\n"
+				+ ",concat(m.nombre, \"(\",m.size,\" \", m.unidad ,\")\") as 'medicamento'\r\n"
+				+ ", lv.cantidad\r\n"
+				+ ", v.nroReceta\r\n"
+				+ ", concat(c.nombre,c.apellido) as 'cliente'\r\n"
+				+ ", c.nroAfiliado \r\n"
+				+ ", \"hay que ver como se marca el total y el desuento\" as \"TODO\" \r\n"
+				+ "from ventas v\r\n"
+				+ "left join clientes c\r\n"
+				+ "	on  v.dniCLiente=c.dni\r\n"
+				+ "left join obras_sociales os\r\n"
+				+ "	on os.id=c.id_obraSocial\r\n"
+				+ "inner join linea_ventas lv\r\n"
+				+ "	on lv.nroVenta=v.nroVenta\r\n"
+				+ "inner join medicamentos m\r\n"
+				+ "	on m.codigoBarra=lv.codBarra\r\n"
+				+ " where c.id_obraSocial= ?\r\n"
+				+ " and v.fecha between ? and ?\r\n;"
+			);
+			st.setInt(1, os.getId());
+			st.setObject(2, fechaDesde);
+			st.setObject(3, fechaHasta);
 			
 			ResultSet rs= st.executeQuery();
 			

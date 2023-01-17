@@ -135,6 +135,8 @@
 					<li><a class="btn btn-sm" href="venta/iniciarVentaLibre">Venta Particular</a></li>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaOS">Venta por Obra Social</a></li>
 					<li><a class="btn btn-sm" href="DescargarListadoVentas">Descargar listado de ventas</a></li>
+					
+					<li><button class="btn btn-sm" onclick="fetch('/lafarmacia/EmailObrasSociales').then(()=>alert('enviados'))" >Enviar mails a las Obras Sociales	</button></li>
 			</ul>
 		</div>
 	</section>

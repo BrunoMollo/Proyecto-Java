@@ -126,4 +126,14 @@
     <servlet-name>DescargarListadoVentas</servlet-name>
     <url-pattern>/DescargarListadoVentas</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>QQQQQQQQQQQQQQQQQQQQQQQQQQQ</display-name>
+    <servlet-name>QQQQQQQQQQQQQQQQQQQQQQQQQQQ</servlet-name>
+    <servlet-class>servlets.QQQQQQQQQQQQQQQQQQQQQQQQQQQ</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QQQQQQQQQQQQQQQQQQQQQQQQQQQ</servlet-name>
+    <url-pattern>/QQQQQQQQQQQQQQQQQQQQQQQQQQQ</url-pattern>
+  </servlet-mapping>
 </web-app>
