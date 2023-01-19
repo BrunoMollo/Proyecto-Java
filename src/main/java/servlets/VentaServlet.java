@@ -54,6 +54,9 @@ public class VentaServlet extends HttpServlet {
 					request.getRequestDispatcher("/WEB-INF/ui-venta/buscarCliente.html").forward(request, response);
 					break;
 				}
+				case "/imprimirVenta": {
+					
+				}
 				default:
 					throw new AppException("no hay",404);
 			}
@@ -120,7 +123,7 @@ public class VentaServlet extends HttpServlet {
 				con.getVenta().setNroReceta(nroRec);
 				con.cerrarVenta();
 				//Ver si no haria falta mostrar como una especie de factura antes de volver al menu principal
-				response.sendRedirect("../Redirect");			
+				request.getRequestDispatcher("/WEB-INF/ui-venta/imprimirVenta.jsp").forward(request, response);			
 				break;
 				
 			}

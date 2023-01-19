@@ -52,7 +52,7 @@ public class CtrlVenta {
 	public void cerrarVenta() throws AppException {
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		ventaActual.setFechaVenta(LocalDateTime.now());
-		ventaActual.cacularTotal();
+		ventaActual.calcularTotal();
 		vDao.add(ventaActual);
 	}
 }
