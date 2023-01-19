@@ -81,8 +81,8 @@
                     				<td><%=lv.getMedicamento().getNombre()%></td>
                        				<td><%=lv.getCantidad()%></td>
                     				<td>$<%=lv.getPrecioUnidad()%></td>
-                    				<td>$<%=lv.getPrecioUnidad()*(1-os.getDescuento()/100)%></td>
-                    				<td>$<%=lv.getSubTotal()*(1-os.getDescuento()/100)%></td>
+                    				<td>$<%=String.format("%.2f", lv.getPrecioUnidad()*(1-os.getDescuento()/100))%></td>
+                    				<td>$<%=String.format("%.2f", lv.getSubTotal()*(1-os.getDescuento()/100))%></td>
                     				<td>
                     					<div class= "btn-edit">
                     				 		<form action="" method="post">
@@ -94,7 +94,7 @@
                     			</tr>
                     		<% } %>
 	                    		<tr>
-	                    			<td colspan="2">Total: $<%=v.getTotal()*(1-os.getDescuento()/100)%> </td>
+	                    			<td colspan="2">Total: $<%=String.format("%.2f", v.getTotal()*(1-os.getDescuento()/100))%> </td>
 	                    		</tr>
                     		</tbody>
                     		</table>

@@ -118,10 +118,7 @@ public class VentaServlet extends HttpServlet {
 				String strNroRec = request.getParameter("nroReceta");
 				Integer nroRec = strNroRec==null?null:Integer.parseInt(request.getParameter("nroReceta"));
 				con.getVenta().setNroReceta(nroRec);
-				ObraSocial osCli = (ObraSocial) request.getSession().getAttribute("osCliente");
-				if(osCli!=null) {con.cerrarVenta(osCli);} 
-				else {con.cerrarVenta();}
-				
+				con.cerrarVenta();
 				//Ver si no haria falta mostrar como una especie de factura antes de volver al menu principal
 				response.sendRedirect("../Redirect");			
 				break;

@@ -69,7 +69,7 @@ public class ClienteABMC extends HttpServlet {
 		try {
 			switch (request.getPathInfo().substring(1)) {
 			case "all": {
-				LinkedList<Cliente> arr = con.getAll(user);
+				LinkedList<Cliente> arr = con.getAll();
 				request.setAttribute("all", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
 				break;
@@ -90,7 +90,7 @@ public class ClienteABMC extends HttpServlet {
 			}
 			//Consultar esto. Larga un Error en consola. No me parece buena idea.
 			case "new": {
-				LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll(user);
+				LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll();
 				request.setAttribute("listOS", obraSociales);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/altaCliente.jsp").forward(request, response);
 				break;

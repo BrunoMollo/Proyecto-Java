@@ -53,15 +53,6 @@ public class CtrlVenta {
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		ventaActual.setFechaVenta(LocalDateTime.now());
 		ventaActual.cacularTotal();
-		
-		vDao.add(ventaActual);
-	}
-	
-	public void cerrarVenta(ObraSocial os) throws AppException {
-		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
-		ventaActual.setFechaVenta(LocalDateTime.now());
-		ventaActual.cacularTotal();
-		ventaActual.setTotal(ventaActual.getTotal()*(1-os.getDescuento()/100));
 		vDao.add(ventaActual);
 	}
 }
