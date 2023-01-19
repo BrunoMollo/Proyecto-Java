@@ -21,7 +21,7 @@ public class EmailService {
 	private Session session;
 	
     private String from = "correofarmacia2022@gmail.com";
-    private String passwordFrom = "bkeoefujykaatvcr";
+    private String passwordFrom = System.getenv("pswEmailFarmacia");
 	
 	
 	public EmailService() {

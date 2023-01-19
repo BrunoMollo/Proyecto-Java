@@ -17,15 +17,59 @@ import entities.ObraSocial;
 import entities.Usuario;
 
 
+class EmailThread extends Thread{
+	
+	private Boolean successFlag=true;
+	public boolean didSucceeded() {
+		return successFlag;
+	}
+	
+	private ObraSocial os;
+	private EmailService email;
+	private VentaDao VDao;
+	
+	
+	public EmailThread( ObraSocial _os, EmailService _email, VentaDao _VDao) {
+		os=_os;
+		email=_email;
+		VDao=_VDao;
+	}
+	
+	@Override
+	public void run() {
+		System.out.println("Inicio envio para "+os.getNombre());
+		
+		File file;
+		try {
+			file = VDao.getVentasOSasCSV(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 2, 1) , os);
+			
+			email.send(os.getEmail(),
+					"Ventas a reintegrar de "+os.getNombre(),
+					"Adjuntamos a este mail el listado de ventas realizadas por sus afiliados \n Atte. lafarmacia",
+					file
+				);
+		} catch (AppException | IOException e) {
+			successFlag=false;
+			e.printStackTrace();
+		}
+		
+		System.out.println("Fin envio para "+os.getNombre());
+	}
+	
+	
+}
+
+
+
 public class EmailObrasSociales extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		VentaDao VDao=new VentaDao();
 		ObrasSocialesDao osDao= new ObrasSocialesDao();
 		EmailService email=new EmailService();
+		VentaDao VDao=new VentaDao();
 		
 		try {
 			
@@ -34,21 +78,33 @@ public class EmailObrasSociales extends HttpServlet {
 			
 			LinkedList<ObraSocial> obrasSociales=osDao.getAll();
 			
+			
+			Boolean success=true;
+			LinkedList<EmailThread> threads= new LinkedList<EmailThread>();
+			
+			
 			for(ObraSocial os: obrasSociales) {
-				
-				File file = VDao.getVentasOSasCSV(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 2, 1) , os);
-				
-				email.send(os.getEmail(),
-						"Ventas a reintegrar de "+os.getNombre(),
-						"Adjuntamos a este mail el listado de ventas realizadas por sus afiliados \n Atte. lafarmacia",
-						file
-					);
+				EmailThread t=new EmailThread(os,email,VDao);
+				threads.add(t);
+				t.start();
 			}
 			
-			response.setStatus(200);
+			for(EmailThread t: threads) {
+				t.join();
+			}
+			
+			for(EmailThread t: threads) {
+				if(t.didSucceeded()==false) {
+					response.setStatus(500);
+					return;
+				}
+			}
+			
+			response.setStatus(200);				
 			
 			
-		} catch (AppException e) {
+		} catch (AppException  | InterruptedException e) {
+			response.setStatus(500);
 			e.printStackTrace();
 		}
 

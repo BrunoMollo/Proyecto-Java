@@ -148,7 +148,12 @@
 						const btn=document.getElementById('enviarMail');
 						btn.classList.add('sending');	
 						fetch('/lafarmacia/EmailObrasSociales')
-						.then(()=>{
+						.then((res)=>{
+							if(res.status>=500){
+								btn.classList.add('fail');
+								return
+							}
+				
 							btn.classList.remove('sending')
 							btn.classList.add('done')
 							setTimeout(()=>btn.classList.remove('done'), 1500)
