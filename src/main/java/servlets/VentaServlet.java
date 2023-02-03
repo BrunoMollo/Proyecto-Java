@@ -41,6 +41,7 @@ public class VentaServlet extends HttpServlet {
 		try {
 			switch (request.getPathInfo()) {
 				case "/iniciarVentaLibre": {
+					request.getSession().setAttribute("cliente", null);
 					CtrlVenta con = new CtrlVenta();
 					con.iniciarVenta(user);
 					request.getSession().setAttribute("CtrlVenta", con);
@@ -48,6 +49,7 @@ public class VentaServlet extends HttpServlet {
 					break;
 				}
 				case "/iniciarVentaOS": {
+					request.getSession().setAttribute("cliente", null);
 					CtrlVenta con = new CtrlVenta();
 					con.iniciarVenta(user);
 					request.getSession().setAttribute("CtrlVenta", con);
@@ -85,8 +87,10 @@ public class VentaServlet extends HttpServlet {
 			}
 			case "/addMedicamentoOS": {			
 				Integer cantidad= Integer.parseInt(request.getParameter("cantidad")); 
-				String nombreMed = request.getParameter("name_med"); 			
-				Boolean medEncontrado=con.addMedicamento(nombreMed, cantidad); 		
+				String nombreMed = request.getParameter("name_med"); 	
+				Double dcto = con.getVenta().getCliente().getObraSocial().getDescuento();
+				
+				Boolean medEncontrado=con.addMedicamento(nombreMed, cantidad,dcto); 		
 				request.setAttribute("medEncontrado", medEncontrado);			
 				request.getRequestDispatcher("/WEB-INF/ui-venta/agregarMedicamentosOS.jsp").forward(request, response);
 				break;
@@ -120,9 +124,10 @@ public class VentaServlet extends HttpServlet {
 			case "/cerrarVenta": {
 				String strNroRec = request.getParameter("nroReceta");
 				Integer nroRec = strNroRec==null?null:Integer.parseInt(request.getParameter("nroReceta"));
+				
 				con.getVenta().setNroReceta(nroRec);
 				con.cerrarVenta();
-				//Ver si no haria falta mostrar como una especie de factura antes de volver al menu principal
+				
 				request.getRequestDispatcher("/WEB-INF/ui-venta/imprimirVenta.jsp").forward(request, response);			
 				break;
 				

@@ -20,6 +20,12 @@ public class CtrlVenta {
 	private Venta ventaActual;
 	private Usuario user;
 	
+	private Medicamento buscarMedicamento(String nombreMed) throws AppException {
+		Medicamento med= new Medicamento();
+		med.setNombre(nombreMed);
+		return mDao.getByName(med);
+	}
+	
 	public Venta getVenta() {
 		return ventaActual;
 	}
@@ -31,22 +37,29 @@ public class CtrlVenta {
 		ventaActual.setVendidoPor(user);
 	}
 	
-	public void setCliente(Cliente cli) {
+	public void setCliente(Cliente cli) throws AppException {
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 		ventaActual.setCliente(cli);
 	}
 	
-	
 	public Boolean addMedicamento(String nombreMed, Integer cant) throws AppException {
 		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
-		Medicamento med= new Medicamento();
-		med.setNombre(nombreMed);
-		med=mDao.getByName(med);
-		
+		Medicamento med = buscarMedicamento(nombreMed);	
+		if(med==null)  {return false; }		
+		ventaActual.addMedicamento(med, cant);
+		return true;
+	}
+	
+	public Boolean addMedicamento(String nombreMed, Integer cant, Double descuento) throws AppException {
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
+		Medicamento med = buscarMedicamento(nombreMed);
 		if(med==null)  {return false; }
+		
+		med.setPrecio(med.getPrecio()*(1-(descuento/100)));
 		
 		ventaActual.addMedicamento(med, cant);
 		return true;
-	}	
+	}
 	
 	
 	public void cerrarVenta() throws AppException {

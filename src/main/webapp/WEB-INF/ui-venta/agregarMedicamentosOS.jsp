@@ -67,9 +67,8 @@
                     			<tr>
                     				<th>Medicamento</th>
                     		    	<th>Cantidad</th>
-                        			<th>Precio Unitario</th>
-                        			<th>Precio Con Descuento</th>      
-                        			<th>Subtotal</th>                   			
+                        			<th>Precio con descuento</th>      
+                        			<th>Subtotal con descuento</th>                   			
                       			</tr>
                       		</thead>
                     		<tbody>
@@ -81,8 +80,7 @@
                     				<td><%=lv.getMedicamento().getNombre()%></td>
                        				<td><%=lv.getCantidad()%></td>
                     				<td>$<%=lv.getPrecioUnidad()%></td>
-                    				<td>$<%=String.format("%.2f", lv.getPrecioUnidad()*(1-os.getDescuento()/100))%></td>
-                    				<td>$<%=String.format("%.2f", lv.getSubTotal()*(1-os.getDescuento()/100))%></td>
+                    				<td>$<%=String.format("%.2f", lv.getSubTotal())%></td>
                     				<td>
                     					<div class= "btn-edit">
                     				 		<form action="" method="post">
@@ -94,7 +92,7 @@
                     			</tr>
                     		<% } %>
 	                    		<tr>
-	                    			<td colspan="2">Total: $<%=String.format("%.2f", v.getTotal()*(1-os.getDescuento()/100))%> </td>
+	                    			<td colspan="2">Total: $<%=String.format("%.2f", v.getTotal())%> </td>
 	                    		</tr>
                     		</tbody>
                     		</table>
@@ -104,9 +102,6 @@
                  <form action="cerrarVenta" method="post">
                  		<input required type="number" name="nroReceta" min="0" step=1 placeholder="Numero Receta">
 						<input type="submit" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Realizar Venta"> 
-				</form>
-				<form action="imprimirVenta" method="get">
-					<button type="submit">Imprimir Venta</button>
 				</form>
         </div>	
  	</main>

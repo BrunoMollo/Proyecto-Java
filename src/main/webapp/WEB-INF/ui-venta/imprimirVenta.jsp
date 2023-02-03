@@ -35,7 +35,6 @@
 					<th>Medicamento |	</th>
 					<th>Precio Unidad |	</th>		
 					<th>Cantidad |	</th>
-					<th>Obra Social |	</th>
 					<th>Subtotal Cliente	</th>
 					
 				</tr>
@@ -46,8 +45,7 @@
 						<td><%=l.getMedicamento().getNombre()%></td>
 						<td><%=l.getPrecioUnidad()%></td>
 						<td><%=l.getCantidad()%></td>
-						<td><%=String.format("%.2f", l.getSubTotal() * (os!=null?os.getDescuento()/100:0))%></td>
-						<td><%=String.format("%.2f", l.getSubTotal() * (os!=null?1-os.getDescuento()/100:1))%></td>
+						<td><%=String.format("%.2f", l.getSubTotal())%></td>
 						
 					</tr>
 				<%}%>
