@@ -39,10 +39,10 @@ public class VentaDao extends Dao<Venta>{
 	}
 
 	@Override
-	public Venta getOne(Venta p) throws AppException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new AppException("Not Implemented "+funcName, 500);
+	public Venta getOne(Venta v) throws AppException {
+		StatementWrapper stw=new StatementWrapper("select * from ventas  where nroVenta=?")
+				.push(v.getNroVenta());
+			 return doGetOne(stw);
 	}
 
 	@Override
@@ -107,4 +107,5 @@ public class VentaDao extends Dao<Venta>{
 		LinkedList<Venta> ventas = doFindAll(st);
 		return ventas;
 	}
+
 }

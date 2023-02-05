@@ -20,9 +20,9 @@ public class LineaVentaDao extends Dao<LineaVenta>{
 		LineaVenta lv=new LineaVenta();
 		
 		Medicamento med= new Medicamento();
-		med.setCodigoBarra(rs.getInt("codigoBarra"));
+		med.setCodigoBarra(rs.getInt("codBarra"));
 		med=medDao.getOne(med);
-		
+		lv.setMedicamento(med);
 		lv.setCantidad(rs.getInt("cantidad"));
 		lv.setPrecioUnidad(rs.getDouble("precioUnidad"));
 		return lv;

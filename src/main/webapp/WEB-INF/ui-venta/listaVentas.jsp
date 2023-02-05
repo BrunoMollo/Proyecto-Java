@@ -49,7 +49,11 @@
 	                    		<% 
 	                    		for (Venta v : ventas) { %>
 	                    			<tr>
-	                    				<td><%=v.getNroVenta()%></td>
+	                    				<td>
+	                    					<a  class="linkVenta btn btn-sm" href="http://localhost:8080/lafarmacia/venta/detalle?nro=<%=v.getNroVenta()%>">
+	                    						<%=v.getNroVenta()%>
+	                    					</a>
+	                    					</td>
 	                       				<td><%=v.getFechaVenta().format(Cliente.dFormat)%></td>
 	                    				<td>$<%=v.getTotalDB()%></td>
 	                    				<% if(v.getCliente()!=null){%>

@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import javax.management.ServiceNotFoundException;
 
 import entities.Cliente;
+import entities.LineaVenta;
 import entities.ObraSocial;
 import entities.Usuario;
 import entities.Venta;
@@ -36,7 +37,7 @@ public class VentaServlet extends HttpServlet {
 		
 		Usuario user=Usuario.factory(request);
 		CtrlVenta con= (CtrlVenta) request.getSession().getAttribute("CtrlVenta");
-		
+		String query= request.getPathInfo();
 		try {
 			switch (request.getPathInfo()) {
 			case "/iniciarVentaLibre": {
@@ -52,6 +53,19 @@ public class VentaServlet extends HttpServlet {
 				request.getSession().setAttribute("CtrlVenta", con);
 				request.setAttribute("listOS", obraSociales);
 				request.getRequestDispatcher("/WEB-INF/ui-venta/busquedaVentas.jsp").forward(request, response);
+				break;
+			}
+			case "/detalle": {
+				con = new CtrlVenta();
+				request.getSession().setAttribute("CtrlVenta", con);
+				String[] queryString = request.getQueryString().split("=");
+				Venta v= new Venta();
+				v.setNroVenta(Integer.parseInt(queryString[1]));;
+				v = con.getOne(user, v);
+				LinkedList<LineaVenta> lventa= con.detalleVenta(user,v);
+				request.setAttribute("lventa", lventa);
+				request.setAttribute("venta", v);
+				request.getRequestDispatcher("/WEB-INF/ui-venta/detalle.jsp").forward(request, response);
 				break;
 			}
 			default:

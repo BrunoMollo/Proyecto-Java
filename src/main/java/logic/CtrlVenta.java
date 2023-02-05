@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
+import data.LineaVentaDao;
 import data.MedicamentoDao;
 import data.VentaDao;
+import entities.LineaVenta;
 import entities.Medicamento;
 import entities.ObraSocial;
 import entities.Usuario;
@@ -63,5 +65,17 @@ public class CtrlVenta {
 		return vDao.listarVentasOS(fechaDesde,fechaHasta,os);
 		
 	}
+	public LinkedList<LineaVenta> detalleVenta(Usuario _user, Venta venta) throws AppException {
+		user=_user;
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
+		return new LineaVentaDao().getAllFromVenta(venta);		
+	}
+	
+	public Venta getOne(Usuario _user, Venta venta) throws AppException {
+		user=_user;
+		if(!user.hasAccess(Usuario.VENDEDOR)) {
+			throw new AppException("Debe ser vendedor",401);}
+		return  vDao.getOne(venta);
+		}
 	
 }

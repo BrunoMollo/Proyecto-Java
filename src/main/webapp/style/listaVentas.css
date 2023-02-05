@@ -9,3 +9,16 @@
 .prueba{
 	text-align:center;
 }
+.linkVenta {
+	height: "5px";
+	width: "5px";
+	border:solid 1px;
+	margin : 3px 0;
+	box-shadow: 2px 2px 2px grey;
+}
+
+.linkVenta:hover {
+  background-color: #198754; /* Green */
+  color: #fff;
+  border-color:#198754
+}
