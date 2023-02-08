@@ -58,6 +58,7 @@ public class EmailService {
 			 
 			 BodyPart fileBodyPart= new MimeBodyPart();
 			 DataSource source = new FileDataSource(file.getAbsolutePath());
+			 
 			 fileBodyPart.setDataHandler(new DataHandler(source));
 			 fileBodyPart.setFileName(file.getName());
 			 multipart.addBodyPart(fileBodyPart);

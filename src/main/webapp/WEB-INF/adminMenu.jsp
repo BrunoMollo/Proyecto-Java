@@ -135,12 +135,12 @@
 					<li><a class="btn btn-sm" href="venta/iniciarVentaLibre">Venta Particular</a></li>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaOS">Venta por Obra Social</a></li>
 					<li><a class="btn btn-sm" href="DescargarListadoVentas">Descargar listado de ventas</a></li>
-					
+					<li><a class="btn btn-sm" href="venta/listaVentas">Lista de ventas por Obra Social</a></li>	
 					<li>
 					
 					<style>
     					.sending:after {content: "  [procesando...]";}
-    					.done:after {content: "  [DONE]";}	
+    					.done:after {content: "  [Enviado]";}	
     					.fail:after {content: "  [ups... algo salio mal]";}	
 					</style>
 						<button id='enviarMail' class="btn btn-sm" 
@@ -166,8 +166,6 @@
 						>Enviar mails a las Obras Sociales	
 						</button>
 					</li>
-					
-					
 			</ul>
 		</div>
 	</section>

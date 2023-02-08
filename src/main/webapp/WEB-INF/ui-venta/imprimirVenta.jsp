@@ -43,7 +43,7 @@
 				<%for(LineaVenta l : lineasVenta){%>
 					<tr>
 						<td><%=l.getMedicamento().getNombre()%></td>
-						<td><%=l.getPrecioUnidad()%></td>
+						<td><%=String.format("%.2f", l.getPrecioUnidad())%></td>
 						<td><%=l.getCantidad()%></td>
 						<td><%=String.format("%.2f", l.getSubTotal())%></td>
 						

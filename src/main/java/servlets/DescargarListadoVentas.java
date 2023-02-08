@@ -40,10 +40,13 @@ public class DescargarListadoVentas extends HttpServlet {
 			LocalDate startOfThisMonth=LocalDate.of(thisYear, thisMonth, 1);  
 			LocalDate startOfNextMonth=LocalDate.now().plusMonths(1);
 			
-	
+			
+			System.out.println(getServletContext().getRealPath("/"));
+			
 			File file = 
 					VDao.getVentasOSasCSV(startOfThisMonth, startOfNextMonth
-							,"Listado Ventas "+thisMonth.getValue()+"-"+thisYear+".csv");
+							,"Listado Ventas "+thisMonth.getValue()+"-"+thisYear+".csv"
+							,"C://");
 			
 			 response.setContentType("application/csv");
 		     response.setHeader("Content-Disposition","attachment; filename=\""+ file.getAbsolutePath() + "\"");

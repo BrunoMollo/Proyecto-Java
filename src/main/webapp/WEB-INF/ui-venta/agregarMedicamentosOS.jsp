@@ -79,7 +79,7 @@
                     			<tr>
                     				<td><%=lv.getMedicamento().getNombre()%></td>
                        				<td><%=lv.getCantidad()%></td>
-                    				<td>$<%==String.format("%.2f", lv.getPrecioUnidad())%></td>
+                    				<td>$<%=String.format("%.2f", lv.getPrecioUnidad())%></td>
                     				<td>$<%=String.format("%.2f", lv.getSubTotal())%></td>
                     				<td>
                     					<div class= "btn-edit">
