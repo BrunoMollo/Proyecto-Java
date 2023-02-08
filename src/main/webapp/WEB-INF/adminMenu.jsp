@@ -134,6 +134,40 @@
 			<ul>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaLibre">Venta Particular</a></li>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaOS">Venta por Obra Social</a></li>
+					<li><a class="btn btn-sm" href="DescargarListadoVentas">Descargar listado de ventas</a></li>
+					
+					<li>
+					
+					<style>
+    					.sending:after {content: "  [procesando...]";}
+    					.done:after {content: "  [DONE]";}	
+    					.fail:after {content: "  [ups... algo salio mal]";}	
+					</style>
+						<button id='enviarMail' class="btn btn-sm" 
+						onclick="
+						const btn=document.getElementById('enviarMail');
+						btn.classList.add('sending');	
+						fetch('/lafarmacia/EmailObrasSociales')
+						.then((res)=>{
+							if(res.status>=500){
+								btn.classList.add('fail');
+								return
+							}
+				
+							btn.classList.remove('sending')
+							btn.classList.add('done')
+							setTimeout(()=>btn.classList.remove('done'), 1500)
+						})
+						.catch((err)=>{
+							btn.classList.add('fail');
+							console.log(err)
+						})
+						" 
+						>Enviar mails a las Obras Sociales	
+						</button>
+					</li>
+					
+					
 			</ul>
 		</div>
 	</section>

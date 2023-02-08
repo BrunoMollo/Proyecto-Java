@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
   <display-name>lafarmacia</display-name>
   <welcome-file-list>
-  	<welcome-file>index</welcome-file>
+    <welcome-file>index</welcome-file>
     <welcome-file>login</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -105,5 +105,35 @@
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
     <url-pattern>/index.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmailObrasSociales</display-name>
+    <servlet-name>EmailObrasSociales</servlet-name>
+    <servlet-class>servlets.EmailObrasSociales</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmailObrasSociales</servlet-name>
+    <url-pattern>/EmailObrasSociales</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DescargarListadoVentas</display-name>
+    <servlet-name>DescargarListadoVentas</servlet-name>
+    <servlet-class>servlets.DescargarListadoVentas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DescargarListadoVentas</servlet-name>
+    <url-pattern>/DescargarListadoVentas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>QQQQQQQQQQQQQQQQQQQQQQQQQQQ</display-name>
+    <servlet-name>QQQQQQQQQQQQQQQQQQQQQQQQQQQ</servlet-name>
+    <servlet-class>servlets.QQQQQQQQQQQQQQQQQQQQQQQQQQQ</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QQQQQQQQQQQQQQQQQQQQQQQQQQQ</servlet-name>
+    <url-pattern>/QQQQQQQQQQQQQQQQQQQQQQQQQQQ</url-pattern>
   </servlet-mapping>
 </web-app>
