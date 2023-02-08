@@ -89,6 +89,5 @@ public class ClienteDao extends Dao<Cliente>{
 					.push(c.getNroAfiliado());
 				 return doGetOne(stw);
 		}
-
 	}
 

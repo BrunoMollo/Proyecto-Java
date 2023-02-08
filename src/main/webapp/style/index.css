@@ -3,8 +3,10 @@
 .show-user{
 	background: #198754;
 	margin:0 auto;
+	padding: 5px;
+	border-radius:3px;
 	color:white;
-	
+	margin-left: 200px
 }
 
 .options{

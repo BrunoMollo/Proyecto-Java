@@ -35,7 +35,7 @@
 <body>
 	<header>
 		<h1 class="d-inline ml-3">Nueva Venta</h1>
-		<a href="../Redirect" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+		<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
 	</header>
 	<main>
 		<label>Cliente: <%=c.getFullName()%></label><br>
