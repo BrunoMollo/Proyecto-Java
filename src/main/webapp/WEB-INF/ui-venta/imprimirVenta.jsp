@@ -55,6 +55,6 @@
 		<label><strong>Total: </strong></label> <%=String.format("%.2f", v.getTotal())%>
 		<label>Cajero/a: </label><%=u.getNombre()%>
 		<p><strong>Gracias por su compra!</strong></p>
-		<script type="text/javascript">setTimeout(()=>window.location.replace("../Redirect"),3000)</script>
+		<script type="text/javascript">setTimeout(()=>window.location.replace("../index"),3000)</script>
 	</body>
 </html>
