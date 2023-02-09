@@ -1,6 +1,5 @@
 package ourLib;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,26 +10,30 @@ public class PipeResulsetToCSV {
 	String fieldDelimiter=";";
 	
 	
-	public void pipe(ResultSet rs, BufferedWriter file) throws SQLException, IOException {
+	public String pipe(ResultSet rs) throws SQLException, IOException {
+		
+		StringBuilder strbuilder= new StringBuilder();
 		
 		Integer columnsNumber=rs.getMetaData().getColumnCount();
 		
 		for(Integer i=1; i<=columnsNumber; i++) {
 			String columnName=rs.getMetaData().getColumnLabel(i).toUpperCase();
-			file.append(columnName);
-			file.append(fieldDelimiter);
+			strbuilder.append(columnName);
+			strbuilder.append(fieldDelimiter);
 		}
-		file.append(lineDelimiter);
+		strbuilder.append(lineDelimiter);
 		
 		while(rs.next()) {
 			//maldito resulset, porque tenes que arrancar a contar desde 1 en lugar de 0???????
 			for(Integer i=1; i<=columnsNumber; i++) {
 				String data=rs.getObject(i).toString();
-				file.append(data);
-				file.append(fieldDelimiter);
+				strbuilder.append(data);
+				strbuilder.append(fieldDelimiter);
 			}
-			file.append(lineDelimiter);
+			strbuilder.append(lineDelimiter);
 		}
+		
+		return strbuilder.toString();
 		
 	}
 	

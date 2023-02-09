@@ -1,8 +1,5 @@
 package data;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +14,7 @@ import entities.LineaVenta;
 import entities.ObraSocial;
 import entities.Venta;
 import ourLib.AppException;
+import ourLib.Csv;
 import ourLib.PipeResulsetToCSV;
 import ourLib.dbUtils.Dao;
 import ourLib.dbUtils.DbConnector;
@@ -46,18 +44,14 @@ public class VentaDao extends Dao<Venta>{
 		return venta;
 	}
 
-	public File getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, String FileName, String basePath)throws AppException, IOException{
+
+	public Csv getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, String FileName)throws AppException, IOException{
 		Connection con =DbConnector.getInstancia().getConn();
-		
-		
-		File file = new File("/"+FileName);
-		file.createNewFile();
-		BufferedWriter writer= new BufferedWriter(new FileWriter("/"+FileName));
 		
 		try {
 			PreparedStatement st= con.prepareStatement("select v.fecha\r\n"
 					+ ", m.nombre as 'medicamento'\r\n"
-					+ ", m.size as 'tamaño'\r\n"
+					+ ", m.size as 'tamaï¿½o'\r\n"
 					+ ", m.unidad \r\n"
 					+ ", lv.cantidad\r\n"
 					+ ", coalesce(concat(c.nombre,c.apellido),'NA') as 'cliente',\r\n"
@@ -77,36 +71,28 @@ public class VentaDao extends Dao<Venta>{
 			
 			ResultSet rs= st.executeQuery();
 			
-			PipeResulsetToCSV pipe= new PipeResulsetToCSV();
+			Csv csv= new Csv();
+			csv.setName(FileName);
+			csv.setRawData(new PipeResulsetToCSV().pipe(rs));
+			return csv;
 			
-			
-			pipe.pipe(rs, writer);
-
-			return file;
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException("Internal Database error", 500);
 		}
-		finally {
-			writer.close();
-		}
+
 	}
 	
 	
 	
-	public File getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException, IOException {
+	public Csv getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException, IOException {
 		Connection con =DbConnector.getInstancia().getConn();
 		
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
 	    String periodo = "("+ fechaDesde.format(myFormatObj)+" a "+ fechaHasta.format(myFormatObj) + ")";  
-	 
-		String basePath="D://";
 		String name="Ventas "+os.getNombre()+" "+periodo+".csv";
 		
-		File file = new File(basePath+name);
-		file.createNewFile();
-		BufferedWriter writer= new BufferedWriter(new FileWriter(basePath+name));
 		
 		try {
 			PreparedStatement st= con.prepareStatement(
@@ -135,18 +121,14 @@ public class VentaDao extends Dao<Venta>{
 			
 			ResultSet rs= st.executeQuery();
 			
-			PipeResulsetToCSV pipe= new PipeResulsetToCSV();
-			
-			pipe.pipe(rs, writer);
-
-			return file;
+			Csv csv= new Csv();
+			csv.setName(name);
+			csv.setRawData(new PipeResulsetToCSV().pipe(rs));
+			return csv;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException("Internal Database error", 500);
-		}
-		finally {
-			writer.close();
 		}
 		
 		

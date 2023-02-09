@@ -5,9 +5,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ourLib.AppException;
+import ourLib.Csv;
 import ourLib.EmailService;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -39,7 +39,7 @@ class EmailThread extends Thread{
 	public void run() {
 		System.out.println("Inicio envio para "+os.getNombre());
 		
-		File file;
+		Csv file;
 		try {
 			file = VDao.getVentasOSasCSV(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 2, 1) , os);
 			

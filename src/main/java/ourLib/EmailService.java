@@ -1,11 +1,10 @@
 package ourLib;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
 
 public class EmailService {
 
@@ -39,7 +39,7 @@ public class EmailService {
 	
 	
 	
-	public void send(String to, String subject, String text, File file) throws AppException {
+	public void send(String to, String subject, String text, Csv csv) throws AppException {
 		 try {
 			 MimeMessage message = new MimeMessage(session);
 			 message.setFrom(new InternetAddress(from));
@@ -55,12 +55,12 @@ public class EmailService {
 			 messageBodyPart.setText(text);
 			 multipart.addBodyPart(messageBodyPart);
 			 
-			 
+		
+		
 			 BodyPart fileBodyPart= new MimeBodyPart();
-			 DataSource source = new FileDataSource(file.getAbsolutePath());
-			 
+			 DataSource source = new ByteArrayDataSource(csv.getRawData(), "application/csv");
 			 fileBodyPart.setDataHandler(new DataHandler(source));
-			 fileBodyPart.setFileName(file.getName());
+			 fileBodyPart.setFileName(csv.getName());
 			 multipart.addBodyPart(fileBodyPart);
 			 
 			 
@@ -71,9 +71,9 @@ public class EmailService {
 			 tr.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
 			 tr.close();
 			 
-		} catch (MessagingException e) {
+		} catch (MessagingException|IOException e) {
 			throw new AppException("NO se pudo enviar el mail", 500);
-		}
+		} 
 	}
 	
 }
