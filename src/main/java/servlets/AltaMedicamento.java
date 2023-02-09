@@ -148,7 +148,7 @@ public class AltaMedicamento extends HttpServlet {
 				
 			case "buscarmedic":
 				CtrlMedicamento ctrlMed = new CtrlMedicamento();
-				String nameMedicamento = (String) request.getAttribute("nomMedicamento");
+				String nameMedicamento = (String) request.getParameter("nomMedicamento");
 				Medicamento medicamento = new Medicamento();
 				medicamento.setNombre(nameMedicamento);
 				med = ctrlMed.getOne(medicamento, user);

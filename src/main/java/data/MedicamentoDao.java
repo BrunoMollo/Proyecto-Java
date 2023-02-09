@@ -58,10 +58,12 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	@Override
 	public Medicamento getOne(Medicamento p) throws AppException {
 		Medicamento med=doGetOne(
-				new StatementWrapper( "select * from medicamentos where codigoBarra=?")
-					.push(p.getCodigoBarra())
+				new StatementWrapper( "select * from medicamentos where nombre=?")
+					.push(p.getNombre())
 				);
-		med.setPrecio(pDao.getLatestPrice(p));
+		if(med!=null) {
+			med.setPrecio(pDao.getLatestPrice(p));
+		}	
 		return med;
 	}
 	
