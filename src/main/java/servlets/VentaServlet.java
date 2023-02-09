@@ -148,11 +148,17 @@ public class VentaServlet extends HttpServlet {
 			case "/cerrarVenta": {
 				String strNroRec = request.getParameter("nroReceta");
 				Integer nroRec = strNroRec==null?null:Integer.parseInt(request.getParameter("nroReceta"));
+				Integer cantProd=con.getVenta().getLineas().size();
 				
-				con.getVenta().setNroReceta(nroRec);
-				con.cerrarVenta();
+				if (cantProd == 0) {
+					String action = strNroRec == null ? "agregarMedicamentos.jsp" : "agregarMedicamentosOS.jsp";
+					request.getRequestDispatcher("/WEB-INF/ui-venta/" + action).forward(request, response);
+				} else {
+					con.getVenta().setNroReceta(nroRec);
+					con.cerrarVenta();			
+					request.getRequestDispatcher("/WEB-INF/ui-venta/imprimirVenta.jsp").forward(request, response);	
+				}	
 				
-				request.getRequestDispatcher("/WEB-INF/ui-venta/imprimirVenta.jsp").forward(request, response);			
 				break;
 				
 			}

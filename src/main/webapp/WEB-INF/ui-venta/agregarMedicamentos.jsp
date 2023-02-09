@@ -95,9 +95,6 @@
                  <form action="cerrarVenta" method="post">
 						<input type="submit" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Realizar Venta"> 
 				</form>
-				<form action="imprimirVenta" method="get">
-					<button type="submit">Imprimir Venta</button>
-				</form>
         </div>	
  	</main>
  	<%if(medEncontrado!=null && medEncontrado==false){ %>
