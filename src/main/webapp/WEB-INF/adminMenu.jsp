@@ -31,7 +31,7 @@
 			          </a>
 			          <ul class="dropdown-menu">
 			            <li><a class="dropdown-item" href="./altaMedicamento.html">Alta Medicamento</a></li>
-			            <li><a class="dropdown-item" href="#">Actualizar Medicamento</a></li>
+			            <li><a class="dropdown-item" href="./ui-medicamento/buscarMedicamento.html">Actualizar Medicamento</a></li>
 			            <li><a class="dropdown-item" href="#">Eliminar Medicamento</a></li>
 			          </ul>
 			        </li>
@@ -117,7 +117,7 @@
 			<h2>Medicamentos</h2>
 			<ul>
 				<li><a class="btn btn-sm" href="ABMC-medicamento/redirectAddMed">Alta Medicamento</a></li>
-				<li><a hidden class="btn btn-sm" href="#">Modificar datos Medicamento</a></li> 
+				<li><a class="btn btn-sm" href="ABMC-medicamento/redirectUpdMed">Modificar datos Medicamento</a></li> 
 				<!-- OJO QUE ACA LO PUSE COMO HIDDEN PQ NO USAMOS ESTE BOTON TODAVIA -->
 				<li><a class="btn btn-sm" href="ABMC-medicamento/redirectNewPrecio">Modificar precio Medicamento</a></li>
 			</ul>

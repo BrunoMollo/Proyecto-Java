@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
+import data.DosisDao;
 import entities.Dosis;
 import entities.Droga;
 import entities.Laboratorio;
@@ -63,6 +64,10 @@ public class AltaMedicamento extends HttpServlet {
 					}
 					case "redirectNewPrecio": {
 						request.getRequestDispatcher("/WEB-INF/ui-medicamento/ModificarPrecioMedicamento.html").forward(request, response);
+						break;
+					}
+					case "redirectUpdMed": {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/buscarMedicamento.html").forward(request, response);
 						break;
 					}
 				}}
@@ -162,7 +167,8 @@ public class AltaMedicamento extends HttpServlet {
 				break;
 				
 			case "updatedrogas":
-				
+				new CtrlMedicamento().update(med, user); 
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 		}
 

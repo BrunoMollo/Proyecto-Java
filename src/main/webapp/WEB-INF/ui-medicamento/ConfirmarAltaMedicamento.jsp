@@ -12,7 +12,7 @@
 	%>
 </head>
 <body>
-	<h1>Se dio de alta el medicamento</h1>
+	<h1>Datos del medicamento</h1>
 		<div>Codigo: <%=med.getCodigoBarra()%> </div>
 		<div>Nombre: <%=med.getNombre()%> </div>
 		<div>Laboratorio: <%=med.getLaboratorio().getNombre() %> </div>

@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
+import entities.Dosis;
 import entities.Laboratorio;
 import entities.Medicamento;
 import ourLib.AppException;
@@ -94,9 +94,25 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	
 	@Override
 	public void update(Medicamento p) throws AppException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new AppException("Manga de vagos, implementen "+funcName,500);
+		StatementWrapper stw=new StatementWrapper(
+				"update medicamentos set"
+				+ "codigoLaboratorio=?, nombre=?, size=?, unidad=?"
+				+ "where codigoBarra=?");	
+		stw.push(p.getLaboratorio().getCodigo());
+		stw.push(p.getNombre());
+		stw.push(p.getSize());
+		stw.push(p.getUnidad());
+		stw.push(p.getCodigoBarra());	
+		doModification(stw);
+		
+		stw=new StatementWrapper("delete from dosis where codigoMedicamento=?");
+		stw.push(p.getCodigoBarra());
+		doModification(stw);
+		
+		DosisDao ddao=new DosisDao();
+		for (Dosis dose : p.getAllDosis().values()) {
+			ddao.add(p,dose);			
+		}
 	}
 
 

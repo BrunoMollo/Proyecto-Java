@@ -14,11 +14,12 @@
 	<body>
 		<div class="form-group">
 			<form action="cargadosis" method="post">
-					<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga" >
-						<label>Nombre Droga:</label>
-						<input name="name_droga" autocomplete="off" required>
-						<ul id="sugerencias"></ul>	
-					</div>
+				<input hidden name="update" value="update">
+				<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga" >
+					<label>Nombre Droga:</label>
+					<input name="name_droga" autocomplete="off" required>
+					<ul id="sugerencias"></ul>	
+				</div>
 					
 					
 				<label>Cantidad Droga:</label>
