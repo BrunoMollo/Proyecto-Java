@@ -45,27 +45,23 @@ public class VentaDao extends Dao<Venta>{
 	}
 
 
-	public Csv getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, String FileName)throws AppException, IOException{
+	public Csv getMasVendidosAsCSV(LocalDate fechaDesde, LocalDate fechaHasta, String FileName)throws AppException, IOException{
 		Connection con =DbConnector.getInstancia().getConn();
 		
 		try {
-			PreparedStatement st= con.prepareStatement("select v.fecha\r\n"
-					+ ", m.nombre as 'medicamento'\r\n"
-					+ ", m.size as 'tama�o'\r\n"
-					+ ", m.unidad \r\n"
-					+ ", lv.cantidad\r\n"
-					+ ", coalesce(concat(c.nombre,c.apellido),'NA') as 'cliente',\r\n"
-					+ "coalesce(os.nombre, 'NA') as 'obra Social' \r\n"
-					+ "from ventas v\r\n"
-					+ "left join clientes c\r\n"
-					+ "	on  v.dniCLiente=c.dni\r\n"
-					+ "left join obras_sociales os\r\n"
-					+ "	on os.id=c.id_obraSocial\r\n"
-					+ "inner join linea_ventas lv\r\n"
-					+ "	on lv.nroVenta=v.nroVenta\r\n"
-					+ "inner join medicamentos m\r\n"
-					+ "	on m.codigoBarra=lv.codBarra\r\n"
-					+ "where v.fecha between ? and ?;");
+			PreparedStatement st= con.prepareStatement(
+					"select concat(m.nombre, ' (',m.size,' ', m.unidad ,')') as 'Medicamento'\n"
+					+ ", sum(lv.cantidad) as 'Cantidad vendida'\n"
+					+ "from ventas v\n"
+					+ "inner join linea_ventas lv\n"
+					+ "	on lv.nroVenta=v.nroVenta\n"
+					+ "inner join medicamentos m\n"
+					+ "	on m.codigoBarra=lv.codBarra\n"
+					+ "where v.fecha between ? and ?\n"
+					+ "group by m.codigoBarra, m.nombre, m.size, m.unidad\n"
+					+ "order by 'Cantidad vendida' DESC \n"
+					+ ";\n"
+					+ "");
 			st.setObject(1, fechaDesde);
 			st.setObject(2, fechaHasta);
 			
@@ -96,24 +92,26 @@ public class VentaDao extends Dao<Venta>{
 		
 		try {
 			PreparedStatement st= con.prepareStatement(
-				"select v.fecha\r\n"
-				+ ",concat(m.nombre, \"(\",m.size,\" \", m.unidad ,\")\") as 'medicamento'\r\n"
-				+ ", lv.cantidad\r\n"
-				+ ", v.nroReceta\r\n"
-				+ ", concat(c.nombre,c.apellido) as 'cliente'\r\n"
-				+ ", c.nroAfiliado \r\n"
-				+ ", \"hay que ver como se marca el total y el desuento\" as \"TODO\" \r\n"
-				+ "from ventas v\r\n"
-				+ "left join clientes c\r\n"
-				+ "	on  v.dniCLiente=c.dni\r\n"
-				+ "left join obras_sociales os\r\n"
-				+ "	on os.id=c.id_obraSocial\r\n"
-				+ "inner join linea_ventas lv\r\n"
-				+ "	on lv.nroVenta=v.nroVenta\r\n"
-				+ "inner join medicamentos m\r\n"
-				+ "	on m.codigoBarra=lv.codBarra\r\n"
-				+ " where c.id_obraSocial= ?\r\n"
-				+ " and v.fecha between ? and ?\r\n;"
+				"select v.fecha\n"
+				+ ",concat(lv.cantidad  ,' x ',m.nombre, ' (',m.size,' ', m.unidad ,')') as 'medicamento'\n"
+				+ ", concat(c.nombre,c.apellido) as 'cliente'\n"
+				+ ", concat('$', lv.precioUnidad *lv.cantidad) as 'importe'\n"
+				+ ", concat('%', os.descuentoGeneral) 'descuento'\n"
+				+ ", concat('$',lv.precioUnidad *lv.cantidad  * os.descuentoGeneral/100) as 'a reintegrar'\n"
+				+ ", v.nroReceta\n"
+				+ ", c.nroAfiliado \n"
+				+ "from ventas v\n"
+				+ "left join clientes c\n"
+				+ "	on  v.dniCLiente=c.dni\n"
+				+ "left join obras_sociales os\n"
+				+ "	on os.id=c.id_obraSocial\n"
+				+ "inner join linea_ventas lv\n"
+				+ "	on lv.nroVenta=v.nroVenta\n"
+				+ "inner join medicamentos m\n"
+				+ "	on m.codigoBarra=lv.codBarra\n"
+				+ " where c.id_obraSocial=?\n"
+				+ " and v.fecha between ? and ?\n"
+				+ ";"
 			);
 			st.setInt(1, os.getId());
 			st.setObject(2, fechaDesde);

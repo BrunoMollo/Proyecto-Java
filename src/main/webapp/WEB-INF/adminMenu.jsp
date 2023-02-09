@@ -134,7 +134,7 @@
 			<ul>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaLibre">Venta Particular</a></li>
 					<li><a class="btn btn-sm" href="venta/iniciarVentaOS">Venta por Obra Social</a></li>
-					<li><a class="btn btn-sm" href="DescargarListadoVentas">Descargar listado de ventas del mes</a></li>
+					<li><a class="btn btn-sm" href="DescargarListadoVentas">Descargar listado de medicamentos mas vendidos del mes</a></li>
 					<li><a class="btn btn-sm" href="venta/listaVentas">Lista de ventas por Obra Social</a></li>	
 					<li>
 					

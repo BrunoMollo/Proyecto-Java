@@ -38,7 +38,7 @@ public class DescargarListadoVentas extends HttpServlet {
 	
 			String filename="Listado Ventas "+thisMonth.getValue()+"-"+thisYear+".csv";
 			Csv csv = 
-					VDao.getVentasOSasCSV(startOfThisMonth, startOfNextMonth,filename);
+					VDao.getMasVendidosAsCSV(startOfThisMonth, startOfNextMonth,filename);
 			
 			response.setContentType("application/csv");
 		    response.setHeader("Content-Disposition","attachment; filename=\""+filename+"\"");
