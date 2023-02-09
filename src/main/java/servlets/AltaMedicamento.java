@@ -99,7 +99,13 @@ public class AltaMedicamento extends HttpServlet {
 				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr,unidad);
 				med.addDosis(dose);
 				request.getSession().setAttribute("medicamento", med);
-				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+				String update = request.getParameter("update");
+				if (update == null) {
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+				}
+				
 				break;
 	
 			case "guardarmedicamento":
@@ -133,7 +139,30 @@ public class AltaMedicamento extends HttpServlet {
 				
 				ctrlm.addPrecioNuevo(medicam,nuevo);
 				response.sendRedirect("../index.html");
-				//request.getRequestDispatcher("../indexLog.html").forward(request, response);
+				break;
+				
+			case "buscarmedic":
+				CtrlMedicamento ctrlMed = new CtrlMedicamento();
+				String nameMedicamento = (String) request.getAttribute("nomMedicamento");
+				Medicamento medicamento = new Medicamento();
+				medicamento.setNombre(nameMedicamento);
+				med = ctrlMed.getOne(medicamento, user);
+				
+				if (med == null) {				
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/buscarMedicamento.html").forward(request, response);
+				} else {
+					request.getSession().setAttribute("medicamento", medicamento);
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateMedicamento.jsp").forward(request, response);
+				}
+				
+			case "updatemedicamento": 
+				med = mapMedicamentoUpdate(request);				
+				request.getSession().setAttribute("medicamento", med);
+				request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+				break;
+				
+			case "updatedrogas":
+				
 				break;
 		}
 
@@ -148,9 +177,15 @@ public class AltaMedicamento extends HttpServlet {
 	
 	
 	private Medicamento mapMedicamento(HttpServletRequest req) throws SQLException {
-		Medicamento mdic=new Medicamento();
+		Medicamento mdic=mapMedicamentoUpdate(req);
 		RequestParameterParser parser=new RequestParameterParser(req);
 		mdic.setCodigoBarra(parser.getInt("cod_med")); 
+		return mdic;
+	}
+	
+	private Medicamento mapMedicamentoUpdate (HttpServletRequest req) throws SQLException {
+		Medicamento mdic=new Medicamento();
+		RequestParameterParser parser=new RequestParameterParser(req);
 		mdic.setNombre(parser.getString("name_med"));
 		mdic.setPrecio(parser.getDouble("price_med"));
 		mdic.setSize(parser.getDouble("size_med"));
