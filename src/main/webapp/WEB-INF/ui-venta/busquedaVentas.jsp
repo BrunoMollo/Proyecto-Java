@@ -38,11 +38,11 @@
 	 		<div class="row" style="margin-top:10px">
 	 			<div class="col">
 					<label class="col-md-0 control-label">Fecha Desde</label>
-					<input name="fechaDesde"  placeholder="dd/mm/aaaa" type="text"> 			
+					<input name="fechaDesde"  placeholder="" type="date"> 			
 	 			</div>
 	 			<div class="col" style="margin-left:22px">
 					<label class="col-md-0 control-label">Fecha Hasta</label>
-					<input name="fechaHasta"  placeholder="dd/mm/aaaa" type="text"> 			
+					<input name="fechaHasta"  placeholder="" type="date"> 			
 	 			</div>
 	 		</div>
 		</div>
