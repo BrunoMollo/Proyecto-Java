@@ -50,8 +50,13 @@ public class AltaMedicamento extends HttpServlet {
 				    		response.sendError(400, "largo insuficiente");
 				    		return;
 				    		}
-						
+						response.addHeader("Cache-Control", "public,  max-age=3600");
 						LinkedList<Medicamento> arr= ctrlmed.getByPartialName(med);
+						if(arr.isEmpty()) {
+							response.setStatus(404);
+							return;
+						}
+						
 						String JsonArr=JsonMaker.getJsonArray(arr);
 						response.getWriter().append(JsonArr);
 						response.setStatus(200);

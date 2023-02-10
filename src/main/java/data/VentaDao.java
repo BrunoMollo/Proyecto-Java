@@ -45,11 +45,12 @@ public class VentaDao extends Dao<Venta>{
 	}
 
 
-	public Csv getMasVendidosAsCSV(LocalDate fechaDesde, LocalDate fechaHasta, String FileName)throws AppException, IOException{
+	public Csv getMasVendidosAsCSV(LocalDate fechaDesde, LocalDate fechaHasta, String FileName)throws AppException, IOException, SQLException{
 		Connection con =DbConnector.getInstancia().getConn();
-		
+		PreparedStatement st=null;
+		ResultSet rs=null;
 		try {
-			PreparedStatement st= con.prepareStatement(
+			st= con.prepareStatement(
 					"select concat(m.nombre, ' (',m.size,' ', m.unidad ,')') as 'Medicamento'\n"
 					+ ", sum(lv.cantidad) as 'Cantidad vendida'\n"
 					+ "from ventas v\n"
@@ -65,7 +66,7 @@ public class VentaDao extends Dao<Venta>{
 			st.setObject(1, fechaDesde);
 			st.setObject(2, fechaHasta);
 			
-			ResultSet rs= st.executeQuery();
+			rs= st.executeQuery();
 			
 			Csv csv= new Csv();
 			csv.setName(FileName);
@@ -77,21 +78,26 @@ public class VentaDao extends Dao<Venta>{
 			e.printStackTrace();
 			throw new AppException("Internal Database error", 500);
 		}
+		finally {
+			if(st!=null)st.close();
+			if(rs!=null)rs.close();
+		}
 
 	}
 	
 	
 	
-	public Csv getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException, IOException {
+	public Csv getVentasOSasCSV(LocalDate fechaDesde, LocalDate fechaHasta, ObraSocial os) throws AppException, IOException, SQLException {
 		Connection con =DbConnector.getInstancia().getConn();
 		
 		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
 	    String periodo = "("+ fechaDesde.format(myFormatObj)+" a "+ fechaHasta.format(myFormatObj) + ")";  
 		String name="Ventas "+os.getNombre()+" "+periodo+".csv";
 		
-		
+		PreparedStatement st=null;
+		ResultSet rs=null;
 		try {
-			PreparedStatement st= con.prepareStatement(
+			st= con.prepareStatement(
 				"select v.fecha\n"
 				+ ",concat(lv.cantidad  ,' x ',m.nombre, ' (',m.size,' ', m.unidad ,')') as 'medicamento'\n"
 				+ ", concat(c.nombre,c.apellido) as 'cliente'\n"
@@ -117,7 +123,7 @@ public class VentaDao extends Dao<Venta>{
 			st.setObject(2, fechaDesde);
 			st.setObject(3, fechaHasta);
 			
-			ResultSet rs= st.executeQuery();
+			rs= st.executeQuery();
 			
 			Csv csv= new Csv();
 			csv.setName(name);
@@ -127,6 +133,10 @@ public class VentaDao extends Dao<Venta>{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new AppException("Internal Database error", 500);
+		}
+		finally {
+			if(st!=null)st.close();
+			if(rs!=null)rs.close();
 		}
 		
 		

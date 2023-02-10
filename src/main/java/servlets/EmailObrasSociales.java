@@ -9,6 +9,7 @@ import ourLib.Csv;
 import ourLib.EmailService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import data.ObrasSocialesDao;
@@ -48,7 +49,7 @@ class EmailThread extends Thread{
 					"Adjuntamos a este mail el listado de ventas realizadas por sus afiliados \n Atte. lafarmacia",
 					file
 				);
-		} catch (AppException | IOException e) {
+		} catch (AppException | IOException | SQLException e) {
 			successFlag=false;
 			e.printStackTrace();
 		}

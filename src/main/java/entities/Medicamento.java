@@ -83,8 +83,10 @@ public class Medicamento  implements Jsonable{
 		maker.set("unidad_med", unidad);
 		maker.set("price_med", precio);
 		maker.set("name_med", nombre);
-		maker.set("lab_name_med", laboratorio.getNombre());
-		maker.set("lab_id_med",laboratorio.getCodigo());
+		if(laboratorio!=null) {
+			maker.set("lab_name_med",laboratorio.getNombre());
+			maker.set("lab_id_med",laboratorio.getCodigo());			
+		}
 		return maker.getJSONObject();
 	}	
 

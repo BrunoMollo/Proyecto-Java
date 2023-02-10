@@ -1,5 +1,7 @@
 package data;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -8,7 +10,10 @@ import java.util.LinkedList;
 import entities.Laboratorio;
 import entities.Medicamento;
 import ourLib.AppException;
+import ourLib.Csv;
+import ourLib.PipeResulsetToCSV;
 import ourLib.dbUtils.Dao;
+import ourLib.dbUtils.DbConnector;
 import ourLib.dbUtils.StatementWrapper;
 
 public class MedicamentoDao extends Dao<Medicamento>{
@@ -108,11 +113,40 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		throw new AppException("Manga de vagos, implementen "+funcName,500);
 	}
 	
+	
+	//lo reescribi con la sintaxis de JDBC vanilla para que solo pedir el nombre del medicamenteo y asi optimizar la query
 	public LinkedList<Medicamento> getAllByPartialName(Medicamento obj) throws AppException {
-		return doFindAll(new StatementWrapper("select * from medicamentos  where nombre like ?")
-				.push(obj.getNombre()+"%"));
-				
-		
+		Connection con =DbConnector.getInstancia().getConn();
+		PreparedStatement st=null;
+		ResultSet rs=null;
+		try {
+			st= con.prepareStatement("select nombre from medicamentos where nombre like ?");
+			st.setString(1, obj.getNombre()+"%");
+			
+			rs= st.executeQuery();
+			LinkedList<Medicamento> arr= new LinkedList<>();
+			while(rs.next()) {
+				Medicamento m= new Medicamento(); 
+				m.setNombre(rs.getString("nombre"));
+				arr.push(m);
+			}
+			
+			return arr;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			throw new AppException("Internal Database error", 500);
+		}
+		finally {
+				try {
+					if(st!=null)st.close();
+					if(rs!=null)rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			
+		}
 	}
 
 

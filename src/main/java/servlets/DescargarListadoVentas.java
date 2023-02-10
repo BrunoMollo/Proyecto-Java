@@ -8,6 +8,7 @@ import ourLib.AppException;
 import ourLib.Csv;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
 import data.VentaDao;
@@ -46,6 +47,8 @@ public class DescargarListadoVentas extends HttpServlet {
 		    response.getWriter().append(csv.getRawData()); 
 		    
 		} catch (AppException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	
