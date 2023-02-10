@@ -104,7 +104,7 @@ public class AltaMedicamento extends HttpServlet {
 				drug.setNombre(name_droga);
 						
 				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr,unidad);
-				med.addDosis(dose);
+				med.handleDosis(dose);
 				request.getSession().setAttribute("medicamento", med);
 				
 				String update = request.getParameter("update");
@@ -183,8 +183,14 @@ public class AltaMedicamento extends HttpServlet {
 				
 			case "finishupdatemedicamento":
 				Medicamento medi = (Medicamento) request.getSession().getAttribute("medicamento");
-				new CtrlMedicamento().update(medi, user); 
-				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				 
+				if(medi.getAllDosis().size() == 0) {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+				} else {
+					new CtrlMedicamento().update(medi, user);
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				}
+				
 				break;
 		}
 
