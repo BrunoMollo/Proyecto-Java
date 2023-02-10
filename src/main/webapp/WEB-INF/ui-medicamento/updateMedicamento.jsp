@@ -11,7 +11,7 @@
 		%>
 	</head>
 	<body>
-		<form action="updatemedicamento">
+		<form action="updatemedicamento" method="post">
 			<div class="row-sm-6">
 				<label class="form-label">Nombre:</label>
 				<input type="text" name="name_med" class="form-control" value=<%=med.getNombre() %> required>
@@ -28,10 +28,11 @@
 			<br>
 			<div class="row-sm-6">
 				<label class="form-label">Tamaño:</label>
-				<input type="number" name="size_med" class="form-control" value=<%=med.getSize() %> required>
+				<input type="number" name="size_med" class="form-control" step="0.01" value=<%=med.getSize() %> required>
 				
 			</div>
 			<br>
+			<input hidden value=<%=med.getUnidad() %> id="valueUnidad">
 			<select class="dropdown" name="unit_med" id="selectUnidad">
 					<option value="unidades">unidades</option>
 					<option value="mg">mg</option>
@@ -45,7 +46,8 @@
 			</div>
 		</form>
 		<script type="text/javascript">
-			document.getElementById('selectUnidad').value=<%=med.getUnidad() %>;
+		const unidad = document.getElementById("valueUnidad").value;
+		document.getElementById('selectUnidad').value=unidad;
 		</script>
 	</body>
 </html>

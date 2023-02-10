@@ -61,9 +61,9 @@ public class MedicamentoDao extends Dao<Medicamento>{
 				new StatementWrapper( "select * from medicamentos where nombre=?")
 					.push(p.getNombre())
 				);
-		if(med!=null) {
-			med.setPrecio(pDao.getLatestPrice(p));
-		}	
+//		if(med!=null) {
+//			med.setPrecio(pDao.getLatestPrice(p));
+//		}	
 		return med;
 	}
 	
@@ -97,9 +97,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	@Override
 	public void update(Medicamento p) throws AppException {
 		StatementWrapper stw=new StatementWrapper(
-				"update medicamentos set"
-				+ "codigoLaboratorio=?, nombre=?, size=?, unidad=?"
-				+ "where codigoBarra=?");	
+				"update medicamentos set codigoLaboratorio=?, nombre=?, size=?, unidad=? where codigoBarra=?");	
 		stw.push(p.getLaboratorio().getCodigo());
 		stw.push(p.getNombre());
 		stw.push(p.getSize());

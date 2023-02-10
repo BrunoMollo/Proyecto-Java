@@ -5,7 +5,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logic.CtrlDroga;
+import logic.CtrlLaboratorio;
 import logic.CtrlMedicamento;
+import ourLib.AppException;
 import ourLib.Parsers.ExceptionDispacher;
 import ourLib.Parsers.JsonMaker;
 import ourLib.Parsers.RequestParameterParser;
@@ -104,6 +106,7 @@ public class AltaMedicamento extends HttpServlet {
 				Dosis dose=new Dosis(ctrld.getByName(drug,user),cant_dr,unidad);
 				med.addDosis(dose);
 				request.getSession().setAttribute("medicamento", med);
+				
 				String update = request.getParameter("update");
 				if (update == null) {
 					request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
@@ -118,10 +121,20 @@ public class AltaMedicamento extends HttpServlet {
 
 				med=(Medicamento)request.getSession().getAttribute("medicamento");
 				
-				ctrlmed.add(med, user);
-				response.setStatus(201);
-				request.setAttribute("medicamento", med);
-				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				if(med.getAllDosis().size() == 0) {
+					String upd = request.getParameter("update");
+					if (upd == null) {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+					} else {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+					}
+				} else {
+					ctrlmed.add(med, user);
+					response.setStatus(201);
+					request.setAttribute("medicamento", med);
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
+				}
+				
 				break;
 				
 			case "getmedicprecios":
@@ -151,23 +164,26 @@ public class AltaMedicamento extends HttpServlet {
 				String nameMedicamento = (String) request.getParameter("nomMedicamento");
 				Medicamento medicamento = new Medicamento();
 				medicamento.setNombre(nameMedicamento);
-				med = ctrlMed.getOne(medicamento, user);
+				medicamento = ctrlMed.getOne(medicamento, user);
 				
-				if (med == null) {				
+				if (medicamento == null) {				
 					request.getRequestDispatcher("/WEB-INF/ui-medicamento/buscarMedicamento.html").forward(request, response);
 				} else {
 					request.getSession().setAttribute("medicamento", medicamento);
 					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateMedicamento.jsp").forward(request, response);
 				}
+				break;
 				
 			case "updatemedicamento": 
-				med = mapMedicamentoUpdate(request);				
-				request.getSession().setAttribute("medicamento", med);
+				Medicamento medic = (Medicamento) request.getSession().getAttribute("medicamento");
+				medic = rewriteMedicamento(medic,request);	
+				request.getSession().setAttribute("medicamento", medic);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
 				break;
 				
-			case "updatedrogas":
-				new CtrlMedicamento().update(med, user); 
+			case "finishupdatemedicamento":
+				Medicamento medi = (Medicamento) request.getSession().getAttribute("medicamento");
+				new CtrlMedicamento().update(medi, user); 
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				break;
 		}
@@ -178,22 +194,11 @@ public class AltaMedicamento extends HttpServlet {
 		}
 	}
 	
-	
-	
-	
-	
-	private Medicamento mapMedicamento(HttpServletRequest req) throws SQLException {
-		Medicamento mdic=mapMedicamentoUpdate(req);
-		RequestParameterParser parser=new RequestParameterParser(req);
-		mdic.setCodigoBarra(parser.getInt("cod_med")); 
-		return mdic;
-	}
-	
-	private Medicamento mapMedicamentoUpdate (HttpServletRequest req) throws SQLException {
+	private Medicamento mapMedicamento(HttpServletRequest req){
 		Medicamento mdic=new Medicamento();
 		RequestParameterParser parser=new RequestParameterParser(req);
+		mdic.setCodigoBarra(parser.getInt("cod_med")); 
 		mdic.setNombre(parser.getString("name_med"));
-		mdic.setPrecio(parser.getDouble("price_med"));
 		mdic.setSize(parser.getDouble("size_med"));
 		mdic.setUnidad(parser.getString("unit_med")); 
 		
@@ -203,6 +208,21 @@ public class AltaMedicamento extends HttpServlet {
 		
 		return mdic;
 	}
+	
+	private Medicamento rewriteMedicamento(Medicamento m, HttpServletRequest req) throws AppException {
+		Laboratorio l = new Laboratorio();
+		CtrlLaboratorio ctrll = new CtrlLaboratorio();
+		l.setNombre((String) req.getParameter("name_lab"));
+		l=ctrll.getOneByName(l);
+		
+		m.setNombre((String) req.getParameter("name_med"));
+		m.setSize(Double.parseDouble((String) req.getParameter("size_med")));
+		m.setLaboratorio(l);
+		m.setUnidad((String) req.getParameter("unit_med"));
+		
+		return m;
+	}
+	
 	//CONSULTAR SI PASAMOS TODO AL METODO DE ABAJO O USAMOS EL DE ARRIBA. 
 	private Medicamento getMedbyName(RequestParameterParser parser) {	
 		Medicamento m =new Medicamento();

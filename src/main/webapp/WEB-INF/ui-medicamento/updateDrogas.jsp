@@ -8,7 +8,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Modificar Drogas</title>
-		<%Medicamento med = (Medicamento)request.getSession().getAttribute("medicamento"); %>
+		<%Medicamento med = (Medicamento) request.getSession().getAttribute("medicamento"); %>
 		<%HashMap<Integer, Dosis> lista=med.getAllDosis(); %>
 	</head>
 	<body>
@@ -42,7 +42,7 @@
 					<th>Droga</th> 
 					<th>Cantidad</th>
 					<th>
-					<form action="updatedrogas" method="post">
+					<form action="finishupdatemedicamento" method="post">
 						<button type="submit">Guardar medicamento</button>
 					</form>
 					</th>	
