@@ -163,8 +163,9 @@ public class VentaServlet extends HttpServlet {
 				
 			}
 			case "/OSSales": {
-				LocalDate fechaDesde= LocalDate.parse(request.getParameter("fechaDesde"), Cliente.dFormat);
-				LocalDate fechaHasta = LocalDate.parse(request.getParameter("fechaHasta"), Cliente.dFormat);
+				String fechaDesdes= request.getParameter("fechaDesde");
+				LocalDate fechaDesde= LocalDate.parse(request.getParameter("fechaDesde"), Venta.dFormat);
+				LocalDate fechaHasta = LocalDate.parse(request.getParameter("fechaHasta"), Venta.dFormat);
 				ObraSocial os = new ObraSocial();
 				os.setId(Integer.parseInt(request.getParameter("id_os")));
 				os = new CtrlObraSocial().getOne(os,user);
