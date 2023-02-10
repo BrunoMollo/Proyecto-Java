@@ -20,7 +20,7 @@
 			<div class="row-sm-6">
 				<label class="form-label">Laboratorio:</label>
 					<div class="async-search" url='/lafarmacia/ABMC-laboratorio/getbyname' searchParameter="name_lab">
-						<input autocomplete="off" name="name_lab" value=<%=med.getLaboratorio().getNombre() %>>
+						<input autocomplete="off" name="name_lab" value=<%=med.getLaboratorio()!=null?med.getLaboratorio().getNombre():"" %>>
 						<ul id="sugerencias"></ul>	
 					</div>
 	<!-- 			<input type="number" name="lab_med" class="form-control"required> -->

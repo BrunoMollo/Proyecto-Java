@@ -177,8 +177,16 @@ public class AltaMedicamento extends HttpServlet {
 			case "updatemedicamento": 
 				Medicamento medic = (Medicamento) request.getSession().getAttribute("medicamento");
 				medic = rewriteMedicamento(medic,request);	
+				
+				Laboratorio labTest = new CtrlLaboratorio().getOneByName(medic.getLaboratorio());
+				medic.setLaboratorio(labTest);
 				request.getSession().setAttribute("medicamento", medic);
-				request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+				
+				if(labTest == null) {
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateMedicamento.jsp").forward(request, response);
+				} else {				
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+				}
 				break;
 				
 			case "finishupdatemedicamento":
@@ -217,9 +225,7 @@ public class AltaMedicamento extends HttpServlet {
 	
 	private Medicamento rewriteMedicamento(Medicamento m, HttpServletRequest req) throws AppException {
 		Laboratorio l = new Laboratorio();
-		CtrlLaboratorio ctrll = new CtrlLaboratorio();
 		l.setNombre((String) req.getParameter("name_lab"));
-		l=ctrll.getOneByName(l);
 		
 		m.setNombre((String) req.getParameter("name_med"));
 		m.setSize(Double.parseDouble((String) req.getParameter("size_med")));
