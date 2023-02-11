@@ -3,14 +3,31 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Buscar Medicamento</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		<link href="/lafarmacia/style/asyncRequest.css" rel="stylesheet">
+		<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+		<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script defer src="/lafarmacia/js/async.js"></script>
 	</head>
 	<body>
-		<h1>Buscar medicamento a modificar</h1>
-		<br>
-		<form action="buscarmedic" method="post">
-			<label for="nomMedicamento">Nombre Medicamento</label>
-			<input type="text" name="nomMedicamento" id="nomMedicamento">
+		<header>
+			<h1 class="d-inline ml-3" >Buscar medicamento a modificar</h1> 
+			<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+		</header>
+		<form action="buscarmedic" method="post" class="signup-form">
+		<div class="row-sm-6">
+				<div class="col async-search" url="/lafarmacia/ABMC-medicamento/" searchParameter="name_med">
+					<label class="col-md-0 control-label">Nombre Medicamento</label>      
+					<input id="asyncInput" name="nomMedicamento" class="form-control" type="text" autocomplete="off" required>
+					<ul id="sugerencias"></ul>	
+				</div>
+			
 			<button type="submit">Buscar</button>
+		</div>
+			
 		</form>
 	</body>
 </html>
