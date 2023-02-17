@@ -14,8 +14,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
-<link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
+<link href="/lafarmacia/style/sharedStyle.css" rel="stylesheet" type="text/css">
+<link href="/lafarmacia/style/asyncRequest.css " rel="stylesheet" type="text/css">
 <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script defer src="/lafarmacia/js/async.js"></script>
 
