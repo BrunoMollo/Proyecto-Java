@@ -70,6 +70,16 @@ public class Medicamento  implements Jsonable{
 	public boolean hasDosis(Dosis dosisToCheck) {
 		return this.dosis.containsKey(dosisToCheck.getCodigoDroga());
 	}	
+	public boolean handleDosis(Dosis dosisToBeHandled) {
+		if(dosisToBeHandled.getDroga()==null) return false;
+		if(dosisToBeHandled.getCant()<=0) {
+			this.dosis.remove(dosisToBeHandled.getCodigoDroga());
+		} else {
+			this.dosis.put(dosisToBeHandled.getCodigoDroga(), dosisToBeHandled);
+		}
+		return false;
+		
+	}
 	public HashMap<Integer, Dosis> getAllDosis(){
 		return this.dosis;
 	}

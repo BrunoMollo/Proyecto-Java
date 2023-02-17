@@ -18,4 +18,8 @@ public class CtrlLaboratorio extends BasicCtrl<Laboratorio, LaboratorioDao>{
 		return miDao.getByPartialName(lab);
 	}
 	
+	public Laboratorio getOneByName(Laboratorio l) throws AppException {
+		return miDao.getOneByName(l);
+	}
+	
 }

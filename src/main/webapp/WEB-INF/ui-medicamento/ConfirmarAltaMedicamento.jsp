@@ -8,11 +8,11 @@
 	<meta charset="ISO-8859-1">
 	<title>La farmacia</title>
 	<%
-		Medicamento med= (Medicamento)request.getAttribute("medicamento");
+		Medicamento med= (Medicamento)request.getSession().getAttribute("medicamento");
 	%>
 </head>
 <body>
-	<h1>Se dio de alta el medicamento</h1>
+	<h1>Datos del medicamento</h1>
 		<div>Codigo: <%=med.getCodigoBarra()%> </div>
 		<div>Nombre: <%=med.getNombre()%> </div>
 		<div>Laboratorio: <%=med.getLaboratorio().getNombre() %> </div>
