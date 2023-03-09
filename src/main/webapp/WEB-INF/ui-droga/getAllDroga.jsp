@@ -8,6 +8,7 @@
 <html>
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+ <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -20,11 +21,11 @@
 		%>
 </head>
 <body>
-<header>
-	<h2 class="d-inline ml-3">Drogas</h2>
-	<a href="../index.html" class="w-20 float-right mt-1 mb-3 mr-2 btn btn-success btn-lg">Volver al menu</a>
-</header>
-<table class="table-responsive ml-5" >
+<header class="head-list">
+	<h2 class="title-list">Drogas</h2>
+	<a href="../index.html" class="btn btn-lg btn-primary btn-c">Volver al menu</a>
+</header >
+<table class="table-responsive m-4" >
 	<thead>
 		<tr>
 			<th>Codigo</th>
@@ -38,8 +39,8 @@
 				<tr>
 					<td><%=d.getCod()%> </td>
 					<td><input value="<%=d.getNombre()%>" type="text" id=<%="name_"+d.getCod()%>></td>
-					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %>></td> 
-					<td><input type="button" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Eliminar" onclick=<%="sendDelete("+d.getCod()+")" %>></td> 
+					<td style="padding-left:100px"><input type="button" class="btn btn-primary btn-lg btn-s" value="Guardar" onclick=<%="sendUpdate("+d.getCod()+")" %>></td> 
+					<td><input type="button" class="btn btn-primary btn-lg btn-c" value="Eliminar" onclick=<%="sendDelete("+d.getCod()+")" %>></td> 
 				</tr>
 		<%}%>
 	</tbody>

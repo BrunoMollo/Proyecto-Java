@@ -13,19 +13,21 @@
 		<script defer src="/lafarmacia/js/async.js"></script>
 	</head>
 	<body>
-		<header>
-			<h1 class="d-inline ml-3" >Buscar medicamento a modificar</h1> 
-			<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+		<header class="head-list">
+			<h1 class="title-list" >Buscar medicamento a modificar</h1> 
+			<a href="../index" class="btn btn-primary btn-lg btn-c">Volver al menu</a>
 		</header>
 		<form action="buscarmedic" method="post" class="signup-form">
-		<div class="row-sm-6">
+		<div class="row-sm-6 mt-5">
 				<div class="col async-search" url="/lafarmacia/ABMC-medicamento/" searchParameter="name_med">
 					<label class="col-md-0 control-label">Nombre Medicamento</label>      
 					<input id="asyncInput" name="nomMedicamento" class="form-control" type="text" autocomplete="off" required>
 					<ul id="sugerencias"></ul>	
 				</div>
 			
-			<button type="submit">Buscar</button>
+			<button    style="position: absolute;
+    							left: 22%"
+    					class="btn btn-primary btn-lg btn-s" type="submit">Buscar</button>
 		</div>
 			
 		</form>
