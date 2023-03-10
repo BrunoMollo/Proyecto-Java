@@ -86,7 +86,7 @@ public class LaboratorioABMC extends HttpServlet {
 				response.setStatus(201);
 				LinkedList<Laboratorio> arr = ctrl.getAll(user);
 				request.setAttribute("all", arr);
-				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-laboratorio/all");		
+				response.sendRedirect("all");		
 				break;
 				
 			}

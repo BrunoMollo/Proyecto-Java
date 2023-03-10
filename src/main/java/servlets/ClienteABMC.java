@@ -121,7 +121,7 @@ public class ClienteABMC extends HttpServlet {
 				con.add(cli, user);
 				response.setStatus(201);
 				LinkedList<Cliente> arr = con.getAll(user);
-				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-cliente/all");
+				response.sendRedirect("all");
 				break;
 			}
 			

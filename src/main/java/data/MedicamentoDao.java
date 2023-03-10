@@ -83,7 +83,24 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		
 		return med;
 	}
+	
+	
+	public Medicamento checkBarcode(Medicamento m) throws AppException {
+		Medicamento med=doGetOne(
+				new StatementWrapper( "select * from medicamentos where codigoBarra = ?")
+					.push(m.getCodigoBarra())
+				);
+		return med;
+	}
 
+	public Medicamento getByCode(Medicamento m) throws AppException {
+		Medicamento med=checkBarcode(m);
+				if(med!=null) {
+					med.setPrecio(pDao.getLatestPrice(med));			
+				}
+		
+		return med;
+	}
 
 	@Override
 	public LinkedList<Medicamento> getAll() throws AppException {

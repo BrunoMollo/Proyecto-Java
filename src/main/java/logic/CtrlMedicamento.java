@@ -61,4 +61,8 @@ public class CtrlMedicamento extends BasicCtrl<Medicamento, MedicamentoDao>{
 		
 	}
 	
+	public Boolean checkBarcode(Medicamento m) throws AppException {
+		return (miDao.checkBarcode(m)==null)?true:false;		
+	}
+	
 }

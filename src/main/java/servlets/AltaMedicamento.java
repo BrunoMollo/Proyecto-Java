@@ -95,8 +95,12 @@ public class AltaMedicamento extends HttpServlet {
 			case "inicializarmedicamento":
 				med = mapMedicamento(request);	
 				med.setPrecio(Double.parseDouble(request.getParameter("price_med")));
-				request.getSession().setAttribute("medicamento", med);
-				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+				if(codigoBarraDisponible(med)) {
+					request.getSession().setAttribute("medicamento", med);
+					request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
+				} else {
+					response.sendRedirect("redirectAddMed");
+				}
 				break;
 				
 			case "cargadosis":
@@ -220,6 +224,12 @@ public class AltaMedicamento extends HttpServlet {
 		}
 	}
 	
+	private Boolean codigoBarraDisponible(Medicamento med) throws AppException {
+		return new CtrlMedicamento().checkBarcode(med);
+	}
+
+
+
 	private Medicamento mapMedicamento(HttpServletRequest req){
 		Medicamento mdic=new Medicamento();
 		RequestParameterParser parser=new RequestParameterParser(req);

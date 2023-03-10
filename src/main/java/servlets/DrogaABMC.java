@@ -90,7 +90,7 @@ public class DrogaABMC extends HttpServlet {
 				LinkedList<Droga> arr=con.getByPartialName(drug);
 				request.setAttribute("all", arr);
 				response.setStatus(201);
-				response.sendRedirect("http://localhost:8080/lafarmacia/ABMC-droga/all");
+				response.sendRedirect("all");
 				break;
 			}
 			case "update": {
