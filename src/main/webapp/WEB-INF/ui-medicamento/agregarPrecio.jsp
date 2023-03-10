@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form action="/lafarmacia/AltaMedicamento/addnuevoprecio" method="post">
+<form action="addnuevoprecio" method="post">
 	<label>Ingrese el nuevo precio del medicamento:</label>
 	<input type="number" name="precioNuevo" step=0.01 min=0 required>
 	<input type="date" name="fechaNuevo" required>
