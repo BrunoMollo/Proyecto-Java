@@ -51,6 +51,13 @@
 				<a href="../index.html" class="w-50 mt-1 mb-3 btn btn-primary btn-lg d-block mx-auto">Volver al menu</a>	
 			</div>
 		</form>
+		<div class="row-sm-6">
+				<form method="post" action="deleteMedicamento">
+					<label for="deleteButton" >Danger Zone!!</label>
+					<button type="submit" id="deleteButton" class="w-50 btn btn-danger btn-lg d-block mx-auto">Eliminar Medicamento</button>
+					<input type="text" name="name_med" value=<%=med.getNombre() %> hidden>
+				</form>
+			</div>
 		<script type="text/javascript">
 		const unidad = document.getElementById("valueUnidad").value;
 		document.getElementById('selectUnidad').value=unidad;

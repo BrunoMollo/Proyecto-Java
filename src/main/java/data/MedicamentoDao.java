@@ -63,7 +63,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	@Override
 	public Medicamento getOne(Medicamento p) throws AppException {
 		Medicamento med=doGetOne(
-				new StatementWrapper( "select * from medicamentos where nombre=?")
+				new StatementWrapper( "select * from medicamentos where nombre=? and baja is null")
 					.push(p.getNombre())
 				);
 //		if(med!=null) {
@@ -74,7 +74,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	
 	public Medicamento getByName(Medicamento m) throws AppException{
 		Medicamento med=doGetOne(
-				new StatementWrapper( "select * from medicamentos where nombre like ?")
+				new StatementWrapper( "select * from medicamentos where nombre like ? and baja is null")
 					.push(m.getNombre()+"%" )
 				);
 		if(med!=null) {
@@ -88,7 +88,19 @@ public class MedicamentoDao extends Dao<Medicamento>{
 	@Override
 	public LinkedList<Medicamento> getAll() throws AppException {
 		LinkedList<Medicamento> med=doFindAll(
-				new StatementWrapper( "select * from medicamentos "));
+				new StatementWrapper( "select * from medicamentos where baja is null"));
+		if(med!=null) {
+			for(Medicamento m:med) {
+				m.setPrecio(pDao.getLatestPrice(m));
+			}
+		}
+		
+		return med;
+	}
+	
+	public LinkedList<Medicamento> getEverything() throws AppException {
+		LinkedList<Medicamento> med=doFindAll(
+				new StatementWrapper( "select * from medicamentos"));
 		if(med!=null) {
 			for(Medicamento m:med) {
 				m.setPrecio(pDao.getLatestPrice(m));
@@ -124,9 +136,10 @@ public class MedicamentoDao extends Dao<Medicamento>{
 
 	@Override
 	public void delete(Medicamento p) throws AppException {
-		// TODO Auto-generated method stub
-		String funcName=new Throwable().getStackTrace()[0].getMethodName();
-		throw new AppException("Manga de vagos, implementen "+funcName,500);
+		StatementWrapper stw=new StatementWrapper(
+				"update medicamentos set baja=now() where codigoBarra=?");
+		stw.push(p.getCodigoBarra());
+		doModification(stw);
 	}
 	
 	
@@ -136,7 +149,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		PreparedStatement st=null;
 		ResultSet rs=null;
 		try {
-			st= con.prepareStatement("select nombre from medicamentos where nombre like ?");
+			st= con.prepareStatement("select nombre from medicamentos where nombre like ? and baja is null");
 			st.setString(1, obj.getNombre()+"%");
 			
 			rs= st.executeQuery();

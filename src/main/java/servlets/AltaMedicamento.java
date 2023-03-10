@@ -93,7 +93,8 @@ public class AltaMedicamento extends HttpServlet {
 		try {
 		switch (request.getPathInfo().substring(1)){
 			case "inicializarmedicamento":
-				med = mapMedicamento(request);				
+				med = mapMedicamento(request);	
+				med.setPrecio(Double.parseDouble(request.getParameter("price_med")));
 				request.getSession().setAttribute("medicamento", med);
 				request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				break;
@@ -140,6 +141,12 @@ public class AltaMedicamento extends HttpServlet {
 					request.getRequestDispatcher("/WEB-INF/ui-medicamento/ConfirmarAltaMedicamento.jsp").forward(request, response);
 				}
 				
+				break;
+				
+			case "deleteMedicamento":
+					Medicamento medicamentoToDelete = (Medicamento) request.getSession().getAttribute("medicamento");
+					new CtrlMedicamento().delete(medicamentoToDelete);
+					response.sendRedirect("../index.html");
 				break;
 				
 			case "getmedicprecios":
