@@ -5,3 +5,39 @@ body {
 	background-size: cover;
     background-attachment: fixed;
 }
+
+.btn-s{
+	color: #fff;
+	background: #198754;
+	border-color: #198754;
+	min-width:180px;
+}
+.btn-c{ 
+color: #fff;
+background: #a50000; 
+border-color: #a50000; 
+min-width:180px;
+}
+.div-btn{
+	text-align:center;
+}
+
+header .btn{
+	position:absolute;
+	right:20px;
+	top:20px;
+}
+thead{
+	text-align:center;
+}
+
+.head-list{
+	margin-top:15px
+}
+.title-list{
+	margin:0px 24px;
+	font-size:2rem;
+}
+td{
+	padding:3px 10px;
+}

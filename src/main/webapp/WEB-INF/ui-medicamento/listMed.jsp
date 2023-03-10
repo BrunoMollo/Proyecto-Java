@@ -20,9 +20,9 @@
 		%>
 </head>
 <body>
-<header>
-		<h1 class="d-inline ml-3">Medicamentos</h1>
-		<a href="../index.html" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-end">Volver al menu</a>
+<header class="head-list">
+		<h1 class="head-list">Medicamentos</h1>
+		<a href="../index.html" class="btn btn-lg btn-primary btn-c">Volver al menu</a>
 	</header>
 
 <table class="table" >

@@ -10,11 +10,16 @@
 <title>Modificar precio Medicamento</title>
 </head>
 <body style="height: 100vh">
+
+<header class="head-list">
+			<h1 class="title-list" >Buscar medicamento</h1> 
+			<a href="../index" class="btn btn-primary btn-lg btn-c">Volver al menu</a>
+		</header>
 <div class="h-50 d-flex justify-content-center align-items-center">
 <form  class="border border-success p-4 rounded shadow " action="getmedicprecios" method="post">
 	<label >Ingrese codigo de producto:</label>
 	<input type="number" min="000000000000" max="999999999999" name="cod_med" placeholder="ej: 000000000001" required>
-	<button class="w-20 h-15   btn btn-success btn-lg" type="submit">Buscar</button>
+	<button class="btn-s btn btn-success btn-lg" type="submit">Buscar</button>
 </form>
 </div>
 </body>
