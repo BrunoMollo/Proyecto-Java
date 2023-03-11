@@ -64,7 +64,7 @@ table.center {
 	
 		axios(
 			{
-				url: '/lafarmacia/ABMC-laboratorio/update',
+				url: '../ABMC-laboratorio/update',
 				method:"post",
 				params:{
 					cod_lab: cod,
@@ -86,7 +86,7 @@ table.center {
 		}
 		axios(
 				{
-					url: '/lafarmacia/ABMC-laboratorio/delete',
+					url: '../ABMC-laboratorio/delete',
 					method:"post",
 					params:{
 						cod_lab: cod,

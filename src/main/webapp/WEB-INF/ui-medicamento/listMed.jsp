@@ -53,7 +53,7 @@
 	
 		axios(
 			{
-				url: '/lafarmacia/ABMC-droga/update',
+				url: '../ABMC-droga/update',
 				method:"post",
 				params:{
 					cod_droga: cod,
@@ -72,7 +72,7 @@
 		}
 		axios(
 				{
-					url: '/lafarmacia/ABMC-droga/delete',
+					url: '../ABMC-droga/delete',
 					method:"post",
 					params:{
 						cod_droga: cod,

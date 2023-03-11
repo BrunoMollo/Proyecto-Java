@@ -50,7 +50,7 @@
 	                    		for (Venta v : ventas) { %>
 	                    			<tr>
 	                    				<td>
-	                    					<a  class="linkVenta btn btn-sm" href="http://localhost:8080/lafarmacia/venta/detalle?nro=<%=v.getNroVenta()%>">
+	                    					<a  class="linkVenta btn btn-sm" href="detalle?nro=<%=v.getNroVenta()%>">
 	                    						<%=v.getNroVenta()%>
 	                    					</a>
 	                    					</td>

@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="/lafarmacia/style/asyncRequest.css" rel="stylesheet" type="text/css">
+		<link href="../style/asyncRequest.css" rel="stylesheet" type="text/css">
 		<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script defer src="/lafarmacia/js/asyncRequest.js"></script>
-		<link href="/lafarmacia/style/sharedStyle.css" rel="stylesheet" type="text/css">
+		<script defer src="../js/asyncRequest.js"></script>
+		<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 		<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 		<meta charset="ISO-8859-1">
@@ -25,7 +25,7 @@
 			<br>
 			<div class="row-sm-6">
 				<label class="form-label">Laboratorio:</label>
-					<div class="async-search" url='/lafarmacia/ABMC-laboratorio/getbyname' searchParameter="name_lab">
+					<div class="async-search" url='../ABMC-laboratorio/getbyname' searchParameter="name_lab">
 						<input autocomplete="off" name="name_lab" value=<%=med.getLaboratorio()!=null?med.getLaboratorio().getNombre():"" %>>
 						<ul id="sugerencias"></ul>	
 					</div>

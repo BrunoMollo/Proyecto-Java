@@ -53,7 +53,7 @@
 </table>
 
 
-<form hidden="true" id="form" action="/lafarmacia/ABMC-obrasocial/update" method="post" >
+<form hidden="true" id="form" action="../ABMC-obrasocial/update" method="post" >
 	<input name="id_os">
 	<input name="name_os">
 	<input name="phone_os">
@@ -71,7 +71,7 @@ function sendUpdate(cod) {
 
 	axios(
 		{
-			url: '/lafarmacia/ABMC-obrasocial/update',
+			url: '../ABMC-obrasocial/update',
 			method:"post",
 			params:{
 				id_os: cod,
@@ -95,7 +95,7 @@ function sendDelete(cod) {
 	
 	axios(
 		{
-			url: '/lafarmacia/ABMC-obrasocial/delete',
+			url: '../ABMC-obrasocial/delete',
 			method:"post",
 			params:{
 				id_os: cod

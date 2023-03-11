@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="entities.Usuario"%>
 <%@page import="entities.LineaVenta"%>
@@ -19,10 +20,11 @@
   		ObraSocial os = c!=null?c.getObraSocial():null;
   		Venta v = ((CtrlVenta) session.getAttribute("CtrlVenta")).getVenta();
   		LinkedList<LineaVenta> lineasVenta = v.getLineas();
+  		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		%>
 	</head>
 	<body onload="window.print()">
-		<label>Fecha y Hora: </label><%=v.getFechaVenta()%>
+		<label>Fecha y Hora: </label><%=v.getFechaVenta().format(formatter)%>
 		<hr>
 		<label>Cliente: </label><%=c!=null?c.getFullName():"PARTICULAR"%><br>
 		<label>DNI: </label><%=c!=null?c.getDni():"-"%><br>

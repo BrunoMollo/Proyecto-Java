@@ -4,6 +4,6 @@ function putDataInDOM(data){
 	document.querySelector("#show-user-rol").innerText="ROL: "+data.rol;
 }
 
-fetch('/lafarmacia/login/who')
+fetch('../login/who')
 .then((res)=>putDataInDOM(res.data))
 .catch((err)=>console.log(err))

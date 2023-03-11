@@ -100,7 +100,7 @@
 			}
 			axios(
 					{
-						url: '/lafarmacia/ABMC-cliente/delete',
+						url: '../ABMC-cliente/delete',
 						method:"post",
 						params:{
 							dniCliente: dni,

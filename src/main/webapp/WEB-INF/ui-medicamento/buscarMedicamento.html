@@ -7,10 +7,10 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-		<link href="/lafarmacia/style/asyncRequest.css" rel="stylesheet">
-		<link href="/lafarmacia/style/sharedStyle.css" rel="stylesheet" type="text/css">
+		<link href="../style/asyncRequest.css" rel="stylesheet">
+		<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 		<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script defer src="/lafarmacia/js/async.js"></script>
+		<script defer src="../js/async.js"></script>
 	</head>
 	<body>
 		<header class="head-list">
@@ -19,7 +19,7 @@
 		</header>
 		<form action="buscarmedic" method="post" class="signup-form">
 		<div class="row-sm-6 mt-5">
-				<div class="col async-search" url="/lafarmacia/ABMC-medicamento/" searchParameter="name_med">
+				<div class="col async-search" url="../ABMC-medicamento/" searchParameter="name_med">
 					<label class="col-md-0 control-label">Nombre Medicamento</label>      
 					<input id="asyncInput" name="nomMedicamento" class="form-control" type="text" autocomplete="off" required>
 					<ul id="sugerencias"></ul>	

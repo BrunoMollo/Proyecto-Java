@@ -8,21 +8,22 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>La Farmacia</title>
-	<link href="/lafarmacia/style/sharedStyle.css" rel="stylesheet" type="text/css">
-	<link href="/lafarmacia/style/asyncRequest.css " rel="stylesheet" type="text/css">
+	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+	<link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
 	
 	<%Medicamento med = (Medicamento)request.getSession().getAttribute("medicamento"); %>
 	<%HashMap<Integer, Dosis> lista=med.getAllDosis(); %>
 	
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script defer src="/lafarmacia/js/asyncRequest.js"></script>
+	<script defer src="../js/asyncRequest.js"></script>
 </head>
 <body>
 <div class="form-group">
 	<form action="cargadosis" method="post">
 	
+	<a href="../index" class="btn btn-primary btn-lg btn-c">Volver al menu</a>
 		
-			<div class="async-search" url="/lafarmacia/ABMC-droga/getbyname" searchParameter="name_droga" >
+			<div class="async-search" url="../ABMC-droga/getbyname" searchParameter="name_droga">
 				<label>Nombre Droga:</label>
 				<input name="name_droga" autocomplete="off" required>
 				<ul id="sugerencias"></ul>	
