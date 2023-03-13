@@ -83,7 +83,7 @@ public class CtrlVenta {
 	}
 	public LinkedList<LineaVenta> detalleVenta(Usuario _user, Venta venta) throws AppException {
 		user=_user;
-		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AppException("Debe ser admin", 401);}
 		return new LineaVentaDao().getAllFromVenta(venta);		
 	}
 	

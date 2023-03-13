@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="nav-bar " >
 				<div class="col" >
-					<h4 class=prueba"">Numero de Venta: <%=v.getNroVenta()%> </h4>
+					<h4 class="prueba">Numero de Venta: <%=v.getNroVenta()%> </h4>
             	</div> 
 		<div class="col-12 col-sm-12 col-lg-12">
 	                	<div class="table-responsive">
