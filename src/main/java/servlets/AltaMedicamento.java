@@ -26,8 +26,7 @@ import entities.Precio;
 import entities.Usuario;
 
 /**
- * Servlet implementation class AltaMedicamento
- */
+ * Servlet implementation class AltaMedicamento */
 public class AltaMedicamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -95,7 +94,8 @@ public class AltaMedicamento extends HttpServlet {
 			case "inicializarmedicamento":
 				med = mapMedicamento(request);	
 				med.setPrecio(Double.parseDouble(request.getParameter("price_med")));
-				if(codigoBarraDisponible(med)) {
+				Medicamento duplicated= new CtrlMedicamento().getOne(med);
+				if(codigoBarraDisponible(med) && duplicated==null) {
 					request.getSession().setAttribute("medicamento", med);
 					request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
 				} else {
@@ -194,15 +194,17 @@ public class AltaMedicamento extends HttpServlet {
 				Medicamento medic = (Medicamento) request.getSession().getAttribute("medicamento");
 				medic = rewriteMedicamento(medic,request);	
 				
+				Medicamento medTest= new CtrlMedicamento().getOne(medic);
+				
 				Laboratorio labTest = new CtrlLaboratorio().getOneByName(medic.getLaboratorio());
 				medic.setLaboratorio(labTest);
 				request.getSession().setAttribute("medicamento", medic);
 				
-				if(labTest == null) {
-					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateMedicamento.jsp").forward(request, response);
-				} else {				
-					request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
-				}
+					if(labTest == null) {
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateMedicamento.jsp").forward(request, response);
+					} else {				
+						request.getRequestDispatcher("/WEB-INF/ui-medicamento/updateDrogas.jsp").forward(request, response);
+					}
 				break;
 				
 			case "finishupdatemedicamento":

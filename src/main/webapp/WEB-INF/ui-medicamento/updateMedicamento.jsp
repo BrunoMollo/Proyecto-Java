@@ -17,10 +17,11 @@
 		%>
 	</head>
 	<body>
+		<div class="p-2">
 		<form action="updatemedicamento" method="post">
 			<div class="row-sm-6">
 				<label class="form-label">Nombre:</label>
-				<input type="text" name="name_med" value=<%=med.getNombre() %> required>
+				<input type="text" class="form-control" name="name_med" value=<%=med.getNombre() %> required>
 			</div>
 			<br>
 			<div class="row-sm-6">
@@ -58,6 +59,7 @@
 					<input type="text" name="name_med" value=<%=med.getNombre() %> hidden>
 				</form>
 			</div>
+		</div>
 		<script type="text/javascript">
 		const unidad = document.getElementById("valueUnidad").value;
 		document.getElementById('selectUnidad').value=unidad;

@@ -38,11 +38,17 @@
 		<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
 	</header>
 	<main>
-		<label>Cliente: <%=c.getFullName()%></label><br>
-		<label>Obra Social: <%=os.getNombre()%></label><br>
-		<label>Descuento: <%=os.getDescuento()%>%</label>
+		
 		<form action="addMedicamentoOS" method="post">
 			<div class="form-group ">
+				<div class="row">
+					<div class="col m-3">
+						<label>Cliente: <%=c.getFullName()%></label><br>
+						<label>Obra Social: <%=os.getNombre()%></label><br>
+						<label>Descuento: <%=os.getDescuento()%>%</label>
+					</div>	
+				</div>
+				<hr>
 					<div class="row">
  						<div class="col async-search" url="../ABMC-medicamento/" searchParameter="name_med">
   							<label class="col-md-0 control-label">Nombre Medicamento</label>      
@@ -98,7 +104,7 @@
                     		</table>
 		</div>
 		
-		<div>
+		<div class="col">
                  <form action="cerrarVenta" method="post">
                  		<input required type="number" name="nroReceta" min="0" step=1 placeholder="Numero Receta">
 						<input type="submit" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Realizar Venta"> 

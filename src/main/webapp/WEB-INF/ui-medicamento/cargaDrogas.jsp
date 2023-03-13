@@ -16,12 +16,19 @@
 	
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="../js/asyncRequest.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+	
 </head>
 <body>
+		<div class="p-2">
 <div class="form-group">
 	<form action="cargadosis" method="post">
 	
-	<a href="../index" class="btn btn-primary btn-lg btn-c">Volver al menu</a>
+	<header>
+		<h1 class="d-inline ml-3">Cargar Dosis</h1>
+		<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+	</header>
 		
 			<div class="async-search" url="../ABMC-droga/getbyname" searchParameter="name_droga">
 				<label>Nombre Droga:</label>
@@ -38,21 +45,22 @@
 		</select>
 		
 		
-		<button type="submit">Agregar droga</button>
+		<button type="submit" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg">Agregar droga</button>
 		
 	</form>
-</div>	
-	<br> <br> <hr>
 	
-	<table>
+	<br> <br> <hr>
+	<form action="guardarmedicamento" method="post">
+					<button type="submit" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg">Guardar medicamento</button>
+				</form>
+		</div>
+		
+	<table class="table-responsive m-4">
 		<thead>
 			<tr>
 				<th>Droga</th> 
 				<th>Cantidad</th>
 				<th>
-				<form action="guardarmedicamento" method="post">
-					<button type="submit">Guardar medicamento</button>
-				</form>
 				</th>	
 			</tr>
 		</thead>
