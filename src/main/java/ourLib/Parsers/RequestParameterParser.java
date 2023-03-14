@@ -1,5 +1,6 @@
 package ourLib.Parsers;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -35,6 +36,10 @@ public class RequestParameterParser {
 		} catch (NumberFormatException  | NullPointerException e) {
 			return null;
 		}
+	}
+	
+	public BigInteger getBigInt(String name) {
+		return new BigInteger(req.getParameter(name));
 	}
 	
 	public Double getDouble(String name) {

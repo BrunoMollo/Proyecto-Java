@@ -94,7 +94,7 @@ public class AltaMedicamento extends HttpServlet {
 			case "inicializarmedicamento":
 				med = mapMedicamento(request);	
 				med.setPrecio(Double.parseDouble(request.getParameter("price_med")));
-				Medicamento duplicated= new CtrlMedicamento().getOne(med);
+				Medicamento duplicated= new CtrlMedicamento().getOne(med,user);
 				if(codigoBarraDisponible(med) && duplicated==null) {
 					request.getSession().setAttribute("medicamento", med);
 					request.getRequestDispatcher("/WEB-INF/ui-medicamento/cargaDrogas.jsp").forward(request, response);
@@ -149,7 +149,7 @@ public class AltaMedicamento extends HttpServlet {
 				
 			case "deleteMedicamento":
 					Medicamento medicamentoToDelete = (Medicamento) request.getSession().getAttribute("medicamento");
-					new CtrlMedicamento().delete(medicamentoToDelete);
+					new CtrlMedicamento().delete(medicamentoToDelete,user);
 					response.sendRedirect("../index.html");
 				break;
 				
@@ -194,7 +194,7 @@ public class AltaMedicamento extends HttpServlet {
 				Medicamento medic = (Medicamento) request.getSession().getAttribute("medicamento");
 				medic = rewriteMedicamento(medic,request);	
 				
-				Medicamento medTest= new CtrlMedicamento().getOne(medic);
+				Medicamento medTest= new CtrlMedicamento().getOne(medic,user);
 				
 				Laboratorio labTest = new CtrlLaboratorio().getOneByName(medic.getLaboratorio());
 				medic.setLaboratorio(labTest);
@@ -235,7 +235,7 @@ public class AltaMedicamento extends HttpServlet {
 	private Medicamento mapMedicamento(HttpServletRequest req){
 		Medicamento mdic=new Medicamento();
 		RequestParameterParser parser=new RequestParameterParser(req);
-		mdic.setCodigoBarra(parser.getInt("cod_med")); 
+		mdic.setCodigoBarra(parser.getString("cod_med")); 
 		mdic.setNombre(parser.getString("name_med"));
 		mdic.setSize(parser.getDouble("size_med"));
 		mdic.setUnidad(parser.getString("unit_med")); 

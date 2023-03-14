@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import ourLib.AppException;
 import ourLib.Csv;
 import ourLib.EmailService;
+import ourLib.Parsers.ExceptionDispacher;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -104,9 +105,9 @@ public class EmailObrasSociales extends HttpServlet {
 			response.setStatus(200);				
 			
 			
-		} catch (AppException  | InterruptedException e) {
-			response.setStatus(500);
-			e.printStackTrace();
+		} 
+		catch (Exception e) {
+			ExceptionDispacher.manage(e, response);
 		}
 
 		

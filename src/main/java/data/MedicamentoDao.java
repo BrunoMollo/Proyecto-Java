@@ -30,7 +30,7 @@ public class MedicamentoDao extends Dao<Medicamento>{
 		
 		lab.setCodigo(rs.getInt("codigoLaboratorio"));
 		
-		med.setCodigoBarra(rs.getInt("codigoBarra"));
+		med.setCodigoBarra(rs.getString("codigoBarra"));
 		med.setLaboratorio(ldao.getOne(lab));
 		med.setNombre(rs.getString("nombre"));
 

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ourLib.AppException;
 import ourLib.Csv;
+import ourLib.Parsers.ExceptionDispacher;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -46,10 +47,9 @@ public class DescargarListadoVentas extends HttpServlet {
 			
 		    response.getWriter().append(csv.getRawData()); 
 		    
-		} catch (AppException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch (Exception e) {
+			ExceptionDispacher.manage(e, response);
 		}
 	
 	}

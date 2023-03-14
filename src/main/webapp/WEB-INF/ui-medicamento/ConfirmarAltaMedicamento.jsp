@@ -19,8 +19,8 @@
 <div class="p-3">
 
 	<h1>Datos del medicamento</h1>
-		<div>Codigo: <%=med.getCodigoBarra()%> </div>
-		<div>Nombre: <%=med.getNombre()%> </div>
+		<div>Codigo: <%=med.getCodigoBarra() %> </div>
+		<div>Nombre: <%=med.getNombre() %> </div>
 		<div>Laboratorio: <%=med.getLaboratorio().getNombre() %> </div>
 		<div>Tamaño: <%=med.getSize()+" "+med.getUnidad()%> </div>
 		<div>Precio: <%=med.getPrecio()%> </div>
