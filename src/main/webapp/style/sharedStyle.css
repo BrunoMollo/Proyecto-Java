@@ -22,11 +22,7 @@ min-width:180px;
 	text-align:center;
 }
 
-header .btn{
-	position:absolute;
-	right:20px;
-	top:20px;
-}
+
 thead{
 	text-align:center;
 }
@@ -40,4 +36,14 @@ thead{
 }
 td{
 	padding:3px 10px;
+}
+.head-list .btn-s {
+ position:absolute;
+ right:14%;
+ top:4%;
+ }
+ .head-list .btn-c{
+	position:absolute;
+	right:1%;
+	top:4%;
 }

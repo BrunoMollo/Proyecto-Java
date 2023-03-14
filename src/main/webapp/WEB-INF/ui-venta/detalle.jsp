@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
-<link href="../style/listaVentas.css" rel="stylesheet" type="text/css">
+<link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
 <title>Detalle venta</title>
 <%		
   		LinkedList<LineaVenta> lventa= (LinkedList<LineaVenta>)request.getAttribute("lventa");
@@ -20,11 +20,15 @@
 	%>
 </head>
 <body>
+	<header class="head-list">
+			<h1 class="title-list">Detalles</h1>
+			<a href="../index" class="btn btn-lg btn-primary btn-c">Volver al menu</a>
+	</header>
 	<div class="container">
 		<div class="row">
 			<div class="nav-bar " >
 				<div class="col" >
-					<h4 class="prueba">Numero de Venta: <%=v.getNroVenta()%> </h4>
+					<h4 style="margin-left:5%">Numero de Venta: <%=v.getNroVenta()%> </h4>
             	</div> 
 		<div class="col-12 col-sm-12 col-lg-12">
 	                	<div class="table-responsive">
@@ -53,7 +57,7 @@
 	                    	</table>
 						</div>
 					</div>
-					<button class="btn btn-success btn-lg btn-block w-25" onclick="history.back()">Volver atras</button>
+					<button style="margin-left:5%" class="btn btn-lg btn-primary btn-c" onclick="history.back()">Volver atras</button>
 				 </div>
 			</div>
 			</div>

@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+ <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
@@ -21,6 +21,9 @@
 %>
 </head>
 <body>
+	<header class="head-list">
+		<h2 class="title-list">Ventas</h2>	
+	</header >
 	<form class="form-group search" action="OSSales" method="post">
 		<div class="form-group ">
 			<div class="row">
@@ -46,14 +49,14 @@
 	 			</div>
 	 		</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group mt-4">
  	  			<div class="row">
+    				<div class="col">
+    					<a href="../index.html" class="btn btn-lg btn-primary btn-c">Volver al menu</a>
+    				</div>  	
  	  				<div class="col">
-    					<a class="btn btn-warning btn-lg " style="height:38px; width:140px" href="../index">Volver al menu</a>
+    					<button type="submit" class="btn btn-lg btn-primary btn-s" >Buscar </button>
     				</div>
- 	  				<div class="col">
-    					<button type="submit" class="btn btn-success" >Buscar </button>
-    				</div>  				
     			</div>
  			</div>
 	</form>

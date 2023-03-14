@@ -16,16 +16,68 @@
 	}
 
 	#sugerencias  li:hover{
-	color:white;
-	background:green
+	color:rgb(255, 255, 255);
+	background:	#198754 ;
 	} 
 
 	#sugerencias li {
-	color: black;
-    padding: 5px;
+    width: 48.6%;
+    color: black;
+    padding: 2px;
     list-style: none;
-    border: 1px solid #000;
+    border: 1px solid #2e382e52;
     cursor: pointer;
     border-radius: 5px;
-    position: relative;
-    background: gainsboro;}
+    position: absolute;
+    background: #08cf575c;
+	}
+    td{
+    text-align:center;  
+	padding:10px 10px;
+    }
+
+	.table tbody tr:nth-child(even) {
+    background-color: #ffffff9c;
+	}
+	.table tbody tr:nth-child(odd) {
+    background-color: #17a2b833;
+	}
+	.t-head tr{
+	background-color: #08cf575c;
+	}
+	.table{
+	width:80%;
+	position:relative;
+	left:5%;
+	}
+	.col .btn-s{
+	position:absolute;
+	left:5%;}
+	
+	.form-med{
+	position:relative;
+	left:3.5%;}
+	
+	.cli-data{
+	width: max-content;
+    margin: auto;
+    margin-top: 25px;
+    font-size:large;
+	}
+	.nro-rec{
+	display:block;
+    margin: 0px 5% 20px }
+    
+    .linkVenta {
+	height: "5px";
+	width: "5px";
+	border:solid 1px;
+	margin : 3px 0;
+	box-shadow: 2px 2px 2px grey;
+}
+
+.linkVenta:hover {
+  background-color: #198754; /* Green */
+  color: #fff;
+  border-color:#198754
+}

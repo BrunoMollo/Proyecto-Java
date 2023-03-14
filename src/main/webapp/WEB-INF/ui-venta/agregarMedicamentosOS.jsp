@@ -33,16 +33,16 @@
 	%>
 </head>
 <body>
-	<header>
-		<h1 class="d-inline ml-3">Nueva Venta</h1>
-		<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+	<header class="head-list">
+		<h1 class="title-list">Nueva Venta</h1>
+		<a href="../index" class="btn btn-lg btn-primary btn-c">Volver al menu</a>
 	</header>
 	<main>
 		
-		<form action="addMedicamentoOS" method="post">
+		<form class="form-med" action="addMedicamentoOS" method="post">
 			<div class="form-group ">
-				<div class="row">
-					<div class="col m-3">
+				<div class="row cli-data">
+					<div class="col">
 						<label>Cliente: <%=c.getFullName()%></label><br>
 						<label>Obra Social: <%=os.getNombre()%></label><br>
 						<label>Descuento: <%=os.getDescuento()%>%</label>
@@ -52,24 +52,24 @@
 					<div class="row">
  						<div class="col async-search" url="../ABMC-medicamento/" searchParameter="name_med">
   							<label class="col-md-0 control-label">Nombre Medicamento</label>      
- 							<input id="asyncInput" name="name_med"class="form-control" placeholder="Nombre Medicamento" type="text" autocomplete="off" required>
+ 							<input id="asyncInput" style="width:49.1%" name="name_med"class="form-control" placeholder="Nombre Medicamento" type="text" autocomplete="off" required>
  							<ul id="sugerencias"></ul>	
     					</div>
     				</div>
     				<div class="row">	
-    					<div class="col ml-5">
+    					<div class="col async-search">
 			  				<label class="col-md-0 control-label">Cantidad</label>      
 			 				<input  name="cantidad"class="form-control" placeholder="Cantidad" type="number" value="1">
     					</div>
-    					<div class="col p-4">
-			  				<button class="w-20 h-15   btn btn-success btn-lg" type="submit">Agregar</button>
+    					<div class="col">
+			  				<button class="btn mt-4  btn-lg btn-primary btn-s" type="submit">Agregar</button>
     					</div>
     				</div>
 			</div>
 		</form>
-		<div class="table-responsive ml-5">
+		<div class="table-responsive">
                     	<table class="table">
-                    		<thead>
+                    		<thead class="t-head">
                     			<tr>
                     				<th>Medicamento</th>
                     		    	<th>Cantidad</th>
@@ -90,24 +90,21 @@
                     				<td>
                     					<div class= "btn-edit">
                     				 		<form action="" method="post">
-                    						<!--	<input type="" class="custom-control-input"  name="" value="">
-													<input class="btn btn-success btn-lg btn-block" id="" type="submit" value=""> -->
 											</form>
                     					</div>	
                     				</td>
                     			</tr>
                     		<% } %>
-	                    		<tr>
-	                    			<td colspan="2">Total: $<%=String.format("%.2f", v.getTotal())%> </td>
+	                    		<tr style="background:transparent;color:red;">
+	                    			<td colspan="1">Total: $<%=String.format("%.2f", v.getTotal())%> </td>
 	                    		</tr>
                     		</tbody>
                     		</table>
 		</div>
-		
-		<div class="col">
-                 <form action="cerrarVenta" method="post">
-                 		<input required type="number" name="nroReceta" min="0" step=1 placeholder="Numero Receta">
-						<input type="submit" class="w-15 m-3 ml-5 btn btn-success btn-lg" value="Realizar Venta"> 
+		<div>
+                 <form class="col" action="cerrarVenta" method="post">
+                 		<input class="nro-rec"required type="number" name="nroReceta" min="0" step=1 placeholder="Numero Receta">
+						<input type="submit" class="btn btn-lg btn-primary btn-s" value="Realizar Venta"> 
 				</form>
         </div>	
  	</main>

@@ -9,19 +9,19 @@
 		<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 		<title>Venta por OS</title>
 	</head>
-	<body>
-		<header>
-			<h1 class="d-inline ml-3">Ingresar cliente para venta</h1>
-			<a href="../index" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg float-right">Volver al menu</a>
+	<body style="height: 100vh">
+		<header class="head-list">
+			<h1 class="title-list">Ingresar cliente para venta</h1>
+			<a href="../ABMC-cliente/new" class="btn btn-primary btn-lg btn-s">Nuevo Cliente</a>
+			<a href="../index" class="btn btn-primary btn-lg btn-c">Volver al menu</a>
 		</header>
-		<div class="col p-5">
-			<form action="buscarCliente" method="POST">
-				<label for="dniCliente">Dni del cliente: </label>
-				<input type="number" name="dniCliente" min="0" max="99999999" step="1" required>
-				<button type="submit" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg">Buscar Cliente</button>
+		<div class="h-50 d-flex justify-content-center align-items-center"">
+			<form class="border border-success p-4 rounded shadow " style="width:35%"action="buscarCliente" method="POST">
+				<label class="m-2 mr-3" for="dniCliente">Dni del cliente: </label>
+				<input class="w-25 mt-2"type="number" name="dniCliente" min="0" max="99999999" step="1" required>
+				<button type="submit" class="btn btn-primary btn-lg btn-s float-right">Buscar Cliente</button>
 			</form>
-			<br>
-			<a href="../ABMC-cliente/new" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg">Nuevo Cliente</a>
+			<br>			
 		</div>
 		
 	</body>
