@@ -31,11 +31,11 @@
 					<div class="row">
  						<div class="col">
   							<label class="col-md-0 control-label">Nombre</label>      
- 							<input  name="nombre"class="form-control" placeholder="Nombre" type="text">
+ 							<input  name="nombre"class="form-control" placeholder="Nombre" type="text" required>
     					</div>
     					<div class="col">
 			  				<label class="col-md-0 control-label">Apellido</label>      
-			 				<input  name="apellido"class="form-control" placeholder="Apellido" type="text">
+			 				<input  name="apellido"class="form-control" placeholder="Apellido" type="text" required>
     					</div>
   					</div>
 			</div>

@@ -16,7 +16,7 @@ public class CtrlCliente extends BasicCtrl<Cliente, ClienteDao>{
 			this.miDao= new ClienteDao();
 		}
 
-		public LinkedList<Cliente> getAllByLastName(Cliente cli, Usuario user) throws AppException {
+		public LinkedList<Cliente> getAllByLastName(Cliente cli) throws AppException {
 			return miDao.getAllByLastName(cli);
 		}
 
