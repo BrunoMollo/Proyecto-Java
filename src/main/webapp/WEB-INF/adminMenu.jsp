@@ -93,7 +93,7 @@
 						onclick="
 						const btn=document.getElementById('enviarMail');
 						btn.classList.add('sending');	
-						fetch('../EmailObrasSociales')
+						fetch('EmailObrasSociales')
 						.then((res)=>{
 							if(res.status>=500){
 								btn.classList.add('fail');

@@ -12,6 +12,7 @@ import ourLib.Parsers.ExceptionDispacher;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.LinkedList;
 import data.ObrasSocialesDao;
 import data.VentaDao;
@@ -43,7 +44,8 @@ class EmailThread extends Thread{
 		
 		Csv file;
 		try {
-			file = VDao.getVentasOSasCSV(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 2, 1) , os);
+			Month month=LocalDate.now().getMonth();
+			file = VDao.getVentasOSasCSV(LocalDate.of(2023, month, 1), LocalDate.of(2023, month.plus(1), 1) , os);
 			
 			email.send(os.getEmail(),
 					"Ventas a reintegrar de "+os.getNombre(),
