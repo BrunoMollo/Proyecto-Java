@@ -19,8 +19,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 	<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
+	<link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	    
@@ -30,17 +30,14 @@
 	
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="nav-bar " >
-				<div class="col" >
-        			<h4 id="prueba">Clientes</h4>
-        		</div>    		
-        	</div>
-            	<div class="col-12 col-sm-12 col-lg-12">
+	<header class="head-list">
+		<h2 class="title-list">Clientes</h2>	
+		<a href="../index" class="btn btn-lg btn-primary btn-c">Volver al menu</a>
+	</header >
+            	<div class="m-5 col-12 col-sm-12 col-lg-12">
                 	<div class="table-responsive">
                     	<table class="table">
-                    		<thead>
+                    		<thead class="t-head">
                     			<tr>
                     				<th>DNI</th>
                     		    	<th>Nombre</th>
@@ -72,13 +69,13 @@
                     					<div class= "btn-edit">
                     						<form action="redirectUpdate" method="post">
                     							<input type="hidden" class="custom-control-input" id="edit-control" name="dniCliente" value="<%=cli.getDni()%>">
-												<input class="btn btn-success btn-lg btn-block" type="submit" value="Modificar"> 
+												<input class="btn btn-lg btn-primary btn-s" type="submit" value="Modificar"> 
 											</form>
 										</div>	
                     				</td>
                     				<td>
                     					<div class= "btn-edit">
-												<input class="btn btn-success btn-lg btn-block" onclick=<%="sendDelete("+cli.getDni()+")"%> id="delete-control" type="submit" value="Eliminar"> 											
+												<input class="btn btn-lg btn-primary btn-c" onclick=<%="sendDelete("+cli.getDni()+")"%> id="delete-control" type="submit" value="Eliminar"> 											
                     					</div>	
                     				</td>
                     			</tr>
@@ -87,9 +84,6 @@
                     	</table>
 					</div>
 				</div>
-				<a href="../index" class="btn btn-success btn-lg btn-block w-25"> Volver al menu</a>
-			 </div>
-		</div>
 	 <!-- /container -->
 	 
 <script  type="text/javascript"	 >

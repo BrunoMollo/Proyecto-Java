@@ -117,10 +117,10 @@
  	  		<div class="form-group">
  	  			<div class="row">
  	  				<div class="col">
-    					<a class="btn btn-success btn-lg " href="../index">Volver al menu</a>
+    					<a class="btn btn-lg btn-primary btn-c" href="../index">Volver al menu</a>
     				</div>
  	  				<div class="col">
-    					<button type="submit" class="btn btn-warning" >Actualizar </button>
+    					<button type="submit" class="btn btn-lg btn-primary btn-s" >Actualizar </button>
     				</div>
     				
     			</div>
