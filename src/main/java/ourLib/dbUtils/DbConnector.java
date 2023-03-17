@@ -18,8 +18,8 @@ public class DbConnector {
 
 	private static DbConnector instancia;
 	
-	private String user="b126a3f12fcb58";
-	private String password="b0c47748";
+	private String user="JAVA_BD_USER";
+	private String password="JAVA_BD_PSW";
 	private String driver="com.mysql.cj.jdbc.Driver";
 	private String host="us-cdbr-east-06.cleardb.net";
 	private String port="3306";
