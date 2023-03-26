@@ -106,7 +106,7 @@
 		 		<div class="row">
 		 			<div class="col">
 		 				<label class="col-md-0 control-label">Numero Afiliado</label>      
-		 				<input  name="nroAfiliado"class="form-control" placeholder="Numero Afiliado" class="form-control"  type="text" required> 
+		 				<input  name="nroAfiliado" class="form-control" placeholder="Numero Afiliado" class="form-control"  type="text" required> 
 		 			</div>
 		 		</div>
 			</div>

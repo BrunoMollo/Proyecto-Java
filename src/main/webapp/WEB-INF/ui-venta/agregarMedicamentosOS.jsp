@@ -19,7 +19,7 @@
 <link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 <link href="../style/asyncRequest.css " rel="stylesheet" type="text/css">
 <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script defer src="../js/async.js"></script>
+<script defer src="../js/asyncRequest.js"></script>
 
 <title>Venta</title>
 
@@ -50,7 +50,7 @@
 				</div>
 				<hr>
 					<div class="row">
- 						<div class="col async-search" url="../ABMC-medicamento/" searchParameter="name_med">
+ 						<div class="col async-search" url="../ABMC-medicamento/getbyname" searchParameter="name_med">
   							<label class="col-md-0 control-label">Nombre Medicamento</label>      
  							<input id="asyncInput" style="width:49.1%" name="name_med"class="form-control" placeholder="Nombre Medicamento" type="text" autocomplete="off" required>
  							<ul id="sugerencias"></ul>	
@@ -103,7 +103,7 @@
 		</div>
 		<div>
                  <form class="col" action="cerrarVenta" method="post">
-                 		<input class="nro-rec"required type="number" name="nroReceta" min="0" step=1 placeholder="Numero Receta">
+                 		<input class="nro-rec"required type="number" name="nroReceta" min="0" step=1 max="99999999" placeholder="Numero Receta">
 						<input type="submit" class="btn btn-lg btn-primary btn-s" value="Realizar Venta"> 
 				</form>
         </div>	

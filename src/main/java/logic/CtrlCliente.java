@@ -24,6 +24,34 @@ public class CtrlCliente extends BasicCtrl<Cliente, ClienteDao>{
 			return miDao.getByNroAfiliado(c);
 		}
 
+		@Override
+		public Cliente getOne(Cliente e, Usuario user) throws AppException {
+			if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser admin", 401);}
+			return miDao.getOne(e);
+		}
+
+		@Override
+		public void add(Cliente e, Usuario user) throws AppException{
+			if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser admin", 401);}
+			miDao.add(e);
+		}
 		
+		@Override
+		public LinkedList<Cliente> getAll(Usuario user) throws AppException{
+			if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser admin", 401);}
+			return miDao.getAll();
+		}
+		
+		@Override
+		public void update(Cliente e, Usuario user) throws AppException {
+			if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser admin", 401);}
+			miDao.update(e);
+		}
+
+		@Override
+		public void delete(Cliente e, Usuario user) throws AppException {
+			if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser admin",401);}
+			miDao.delete(e);
+		}
 	}
 

@@ -10,7 +10,8 @@
 		<link href="../style/asyncRequest.css" rel="stylesheet">
 		<link href="../style/sharedStyle.css" rel="stylesheet" type="text/css">
 		<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script defer src="../js/async.js"></script>
+		<script defer src="../js/asyncRequest.js"></script>
+		
 	</head>
 	<body>
 		<header class="head-list">
@@ -20,13 +21,13 @@
 		<div class="p-2">
 		<form action="buscarmedic" method="post" class="signup-form">
 		<div class="row-sm-6 mt-5">
-				<div class="col async-search" url="../ABMC-medicamento/" searchParameter="name_med">
+				<div class="col async-search" url="../ABMC-medicamento/getbyname" searchParameter="name_med">
 					<label class="col-md-0 control-label">Nombre Medicamento</label>      
 					<input id="asyncInput" name="nomMedicamento" class="form-control" type="text" autocomplete="off" required>
-					<ul id="sugerencias"></ul>	
+					<ul style="padding: 0;" id="sugerencias"></ul>	
 				</div>
 			
-			<button    style="position: absolute;
+			<button  style="position: absolute;
     							left: 22%"
     					class="btn btn-primary btn-lg btn-s" type="submit">Buscar</button>
 		</div>

@@ -53,7 +53,7 @@
 	<form action="guardarmedicamento" method="post">
 					<button type="submit" class="w-20 mt-1 mb-3 mr-2 btn btn-success btn-lg">Guardar medicamento</button>
 				</form>
-		</div>
+		</div></div>
 		
 	<table class="table-responsive m-4">
 		<thead>

@@ -121,7 +121,7 @@ public class VentaServlet extends HttpServlet {
 			}
 			case "/buscarCliente": {
 				Integer dni= Integer.parseInt(request.getParameter("dniCliente"));
-				Cliente c = ccli.getOne(new Cliente(dni));
+				Cliente c = ccli.getOne(new Cliente(dni), user);
 				if(c!=null) {
 					request.getSession().setAttribute("cliente", c);
 					con.setCliente(c);
