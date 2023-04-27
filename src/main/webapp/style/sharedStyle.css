@@ -22,16 +22,15 @@ min-width:180px;
 	text-align:center;
 }
 
-
+.head-list{
+	position:relative;
+}
 thead{
 	text-align:center;
 }
 
-.head-list{
-	margin-top:15px
-}
 .title-list{
-	margin:0px 24px;
+	margin:15px 24px;
 	font-size:2rem;
 }
 td{

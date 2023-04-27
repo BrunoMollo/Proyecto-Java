@@ -58,6 +58,7 @@ public class LaboratorioABMC extends HttpServlet {
 				break;
 			}
 			case "redirectAddLab": {
+				ctrl.verifyUser(user);
 				request.getRequestDispatcher("/WEB-INF/ui-laboratorio/altaLaboratorio.html").forward(request, response);
 				break;
 			}

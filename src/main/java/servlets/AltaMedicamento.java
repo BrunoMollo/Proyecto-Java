@@ -65,14 +65,17 @@ public class AltaMedicamento extends HttpServlet {
 						response.setContentType("application/json");
 						break;
 					case "redirectAddMed": {
+						ctrlmed.verifyUser(user);
 						request.getRequestDispatcher("/WEB-INF/ui-medicamento/altaMedicamento.html").forward(request, response);
 						break;
 					}
 					case "redirectNewPrecio": {
+						ctrlmed.verifyUser(user);
 						request.getRequestDispatcher("/WEB-INF/ui-medicamento/ModificarPrecioMedicamento.html").forward(request, response);
 						break;
 					}
 					case "redirectUpdMed": {
+						ctrlmed.verifyUser(user);
 						request.getRequestDispatcher("/WEB-INF/ui-medicamento/buscarMedicamento.html").forward(request, response);
 						break;
 					}

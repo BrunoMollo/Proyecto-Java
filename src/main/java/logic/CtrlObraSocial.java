@@ -25,4 +25,8 @@ public class CtrlObraSocial extends BasicCtrl<ObraSocial, ObrasSocialesDao>{
 		return miDao.getAll();
 	}
 	
+	public void verifyUser(Usuario user) throws AppException{
+		if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser admin", 401);}
+	}
+	
 }

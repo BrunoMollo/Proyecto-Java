@@ -72,21 +72,7 @@ public class ClienteABMC extends HttpServlet {
 				LinkedList<Cliente> arr = con.getAll(user);
 				request.setAttribute("all", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-cliente/listCliente.jsp").forward(request, response);
-				break;
-			}
-			case "getbylastname": {
-				Cliente cli= getCliente(new RequestParameterParser(request));
-				if(cli.getApellido().length()<2) {
-		    		response.sendError(400, "largo insificuente");
-		    		return;
-				}
-				LinkedList<Cliente> arr=con.getAllByLastName(cli);
-				response.setStatus(200);
-				response.setContentType("application/json");
-				
-				String JsonArr=JsonMaker.getJsonArray(arr);
-				response.getWriter().append(JsonArr);
-				break;
+				break;			
 			}
 			case "new": {
 				LinkedList<ObraSocial> obraSociales = new CtrlObraSocial().getAll(user);

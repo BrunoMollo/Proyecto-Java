@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
 
 		try {
 			user=ctrl.validateLogin(user);
-			if(user!=null) {
+			if(user.getRol()!=null) {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
 				response.sendRedirect("index");

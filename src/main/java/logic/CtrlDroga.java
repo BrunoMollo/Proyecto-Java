@@ -23,5 +23,9 @@ public class CtrlDroga extends BasicCtrl<Droga, DrogasDao>{
 		return miDao.getOneByName(drug);
 		
 	}
+	
+	public void verifyUser(Usuario user) throws AppException {
+		if(!user.hasAccess(Usuario.ADMIN)) {throw new AppException("Debe ser admin", 401);
+	}
 
-}
+}}

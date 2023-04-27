@@ -135,7 +135,7 @@ public class VentaServlet extends HttpServlet {
 				String nroAfiliado= request.getParameter("nroAfiliado");
 				Cliente c = new Cliente();
 				c.setNroAfiliado(nroAfiliado);
-				c = ccli.getByNroAfiliado(c);
+				c = ccli.getByNroAfiliado(c,user);
 				if(c!=null) {
 					request.getSession().setAttribute("cliente", c);
 					con.setCliente(c);

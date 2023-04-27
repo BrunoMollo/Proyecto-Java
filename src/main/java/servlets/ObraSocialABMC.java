@@ -68,6 +68,7 @@ public class ObraSocialABMC extends HttpServlet {
 				break;
 			}
 			case "redirectAddOS": {
+				con.verifyUser(user);
 				request.getRequestDispatcher("/WEB-INF/ui-obraSocial/altaObraSocial.html").forward(request, response);
 				break;
 			}

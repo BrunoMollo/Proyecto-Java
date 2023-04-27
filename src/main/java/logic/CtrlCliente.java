@@ -16,11 +16,8 @@ public class CtrlCliente extends BasicCtrl<Cliente, ClienteDao>{
 			this.miDao= new ClienteDao();
 		}
 
-		public LinkedList<Cliente> getAllByLastName(Cliente cli) throws AppException {
-			return miDao.getAllByLastName(cli);
-		}
-
-		public Cliente getByNroAfiliado(Cliente c) throws AppException {
+		public Cliente getByNroAfiliado(Cliente c,Usuario user) throws AppException {
+			if(!user.hasAccess(Usuario.VENDEDOR)) {throw new AppException("Debe ser vendedor", 401);}
 			return miDao.getByNroAfiliado(c);
 		}
 

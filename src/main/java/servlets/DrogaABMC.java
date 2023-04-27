@@ -44,7 +44,7 @@ public class DrogaABMC extends HttpServlet {
 		
 		try {
 			switch (request.getPathInfo().substring(1)) {
-			case "all": {
+			case "all": {				
 				LinkedList<Droga> arr = con.getAll(user);
 				request.setAttribute("all", arr);
 				request.getRequestDispatcher("/WEB-INF/ui-droga/getAllDroga.jsp").forward(request, response);
@@ -58,14 +58,14 @@ public class DrogaABMC extends HttpServlet {
 				LinkedList<Droga> arr=con.getByPartialName(drug);
 				String JsonArr=JsonMaker.getJsonArray(arr);
 				response.getWriter().append(JsonArr);
-
 				response.setStatus(200);
 				response.setContentType("application/json");
 				break;
 			}
 			case "redirectAddDroga": {
+				con.verifyUser(user);
 				request.getRequestDispatcher("/WEB-INF/ui-droga/altaDroga.html").forward(request, response);
-				break;
+				break;			
 			}
 			
 			default:
