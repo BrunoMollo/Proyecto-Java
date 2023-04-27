@@ -37,11 +37,13 @@ public class Login extends HttpServlet {
 
 		try {
 			user=ctrl.validateLogin(user);
-			if(user.getRol()!=null) {
+			if(user == null) {
+				response.sendRedirect("./wrongLogin.html");
+			} else {
 				response.setStatus(200);
 				request.getSession().setAttribute("user",user);
 				response.sendRedirect("index");
-			} else response.sendRedirect("./wrongLogin.html");
+			}
 		} 
 		catch (Exception e) {
 			ExceptionDispacher.manage(e, response);
