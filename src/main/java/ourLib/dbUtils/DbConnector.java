@@ -18,13 +18,13 @@ public class DbConnector {
 
 	private static DbConnector instancia;
 	
-	private String user="JAVA_BD_USER";
-	private String password="JAVA_BD_PSW";
-	private String driver="com.mysql.cj.jdbc.Driver";
-	private String host="us-cdbr-east-06.cleardb.net";
-	private String port="3306";
-	private String db="heroku_5c56859fce36a7d";
-
+	private String user=System.getenv("user");
+	private String password=System.getenv("password");
+	private String driver=System.getenv("driver");
+	private String host=System.getenv("host");
+	private String port=System.getenv("port");
+	private String db=System.getenv("db")
+ 
 	private int conectados=0;
 	private Connection conn=null;
 	
